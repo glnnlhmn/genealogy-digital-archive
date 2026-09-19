@@ -8,12 +8,12 @@ schema/persona integrity auditing, hash drift detection, automated remediation, 
 Public Interface:
     - audit_system(format_type: str, verbose: bool) -> dict: Executes system integrity checks and exports unique timestamped audit reports.
     - generate_config() -> dict: Backs up existing config, scans the archive root, and generates a fresh gda_config.json baseline manifest.
-    - remediate_latest_report() -> None: Parses the latest audit report and automatically repairs version mismatches and UNKNOWN faults.
+    - remediate_latest_report() -> None: Parses the latest audit report and automatically repairs UNKNOWN faults.
 
 Dependencies:
     - Standard Library only: argparse, hashlib, json, pathlib, re, sys, datetime
 
-Version: 1.0.5
+Version: 1.0.6
 """
 
 import argparse
@@ -28,23 +28,18 @@ from typing import Dict, List, Optional, Tuple
 ROOT_DIR = Path("G:/My Drive/genealogy-digital-archive")
 CONFIG_FILE = ROOT_DIR / "gda_config.json"
 REPORTS_DIR = ROOT_DIR / "reports"
-LOGS_DIR = ROOT_DIR / "logs"  # Updated from GTEMP_DIR
+LOGS_DIR = ROOT_DIR / "logs"
 GTEMP_DIR = ROOT_DIR / "gtemp"
 
-LOGS_DIR.mkdir(parents=True, exist_ok=True)  # Ensure logs directory exists
+LOGS_DIR.mkdir(parents=True, exist_ok=True)
 GTEMP_DIR.mkdir(parents=True, exist_ok=True)
 REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 SESSION_TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
-LOG_FILE = LOGS_DIR / f"gna-{SESSION_TIMESTAMP}.log"  # Routed to logs/
+LOG_FILE = LOGS_DIR / f"gna-{SESSION_TIMESTAMP}.log"
+
 
 def log(msg: str, is_error: bool = False, verbose: bool = False) -> None:
-    """Writes a timestamped log entry to the active session log and stderr/stdout if verbose.
-
-    Args:
-        msg (str): The log message text.
-        is_error (bool): If True, routes to stderr and prefixes with ERROR:.
-        verbose (bool): If True, echoes output to stdout.
-    """
+    """Writes a timestamped log entry to the active session log and stderr/stdout if verbose."""
     line = f"[{datetime.now().isoformat()}] {'ERROR: ' if is_error else ''}{msg}\n"
     if is_error:
         sys.stderr.write(line)
@@ -59,14 +54,7 @@ def log(msg: str, is_error: bool = False, verbose: bool = False) -> None:
 
 
 def compute_sha256(file_path: Path) -> str:
-    """Computes the SHA-256 cryptographic hash of a target file.
-
-    Args:
-        file_path (Path): The path to the file to hash.
-
-    Returns:
-        str: The 64-character hexadecimal digest, or "ERROR_HASH" on failure.
-    """
+    """Computes the SHA-256 cryptographic hash of a target file."""
     sha256_hash = hashlib.sha256()
     try:
         with open(file_path, "rb") as f:
@@ -79,14 +67,7 @@ def compute_sha256(file_path: Path) -> str:
 
 
 def extract_metadata(file_path: Path) -> Tuple[str, str]:
-    """Extracts internal version string and description/purpose from file headers or JSON metadata.
-
-    Args:
-        file_path (Path): Path to the JSON or Markdown asset.
-
-    Returns:
-        Tuple[str, str]: A tuple containing the version string (or "UNKNOWN") and extracted description/purpose.
-    """
+    """Extracts internal version string and description from file headers or JSON metadata."""
     version = "UNKNOWN"
     description = "N/A"
     try:
@@ -122,34 +103,14 @@ def extract_metadata(file_path: Path) -> Tuple[str, str]:
     return version, description
 
 
-def extract_filename_version(filename: str) -> str:
-    """Extracts version pattern like v1.0.3 or 1.0.3 from a filename if present.
-
-    Args:
-        filename (str): Name of the file.
-
-    Returns:
-        str: Extracted version string or empty string.
-    """
-    match = re.search(r"[vV]?(\d+\.\d+\.\d+)", filename)
-    if match:
-        return match.group(1)
-    return ""
-
-
 def generate_config() -> dict:
-    """Backs up existing config, scans repository schemas/prompts, and generates a fresh gda_config.json baseline.
-
-    Returns:
-        dict: The complete configuration dictionary written to disk.
-    """
+    """Backs up existing config, scans repository schemas/prompts, and generates a fresh gda_config.json baseline."""
     log("Generating system configuration manifest...")
 
-    # Backup existing config if present (.bk extension in root)
     if CONFIG_FILE.exists():
         bk_file = CONFIG_FILE.with_suffix(CONFIG_FILE.suffix + ".bk")
         try:
-            CONFIG_FILE.replace(bk_file)  # Atomic replacement
+            CONFIG_FILE.replace(bk_file)
             print(f"[+] Existing configuration backed up to: {bk_file.relative_to(ROOT_DIR)}")
             log(f"Backed up existing config to {bk_file}")
         except Exception as e:
@@ -169,6 +130,7 @@ def generate_config() -> dict:
                 print(f"[!] Skipping unversioned schema (UNKNOWN version): {rel}")
                 continue
             tracked_schemas.append({"path": rel, "expected_version": ver, "sha256": compute_sha256(p), "purpose": desc})
+
     tracked_prompts = []
     if prompts_dir.exists():
         for p in sorted(prompts_dir.rglob("*.md")):
@@ -180,6 +142,7 @@ def generate_config() -> dict:
                 print(f"[!] Skipping unversioned prompt (UNKNOWN version): {rel}")
                 continue
             tracked_prompts.append({"path": rel, "expected_version": ver, "sha256": compute_sha256(p), "purpose": desc})
+
     config_data = {
         "ConfigVersion": "1.0.0",
         "LastUpdated": datetime.now().strftime("%Y-%m-%d"),
@@ -194,30 +157,25 @@ def generate_config() -> dict:
 
 
 def audit_system(format_type: str = "all", verbose: bool = False) -> dict:
-    """Performs full system integrity audit, flagging UNKNOWN versions and hash drifts as discrepancies/errors.
-
-    Args:
-        format_type (str): Report export format ("json", "md", or "all").
-        verbose (bool): Enables detailed trace output.
-
-    Returns:
-        dict: Comprehensive audit record dictionary.
-    """
+    """Performs full system integrity audit against internal versions and hashes."""
     if not CONFIG_FILE.exists():
         print("[!] Error: Configuration file 'gda_config.json' does not exist.")
         print("[i] Hard stop: Run with --generate-config (-g) to initialize baseline manifest.")
         log("Audit aborted: gda_config.json missing.", is_error=True)
         sys.exit(1)
+
     config = json.loads(CONFIG_FILE.read_text(encoding="utf-8"))
     if config.get("ConfigVersion", "UNKNOWN") == "UNKNOWN":
         print("[!] CRITICAL ERROR: gda_config.json contains an UNKNOWN ConfigVersion.")
         log("Critical error: gda_config.json ConfigVersion is UNKNOWN.", is_error=True)
+
     tracked_map = {}
     for category in ["schemas", "prompts"]:
         for item in config.get("TrackedAssets", {}).get(category, []):
             if item.get("expected_version") == "UNKNOWN":
                 print(f"[!] CRITICAL CONFIG ERROR: Tracked asset '{item['path']}' has expected_version: UNKNOWN")
             tracked_map[item["path"]] = item
+
     all_disk_files = []
     schemas_dir = ROOT_DIR / "schemas"
     prompts_dir = ROOT_DIR / "prompts"
@@ -231,16 +189,17 @@ def audit_system(format_type: str = "all", verbose: bool = False) -> dict:
             if "archive" in p.parts or "-bk-" in p.name:
                 continue
             all_disk_files.append(p)
+
     audit_records = []
     discrepancies = 0
-    print("\n" + "=" * 105)
-    print(f"{'FILE PATH':<45} | {'FILE VER':<10} | {'INTERNAL':<10} | {'STATUS'}")
-    print("=" * 105)
+    print("\n" + "=" * 95)
+    print(f"{'FILE PATH':<55} | {'INTERNAL VER':<14} | {'STATUS'}")
+    print("=" * 95)
+
     for file_path in sorted(all_disk_files):
         rel_path = file_path.relative_to(ROOT_DIR).as_posix()
         file_hash = compute_sha256(file_path)
         internal_ver, description = extract_metadata(file_path)
-        filename_ver = extract_filename_version(file_path.name)
         status = "OK"
         issues = []
 
@@ -248,18 +207,18 @@ def audit_system(format_type: str = "all", verbose: bool = False) -> dict:
             status = "ERROR"
             issues.append("Internal version is UNKNOWN (requires repair to 0.0.999)")
             discrepancies += 1
-        elif file_path.suffix.lower() == ".md" and filename_ver and internal_ver != "UNKNOWN":
-            if filename_ver != internal_ver.replace("v", ""):
-                status = "MISMATCH"
-                issues.append(f"Filename version ({filename_ver}) != internal version ({internal_ver})")
-                discrepancies += 1
 
         if status == "OK":
             if rel_path in tracked_map:
                 expected_hash = tracked_map[rel_path]["sha256"]
-                if expected_hash != file_hash:
+                expected_ver = tracked_map[rel_path].get("expected_version")
+                if internal_ver != expected_ver:
                     status = "DRIFT"
-                    issues.append("File hash differs from gda_config.json baseline")
+                    issues.append(f"Internal version changed from manifest ({expected_ver} -> {internal_ver})")
+                    discrepancies += 1
+                elif expected_hash != file_hash:
+                    status = "DRIFT"
+                    issues.append("File content hash differs from gda_config.json baseline")
                     discrepancies += 1
             else:
                 status = "UNTRACKED"
@@ -268,17 +227,16 @@ def audit_system(format_type: str = "all", verbose: bool = False) -> dict:
 
         audit_records.append({
             "path": rel_path,
-            "filename_version": filename_ver or None,
             "internal_version": internal_ver,
             "sha256": file_hash,
             "status": status,
             "issues": issues,
             "description": description,
         })
-        print(f"{rel_path:<45} | {filename_ver or 'N/A':<10} | {internal_ver:<10} | {status}")
+        print(f"{rel_path:<55} | {internal_ver:<14} | {status}")
         for issue in issues:
             print(f"    [!] {issue}")
-    print("=" * 105)
+    print("=" * 95)
 
     run_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     report_data = {
@@ -312,7 +270,7 @@ def audit_system(format_type: str = "all", verbose: bool = False) -> dict:
 
 
 def remediate_latest_report() -> None:
-    """Reads the most recent audit report and applies automated fixes or forced 0.0.999 overrides."""
+    """Reads the most recent audit report and forces UNKNOWN versions to 0.0.999."""
     reports = sorted(list(REPORTS_DIR.glob("gna_audit_*.json")))
     if not reports:
         print("[!] No prior audit reports found in reports/ to remediate.")
@@ -325,21 +283,7 @@ def remediate_latest_report() -> None:
         file_path = ROOT_DIR / rec["path"]
         if not file_path.exists():
             continue
-        if rec["status"] == "MISMATCH" and rec["filename_version"]:
-            if file_path.suffix.lower() == ".md":
-                content = file_path.read_text(encoding="utf-8", errors="replace")
-                target_ver = rec["filename_version"]
-                new_content, count = re.subn(
-                    r"<!--\s*(?:version|spec\s*version|v):\s*([vV]?\d+\.\d+\.\d+)\s*-->",
-                    rf"<!-- Version: {target_ver} -->",
-                    content,
-                    flags=re.IGNORECASE,
-                )
-                if count > 0:
-                    file_path.write_text(new_content, encoding="utf-8")
-                    print(f"    [+] Updated internal version in {rec['path']} to match filename ({target_ver})")
-                    fixed_count += 1
-        elif rec["internal_version"] == "UNKNOWN" or rec["status"] == "ERROR":
+        if rec["internal_version"] == "UNKNOWN" or rec["status"] == "ERROR":
             forced_ver = "0.0.999"
             if file_path.suffix.lower() == ".md":
                 content = file_path.read_text(encoding="utf-8", errors="replace")
@@ -376,7 +320,7 @@ def interactive_menu() -> None:
     """Runs the interactive TUI management console loop."""
     while True:
         print("\n" + "=" * 50)
-        print(" GNA SYSTEM MANAGEMENT CONSOLE (v1.0.5)")
+        print(" GNA SYSTEM MANAGEMENT CONSOLE (v1.0.6)")
         print("=" * 50)
         print("[1] Run Full System Integrity Audit")
         print("[2] Generate / Refresh System Config (gda_config.json)")

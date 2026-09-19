@@ -182,127 +182,127 @@
     ],
     "prompts": [
       {
-        "path": "prompts/core/Adam-Core-v1.0.3.md",
+        "path": "prompts/core/Adam-Core.md",
         "expected_version": "1.0.3",
         "sha256": "e74538f01018bb9eda657ed87852fb6494fc864993b1a4e6d069c291995c93b7",
         "purpose": "PATH: gtemp/[script_name].py"
       },
       {
-        "path": "prompts/core/AIRE-Core-v1.0.3.md",
+        "path": "prompts/core/AIRE-Core.md",
         "expected_version": "1.0.3",
         "sha256": "114be96dc4313ec26da68896d6c6533d63b4ab6a4d2c7919fd79391b1e91a506",
         "purpose": "SYSTEM INSTRUCTION: AIRE (Archival Intelligence & Renaming Engine)"
       },
       {
-        "path": "prompts/core/Barnum-Core-v1.0.0.md",
+        "path": "prompts/core/Barnum-Core.md",
         "expected_version": "1.0.0",
         "sha256": "0e392c35f192059083055c74964c021a4e2c390d8ce97a0ebd729bb5918bafd6",
         "purpose": "Barnum: Miscellaneous Ephemera and Fraternal Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Caleb-Core-v1.0.0.md",
+        "path": "prompts/core/Caleb-Core.md",
         "expected_version": "1.0.0",
         "sha256": "784f2b85e97ad944e8b388ba934718933c427ed7e6735323e12ac7a084b94e4c",
         "purpose": "Caleb: Land Deed and Property Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Euler-Core-v1.0.0.md",
+        "path": "prompts/core/Euler-Core.md",
         "expected_version": "1.0.0",
         "sha256": "e37835b965212754379b628abcca8c863b384081646f53951264028fc2fbcd96",
         "purpose": "Euler: Academic Credential and Yearbook Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Ezra-Core-v1.0.0.md",
+        "path": "prompts/core/Ezra-Core.md",
         "expected_version": "1.0.0",
         "sha256": "9084ea37955fde95c01d792131b65b8284e5c3cdaf5e5f5bc412954b59af4c16",
         "purpose": "Ezra: Federal Census Schedule Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Fosse-Core-v1.0.0.md",
+        "path": "prompts/core/Fosse-Core.md",
         "expected_version": "1.0.0",
         "sha256": "b5aa507769d958b6b4239db9c2919f0fd1fa02e882f3b956bc7f4e232f20dd9e",
         "purpose": "Fosse: Naturalization and Citizenship Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Gander-Core-v1.0.0.md",
+        "path": "prompts/core/Gander-Core.md",
         "expected_version": "1.0.0",
         "sha256": "fc83021fe927771feb02efbd5fe950fef713c3d889427c2ced0a9d06abae8206",
         "purpose": "Gander: Immigration and Passenger Manifest Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/John-Core-v1.0.0.md",
+        "path": "prompts/core/John-Core.md",
         "expected_version": "1.0.0",
         "sha256": "11928b26dd2b2bdb3eb7b09b15f491bf2f18d08fd1a17f97e43c5cde0c43eebf",
         "purpose": "John: Church Baptism Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Levi-Core-v1.0.0.md",
+        "path": "prompts/core/Levi-Core.md",
         "expected_version": "1.0.0",
         "sha256": "085632d4f1b9ac51eb9104bbc52b110adc616b9e69a5e2ff5583fe39909fbc65",
         "purpose": "Levi: Tax Assessment Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/MeMe-Core-v1.0.0.md",
+        "path": "prompts/core/MeMe-Core.md",
         "expected_version": "1.0.0",
         "sha256": "64658fe28c2dca3cf43673c5833a40bebfef852e5249f7b3e469a2ba5a3d4e35",
         "purpose": "Meme: Personal Testimony and Manuscript Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/MIP-Core-v1.0.3.md",
+        "path": "prompts/core/MIP-Core.md",
         "expected_version": "1.0.3",
-        "sha256": "0918ee72dace4476ca2b7100ae0e05a4905c6f7c66ffa88224944c4ea51cb356",
+        "sha256": "a9fface9836623f8ef493cbb46a88f6865919e10e3e8b57672c8dd90f23ece72",
         "purpose": "SYSTEM INSTRUCTION: MIP (Master Intelligence Profile)"
       },
       {
-        "path": "prompts/core/Pappy-Core-v1.0.3.md",
+        "path": "prompts/core/Pappy-Core.md",
         "expected_version": "1.0.3",
         "sha256": "928efc0bf39e0611f83c96baa6186fdccb9ace48451aa8c13b238935be7e51a3",
         "purpose": "Paddy: Newspaper Article Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Polk-Core-v1.0.0.md",
+        "path": "prompts/core/Polk-Core.md",
         "expected_version": "1.0.0",
         "sha256": "17996ddef69eba7196d7052e1ddf9e884f2a5d1be2df3f241b6802ff8dec97f8",
         "purpose": "Polk: City and Business Directory Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Reaper-Core-v1.0.0.md",
+        "path": "prompts/core/Reaper-Core.md",
         "expected_version": "1.0.0",
         "sha256": "e54716dbfbc43057b1ee3c1f22e52c06d4733cac9beca827be5b46a1a3674ef7",
         "purpose": "Reaper: Vital Death Record Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Sherman-Core-v1.0.0.md",
+        "path": "prompts/core/Sherman-Core.md",
         "expected_version": "1.0.0",
         "sha256": "f50a17e8dc051475adef4f098ebe6a0d0e8bcfe1e81a400acf2385b1b93eea6b",
         "purpose": "Sherman: Military Draft Registration Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Splitter-Core-v1.0.0.md",
+        "path": "prompts/core/Splitter-Core.md",
         "expected_version": "1.0.0",
         "sha256": "97341a33f653b74a0358673914785964c5f8f82106a565442a1fd3076b47cd37",
         "purpose": "Splitter: Civil Divorce Record Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Stevens-Core-v1.0.0.md",
+        "path": "prompts/core/Stevens-Core.md",
         "expected_version": "1.0.0",
         "sha256": "c4322447678072590f530fd20b3bf7c228f25d6105faf364f61b5e6f2d6cd61e",
         "purpose": "Stevens: Cemetery Marker Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Stork-Core-v1.0.0.md",
+        "path": "prompts/core/Stork-Core.md",
         "expected_version": "1.0.0",
         "sha256": "faffc16db347e1bfc14a75905bd87b3ddd74fa6b7ed0051318ab9d939499f26a",
         "purpose": "Stork: Vital Birth Record Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Will-Core-v1.0.0.md",
+        "path": "prompts/core/Will-Core.md",
         "expected_version": "1.0.0",
         "sha256": "43e683295c00890ce7ae10b36a505f1c14a6bd0914dc6890caecf149c2a2a3d7",
         "purpose": "Will: Probate and Estate Record Archival Processing Protocol"
       },
       {
-        "path": "prompts/core/Yente-Core-v1.0.0.md",
+        "path": "prompts/core/Yente-Core.md",
         "expected_version": "1.0.0",
         "sha256": "0e08f18d604dcba8d80778499c552591c9e89f1133578937da8c8975e9400c13",
         "purpose": "Yente: Civil Marriage Record Archival Processing Protocol"
@@ -342,6 +342,12 @@
         "expected_version": "1.0.0",
         "sha256": "766a4a0e9910e1279e5269a3f3ad5fb4b8e96305bd86e4e35e668c48bf9c1c21",
         "purpose": "MIP-Topic: Data Protection and Backup Architecture"
+      },
+      {
+        "path": "prompts/topics/MIP-Topic-Documentation-Practices-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "ec6ac595753a7de6e37239537fd64d17be8526c4bd6a01175babe9df880993b0",
+        "purpose": "Topic Specification: Digital Archive Documentation & Tool Promotion Standards"
       }
     ]
   }
