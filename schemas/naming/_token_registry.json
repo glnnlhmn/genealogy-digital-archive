@@ -1,0 +1,258 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "name": "_token_registry.json",
+  "version": "1.0.17",
+  "description": "Authoritative registry of tokens, controlled vocabularies, and regex patterns for archival file naming.",
+  "record_types": [
+    "CENSUS",
+    "DEATH",
+    "MARRIAGE",
+    "BIRTH",
+    "NEWS",
+    "WILL",
+    "DRAFT",
+    "CEMETERY",
+    "BAPTISM",
+    "DIVORCE",
+    "TESTIMONY",
+    "AWARD",
+    "DIPLOMA",
+    "LAND",
+    "TAX",
+    "NATURALIZATION",
+    "IMMIGRATION",
+    "DIRECTORY",
+    "OTHER"
+  ],
+  "conflicts": [
+    "CW",
+    "SPANAM",
+    "WWI",
+    "WWII",
+    "KOREA",
+    "VIETNAM",
+    "PEACETIME"
+  ],
+  "award_categories": [
+    "MIL",
+    "CIVIC",
+    "FRAT",
+    "ACAD",
+    "CORP",
+    "OTHER"
+  ],
+  "diploma_levels": [
+    "ELEM",
+    "HS",
+    "COLL",
+    "GRAD",
+    "VOC",
+    "OTHER"
+  ],
+  "other_categories": [
+    "BIBLE",
+    "DIARY",
+    "CORRESP",
+    "FIN",
+    "EPHEM",
+    "PHOTO",
+    "MISC"
+  ],
+  "news_classifications": [
+    "OBIT",
+    "MARR",
+    "BIRTH",
+    "CIVIC",
+    "EDU",
+    "EMPL",
+    "LEGAL",
+    "SOC",
+    "OTHER"
+  ],
+  "pub_codes": {
+    "CARSENT": "Carlisle Sentinel (Carlisle, PA)",
+    "CARHER": "Carlisle Herald (Carlisle, PA)",
+    "EVRECORD": "Evening Record (Carlisle, PA)",
+    "PATNEWS": "The Patriot-News (Harrisburg, PA)",
+    "HBGINQ": "Harrisburg Daily Independent / Inquirer (Harrisburg, PA)",
+    "HBGTELE": "Harrisburg Telegraph (Harrisburg, PA)",
+    "VALSTAR": "Valley Times-Star / Star-Enterprise (Newville, PA)",
+    "SHIPTRIB": "Shippensburg News-Chronicle / Tribune (Shippensburg, PA)",
+    "OTHER": "Generic or unindexed regional newspaper"
+  },
+  "states": {
+    "Connecticut": "CT",
+    "District of Columbia": "DC",
+    "Maryland": "MD",
+    "New Hampshire": "NH",
+    "New Jersey": "NJ",
+    "Pennsylvania": "PA",
+    "Virginia": "VA",
+    "Baden-Wuerttemberg": "BW",
+    "Bavaria": "BY",
+    "Hesse": "HE",
+    "Prussia": "PR"
+  },
+  "counties": [
+    "Berks",
+    "Cumberland",
+    "Dauphin",
+    "Essex",
+    "Huntingdon",
+    "Lancaster",
+    "Lebanon",
+    "Merrimack",
+    "New London",
+    "Northampton",
+    "Portsmouth",
+    "Schuylkill",
+    "York"
+  ],
+  "jurisdictions": {
+    "Bangor": "Bangor",
+    "Bloserville": "UpperFrankford",
+    "Boiling Springs": "BoilingSprings",
+    "Camp Hill": "CampHill",
+    "Carlisle": "Carlisle",
+    "Colonial Park": "ColonialPark",
+    "Enola": "Enola",
+    "Fairview": "Fairview",
+    "Frankford": "Frankford",
+    "Harrisburg": "Harrisburg",
+    "Hornberg": "Hornberg",
+    "Lebanon": "Lebanon",
+    "Lower Frankford": "LowerFrankford",
+    "Lower Paxton": "LowerPaxton",
+    "Lower West Pennsboro": "LowerWestPennsboro",
+    "Manheim": "Manheim",
+    "Mechanicsburg": "Mechanicsburg",
+    "Middlesex": "Middlesex",
+    "Mount Holly Springs": "MountHollySprings",
+    "Newark": "Newark",
+    "Newville": "Newville",
+    "North Middleton": "NorthMiddleton",
+    "Penbrook": "Penbrook",
+    "Pine Grove": "PineGrove",
+    "Plainfield": "Plainfield",
+    "Portsmouth": "Portsmouth",
+    "Progress": "Progress",
+    "Reading": "Reading",
+    "Saltillo": "Saltillo",
+    "Shellsville": "Shellsville",
+    "Shippensburg": "Shippensburg",
+    "Silver Spring": "SilverSpring",
+    "Steelton": "Steelton",
+    "Susquehanna": "Susquehanna",
+    "Swatara": "Swatara",
+    "Upper Frankford": "UpperFrankford",
+    "West Hanover": "WestHanover",
+    "West Pennsboro": "WestPennsboro",
+    "West Pennsborough": "WestPennsboro",
+    "Wormleysburg": "Wormleysburg"
+  },
+  "locator_census_patterns": {
+    "page": "^P\\d{3}$",
+    "page_stamp": "^P\\d{3}S\\d{3}[A-Z]?$",
+    "ed_sheet": "^ED[\\w-]+S\\d{2}[A-Z]?$"
+  },
+  "locator_death_patterns": {
+    "certificate_number": "^\\d{5,}$",
+    "register_entry": "^REC-\\d+$",
+    "person_id": "^IND-\\d{5}$"
+  },
+  "locator_marriage_patterns": {
+    "license_number": "^LIC-\\d+$",
+    "certificate_number": "^\\d{5,}$",
+    "docket_volume_page": "^Vol[A-Za-z0-9]+P\\d+$",
+    "register_entry": "^REC-\\d+$"
+  },
+  "locator_birth_patterns": {
+    "certificate_number": "^\\d{5,}$",
+    "delayed_filing": "^DEL-\\d+$",
+    "volume_page": "^Vol[A-Za-z0-9]+P\\d+$",
+    "register_entry": "^REC-\\d+$"
+  },
+  "locator_news_patterns": {
+    "page_column": "^P\\d{1,2}C\\d{1,2}$",
+    "page_only": "^P\\d{1,2}$",
+    "clipping_id": "^CLIP-\\d+$"
+  },
+  "locator_will_patterns": {
+    "will_book": "^WB-[A-Za-z0-9]+P\\d+$",
+    "estate_file": "^FILE-\\d+$",
+    "orphans_court": "^OC-[A-Za-z0-9]+P\\d+$",
+    "register_entry": "^REC-\\d+$"
+  },
+  "locator_draft_patterns": {
+    "board_order": "^BOARD-\\d+(-[A-Za-z0-9]+)?$",
+    "serial_number": "^SN-[A-Za-z0-9]+$",
+    "card_identifier": "^CARD-\\d+$",
+    "class_identifier": "^CLASS-\\d+$",
+    "register_entry": "^REC-\\d+$"
+  },
+  "locator_divorce_patterns": {
+    "docket_number": "^DOCKET-\\d+(-[A-Za-z0-9]+)?$",
+    "case_packet": "^CASE-\\d+$",
+    "volume_page": "^Vol[A-Za-z0-9]+P\\d+$",
+    "register_entry": "^REC-\\d+$"
+  },
+  "locator_testimony_patterns": {
+    "session_reel": "^(SESS|TAPE|REEL)-\\d+$",
+    "manuscript_folio": "^MS-[A-Za-z0-9]+$",
+    "affidavit_filing": "^AFF-\\d+$",
+    "descriptive_slug": "^(Transcript|Interview|Memoir|Deposition)(_[A-Za-z0-9]+)?$"
+  },
+  "locator_award_patterns": {
+    "general_order": "^GO-\\d+$",
+    "certificate_number": "^CERT-\\d+$",
+    "descriptive_slug": "^(Citation|Medal|Commendation|Ribbon|Plaque)(_[A-Za-z0-9]+)?$"
+  },
+  "locator_land_patterns": {
+    "deed_book": "^DB-[A-Za-z0-9]+P\\d+$",
+    "warrant_number": "^WAR-\\d+$",
+    "patent_number": "^PAT-[A-Za-z0-9-]+$",
+    "tract_parcel": "^PARCEL-[A-Za-z0-9-]+$"
+  },
+  "locator_tax_patterns": {
+    "line_item": "^LINE-\\d+$",
+    "page_entry": "^P\\d+(-[A-Za-z0-9]+)?$",
+    "assessment_id": "^ASSESS-\\d+$"
+  },
+  "locator_naturalization_patterns": {
+    "declaration_intent": "^DECL-\\d+$",
+    "petition_number": "^PET-\\d+$",
+    "certificate_number": "^CERT-\\d+$",
+    "docket_volume_page": "^Vol[A-Za-z0-9]+P\\d+$"
+  },
+  "locator_immigration_patterns": {
+    "manifest_line": "^LIST-\\d+L\\d+$",
+    "passenger_id": "^PASS-\\d+$",
+    "volume_page": "^Vol[A-Za-z0-9]+P\\d+$"
+  },
+  "locator_directory_patterns": {
+    "page_column": "^P\\d{1,4}(C\\d{1,2})?$",
+    "listing_id": "^ENTRY-\\d+$"
+  },
+  "locator_other_patterns": {
+    "item_number": "^ITEM-\\d+$",
+    "page_number": "^P\\d+$",
+    "descriptive_slug": "^[A-Za-z0-9_-]+$"
+  },
+  "marker_patterns": {
+    "findagrave_id": "^FG-\\d+$",
+    "plot_coordinate": "^PLOT-[\\w-]+$",
+    "descriptive_slug": "^(Headstone|Footstone|Monument|Shared_Headstone)(_[A-Za-z0-9]+)?$"
+  },
+  "register_church_patterns": {
+    "page": "^P\\d+$",
+    "entry": "^Entry-\\d+$",
+    "volume_page": "^Vol\\d+P\\d+$",
+    "general": "^(Register|Ledger|Item\\d+)$"
+  },
+  "register_cemetery_patterns": {
+    "entry": "^Entry-\\d+$",
+    "page": "^P\\d+$",
+    "volume_page": "^Vol[A-Za-z0-9]+P\\d+$",
+    "register_entry": "^REC-\\d+$"
+  }
+}

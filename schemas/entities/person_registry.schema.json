@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/entities/person_registry.schema.json",
+  "title": "Person_Registry",
+  "version": "1.0.1",
+  "description": "Master administrative registry container for individual person entities, utilizing centralized shared definitions.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schema_version",
+    "created_at",
+    "last_modified",
+    "total_persons",
+    "persons"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Registry schema version string.",
+      "const": "1.0.1"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "Timestamp when the registry file was created."
+    },
+    "last_modified": {
+      "type": "string",
+      "description": "Timestamp when the registry file was last modified."
+    },
+    "total_persons": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total count of person entities contained in the registry."
+    },
+    "persons": {
+      "type": "array",
+      "description": "List of master person records.",
+      "items": {
+        "$ref": "person.schema.json"
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/entities/fact.schema.json",
+  "title": "Fact",
+  "version": "1.0.4",
+  "description": "Represents an assertion linking a person to a source document for a specific historical reason, utilizing centralized shared definitions.",
+  "type": "object",
+  "properties": {
+    "fact_id": {
+      "$ref": "../defs/_shared_definitions.schema.json#/$defs/fact_id"
+    },
+    "person_id": {
+      "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id"
+    },
+    "fact_type": {
+      "type": "string",
+      "enum": [
+        "Association",
+        "Award",
+        "Baptism",
+        "Birth",
+        "Burial",
+        "Census",
+        "Civic",
+        "Death",
+        "Divorce",
+        "Education",
+        "Incident",
+        "Legal",
+        "Marriage",
+        "Military",
+        "Occupation",
+        "Parentage",
+        "Probate",
+        "Property",
+        "Residence",
+        "Other"
+      ],
+      "description": "[REQUIRED] Standardized category of the historical fact assertion."
+    },
+    "source_urn": {
+      "description": "[REQUIRED] Primary source URN or list of corroborating source URNs.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "quay_score": {
+      "$ref": "../defs/_shared_definitions.schema.json#/$defs/quay_score"
+    },
+    "date": {
+      "oneOf": [
+        {
+          "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "[OPTIONAL] Genealogical date for the fact or null."
+    },
+    "location": {
+      "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+      "description": "[OPTIONAL] Standardized and verbatim location."
+    },
+    "description": {
+      "type": "string",
+      "description": "[REQUIRED] Human- and AI-readable contextual display string summarizing the asserted fact (e.g., 'Death of Annie Lehman', 'Marriage of William Lehman and Annie Myers')."
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "[OPTIONAL] Research notes, conflict analysis, or transcription quirks (excluding individual names to prevent data drift)."
+    },
+    "life_story": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "[OPTIONAL] Qualitative narrative describing the human context of the event."
+    },
+    "associated_people": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+      },
+      "description": "[OPTIONAL] List of other individuals involved in this event and their specific roles."
+    },
+    "external_identifiers": {
+      "$ref": "../defs/_shared_definitions.schema.json#/$defs/fact_external_identifiers",
+      "description": "[OPTIONAL] Cross-reference mapping to external GEDCOM events and sources."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "[REQUIRED] ISO 8601 timestamp tracking when the fact entry was first created."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "[REQUIRED] ISO 8601 timestamp tracking when the fact entry was last modified. Matches created_at on initial insertion."
+    }
+  },
+  "required": [
+    "fact_id",
+    "person_id",
+    "fact_type",
+    "source_urn",
+    "quay_score",
+    "description",
+    "created_at",
+    "updated_at"
+  ],
+  "additionalProperties": false
+}

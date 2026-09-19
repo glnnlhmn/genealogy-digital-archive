@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/sources/personal_testimony.schema.json",
+  "title": "PersonalTestimonyRecord",
+  "version": "1.0.0",
+  "description": "Standardized schema for narrative and manuscript records including sworn affidavits, recorded depositions, personal memoirs, family Bible registers, and oral histories.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "description",
+    "record_metadata",
+    "testimony_details",
+    "associated_people"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "description": {
+      "type": "string",
+      "description": "[REQUIRED] Contextual summary (e.g., '1938 Personal Memoir of Annie Myers Lehman (Newville, Cumberland Co., PA)')."
+    },
+    "record_metadata": {
+      "type": "object",
+      "required": ["source_urn", "record_category", "record_type"],
+      "properties": {
+        "source_urn": {
+          "type": "string",
+          "pattern": "^URN:TESTIMONY:[0-9]{4}:[A-Z0-9_]+:[A-Za-z0-9_-]+$",
+          "description": "Adheres to URN:TESTIMONY:[YEAR]:[JURISDICTION]:[LOCATOR]."
+        },
+        "record_category": {
+          "type": "string",
+          "enum": ["MANUSCRIPT", "NARRATIVE", "LEGAL"],
+          "default": "MANUSCRIPT"
+        },
+        "record_type": {
+          "type": "string",
+          "enum": [
+            "AFFIDAVIT",
+            "DEPOSITION",
+            "MEMOIR",
+            "BIBLE_RECORD",
+            "ORAL_HISTORY",
+            "INTERVIEW_TRANSCRIPT",
+            "PERSONAL_LETTER"
+          ],
+          "default": "MEMOIR"
+        }
+      },
+      "additionalProperties": false
+    },
+    "testimony_details": {
+      "type": "object",
+      "required": [
+        "creator",
+        "format",
+        "transcript",
+        "media_files"
+      ],
+      "properties": {
+        "creator": {
+          "type": "object",
+          "required": ["full_name"],
+          "properties": {
+            "person_id": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id",
+              "description": "Foreign key pointing to the master Person Registry."
+            },
+            "full_name": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name"
+            },
+            "relationship_to_subject": {
+              "type": ["string", "null"],
+              "description": "Kinship or contextual relationship of author/deponent to primary subjects (e.g., 'Granddaughter', 'Eyewitness', 'Self')."
+            }
+          },
+          "additionalProperties": false
+        },
+        "creation_date": {
+          "oneOf": [
+            { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+            { "type": "null" }
+          ],
+          "description": "Date recorded, dictated, sworn, or entered into manuscript."
+        },
+        "location": {
+          "oneOf": [
+            { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+            { "type": "null" }
+          ],
+          "description": "Location where testimony, deposition, or entry was taken."
+        },
+        "format": {
+          "type": "object",
+          "required": ["medium"],
+          "properties": {
+            "medium": {
+              "type": "string",
+              "enum": [
+                "Manuscript (Handwritten)",
+                "Typescript",
+                "Printed Bible Register",
+                "Audio Recording Transcript",
+                "Photocopy",
+                "Other"
+              ]
+            },
+            "repository_or_provenance": {
+              "type": ["string", "null"],
+              "description": "Physical custodial chain, family owner, or archive holding original item."
+            }
+          },
+          "additionalProperties": false
+        },
+        "testimony_note": {
+          "type": ["string", "null"],
+          "description": "Notes regarding handwriting variations, notary seals, pagination, or ink fading."
+        },
+        "transcript": {
+          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+          "description": "Verbatim transcription, abstract summary, and keywords."
+        },
+        "media_files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+          },
+          "description": "Image scans of manuscript folios, Bible leaves, or signed affidavits."
+        }
+      },
+      "additionalProperties": false
+    },
+    "associated_people": {
+      "type": "array",
+      "items": {
+        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+      },
+      "description": "Linked participants (author/deponent, interviewer, notary/magistrate, and mentioned relatives/subjects) mapped to roles and IDs."
+    }
+  },
+  "additionalProperties": false
+}

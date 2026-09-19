@@ -1,0 +1,348 @@
+{
+  "ConfigVersion": "1.0.0",
+  "LastUpdated": "2026-09-19",
+  "ArchiveName": "Genealogy Digital Archive",
+  "RootAnchor": "G:\\My Drive\\genealogy-digital-archive",
+  "TrackedAssets": {
+    "schemas": [
+      {
+        "path": "schemas/defs/_census_definitions.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "8479a5ecdb618d15e37ae5cd0b9a14204f7160d85b23e0e1e678abd4c5dbc947",
+        "purpose": "JSON Metadata / Config entity (_census_definitions.schema.json)"
+      },
+      {
+        "path": "schemas/defs/_draft_definitions.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "ceceb08e99aa2d8d06c93c84f760ebfbd039ea9b50829be10026549c52357897",
+        "purpose": "JSON Metadata / Config entity (_draft_definitions.schema.json)"
+      },
+      {
+        "path": "schemas/defs/_shared_definitions.schema.json",
+        "expected_version": "1.0.5",
+        "sha256": "22ba17884a649115e11445d277349cad75cf1ccc72c5d03a9d0946409a8b67a6",
+        "purpose": "JSON Metadata / Config entity (_shared_definitions.schema.json)"
+      },
+      {
+        "path": "schemas/entities/fact.schema.json",
+        "expected_version": "1.0.4",
+        "sha256": "5b0c0925d9e3d8e2968e343d14823cfa456468304aef19dcf2b63952259b9278",
+        "purpose": "JSON Metadata / Config entity (fact.schema.json)"
+      },
+      {
+        "path": "schemas/entities/fact_registry.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "eb5e09d4209e0242103dac2bdb1cbee42e45323510114564c9cc0cf74c22271f",
+        "purpose": "JSON Metadata / Config entity (fact_registry.schema.json)"
+      },
+      {
+        "path": "schemas/entities/person.schema.json",
+        "expected_version": "1.0.3",
+        "sha256": "dce506852a2bc9f3e56edb0c147835234acb20db695475678d58859957fbebb2",
+        "purpose": "JSON Metadata / Config entity (person.schema.json)"
+      },
+      {
+        "path": "schemas/entities/person_registry.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "ae2f0e7feb5c323da99cb641782fa7d2cd8a7e62eb518531d252a0917df86e01",
+        "purpose": "JSON Metadata / Config entity (person_registry.schema.json)"
+      },
+      {
+        "path": "schemas/indices/ahnentafel_index.schema.json",
+        "expected_version": "0.0.999",
+        "sha256": "e5201280b5aab1483e87fe673db5cd20dc2268a7aa602a493aec847ceb59c370",
+        "purpose": "JSON Metadata / Config entity (ahnentafel_index.schema.json)"
+      },
+      {
+        "path": "schemas/indices/newspaper_index.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "40b62c393628ae2347e7183d73e0e3d8e32b3c3fa64867e9b7bbc9c1d5915a2b",
+        "purpose": "JSON Metadata / Config entity (newspaper_index.schema.json)"
+      },
+      {
+        "path": "schemas/naming/_token_registry.json",
+        "expected_version": "1.0.17",
+        "sha256": "f73af5b361886cbd630832c5d8709200848595f1e526e812f91ab3ab8f8b938a",
+        "purpose": "JSON Metadata / Config entity (_token_registry.json)"
+      },
+      {
+        "path": "schemas/naming/naming_standards.json",
+        "expected_version": "1.0.15",
+        "sha256": "ad82ae90b1e3dd265320a6dc7b3a957a076f692894e819e678fcb9f35c17fe8b",
+        "purpose": "JSON Metadata / Config entity (naming_standards.json)"
+      },
+      {
+        "path": "schemas/sources/academic_credential.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "2514fadfb23ae2abb22ee064394e200e025798aedd8dc35283439f8929b32def",
+        "purpose": "JSON Metadata / Config entity (academic_credential.schema.json)"
+      },
+      {
+        "path": "schemas/sources/birth_certificate.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "e88c703e82ae1c72ec7c9b3861744cbe306745e1a85c7a930f3be8d363a115dd",
+        "purpose": "JSON Metadata / Config entity (birth_certificate.schema.json)"
+      },
+      {
+        "path": "schemas/sources/cemetery_marker.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "5b4baf9115631e0b93818197e383eaed4d22128f20d5f4e98552a79a4a69b8c5",
+        "purpose": "JSON Metadata / Config entity (cemetery_marker.schema.json)"
+      },
+      {
+        "path": "schemas/sources/census_schedule.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "27dae0841d4fc5372c330756297c039187c33e90448a213b19fa01652754e189",
+        "purpose": "JSON Metadata / Config entity (census_schedule.schema.json)"
+      },
+      {
+        "path": "schemas/sources/church_baptism.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "cb6b9f9ec64fc3da99216671bb498b300ba45bf79d1ed37a2d0fa885529ec546",
+        "purpose": "JSON Metadata / Config entity (church_baptism.schema.json)"
+      },
+      {
+        "path": "schemas/sources/death_certificate.schema.json",
+        "expected_version": "1.0.4",
+        "sha256": "95300ffcf9fb951c3ead9899e00721b626b872bcfb5e60396fe0c56ee07fc0c6",
+        "purpose": "JSON Metadata / Config entity (death_certificate.schema.json)"
+      },
+      {
+        "path": "schemas/sources/directory_listing.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "691c80406ef3ee67f7371277ec7d35a41b4fca1195ea9a5529af14efacefc050",
+        "purpose": "JSON Metadata / Config entity (directory_listing.schema.json)"
+      },
+      {
+        "path": "schemas/sources/divorce_report.schema.json",
+        "expected_version": "1.0.4",
+        "sha256": "5bf7910be3dfde70f67271951568f0248ba178545eb20875dece88681054546d",
+        "purpose": "JSON Metadata / Config entity (divorce_report.schema.json)"
+      },
+      {
+        "path": "schemas/sources/immigration_manifest.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "4517b41c7a1e8e557c2359a121eb18e9b9d8259f7a402be2c32938393c9e8595",
+        "purpose": "JSON Metadata / Config entity (immigration_manifest.schema.json)"
+      },
+      {
+        "path": "schemas/sources/land_deed.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "6141d0a034aedad3c18c895de3b4ae84736f60ec44111135427fde84b83afa97",
+        "purpose": "JSON Metadata / Config entity (land_deed.schema.json)"
+      },
+      {
+        "path": "schemas/sources/marriage_license.schema.json",
+        "expected_version": "1.0.4",
+        "sha256": "d8c7298f8101732f4646801babf7265b4eff02061cda14e5e7aa6d4f8bb96d4e",
+        "purpose": "JSON Metadata / Config entity (marriage_license.schema.json)"
+      },
+      {
+        "path": "schemas/sources/military_draft.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "7d2b6915ff46b7715ae78b9932add6a8e4df23e73f6c5dbe8edf80932a8ebb15",
+        "purpose": "JSON Metadata / Config entity (military_draft.schema.json)"
+      },
+      {
+        "path": "schemas/sources/naturalization_record.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "1fb4185492f95201a3c45f24ec70fedbc2bc5c9c8aedf7f599c218a426444417",
+        "purpose": "JSON Metadata / Config entity (naturalization_record.schema.json)"
+      },
+      {
+        "path": "schemas/sources/newspaper_article.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "11537a3e8624af126078c3f90414a29269b166f04a2f74a2d2eea5f0bcdb2d22",
+        "purpose": "JSON Metadata / Config entity (newspaper_article.schema.json)"
+      },
+      {
+        "path": "schemas/sources/other_miscellaneous.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "df4d4df6f05948340d0eada7a1ee14de25dfec9fa0fbb6705be82298b98327c5",
+        "purpose": "JSON Metadata / Config entity (other_miscellaneous.schema.json)"
+      },
+      {
+        "path": "schemas/sources/personal_testimony.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "eb2ca2e5b73c265b9e4006aaafb9903ea40ad6efc50fd1c412db694b79f3e5c0",
+        "purpose": "JSON Metadata / Config entity (personal_testimony.schema.json)"
+      },
+      {
+        "path": "schemas/sources/probate_record.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "40d091cf700c58c0171ac1816480f507ddc2e766b5cdab68fde34adbe8b5a63f",
+        "purpose": "JSON Metadata / Config entity (probate_record.schema.json)"
+      },
+      {
+        "path": "schemas/sources/tax_assessment.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "c7591c50404a77cd72f35a7949cc18afcbd36e59a21be2fa05450e7f03f1ac8e",
+        "purpose": "JSON Metadata / Config entity (tax_assessment.schema.json)"
+      }
+    ],
+    "prompts": [
+      {
+        "path": "prompts/core/Adam-Core-v1.0.3.md",
+        "expected_version": "1.0.3",
+        "sha256": "e74538f01018bb9eda657ed87852fb6494fc864993b1a4e6d069c291995c93b7",
+        "purpose": "PATH: gtemp/[script_name].py"
+      },
+      {
+        "path": "prompts/core/AIRE-Core-v1.0.3.md",
+        "expected_version": "1.0.3",
+        "sha256": "114be96dc4313ec26da68896d6c6533d63b4ab6a4d2c7919fd79391b1e91a506",
+        "purpose": "SYSTEM INSTRUCTION: AIRE (Archival Intelligence & Renaming Engine)"
+      },
+      {
+        "path": "prompts/core/Barnum-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "0e392c35f192059083055c74964c021a4e2c390d8ce97a0ebd729bb5918bafd6",
+        "purpose": "Barnum: Miscellaneous Ephemera and Fraternal Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Caleb-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "784f2b85e97ad944e8b388ba934718933c427ed7e6735323e12ac7a084b94e4c",
+        "purpose": "Caleb: Land Deed and Property Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Euler-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "e37835b965212754379b628abcca8c863b384081646f53951264028fc2fbcd96",
+        "purpose": "Euler: Academic Credential and Yearbook Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Ezra-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "9084ea37955fde95c01d792131b65b8284e5c3cdaf5e5f5bc412954b59af4c16",
+        "purpose": "Ezra: Federal Census Schedule Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Fosse-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "b5aa507769d958b6b4239db9c2919f0fd1fa02e882f3b956bc7f4e232f20dd9e",
+        "purpose": "Fosse: Naturalization and Citizenship Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Gander-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "fc83021fe927771feb02efbd5fe950fef713c3d889427c2ced0a9d06abae8206",
+        "purpose": "Gander: Immigration and Passenger Manifest Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/John-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "11928b26dd2b2bdb3eb7b09b15f491bf2f18d08fd1a17f97e43c5cde0c43eebf",
+        "purpose": "John: Church Baptism Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Levi-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "085632d4f1b9ac51eb9104bbc52b110adc616b9e69a5e2ff5583fe39909fbc65",
+        "purpose": "Levi: Tax Assessment Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/MeMe-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "64658fe28c2dca3cf43673c5833a40bebfef852e5249f7b3e469a2ba5a3d4e35",
+        "purpose": "Meme: Personal Testimony and Manuscript Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/MIP-Core-v1.0.3.md",
+        "expected_version": "1.0.3",
+        "sha256": "0918ee72dace4476ca2b7100ae0e05a4905c6f7c66ffa88224944c4ea51cb356",
+        "purpose": "SYSTEM INSTRUCTION: MIP (Master Intelligence Profile)"
+      },
+      {
+        "path": "prompts/core/Pappy-Core-v1.0.3.md",
+        "expected_version": "1.0.3",
+        "sha256": "928efc0bf39e0611f83c96baa6186fdccb9ace48451aa8c13b238935be7e51a3",
+        "purpose": "Paddy: Newspaper Article Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Polk-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "17996ddef69eba7196d7052e1ddf9e884f2a5d1be2df3f241b6802ff8dec97f8",
+        "purpose": "Polk: City and Business Directory Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Reaper-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "e54716dbfbc43057b1ee3c1f22e52c06d4733cac9beca827be5b46a1a3674ef7",
+        "purpose": "Reaper: Vital Death Record Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Sherman-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "f50a17e8dc051475adef4f098ebe6a0d0e8bcfe1e81a400acf2385b1b93eea6b",
+        "purpose": "Sherman: Military Draft Registration Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Splitter-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "97341a33f653b74a0358673914785964c5f8f82106a565442a1fd3076b47cd37",
+        "purpose": "Splitter: Civil Divorce Record Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Stevens-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "c4322447678072590f530fd20b3bf7c228f25d6105faf364f61b5e6f2d6cd61e",
+        "purpose": "Stevens: Cemetery Marker Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Stork-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "faffc16db347e1bfc14a75905bd87b3ddd74fa6b7ed0051318ab9d939499f26a",
+        "purpose": "Stork: Vital Birth Record Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Will-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "43e683295c00890ce7ae10b36a505f1c14a6bd0914dc6890caecf149c2a2a3d7",
+        "purpose": "Will: Probate and Estate Record Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/core/Yente-Core-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "0e08f18d604dcba8d80778499c552591c9e89f1133578937da8c8975e9400c13",
+        "purpose": "Yente: Civil Marriage Record Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/tools/def-safe-backup-v1.0.0.md",
+        "expected_version": "v1.0.0",
+        "sha256": "e4fcec7a5d510a7d2fb650879990dca7508e4d0f8474519af2e52c4fc330b952",
+        "purpose": "Definition: Safe Backup Protocol"
+      },
+      {
+        "path": "prompts/tools/Fact-Lifecycle-Protocol-v1.0.3.md",
+        "expected_version": "1.0.3",
+        "sha256": "6ba70304bcbdc27f79aa8e60c819dece7254a55c7d60e0351a45dc010b516fb0",
+        "purpose": "TOOL INSTRUCTION: Fact Ingestion & Reconciliation Protocol"
+      },
+      {
+        "path": "prompts/tools/Person-Evidence-Dossier-Spec-v0.1.0.md",
+        "expected_version": "0.1.0",
+        "sha256": "b832ada7575de3cd4b60ac44737403839450d8af3c8bbc79734c739e99ed797e",
+        "purpose": "Idea: Individual Evidence Ledger & Research Analysis Tool"
+      },
+      {
+        "path": "prompts/tools/Validate-Domain-Persona-Prompt-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "630d11fce021faa883716d888700daf65da5fe9068a1e75ae61a6322976ef010",
+        "purpose": "TOOL PROMPT: Domain Persona Configuration Validator"
+      },
+      {
+        "path": "prompts/tools/Validate-Technical-Persona-Prompt-v1.0.0.md",
+        "expected_version": "1.0.0",
+        "sha256": "8308ccf0e371ba9b55a33ffb8421facdb87495870a6b69ecf1b84a0539cc5222",
+        "purpose": "TOOL PROMPT: Technical Persona Configuration Validator"
+      },
+      {
+        "path": "prompts/topics/mip-topic-backup-protocol.md",
+        "expected_version": "1.0.0",
+        "sha256": "766a4a0e9910e1279e5269a3f3ad5fb4b8e96305bd86e4e35e668c48bf9c1c21",
+        "purpose": "MIP-Topic: Data Protection and Backup Architecture"
+      }
+    ]
+  }
+}

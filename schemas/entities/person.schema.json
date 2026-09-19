@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/entities/person.schema.json",
+  "title": "Person",
+  "version": "1.0.3",
+  "description": "Represents an individual person entity in the master registry, utilizing centralized shared definitions.",
+  "type": "object",
+  "required": [
+    "person_id",
+    "display_name",
+    "canonical_name"
+  ],
+  "properties": {
+    "person_id": {
+      "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "Primary preferred name for listing and UI rendering."
+    },
+    "sex": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Male",
+        "Female",
+        "Unknown",
+        null
+      ]
+    },
+    "canonical_name": {
+      "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name"
+    },
+    "vitals": {
+      "type": "object",
+      "properties": {
+        "birth": {
+          "type": "object",
+          "properties": {
+            "date": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted"
+            },
+            "place": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/location"
+            }
+          },
+          "additionalProperties": false
+        },
+        "death": {
+          "type": "object",
+          "properties": {
+            "date": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted"
+            },
+            "place": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/location"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "external_identifiers": {
+      "$ref": "../defs/_shared_definitions.schema.json#/$defs/external_identifiers"
+    },
+    "notes": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "Structured notes and research tracking entries for the entity.",
+      "items": {
+        "$ref": "../defs/_shared_definitions.schema.json#/$defs/note_entry"
+      }
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "ISO-8601 timestamp representing the last modification to this entity."
+    },
+    "associated_people": {
+      "type": "array",
+      "description": "Linked secondary people or non-minted parents/kin with assigned roles.",
+      "items": {
+        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+      }
+    }
+  },
+  "additionalProperties": false
+}

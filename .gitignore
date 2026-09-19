@@ -1,0 +1,72 @@
+# =====================================================================
+# IDE, OS & Python Virtual Environments
+# =====================================================================
+.idea/
+.vscode/
+/shelf/
+/workspace.xml
+/httpRequests/
+/queries/
+/dataSources/
+/dataSources.local.xml
+.DS_Store
+Thumbs.db
+
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =====================================================================
+# API Keys, Secrets & Credentials
+# =====================================================================
+.env
+*.env
+*.key
+*.pem
+
+# =====================================================================
+# BACKUPS & ROLLBACK SNAPSHOTS
+# =====================================================================
+*.bk
+*.bak
+*.bk.*
+*.bak.*
+*.[0-9]*.bk
+gda_config.json.bk
+backups/
+
+# =====================================================================
+# DATA EXCLUSION (Strict Living Person Privacy)
+# =====================================================================
+data/
+GEDCOM/
+*.ged
+*gedcom*.json
+
+# Intake Pipeline & Staging
+import/
+
+# =====================================================================
+# PERSONAL USER PROFILES & PRIVATE PROMPTS
+# =====================================================================
+prompts/core/Glenn*
+prompts/archive/
+
+# =====================================================================
+# DEPRECATED / ARCHIVED SCHEMAS
+# =====================================================================
+schemas/archive/*_us_census.schema.json
+
+# =====================================================================
+# Ephemeral Chat Downloads, Workspace, Logs & Reports
+# =====================================================================
+gemini-code-*.*
+gtemp/
+logs/
+reports/

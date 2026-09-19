@@ -1,0 +1,51 @@
+site_name: Genealogy Digital Archive - Technical Docs
+site_description: System architecture, tool runbooks, and APIs for the Digital Archive.
+docs_dir: docs
+
+theme:
+  name: material
+  palette:
+    # Slate / Dark theme (ideal for code and CLI docs)
+    - scheme: slate
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    # Light theme toggle
+    - scheme: default
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Architecture:
+      - Package Structure: architecture/package_structure.md
+  - Tools & CLI:
+      - Script Importer: tools/script_importer.md
+  - Library APIs:
+      - Overview: lib/index.md
+  - Workflows:
+      - Overview: workflows/index.md

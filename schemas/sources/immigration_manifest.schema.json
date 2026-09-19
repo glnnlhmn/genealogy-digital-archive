@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/sources/immigration_manifest.schema.json",
+  "title": "ImmigrationManifestRecord",
+  "version": "1.0.0",
+  "description": "Standardized schema for historical ship passenger arrival manifests, border inspection cards, customs lists, and oaths of allegiance.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "description",
+    "record_metadata",
+    "voyage",
+    "manifest_details",
+    "associated_people"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "description": {
+      "type": "string",
+      "description": "[REQUIRED] Contextual summary (e.g., '1745 Passenger Arrival Manifest of Johan Adam Lehman (Ship Robert and Alice, Port of Philadelphia, PA)')."
+    },
+    "record_metadata": {
+      "type": "object",
+      "required": ["source_urn", "record_category", "record_type"],
+      "properties": {
+        "source_urn": {
+          "type": "string",
+          "pattern": "^URN:IMMIGRATION:[0-9]{4}:[A-Z0-9_]+:[A-Za-z0-9_-]+$",
+          "description": "Adheres to URN:IMMIGRATION:[YEAR]:[JURISDICTION]:[LOCATOR]."
+        },
+        "record_category": {
+          "type": "string",
+          "enum": ["IMMIGRATION", "TRAVEL", "CUSTOMS"],
+          "default": "IMMIGRATION"
+        },
+        "record_type": {
+          "type": "string",
+          "enum": [
+            "PASSENGER_MANIFEST",
+            "CUSTOMS_LIST",
+            "OATH_OF_ALLEGIANCE_LIST",
+            "BORDER_CROSSING_CARD",
+            "CREW_LIST"
+          ],
+          "default": "PASSENGER_MANIFEST"
+        }
+      },
+      "additionalProperties": false
+    },
+    "voyage": {
+      "type": "object",
+      "required": ["port_of_arrival", "arrival_date"],
+      "properties": {
+        "ship_name": {
+          "type": ["string", "null"],
+          "description": "Name of the steamship, sailing vessel, or airline (e.g., 'SS Rotterdam', 'Robert and Alice')."
+        },
+        "master_or_captain": { "type": ["string", "null"] },
+        "shipping_line": { "type": ["string", "null"] },
+        "port_of_departure": {
+          "oneOf": [
+            { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+            { "type": "null" }
+          ],
+          "description": "Port where voyage commenced (e.g., Rotterdam, Liverpool, Bremen, Le Havre)."
+        },
+        "port_of_arrival": {
+          "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+          "description": "Port of entry (e.g., Philadelphia, Ellis Island/New York, Castle Garden, Boston)."
+        },
+        "arrival_date": {
+          "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted",
+          "description": "Date manifest was filed or vessel reached port."
+        }
+      },
+      "additionalProperties": false
+    },
+    "manifest_details": {
+      "type": "object",
+      "required": [
+        "manifest_reference",
+        "passenger",
+        "transcript",
+        "media_files"
+      ],
+      "properties": {
+        "manifest_reference": {
+          "type": "object",
+          "required": ["locator"],
+          "properties": {
+            "locator": {
+              "type": "string",
+              "description": "List number and line number matching locator_immigration_patterns."
+            },
+            "list_number": { "type": ["string", "null"] },
+            "line_number": { "type": ["integer", "null"] }
+          },
+          "additionalProperties": false
+        },
+        "passenger": {
+          "type": "object",
+          "required": ["full_name"],
+          "properties": {
+            "person_id": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id"
+            },
+            "full_name": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name"
+            },
+            "age": {
+              "oneOf": [
+                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/age_record" },
+                { "type": "null" }
+              ]
+            },
+            "sex": {
+              "type": ["string", "null"],
+              "enum": ["Male", "Female", "Unknown", null]
+            },
+            "marital_status": {
+              "type": ["string", "null"],
+              "enum": ["Single", "Married", "Widowed", "Divorced", null]
+            },
+            "occupation": { "type": ["string", "null"] },
+            "last_permanent_residence": {
+              "oneOf": [
+                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "type": "null" }
+              ]
+            },
+            "final_destination": {
+              "oneOf": [
+                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "type": "null" }
+              ]
+            },
+            "relative_joined": {
+              "type": "object",
+              "properties": {
+                "name": { "type": ["string", "null"] },
+                "relationship": { "type": ["string", "null"] },
+                "address": { "type": ["string", "null"] }
+              },
+              "additionalProperties": false,
+              "description": "Named kin or sponsor the passenger is joining in America."
+            }
+          },
+          "additionalProperties": false
+        },
+        "manifest_note": {
+          "type": ["string", "null"],
+          "description": "Annotations on head tax, ticket details, or hospital detentions."
+        },
+        "transcript": {
+          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+          "description": "Verbatim line transcription, abstract, and search keywords."
+        },
+        "media_files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+          },
+          "description": "Scans of the ship manifest roll pages."
+        }
+      },
+      "additionalProperties": false
+    },
+    "associated_people": {
+      "type": "array",
+      "items": {
+        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+      },
+      "description": "Array of participants (passenger, accompanying family members, master, relative joined) mapped to roles and IDs."
+    }
+  },
+  "additionalProperties": false
+}

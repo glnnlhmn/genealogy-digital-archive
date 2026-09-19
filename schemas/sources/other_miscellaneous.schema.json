@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/sources/other_miscellaneous.schema.json",
+  "title": "OtherMiscellaneousRecord",
+  "version": "1.0.0",
+  "description": "Flexible open schema for miscellaneous historical sources including fraternal/lodge records, society rosters, ephemera, receipts, and untyped manuscript items.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "description",
+    "record_metadata",
+    "other_details",
+    "associated_people"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "description": {
+      "type": "string",
+      "description": "[REQUIRED] Contextual summary (e.g., '1925 Masonic Lodge Dues Receipt for William Lehman (Carlisle Lodge No. 260)')."
+    },
+    "record_metadata": {
+      "type": "object",
+      "required": ["source_urn", "record_category", "record_type"],
+      "properties": {
+        "source_urn": {
+          "type": "string",
+          "pattern": "^URN:OTHER:[0-9]{4}:[A-Z0-9_]+:[A-Za-z0-9_-]+$",
+          "description": "Adheres to URN:OTHER:[YEAR]:[JURISDICTION]:[LOCATOR] (using 9999 if year is undetermined)."
+        },
+        "record_category": {
+          "type": "string",
+          "enum": ["OTHER", "FRATERNAL", "CIVIC", "EPHEMERA", "FINANCIAL"],
+          "default": "OTHER"
+        },
+        "record_type": {
+          "type": "string",
+          "enum": [
+            "BIBLE",
+            "DIARY",
+            "CORRESP",
+            "FIN",
+            "EPHEM",
+            "PHOTO",
+            "LODGE_RECORD",
+            "MEMBERSHIP_ROSTER",
+            "RECEIPT",
+            "MISC"
+          ],
+          "default": "MISC",
+          "description": "Classification token matching other_categories in _token_registry.json."
+        }
+      },
+      "additionalProperties": false
+    },
+    "organization_or_entity": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": ["string", "null"],
+          "description": "Name of the lodge, fraternal order, church society, or commercial establishment (e.g., 'Carlisle Lodge No. 260 F&AM', 'Order of the Rainbow for Girls')."
+        },
+        "location": {
+          "oneOf": [
+            { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "other_details": {
+      "type": "object",
+      "required": [
+        "item_date",
+        "transcript",
+        "media_files"
+      ],
+      "properties": {
+        "item_date": {
+          "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted",
+          "description": "Document or artifact creation date (use modifier UNKNOWN and year 9999 if undetermined)."
+        },
+        "custom_fields": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Dynamic open container allowing arbitrary domain key-value pairs created on the fly (e.g., lodge_degree, dues_amount, item_dimensions)."
+        },
+        "item_note": {
+          "type": ["string", "null"],
+          "description": "Physical description, artifact context, handwriting, or provenance notes."
+        },
+        "transcript": {
+          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+          "description": "Verbatim transcript of the item, abstract summary, and search keywords."
+        },
+        "media_files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+          },
+          "description": "Scans or photos of the physical item or document."
+        }
+      },
+      "additionalProperties": false
+    },
+    "associated_people": {
+      "type": "array",
+      "items": {
+        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+      },
+      "description": "Array of participants linked to the item (members, officers, signatories, payees) mapped to roles and IDs."
+    }
+  },
+  "additionalProperties": false
+}

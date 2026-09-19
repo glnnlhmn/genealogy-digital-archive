@@ -1,0 +1,217 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/sources/cemetery_marker.schema.json",
+  "title": "CemeteryMarkerRecord",
+  "version": "1.0.0",
+  "description": "Standardized schema for historical cemetery markers, headstones, monuments, mausoleum crypts, and memorial inscriptions.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "description",
+    "record_metadata",
+    "cemetery",
+    "marker",
+    "associated_people"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string",
+      "description": "[REQUIRED] Human- and AI-readable contextual summary of this cemetery marker record (e.g., '1944 Headstone of Annie Lehman (Newville Cemetery, Cumberland Co., PA)')."
+    },
+    "record_metadata": {
+      "type": "object",
+      "required": [
+        "source_urn",
+        "record_category",
+        "record_type"
+      ],
+      "properties": {
+        "source_urn": {
+          "type": "string",
+          "pattern": "^URN:CEMETERY:[0-9]{4}:[A-Z0-9_]+:[A-Za-z0-9_-]+$",
+          "description": "Unique Uniform Resource Name adhering to URN:CEMETERY:[YEAR]:[JURISDICTION]:[LOCATOR]."
+        },
+        "record_category": {
+          "type": "string",
+          "enum": ["CEMETERY"],
+          "default": "CEMETERY",
+          "description": "Classification category for physical memorial markers."
+        },
+        "record_type": {
+          "type": "string",
+          "enum": [
+            "CEMETERY_MARKER",
+            "HEADSTONE",
+            "FOOTSTONE",
+            "FAMILY_MONUMENT",
+            "MEMORIAL_PLAQUE",
+            "MAUSOLEUM_CRYPT"
+          ],
+          "default": "CEMETERY_MARKER",
+          "description": "Physical classification of the memorial instrument."
+        }
+      },
+      "additionalProperties": false
+    },
+    "cemetery": {
+      "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+      "description": "Cemetery facility and geographic location. The formal cemetery name must be recorded in cemetery.details.location_name (e.g., 'Big Spring Presbyterian Church Cemetery')."
+    },
+    "marker": {
+      "type": "object",
+      "required": [
+        "interments",
+        "transcript",
+        "media_files"
+      ],
+      "properties": {
+        "plot_location": {
+          "type": ["string", "null"],
+          "description": "Specific lot, section, row, or grave coordinate within the cemetery (e.g., 'Section 3, Lot 14, Grave 2')."
+        },
+        "memorial_identifiers": {
+          "type": "object",
+          "properties": {
+            "findagrave_id": {
+              "type": ["string", "null"],
+              "description": "Find A Grave memorial number (e.g., '104729778'). Matches token registry pattern FG-\\d+."
+            },
+            "billiongraves_id": {
+              "type": ["string", "null"],
+              "description": "BillionGraves memorial or record number."
+            },
+            "cemetery_grave_id": {
+              "type": ["string", "null"],
+              "description": "Internal grave or plot ID assigned by municipal or church cemetery sexton."
+            }
+          },
+          "additionalProperties": false
+        },
+        "monument_profile": {
+          "type": "object",
+          "properties": {
+            "marker_type": {
+              "type": ["string", "null"],
+              "enum": [
+                "Upright Headstone",
+                "Flat Marker",
+                "Slant",
+                "Obelisk",
+                "Ledger",
+                "Table Tomb",
+                "Footstone",
+                "Monument",
+                "Other",
+                null
+              ]
+            },
+            "material": {
+              "type": ["string", "null"],
+              "enum": [
+                "Marble",
+                "Granite",
+                "Sandstone",
+                "Limestone",
+                "Slate",
+                "Fieldstone",
+                "Bronze",
+                "Other",
+                null
+              ]
+            },
+            "carver": {
+              "type": ["string", "null"],
+              "description": "Name or hallmark of the stonecutter/carver (e.g., 'Stevens', 'J. W. Craver')."
+            },
+            "physical_condition": {
+              "type": ["string", "null"],
+              "enum": [
+                "Sound",
+                "Weathered",
+                "Broken/Repaired",
+                "Sunken",
+                "Illegible",
+                "Overgrown",
+                null
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "interments": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["inscribed_name"],
+            "properties": {
+              "person_id": {
+                "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id",
+                "description": "Controlled foreign key referencing the master Person Registry (/data/entities/people.json). Must be verified with 3 corroborating data points before assignment."
+              },
+              "inscribed_name": {
+                "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name",
+                "description": "Inscribed name parsed canonically or captured verbatim in raw_name."
+              },
+              "birth_date": {
+                "oneOf": [
+                  { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                  { "type": "null" }
+                ],
+                "description": "Birth date inscribed on the stone or interpreted from age/death."
+              },
+              "death_date": {
+                "oneOf": [
+                  { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                  { "type": "null" }
+                ],
+                "description": "Death date inscribed on the stone."
+              },
+              "age_at_death": {
+                "oneOf": [
+                  { "$ref": "../defs/_shared_definitions.schema.json#/$defs/age_record" },
+                  { "type": "null" }
+                ],
+                "description": "Age as inscribed on the stone (e.g., 'Aged 74 ys, 3 ms, 12 ds')."
+              },
+              "relationship_inscribed": {
+                "type": ["string", "null"],
+                "description": "Literal familial phrasing on marker (e.g., 'Wife of William Lehman', 'Our Mother')."
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "List of all individuals inscribed or memorialized on this marker."
+        },
+        "marker_note": {
+          "type": ["string", "null"],
+          "description": "Optional notes regarding iconography, symbols (e.g., Masonic compass, weeping willow), footstone alignment, or field observations."
+        },
+        "transcript": {
+          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+          "description": "Verbatim transcript of the complete epitaph and all inscribed lettering, search keywords, and legibility assessment."
+        },
+        "media_files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+          },
+          "description": "Array of original photographic scans/images of the headstone, footstone, or monument."
+        }
+      },
+      "additionalProperties": false
+    },
+    "associated_people": {
+      "type": "array",
+      "items": {
+        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+      },
+      "description": "Array of participants (deceased interred, named spouse/parents in epitaph, stone carver) linked to roles and master person IDs."
+    }
+  },
+  "additionalProperties": false
+}

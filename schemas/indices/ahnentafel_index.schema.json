@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AhnentafelIndex",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "proband_id": {
+      "type": "string",
+      "pattern": "^IND-\\d{5}$"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "total_ancestors": {
+      "type": "integer"
+    },
+    "ancestors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ahnentafel_number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "person_id": {
+            "type": "string",
+            "pattern": "^IND-\\d{5}$"
+          },
+          "canonical_name": {
+            "type": "string"
+          },
+          "focus": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "default": "no"
+          },
+          "notes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ahnentafel_number",
+          "person_id",
+          "canonical_name",
+          "focus"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "proband_id",
+    "ancestors"
+  ],
+  "SchemaVersion": "0.0.999"
+}

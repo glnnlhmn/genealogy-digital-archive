@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/indices/newspaper_index.schema.json",
+  "title": "MasterNewspaperArticleIndex",
+  "version": "1.0.1",
+  "type": "object",
+  "required": [
+    "$schema",
+    "registry_metadata",
+    "articles"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "registry_metadata": {
+      "type": "object",
+      "required": ["version", "last_updated"],
+      "properties": {
+        "version": { "type": "string" },
+        "last_updated": { "type": "string", "format": "date" }
+      },
+      "additionalProperties": false
+    },
+    "articles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source_urn",
+          "pub_code",
+          "pub_date",
+          "record_type",
+          "headline",
+          "file_path",
+          "associated_people"
+        ],
+        "properties": {
+          "source_urn": { "type": "string" },
+          "pub_code": { "type": "string", "maxLength": 6 },
+          "pub_date": {
+            "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted"
+          },
+          "record_type": { "type": "string", "maxLength": 6 },
+          "headline": { "type": "string" },
+          "file_path": { "type": "string" },
+          "associated_people": {
+            "type": "array",
+            "items": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

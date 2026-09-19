@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/sources/birth_certificate.schema.json",
+  "title": "BirthCertificateSourceRecord",
+  "version": "1.0.1",
+  "description": "Standardized schema for civil birth certificates, delayed birth certificates, hospital registers, and civil birth ledger entries.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "description",
+    "record_metadata",
+    "birth_certificate_details",
+    "associated_people"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "description": {
+      "type": "string",
+      "description": "[REQUIRED] Contextual summary (e.g., '1915 Birth Certificate of Daniel Lehman (Carlisle, Cumberland Co., PA)')."
+    },
+    "record_metadata": {
+      "type": "object",
+      "required": ["source_urn", "record_category", "record_type"],
+      "properties": {
+        "source_urn": {
+          "type": "string",
+          "pattern": "^URN:BIRTH:[0-9]{4}:[A-Z0-9_]+:[A-Za-z0-9_-]+$",
+          "description": "Unique Uniform Resource Name adhering to URN:BIRTH:[YEAR]:[JURISDICTION]:[LOCATOR]."
+        },
+        "record_category": {
+          "type": "string",
+          "enum": ["VITAL"],
+          "default": "VITAL"
+        },
+        "record_type": {
+          "type": "string",
+          "enum": [
+            "BIRTH_CERTIFICATE",
+            "DELAYED_BIRTH",
+            "REGISTER_ENTRY",
+            "STILLBORN_RECORD",
+            "HOSPITAL_CERTIFICATE"
+          ],
+          "default": "BIRTH_CERTIFICATE"
+        }
+      },
+      "additionalProperties": false
+    },
+    "birth_certificate_details": {
+      "type": "object",
+      "required": [
+        "filing_details",
+        "child",
+        "transcript",
+        "media_files"
+      ],
+      "properties": {
+        "filing_details": {
+          "type": "object",
+          "required": ["certificate_number"],
+          "properties": {
+            "certificate_number": {
+              "type": "string",
+              "description": "Official state, county, or local file number."
+            },
+            "registration_district": {
+              "type": ["string", "null"]
+            },
+            "date_filed": {
+              "oneOf": [
+                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "type": "null" }
+              ]
+            },
+            "local_registrar": { "type": ["string", "null"] },
+            "sub_registrar": { "type": ["string", "null"] }
+          },
+          "additionalProperties": false
+        },
+        "child": {
+          "type": "object",
+          "required": [
+            "full_name",
+            "sex",
+            "date_of_birth",
+            "place_of_birth"
+          ],
+          "properties": {
+            "person_id": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id"
+            },
+            "full_name": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name"
+            },
+            "sex": {
+              "type": "string",
+              "enum": ["Male", "Female", "Unknown"]
+            },
+            "plurality": {
+              "type": ["string", "null"],
+              "enum": ["Single", "Twin", "Triplet", "Quadruplet", null],
+              "default": "Single"
+            },
+            "birth_order": { "type": ["string", "null"] },
+            "is_stillborn": {
+              "type": ["boolean", "null"],
+              "default": false
+            },
+            "date_of_birth": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted"
+            },
+            "time_of_birth": { "type": ["string", "null"] },
+            "place_of_birth": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/location"
+            },
+            "legitimacy": { "type": ["boolean", "null"] }
+          },
+          "additionalProperties": false
+        },
+        "certificate_note": {
+          "type": ["string", "null"],
+          "description": "Archival notes regarding delayed affidavits, stamps, or seal condition."
+        },
+        "transcript": {
+          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record"
+        },
+        "media_files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "associated_people": {
+      "type": "array",
+      "items": {
+        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+      },
+      "description": "Linked participants (child, father, mother, attendant/physician, informant, registrar) mapped to standardized roles and IDs."
+    }
+  },
+  "additionalProperties": false
+}

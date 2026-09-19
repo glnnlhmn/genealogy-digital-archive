@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/sources/newspaper_article.schema.json",
+  "title": "NewspaperArticleSourceRecord",
+  "version": "1.0.1",
+  "description": "Standardized schema for historical newspaper clippings, obituaries, marriage announcements, and legal notices.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "description",
+    "record_metadata",
+    "publication",
+    "article",
+    "associated_people"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "description": {
+      "type": "string",
+      "description": "[REQUIRED] Contextual summary of this newspaper record (e.g., '1952 Obituary of William Lehman (Carlisle Sentinel)')."
+    },
+    "record_metadata": {
+      "type": "object",
+      "required": ["source_urn", "record_category", "record_type"],
+      "properties": {
+        "source_urn": { 
+          "type": "string", 
+          "pattern": "^URN:NEWSPAPER:[0-9]{8}:[A-Z0-9_]+:[A-Za-z0-9_-]+$",
+          "description": "Adheres to URN:NEWSPAPER:[PUBDATE]:[PUBCODE]:[LOCATOR]."
+        },
+        "record_category": { 
+          "type": "string", 
+          "enum": ["NEWS"],
+          "default": "NEWS"
+        },
+        "record_type": { 
+          "type": "string",
+          "maxLength": 6,
+          "description": "Classification token defined under 'news_classifications' in _token_registry.json."
+        }
+      },
+      "additionalProperties": false
+    },
+    "publication": {
+      "type": "object",
+      "required": ["pub_code", "pub_name"],
+      "properties": {
+        "pub_code": { 
+          "type": "string",
+          "maxLength": 6,
+          "description": "Standardized publication key defined under 'pub_codes' in _token_registry.json."
+        },
+        "pub_name": { 
+          "type": "string", 
+          "description": "Full formal name of the publication."
+        },
+        "pub_date": { 
+          "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted"
+        },
+        "pub_edition": { 
+          "type": ["string", "null"]
+        },
+        "pub_note": { 
+          "type": ["string", "null"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "article": {
+      "type": "object",
+      "required": ["category", "transcript", "clippings"],
+      "properties": {
+        "headline": { 
+          "type": ["string", "null"],
+          "description": "Verbatim headline or title as printed."
+        },
+        "category": {
+          "type": "string",
+          "maxLength": 6
+        },
+        "transcript": { 
+          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record"
+        },
+        "article_note": { 
+          "type": ["string", "null"]
+        },
+        "clippings": {
+          "type": "array",
+          "items": {
+            "$ref": "../defs/_shared_definitions.schema.json#/$defs/news_clipping"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "associated_people": {
+      "type": "array",
+      "items": {
+        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+      }
+    }
+  },
+  "additionalProperties": false
+}

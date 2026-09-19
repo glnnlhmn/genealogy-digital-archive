@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/sources/land_deed.schema.json",
+  "title": "LandDeedRecord",
+  "version": "1.0.0",
+  "description": "Standardized schema for historical land deeds, indentures, conveyances, warrants, patents, surveys, and mortgages.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "description",
+    "record_metadata",
+    "recorder_office",
+    "deed_details",
+    "associated_people"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "description": {
+      "type": "string",
+      "description": "[REQUIRED] Contextual summary (e.g., '1865 Land Conveyance from Christian Lehman to Daniel Lehman (West Pennsboro Twp, Cumberland Co., PA)')."
+    },
+    "record_metadata": {
+      "type": "object",
+      "required": ["source_urn", "record_category", "record_type"],
+      "properties": {
+        "source_urn": {
+          "type": "string",
+          "pattern": "^URN:LAND:[0-9]{4}:[A-Z0-9_]+:[A-Za-z0-9_-]+$",
+          "description": "Adheres to URN:LAND:[YEAR]:[JURISDICTION]:[LOCATOR]."
+        },
+        "record_category": {
+          "type": "string",
+          "enum": ["LAND", "LEGAL", "PROPERTY"],
+          "default": "LAND"
+        },
+        "record_type": {
+          "type": "string",
+          "enum": [
+            "DEED_INDENTURE",
+            "QUITCLAIM_DEED",
+            "WARRANT",
+            "PATENT",
+            "SURVEY",
+            "MORTGAGE",
+            "SHERIFF_DEED",
+            "RELEASE_DOWER"
+          ],
+          "default": "DEED_INDENTURE"
+        }
+      },
+      "additionalProperties": false
+    },
+    "recorder_office": {
+      "type": "object",
+      "required": ["office_title", "location"],
+      "properties": {
+        "office_title": {
+          "type": "string",
+          "description": "e.g., 'Recorder of Deeds of Cumberland County', 'Pennsylvania Land Office'."
+        },
+        "location": {
+          "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+          "description": "Jurisdiction where deed was officially enrolled/recorded."
+        },
+        "recorder_or_deputy": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "deed_details": {
+      "type": "object",
+      "required": [
+        "recording_reference",
+        "dates",
+        "grantors",
+        "grantees",
+        "parcel",
+        "transcript",
+        "media_files"
+      ],
+      "properties": {
+        "recording_reference": {
+          "type": "object",
+          "required": ["locator"],
+          "properties": {
+            "locator": {
+              "type": "string",
+              "description": "Deed book and page, warrant number, or patent number matching locator_land_patterns."
+            },
+            "deed_book": { "type": ["string", "null"] },
+            "page_number": { "type": ["string", "null"] },
+            "instrument_number": { "type": ["string", "null"] }
+          },
+          "additionalProperties": false
+        },
+        "dates": {
+          "type": "object",
+          "required": ["date_written"],
+          "properties": {
+            "date_written": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted",
+              "description": "Date indenture/conveyance was signed and sealed by grantors."
+            },
+            "date_acknowledged": {
+              "oneOf": [
+                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "type": "null" }
+              ],
+              "description": "Date grantors appeared before a Justice of the Peace."
+            },
+            "date_recorded": {
+              "oneOf": [
+                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "type": "null" }
+              ],
+              "description": "Date formally entered into county deed books."
+            }
+          },
+          "additionalProperties": false
+        },
+        "grantors": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["full_name"],
+            "properties": {
+              "person_id": {
+                "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id"
+              },
+              "full_name": {
+                "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name"
+              },
+              "residence": {
+                "oneOf": [
+                  { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                  { "type": "null" }
+                ]
+              },
+              "relationship_to_grantee": { "type": ["string", "null"] }
+            },
+            "additionalProperties": false
+          },
+          "description": "Selling/transferring party (grantors, releasors, mortgagors)."
+        },
+        "grantees": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["full_name"],
+            "properties": {
+              "person_id": {
+                "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id"
+              },
+              "full_name": {
+                "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name"
+              },
+              "residence": {
+                "oneOf": [
+                  { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                  { "type": "null" }
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "Purchasing/receiving party (grantees, releasees, mortgagees)."
+        },
+        "financials": {
+          "type": "object",
+          "properties": {
+            "consideration_amount": {
+              "type": ["string", "null"],
+              "description": "Verbatim purchase price (e.g., '$1,200.00', '50 pounds lawful money of Pennsylvania', 'one dollar and natural love and affection')."
+            },
+            "dower_relinquished": {
+              "type": ["boolean", "null"],
+              "description": "True if wife examined separately by magistrate acknowledging release of dower."
+            }
+          },
+          "additionalProperties": false
+        },
+        "parcel": {
+          "type": "object",
+          "required": ["location"],
+          "properties": {
+            "location": {
+              "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+              "description": "Township/borough and physical tract location."
+            },
+            "tract_name": {
+              "type": ["string", "null"],
+              "description": "Colonial patent or tract title (e.g., 'Wheatland', 'Mount Pleasant')."
+            },
+            "acreage": {
+              "type": ["string", "null"],
+              "description": "Verbatim acreage (e.g., '142 acres and 32 perches')."
+            },
+            "metes_and_bounds_summary": {
+              "type": ["string", "null"],
+              "description": "Summary of corner markers (e.g., 'beginning at a white oak...')."
+            },
+            "neighboring_landowners": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Adjoining owners cited in bounds (vital for neighborhood network analysis)."
+            },
+            "prior_deed_recital": {
+              "type": ["string", "null"],
+              "description": "Chain of title recital reciting how grantor obtained title."
+            }
+          },
+          "additionalProperties": false
+        },
+        "deed_note": {
+          "type": ["string", "null"],
+          "description": "Condition, marginal releases, or watermarks."
+        },
+        "transcript": {
+          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+          "description": "Verbatim deed text, abstract, and keywords."
+        },
+        "media_files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+          },
+          "description": "Scans of the deed pages or deed book register leaves."
+        }
+      },
+      "additionalProperties": false
+    },
+    "associated_people": {
+      "type": "array",
+      "items": {
+        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+      },
+      "description": "Array of participants (grantors, grantees, wives releasing dower, neighboring owners, witnesses, recorder) mapped to roles and IDs."
+    }
+  },
+  "additionalProperties": false
+}
