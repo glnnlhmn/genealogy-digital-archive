@@ -1,5 +1,20 @@
-# Name: audit_people_registry.py
-# Path: tools/audits/audit_people_registry.py
+# Name: gpa.py
+# Path: tools/ops/gpa.py
+
+"""GPA: Genealogy People Auditor Operational CLI Tool.
+
+Version: 1.0.0
+Target Database: data/entities/people.json
+Schema Specification: schemas/entities/person_registry.schema.json (v1.0.1)
+
+Audits envelope container properties, entity schema conformance, bidirectional
+kinship reciprocity, biological chronology limits, vital-date synchronization,
+and catalogs incomplete or missing dates. Emits diagnostic session logs to logs/
+and writes structured reports and remediation ledgers to reports/.
+
+Supports full headless execution via CLI flags as well as an interactive
+console menu when invoked without operational arguments.
+"""
 
 import argparse
 import csv
@@ -12,11 +27,12 @@ import sys
 ROOT_DIR = Path("G:/My Drive/genealogy-digital-archive")
 PEOPLE_PATH = ROOT_DIR / "data/entities/people.json"
 REPORTS_DIR = ROOT_DIR / "reports"
-LOGS_DIR = ROOT_DIR / "gtemp"
+LOGS_DIR = ROOT_DIR / "logs"
 
 DATE_ISO_PATTERN = re.compile(r"^\d{4}(-(0[1-9]|1[0-2])(-(0[1-9]|[12]\d|3[01]))?)?$")
 PERSON_ID_PATTERN = re.compile(r"^IND-\d{5}$")
 VALID_SEX_VALUES = {"Male", "Female", "Unknown", None}
+VALID_MODIFIERS = {"EXACT", "ABT", "BEF", "AFT", "BET", "FROM_TO", "LIVING", "UNKNOWN"}
 VALID_ROLES = {
     "CHIL", "HUSB", "WIFE", "MOTH", "FATH", "SPOU", "WITN", "GODP",
     "INFORMANT", "CLERGY", "OFFICIATOR", "NEIGHBOR", "ATND", "UNDR",
@@ -25,39 +41,50 @@ VALID_ROLES = {
 
 
 class TieredFindings:
+    """Aggregates and categorizes validation issues by severity level."""
+
     def __init__(self):
+        """Initializes empty finding buckets for errors, warnings, and notes."""
         self.errors = []
         self.warnings = []
         self.notes = []
 
     def add_error(self, entity_id: str, message: str):
+        """Records a critical integrity or schema violation."""
         self.errors.append(f"[{entity_id}] {message}")
 
     def add_warning(self, entity_id: str, message: str):
+        """Records a data gap, modifier discordance, or potential issue."""
         self.warnings.append(f"[{entity_id}] {message}")
 
     def add_note(self, entity_id: str, message: str):
+        """Records an observational note or incomplete date pattern."""
         self.notes.append(f"[{entity_id}] {message}")
 
-    def extend(self, other):
+    def extend(self, other: "TieredFindings"):
+        """Merges all finding tiers from another TieredFindings instance."""
         self.errors.extend(other.errors)
         self.warnings.extend(other.warnings)
         self.notes.extend(other.notes)
 
     @property
     def total_count(self) -> int:
+        """Returns the aggregate count of all tracked findings."""
         return len(self.errors) + len(self.warnings) + len(self.notes)
 
 
 class RegistryAuditor:
-    def __init__(self, debug=False, verbose=False):
+    """Auditor engine validating structural and evidentiary integrity in people.json."""
+
+    def __init__(self, debug: bool = False, verbose: bool = False):
+        """Initializes logging, operational buffers, and loads registry entities."""
         self.debug = debug
         self.verbose = verbose
         self.log_file = None
         if self.verbose:
             LOGS_DIR.mkdir(parents=True, exist_ok=True)
             ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-            self.log_file = LOGS_DIR / f"audit_people_registry-{ts}.log"
+            self.log_file = LOGS_DIR / f"gpa-{ts}.log"
 
         self.people_data = {}
         self.persons = []
@@ -66,6 +93,7 @@ class RegistryAuditor:
         self.load_data()
 
     def _log(self, message: str, is_error: bool = False):
+        """Writes execution traces to stderr/stdout or the verbose session log."""
         if self.debug:
             target_stream = sys.stderr if is_error else sys.stdout
             target_stream.write(f"DEBUG: {message}\n")
@@ -75,6 +103,7 @@ class RegistryAuditor:
                 f.write(f"[{datetime.now().isoformat()}] {'ERROR: ' if is_error else ''}{message}\n")
 
     def load_data(self):
+        """Loads and indexes entities from data/entities/people.json into memory."""
         if not PEOPLE_PATH.exists():
             err = f"Target people registry not found at: {PEOPLE_PATH}"
             self._log(err, is_error=True)
@@ -91,33 +120,65 @@ class RegistryAuditor:
         }
         self._log(f"Loaded {len(self.persons)} total individuals into memory.")
 
-    def audit_schema(self) -> TieredFindings:
+    def audit_container(self) -> TieredFindings:
+        """Validates top-level envelope properties, schema version, and entity counts."""
         findings = TieredFindings()
-        self._log("Initiating Schema Requirements Audit.")
+        self._log("Initiating Container Schema & Header Audit.")
 
-        for p in self.persons:
-            pid = p.get("person_id", "UNKNOWN_ID")
+        schema_val = self.people_data.get("$schema", "")
+        if "person_registry.schema.json" not in schema_val:
+            findings.add_error("CONTAINER", f"Invalid container $schema reference: '{schema_val}'")
+
+        ver = self.people_data.get("schema_version")
+        if ver != "1.0.1":
+            findings.add_error("CONTAINER", f"Invalid schema_version: '{ver}' (expected '1.0.1')")
+
+        total_persons = self.people_data.get("total_persons")
+        actual_count = len(self.persons)
+        if total_persons is None:
+            findings.add_warning("CONTAINER", "Missing 'total_persons' field in container root.")
+        elif total_persons != actual_count:
+            findings.add_error(
+                "CONTAINER",
+                f"Count mismatch: total_persons property ({total_persons}) does not match array length ({actual_count})."
+            )
+
+        return findings
+
+    def audit_schema(self) -> TieredFindings:
+        """Audits individual person records against schema constraints and field requirements."""
+        findings = TieredFindings()
+        self._log("Initiating Entity Schema Requirements Audit.")
+        seen_ids = set()
+
+        for idx, p in enumerate(self.persons):
+            pid = p.get("person_id")
+            entity_tag = pid if pid else f"INDEX_{idx}"
 
             if not pid or not PERSON_ID_PATTERN.match(pid):
-                findings.add_error(pid, "Invalid person_id format or missing key.")
+                findings.add_error(entity_tag, f"Invalid or missing person_id format: '{pid}'")
+            elif pid in seen_ids:
+                findings.add_error(pid, "Duplicate person_id found in registry.")
+            else:
+                seen_ids.add(pid)
 
-            if "display_name" not in p or not isinstance(p["display_name"], str):
-                findings.add_error(pid, "Missing or invalid required string 'display_name'.")
+            if not p.get("display_name") or not isinstance(p["display_name"], str):
+                findings.add_error(entity_tag, "Missing or invalid required string 'display_name'.")
 
             cname = p.get("canonical_name")
             if not isinstance(cname, dict):
-                findings.add_error(pid, "Missing or invalid required object 'canonical_name'.")
+                findings.add_error(entity_tag, "Missing or invalid required object 'canonical_name'.")
             else:
                 has_raw = bool(cname.get("raw_name"))
                 has_given_surname = bool(cname.get("given") and cname.get("surname"))
                 if not (has_raw or has_given_surname):
                     findings.add_error(
-                        pid,
+                        entity_tag,
                         "canonical_name requires either 'raw_name' or both 'given' and 'surname'."
                     )
 
-            if "sex" in p and p["sex"] not in VALID_SEX_VALUES:
-                findings.add_error(pid, f"Invalid 'sex' enum value: '{p['sex']}'")
+            if p.get("sex") not in VALID_SEX_VALUES:
+                findings.add_error(entity_tag, f"Invalid 'sex' enum value: '{p.get('sex')}'")
 
             vitals = p.get("vitals", {})
             if isinstance(vitals, dict):
@@ -126,41 +187,46 @@ class RegistryAuditor:
                     if isinstance(vobj, dict):
                         dobj = vobj.get("date", {})
                         if isinstance(dobj, dict):
+                            mod = dobj.get("modifier")
+                            if mod and mod not in VALID_MODIFIERS:
+                                findings.add_error(entity_tag, f"vitals.{vtype}.date has invalid modifier enum: '{mod}'")
+
                             dstart = dobj.get("date_start")
                             if dstart is not None and not DATE_ISO_PATTERN.match(str(dstart)):
                                 findings.add_error(
-                                    pid,
+                                    entity_tag,
                                     f"vitals.{vtype}.date.date_start fails ISO pattern: '{dstart}'"
                                 )
                             dend = dobj.get("date_end")
                             if dend is not None and not DATE_ISO_PATTERN.match(str(dend)):
                                 findings.add_error(
-                                    pid,
+                                    entity_tag,
                                     f"vitals.{vtype}.date.date_end fails ISO pattern: '{dend}'"
                                 )
 
             assoc = p.get("associated_people", [])
             if isinstance(assoc, list):
-                for idx, a in enumerate(assoc):
+                for a_idx, a in enumerate(assoc):
                     role = a.get("role")
                     if role not in VALID_ROLES:
                         findings.add_error(
-                            pid,
-                            f"associated_people[{idx}] has invalid role enum: '{role}'"
+                            entity_tag,
+                            f"associated_people[{a_idx}] has invalid role enum: '{role}'"
                         )
-                    if "person_id" not in a and "name" not in a:
+                    if not a.get("person_id") and not a.get("name"):
                         findings.add_error(
-                            pid,
-                            f"associated_people[{idx}] requires either 'person_id' or 'name'."
+                            entity_tag,
+                            f"associated_people[{a_idx}] requires either 'person_id' or 'name'."
                         )
             else:
-                findings.add_error(pid, "'associated_people' must be an array.")
+                findings.add_error(entity_tag, "'associated_people' must be an array.")
 
         return findings
 
     def audit_reciprocity(self) -> TieredFindings:
+        """Verifies bidirectional kinship links across associated individuals."""
         findings = TieredFindings()
-        self._log("Initiating Reciprocal Relationship Audit.")
+        self._log("Initiating Reciprocal Kinship Relationship Audit.")
 
         for pid, p in self.person_map.items():
             assoc = p.get("associated_people", [])
@@ -168,7 +234,14 @@ class RegistryAuditor:
                 target_id = a.get("person_id")
                 role = a.get("role")
 
-                if not target_id or target_id not in self.person_map:
+                if not target_id:
+                    continue
+
+                if target_id not in self.person_map:
+                    findings.add_error(
+                        pid,
+                        f"References non-existent person_id '{target_id}' with role '{role}'."
+                    )
                     continue
 
                 target_p = self.person_map[target_id]
@@ -186,14 +259,22 @@ class RegistryAuditor:
                         )
 
                 elif role == "CHIL":
+                    p_sex = p.get("sex")
+                    if p_sex == "Male":
+                        expected_roles = ("FATH",)
+                    elif p_sex == "Female":
+                        expected_roles = ("MOTH",)
+                    else:
+                        expected_roles = ("FATH", "MOTH")
+
                     recip = any(
-                        ta.get("person_id") == pid and ta.get("role") in ("FATH", "MOTH")
+                        ta.get("person_id") == pid and ta.get("role") in expected_roles
                         for ta in target_assoc
                     )
                     if not recip:
                         findings.add_error(
                             f"{pid} -> {target_id}",
-                            f"Links child, but {target_id} does not link back as FATH or MOTH."
+                            f"Links child, but {target_id} does not link back as {'/'.join(expected_roles)}."
                         )
 
                 elif role in ("SPOU", "HUSB", "WIFE"):
@@ -209,7 +290,8 @@ class RegistryAuditor:
 
         return findings
 
-    def _extract_birth_year(self, p):
+    def _extract_birth_year(self, p: dict):
+        """Extracts an integer birth year from canonical_name or vitals fallback."""
         cname = p.get("canonical_name", {})
         byear_obj = cname.get("birth_year", {})
         if isinstance(byear_obj, dict) and byear_obj.get("year"):
@@ -227,6 +309,7 @@ class RegistryAuditor:
         return None
 
     def audit_chronology(self) -> TieredFindings:
+        """Validates biological age limits between parents and children at birth."""
         findings = TieredFindings()
         self._log("Initiating Child/Parent Chronological Validation.")
 
@@ -278,9 +361,7 @@ class RegistryAuditor:
         return findings
 
     def _determine_presumed_truth(self, c_val, c_mod, v_val, v_mod):
-        """
-        Genealogical arbitration rules returning (narrative_string, proposed_action, proposed_val, reason).
-        """
+        """Applies evidentiary arbitration rules returning proposed fixes for discordant dates."""
         if v_val and not c_val:
             val = str(v_val)[:4] if len(str(v_val)) >= 4 else str(v_val)
             return (
@@ -344,6 +425,7 @@ class RegistryAuditor:
         return ("Requires primary document review.", "MANUAL_REVIEW", "", "Unclassified edge case")
 
     def audit_vital_synchronization(self) -> TieredFindings:
+        """Audits consistency between canonical summary years and vitals date structures."""
         findings = TieredFindings()
         self.remediation_rows = []
         self._log("Initiating Canonical vs. Vitals Cross-Synchronization Audit.")
@@ -436,7 +518,7 @@ class RegistryAuditor:
                     v_dyear = int(match.group(1))
 
             if c_dmod == "LIVING" and v_dmod == "UNKNOWN" and v_dstart is None:
-                pass  # Standard living placeholder
+                pass
             elif c_dyear is not None and v_dyear is not None and c_dyear != v_dyear:
                 narrative, action, pval, reason = self._determine_presumed_truth(c_dyear, c_dmod, v_dstart, v_dmod)
                 findings.add_error(
@@ -492,6 +574,7 @@ class RegistryAuditor:
         return findings
 
     def audit_incomplete_dates(self) -> TieredFindings:
+        """Identifies missing vital dates and catalogs partial date representations."""
         findings = TieredFindings()
         self._log("Initiating Incomplete and Missing Vital Dates Audit.")
 
@@ -511,7 +594,6 @@ class RegistryAuditor:
                 c_year = c_year_obj.get("year")
                 c_mod = c_year_obj.get("modifier")
 
-                # Missing date entirely
                 if dstart is None:
                     if vtype == "death" and c_mod == "LIVING":
                         continue
@@ -522,13 +604,11 @@ class RegistryAuditor:
                     continue
 
                 dstart_str = str(dstart)
-                # Incomplete partial date (Year-only YYYY)
                 if re.match(r"^\d{4}$", dstart_str):
                     findings.add_note(
                         pid,
                         f"Partial date [YYYY]: vitals.{vtype}.date.date_start='{dstart_str}' | mod='{mod}' | raw='{raw}' | canonical_year={c_year}."
                     )
-                # Incomplete partial date (Year-Month YYYY-MM)
                 elif re.match(r"^\d{4}-\d{2}$", dstart_str):
                     findings.add_note(
                         pid,
@@ -537,7 +617,19 @@ class RegistryAuditor:
 
         return findings
 
+    def run_full_audit(self) -> TieredFindings:
+        """Executes all structural, container, kinship, and vital audits sequentially."""
+        combined = TieredFindings()
+        combined.extend(self.audit_container())
+        combined.extend(self.audit_schema())
+        combined.extend(self.audit_reciprocity())
+        combined.extend(self.audit_chronology())
+        combined.extend(self.audit_vital_synchronization())
+        combined.extend(self.audit_incomplete_dates())
+        return combined
+
     def write_csv_remediation(self, rows: list, base_ts: str):
+        """Generates a CSV change ledger detailing actionable date discrepancies."""
         if not rows:
             return
         REPORTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -565,21 +657,22 @@ class RegistryAuditor:
         print(f"[+] Remediation CSV ledger written to: {csv_file}")
 
     def write_report(self, check_name: str, findings: TieredFindings):
+        """Writes categorized errors, warnings, and notes to a text report in reports/."""
         REPORTS_DIR.mkdir(parents=True, exist_ok=True)
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-        report_file = REPORTS_DIR / f"audit_{check_name}_{ts}.txt"
+        report_file = REPORTS_DIR / f"audit_people_{check_name}_{ts}.txt"
 
         self._log(f"Writing tiered report ({findings.total_count} total entries) to {report_file}")
         with open(report_file, "w", encoding="utf-8") as f:
             f.write(f"AUDIT REPORT: {check_name.upper()}\n")
             f.write(f"Timestamp: {datetime.now().isoformat()}\n")
-            f.write(f"Total Entities Evaluated: {len(self.persons)}\n")
+            f.write(f"Target Database: {PEOPLE_PATH}\n")
+            f.write(f"Total Entities Enumerated: {len(self.persons)}\n")
             f.write(
                 f"Summary: {len(findings.errors)} Errors | {len(findings.warnings)} Warnings | {len(findings.notes)} Notes\n"
             )
             f.write("=" * 68 + "\n\n")
 
-            # Errors Section
             f.write(f"[ERRORS] - Critical Integrity & Schema Violations ({len(findings.errors)})\n")
             f.write("-" * 68 + "\n")
             if not findings.errors:
@@ -589,8 +682,7 @@ class RegistryAuditor:
                     f.write(f"{idx:03d}. {entry}\n")
                 f.write("\n")
 
-            # Warnings Section
-            f.write(f"[WARNINGS] - Data Gaps, Modifier Discordances & Resolutions ({len(findings.warnings)})\n")
+            f.write(f"[WARNINGS] - Data Gaps, Modifier Discordances & Kinship Inconsistencies ({len(findings.warnings)})\n")
             f.write("-" * 68 + "\n")
             if not findings.warnings:
                 f.write("None detected.\n\n")
@@ -599,8 +691,7 @@ class RegistryAuditor:
                     f.write(f"{idx:03d}. {entry}\n")
                 f.write("\n")
 
-            # Notes Section
-            f.write(f"[NOTES] - Incomplete Dates & Structural Observations ({len(findings.notes)})\n")
+            f.write(f"[NOTES] - Incomplete Dates & Chronological Observations ({len(findings.notes)})\n")
             f.write("-" * 68 + "\n")
             if not findings.notes:
                 f.write("None detected.\n\n")
@@ -620,59 +711,61 @@ class RegistryAuditor:
 
 
 def display_menu(auditor: RegistryAuditor):
+    """Renders the interactive command console for targeted verification routines."""
     while True:
         print("=" * 56)
-        print("    ARCHIVAL REGISTRY AUDIT MENU (MIP v1.0.1)")
+        print("        GPA: GENEALOGY PEOPLE AUDITOR (v1.0.0)")
         print("=" * 56)
-        print("1. Validate Schema Requirements")
-        print("2. Validate Relationship Reciprocity")
-        print("3. Validate Child/Parent Birth Chronology")
-        print("4. Validate Birth & Death Cross-Synchronization (TXT + CSV)")
-        print("5. Audit Incomplete & Partial Vital Dates")
-        print("6. Run Complete Audit (All Checks + CSV)")
+        print("1. Validate Container Schema & Version")
+        print("2. Validate Entity Schema Requirements")
+        print("3. Validate Bidirectional Kinship Reciprocity")
+        print("4. Validate Child/Parent Birth Chronology")
+        print("5. Validate Birth & Death Cross-Synchronization (TXT + CSV)")
+        print("6. Audit Incomplete & Partial Vital Dates")
+        print("7. Run Complete Audit (All Checks + CSV)")
         print("Q. Quit")
         print("=" * 56)
-        choice = input("Select an option [1-6, Q]: ").strip().upper()
+        choice = input("Select an option [1-7, Q]: ").strip().upper()
 
         if choice == "1":
-            print("\nExecuting: Schema Requirements Audit...")
+            print("\nExecuting: Container Schema Audit...")
+            findings = auditor.audit_container()
+            auditor.write_report("container_schema", findings)
+        elif choice == "2":
+            print("\nExecuting: Entity Schema Requirements Audit...")
             findings = auditor.audit_schema()
             auditor.write_report("schema_requirements", findings)
-        elif choice == "2":
-            print("\nExecuting: Relationship Reciprocity Audit...")
+        elif choice == "3":
+            print("\nExecuting: Bidirectional Kinship Reciprocity Audit...")
             findings = auditor.audit_reciprocity()
             auditor.write_report("relationship_reciprocity", findings)
-        elif choice == "3":
+        elif choice == "4":
             print("\nExecuting: Child/Parent Chronological Audit...")
             findings = auditor.audit_chronology()
             auditor.write_report("birth_chronology", findings)
-        elif choice == "4":
+        elif choice == "5":
             print("\nExecuting: Birth & Death Synchronization Audit...")
             findings = auditor.audit_vital_synchronization()
             auditor.write_report("vital_synchronization", findings)
-        elif choice == "5":
+        elif choice == "6":
             print("\nExecuting: Incomplete & Partial Dates Audit...")
             findings = auditor.audit_incomplete_dates()
             auditor.write_report("incomplete_dates", findings)
-        elif choice == "6":
-            print("\nExecuting: Complete Registry Audit...")
-            findings = TieredFindings()
-            findings.extend(auditor.audit_schema())
-            findings.extend(auditor.audit_reciprocity())
-            findings.extend(auditor.audit_chronology())
-            findings.extend(auditor.audit_vital_synchronization())
-            findings.extend(auditor.audit_incomplete_dates())
+        elif choice == "7":
+            print("\nExecuting: Complete Master Registry Audit...")
+            findings = auditor.run_full_audit()
             auditor.write_report("full_audit", findings)
         elif choice == "Q":
-            print("\nExiting audit utility.")
+            print("\nExiting GPA utility.")
             break
         else:
-            print("\n[!] Invalid selection. Please choose 1-6 or Q.")
+            print("\n[!] Invalid selection. Please choose 1-7 or Q.")
 
 
 def main():
+    """Parses command-line arguments and dispatches auditor routines."""
     parser = argparse.ArgumentParser(
-        description="MIP Master Person Registry Validation & Audit Tool"
+        description="GPA: Genealogy People Auditor (v1.0.0) - Person Registry Verification Tool"
     )
     parser.add_argument(
         "--debug",
@@ -683,12 +776,91 @@ def main():
         "-v",
         "--verbose",
         action="store_true",
-        help="Log execution details to gtemp/[script name]-timestamp.log"
+        help="Log execution details to logs/gpa-[timestamp].log"
     )
-    args = parser.parse_args()
 
+    # CLI Operation Flags
+    group = parser.add_argument_group("Audit Operations")
+    group.add_argument(
+        "--container",
+        action="store_true",
+        help="Run container schema and header verification"
+    )
+    group.add_argument(
+        "--schema",
+        action="store_true",
+        help="Run entity schema requirements verification"
+    )
+    group.add_argument(
+        "--reciprocity",
+        action="store_true",
+        help="Run bidirectional kinship reciprocity verification"
+    )
+    group.add_argument(
+        "--chronology",
+        action="store_true",
+        help="Run child/parent birth chronology verification"
+    )
+    group.add_argument(
+        "--vital-sync",
+        action="store_true",
+        help="Run birth and death cross-synchronization check (TXT + CSV)"
+    )
+    group.add_argument(
+        "--incomplete-dates",
+        action="store_true",
+        help="Run incomplete and partial vital dates audit"
+    )
+    group.add_argument(
+        "--all",
+        action="store_true",
+        help="Execute all audit checks and generate complete report + CSV"
+    )
+
+    args = parser.parse_args()
     auditor = RegistryAuditor(debug=args.debug, verbose=args.verbose)
-    display_menu(auditor)
+
+    has_op = any([
+        args.container,
+        args.schema,
+        args.reciprocity,
+        args.chronology,
+        args.vital_sync,
+        args.incomplete_dates,
+        args.all
+    ])
+
+    if not has_op:
+        display_menu(auditor)
+        return
+
+    if args.container:
+        findings = auditor.audit_container()
+        auditor.write_report("container_schema", findings)
+
+    if args.schema:
+        findings = auditor.audit_schema()
+        auditor.write_report("schema_requirements", findings)
+
+    if args.reciprocity:
+        findings = auditor.audit_reciprocity()
+        auditor.write_report("relationship_reciprocity", findings)
+
+    if args.chronology:
+        findings = auditor.audit_chronology()
+        auditor.write_report("birth_chronology", findings)
+
+    if args.vital_sync:
+        findings = auditor.audit_vital_synchronization()
+        auditor.write_report("vital_synchronization", findings)
+
+    if args.incomplete_dates:
+        findings = auditor.audit_incomplete_dates()
+        auditor.write_report("incomplete_dates", findings)
+
+    if args.all:
+        findings = auditor.run_full_audit()
+        auditor.write_report("full_audit", findings)
 
 
 if __name__ == "__main__":

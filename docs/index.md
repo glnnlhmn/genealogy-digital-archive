@@ -14,4 +14,5 @@
 * [GNA (Genealogy Naming & Manifest Administrator)](tools/gna.md)
 * [GSI (Genealogy Schema Integrity)](tools/gsi.md)
 * [GFI (Genealogy Fact Intake)](tools/gfi.md)
+* [GPA (Genealogy People Auditor)](tools/gpa.md)
 * [GTR (Genealogy Token Registry)](tools/gtr.md)
