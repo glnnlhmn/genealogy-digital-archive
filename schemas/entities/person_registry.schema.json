@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/entities/person_registry.schema.json",
   "title": "Person_Registry",
-  "version": "1.0.1",
-  "description": "Master administrative registry container for individual person entities, utilizing centralized shared definitions.",
+  "version": "1.0.2",
+  "description": "Master administrative registry container for individual person entities, utilizing centralized registry definitions.",
   "type": "object",
   "required": [
     "$schema",
@@ -15,24 +15,20 @@
   ],
   "properties": {
     "$schema": {
-      "type": "string"
+      "$ref": "../defs/_registry_definitions.schema.json#/$defs/registry_header/properties/$schema"
     },
     "schema_version": {
-      "type": "string",
-      "description": "Registry schema version string.",
-      "const": "1.0.1"
+      "$ref": "../defs/_registry_definitions.schema.json#/$defs/registry_header/properties/schema_version",
+      "const": "1.0.2"
     },
     "created_at": {
-      "type": "string",
-      "description": "Timestamp when the registry file was created."
+      "$ref": "../defs/_registry_definitions.schema.json#/$defs/registry_header/properties/created_at"
     },
     "last_modified": {
-      "type": "string",
-      "description": "Timestamp when the registry file was last modified."
+      "$ref": "../defs/_registry_definitions.schema.json#/$defs/registry_header/properties/last_modified"
     },
     "total_persons": {
-      "type": "integer",
-      "minimum": 0,
+      "$ref": "../defs/_registry_definitions.schema.json#/$defs/total_count",
       "description": "Total count of person entities contained in the registry."
     },
     "persons": {

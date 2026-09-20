@@ -1,17 +1,17 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://genealogy.archive/schemas/entities/fact_registry.schema.json",
-  "title": "Fact_Registry",
-  "version": "1.0.2",
-  "description": "Master administrative registry container for discrete fact assertions, utilizing centralized registry definitions.",
+  "$id": "https://genealogy.archive/schemas/entities/location_registry.schema.json",
+  "title": "Location_Registry",
+  "version": "1.0.0",
+  "description": "Master administrative registry container for individual location entities, utilizing centralized registry definitions.",
   "type": "object",
   "required": [
     "$schema",
     "schema_version",
     "created_at",
     "last_modified",
-    "total_facts",
-    "facts"
+    "total_locations",
+    "locations"
   ],
   "properties": {
     "$schema": {
@@ -19,7 +19,7 @@
     },
     "schema_version": {
       "$ref": "../defs/_registry_definitions.schema.json#/$defs/registry_header/properties/schema_version",
-      "const": "1.0.2"
+      "const": "1.0.0"
     },
     "created_at": {
       "$ref": "../defs/_registry_definitions.schema.json#/$defs/registry_header/properties/created_at"
@@ -27,15 +27,15 @@
     "last_modified": {
       "$ref": "../defs/_registry_definitions.schema.json#/$defs/registry_header/properties/last_modified"
     },
-    "total_facts": {
+    "total_locations": {
       "$ref": "../defs/_registry_definitions.schema.json#/$defs/total_count",
-      "description": "Total count of discrete fact assertions contained in the registry."
+      "description": "Total count of location entities contained in the registry."
     },
-    "facts": {
+    "locations": {
       "type": "array",
-      "description": "List of master fact assertion records.",
+      "description": "List of master location records.",
       "items": {
-        "$ref": "fact.schema.json"
+        "$ref": "location.schema.json"
       }
     }
   },

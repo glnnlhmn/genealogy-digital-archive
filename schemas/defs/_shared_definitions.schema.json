@@ -2,13 +2,34 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/defs/_shared_definitions.schema.json",
   "title": "Genealogy_Shared_Definitions",
-  "version": "1.0.5",
-  "description": "Centralized reusable definitions, cross-references, and primitive constraints for the digital genealogy archive. Single source of truth for child schemas (person registry, facts, and source records).",
+  "version": "1.0.6",
+  "description": "Centralized reusable definitions, cross-references, and primitive constraints for the digital genealogy archive. Single source of truth for child schemas (person registry, facts, locations, and source records).",
   "$defs": {
     "person_id": {
       "type": "string",
       "description": "Canonical internal person identifier matching pattern IND- followed by five digits (e.g., IND-00105). Controlled foreign key referencing an existing entity in the Master Person Registry (/data/entities/people.json). Assistants must NEVER mint or assign a new IND-##### unless confirmed in the registry.",
-      "pattern": "^IND-\\d{5}$"
+      "pattern": "^(IND|TMP)-\\d{5}$"
+    },
+    "temp_person_id": {
+      "type": "string",
+      "description": "Ephemeral staging identifier matching pattern TMP- followed by five digits (e.g., TMP-00001). Strictly reserved for unmerged pep-let staging files during the extraction and pre-ingestion phase. Assistants and intake tools must translate all TMP-##### tokens to canonical IND-##### before committing records to the Master Person Registry (/data/entities/people.json). Never committed to master storage.",
+      "pattern": "^TMP-\\d{5}$"
+    },
+    "any_person_id": {
+      "description": "Accepts either an established canonical IND-##### identifier or an ephemeral TMP-##### staging identifier during batch ingestion.",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/person_id"
+        },
+        {
+          "$ref": "#/$defs/temp_person_id"
+        }
+      ]
+    },
+    "location_id": {
+      "type": "string",
+      "description": "Canonical internal location identifier matching pattern LOC- followed by five digits (e.g., LOC-00105). Controlled foreign key referencing an existing entity in the Master Location Registry (/data/entities/locations.json).",
+      "pattern": "^LOC-\\d{5}$"
     },
     "fact_id": {
       "type": "string",
@@ -253,15 +274,15 @@
     },
     "associated_person_entry": {
       "type": "object",
-      "description": "Participant linked to an archival record or fact assertion. Supports an internal person_id (for tracked family), a literal name string (for external participants), or both.",
+      "description": "Participant linked to an archival record or fact assertion. Supports a canonical person_id (IND-#####) or staging temp_person_id (TMP-#####), a literal name string (for external participants), or both.",
       "additionalProperties": false,
       "required": [
         "role"
       ],
       "properties": {
         "person_id": {
-          "description": "Foreign key pointing to an IND-##### entity in the master registry.",
-          "$ref": "#/$defs/person_id"
+          "description": "Foreign key pointing to an IND-##### entity in the master registry or TMP-##### in a staging container.",
+          "$ref": "#/$defs/any_person_id"
         },
         "name": {
           "type": "string",
