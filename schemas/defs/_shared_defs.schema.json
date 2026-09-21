@@ -1,0 +1,563 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/defs/_shared_defs.schema.json",
+  "title": "Genealogy_Shared_Definitions",
+  "version": "1.0.0",
+  "description": "Canonical definitions, cross-references, and primitive constraints for the digital genealogy archive.",
+  "$defs": {
+    "enum_quality_assessment": {
+      "type": "string",
+      "enum": [
+        "EXCELLENT",
+        "GOOD",
+        "FAIR",
+        "POOR"
+      ],
+      "default": "GOOD"
+    },
+    "enum_date_modifier": {
+      "type": "string",
+      "enum": [
+        "EXACT",
+        "ABT",
+        "BEF",
+        "AFT",
+        "BET",
+        "FROM_TO",
+        "UNKNOWN"
+      ],
+      "default": "EXACT"
+    },
+    "enum_vital_modifier": {
+      "type": "string",
+      "enum": [
+        "EXACT",
+        "ABT",
+        "BEF",
+        "AFT",
+        "BET",
+        "FROM_TO",
+        "LIVING",
+        "UNKNOWN"
+      ]
+    },
+    "enum_associated_role": {
+      "type": "string",
+      "enum": [
+        "CHIL",
+        "HUSB",
+        "WIFE",
+        "MOTH",
+        "FATH",
+        "SPOU",
+        "WITN",
+        "GODP",
+        "INFORMANT",
+        "CLERGY",
+        "OFFICIATOR",
+        "NEIGHBOR",
+        "ATND",
+        "UNDR",
+        "DEC",
+        "OTHR",
+        "UNKNOWN"
+      ]
+    },
+    "enum_note_category": {
+      "type": "string",
+      "enum": [
+        "ANOMALY",
+        "RESEARCH_TODO",
+        "GENERAL"
+      ]
+    },
+    "enum_fact_type": {
+      "type": "string",
+      "description": "Standardized category of the historical fact assertion.",
+      "enum": [
+        "Association",
+        "Award",
+        "Baptism",
+        "Birth",
+        "Burial",
+        "Census",
+        "Civic",
+        "Death",
+        "Divorce",
+        "Education",
+        "Incident",
+        "Legal",
+        "Marriage",
+        "Military",
+        "Occupation",
+        "Parentage",
+        "Probate",
+        "Property",
+        "Residence",
+        "Other"
+      ]
+    },
+    "enum_sex": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Biological sex classification.",
+      "enum": [
+        "Male",
+        "Female",
+        "Unknown",
+        null
+      ]
+    },
+    "enum_location_type": {
+      "type": "string",
+      "description": "Classification distinguishing civil jurisdictions from physical venues, landmarks, and cemeteries.",
+      "enum": [
+        "JURISDICTION",
+        "CEMETERY",
+        "CHURCH",
+        "HOSPITAL",
+        "FACILITY",
+        "RESIDENCE",
+        "LANDMARK",
+        "OTHER"
+      ]
+    },
+    "person_id": {
+      "type": "string",
+      "pattern": "^(IND|TMP)-\\d{5}$"
+    },
+    "temp_person_id": {
+      "type": "string",
+      "pattern": "^TMP-\\d{5}$"
+    },
+    "any_person_id": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/person_id"
+        },
+        {
+          "$ref": "#/$defs/temp_person_id"
+        }
+      ]
+    },
+    "location_id": {
+      "type": "string",
+      "pattern": "^LOC-\\d{5}$"
+    },
+    "fact_id": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+    },
+    "note_id": {
+      "type": "string",
+      "pattern": "^NOT-\\d{5}$"
+    },
+    "quay_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3,
+      "default": 0
+    },
+    "date_iso": {
+      "type": "string",
+      "pattern": "^\\d{4}(-(0[1-9]|1[0-2])(-(0[1-9]|[12]\\d|3[01]))?)?$"
+    },
+    "date_interpreted": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": [
+        "date_start",
+        "modifier"
+      ],
+      "properties": {
+        "modifier": {
+          "$ref": "#/$defs/enum_date_modifier"
+        },
+        "date_start": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\d{4}(-(0[1-9]|1[0-2])(-(0[1-9]|[12]\\d|3[01]))?)?$"
+        },
+        "date_end": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^\\d{4}(-(0[1-9]|1[0-2])(-(0[1-9]|[12]\\d|3[01]))?)?$"
+        },
+        "raw_text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "age_record": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "years": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 130
+        },
+        "months": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 11
+        },
+        "days": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 30
+        },
+        "raw_text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "vital_year": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": [
+        "year",
+        "modifier"
+      ],
+      "properties": {
+        "year": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1000,
+          "maximum": 2100
+        },
+        "modifier": {
+          "$ref": "#/$defs/enum_vital_modifier"
+        }
+      }
+    },
+    "canonical_name": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "raw_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "given": {
+          "type": "string",
+          "minLength": 1
+        },
+        "middle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "surname": {
+          "type": "string",
+          "minLength": 1
+        },
+        "suffix": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "birth_year": {
+          "$ref": "#/$defs/vital_year"
+        },
+        "death_year": {
+          "$ref": "#/$defs/vital_year"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "raw_name"
+          ]
+        },
+        {
+          "required": [
+            "given",
+            "surname"
+          ]
+        }
+      ]
+    },
+    "associated_person_entry": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": [
+        "role"
+      ],
+      "properties": {
+        "person_id": {
+          "$ref": "#/$defs/any_person_id"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "$ref": "#/$defs/enum_associated_role"
+        },
+        "relation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "is_primary_subject": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "person_id"
+          ]
+        },
+        {
+          "required": [
+            "name"
+          ]
+        }
+      ]
+    },
+    "location": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": [
+        "standardized"
+      ],
+      "properties": {
+        "standardized": {
+          "type": "string"
+        },
+        "verbatim": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "details": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "unevaluatedProperties": false,
+          "properties": {
+            "location_name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "address_line_1": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "address_line_2": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "local_jurisdiction": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "county": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state_or_province": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "country": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "default": "USA"
+            },
+            "postal_code": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "coordinates": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "unevaluatedProperties": false,
+              "properties": {
+                "latitude": {
+                  "type": "number",
+                  "minimum": -90.0,
+                  "maximum": 90.0
+                },
+                "longitude": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": -180.0,
+                  "maximum": 180.0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "external_identifiers": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "gedcom_xref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^@I[A-Za-z0-9_]+@$"
+        },
+        "gedcom_uid": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^([0-9A-Fa-f]{32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"
+        },
+        "gedcom_refn": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "familysearch_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[A-Z0-9]{4}-[A-Z0-9]{3,4}$"
+        }
+      }
+    },
+    "fact_external_identifiers": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "gedcom_tag": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gedcom_uid": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^([0-9A-Fa-f]{32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"
+        },
+        "source_xref": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^@S[A-Za-z0-9_]+@$"
+        }
+      }
+    },
+    "note_entry": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": [
+        "note_id",
+        "category",
+        "text"
+      ],
+      "properties": {
+        "note_id": {
+          "$ref": "#/$defs/note_id"
+        },
+        "category": {
+          "$ref": "#/$defs/enum_note_category"
+        },
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "record_urn": {
+      "type": "string",
+      "description": "Archival Uniform Resource Name representing source documents. Follows the hierarchy: URN:COLLECTION:YEAR:SUBTYPE:LOCATOR.",
+      "pattern": "^URN:[A-Z]+:[0-9]{4}:(?:[A-Z0-9_]+:)*[A-Za-z0-9_-]+(?::P\\d+)?(?::LINE:\\d+)?$"
+    },
+    "source_reference": {
+      "type": "object",
+      "description": "Explicit linkage pairing a granular archival URN with its physical file location on disk to eliminate full-repository scans.",
+      "unevaluatedProperties": false,
+      "required": [
+        "record_urn"
+      ],
+      "properties": {
+        "record_urn": {
+          "$ref": "#/$defs/record_urn"
+        },
+        "file_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Physical filename of the source document or transcript in data/transcript/ or data/archival_records/."
+        },
+        "repository_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Relative subdirectory path within data/ if stored outside the default collection root."
+        }
+      }
+    }
+  }
+}

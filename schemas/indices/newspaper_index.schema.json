@@ -37,7 +37,7 @@
           "source_urn": { "type": "string" },
           "pub_code": { "type": "string", "maxLength": 6 },
           "pub_date": {
-            "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted"
+            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted"
           },
           "record_type": { "type": "string", "maxLength": 6 },
           "headline": { "type": "string" },
@@ -45,7 +45,7 @@
           "associated_people": {
             "type": "array",
             "items": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
             }
           }
         },

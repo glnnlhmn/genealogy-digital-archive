@@ -59,17 +59,17 @@
         "shipping_line": { "type": ["string", "null"] },
         "port_of_departure": {
           "oneOf": [
-            { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+            { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
             { "type": "null" }
           ],
           "description": "Port where voyage commenced (e.g., Rotterdam, Liverpool, Bremen, Le Havre)."
         },
         "port_of_arrival": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
           "description": "Port of entry (e.g., Philadelphia, Ellis Island/New York, Castle Garden, Boston)."
         },
         "arrival_date": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted",
           "description": "Date manifest was filed or vessel reached port."
         }
       },
@@ -102,14 +102,14 @@
           "required": ["full_name"],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id"
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name"
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
             },
             "age": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/age_record" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/age_record" },
                 { "type": "null" }
               ]
             },
@@ -124,13 +124,13 @@
             "occupation": { "type": ["string", "null"] },
             "last_permanent_residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                 { "type": "null" }
               ]
             },
             "final_destination": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                 { "type": "null" }
               ]
             },
@@ -152,14 +152,14 @@
           "description": "Annotations on head tax, ticket details, or hospital detentions."
         },
         "transcript": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
           "description": "Verbatim line transcription, abstract, and search keywords."
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
           },
           "description": "Scans of the ship manifest roll pages."
         }
@@ -169,7 +169,7 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
       },
       "description": "Array of participants (passenger, accompanying family members, master, relative joined) mapped to roles and IDs."
     }

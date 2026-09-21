@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/defs/_document_defs.schema.json",
+  "title": "Genealogy_Document_Definitions",
+  "version": "1.0.0",
+  "description": "Definitions for documentary sources, media scans, clipping coordinates, and transcripts.",
+  "$defs": {
+    "source_media": {
+      "type": "object",
+      "description": "Derivative scan image metadata and legibility assessment for an archival source record.",
+      "unevaluatedProperties": false,
+      "required": [
+        "image_filename",
+        "image_quality"
+      ],
+      "properties": {
+        "image_filename": {
+          "type": "string",
+          "description": "Derivative scan image filename."
+        },
+        "image_quality": {
+          "$ref": "_shared_defs.schema.json#/$defs/enum_quality_assessment"
+        },
+        "page_or_side": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Descriptor for multi-image records (e.g., 'Front', 'Reverse', 'Page 1')."
+        }
+      }
+    },
+    "news_clipping": {
+      "type": "object",
+      "description": "Physical clipping segment metadata linking visual scans to page and layout positions.",
+      "unevaluatedProperties": false,
+      "properties": {
+        "page": {
+          "type": "string",
+          "description": "Page number or identifier where the clipping appears."
+        },
+        "column": {
+          "type": "string",
+          "description": "Column number or layout position on the page."
+        },
+        "section": {
+          "type": "string",
+          "description": "Newspaper section identifier."
+        },
+        "image_filename": {
+          "type": "string",
+          "description": "Specific visual scan file name corresponding to this clipping segment."
+        },
+        "image_quality": {
+          "$ref": "_shared_defs.schema.json#/$defs/enum_quality_assessment"
+        }
+      }
+    },
+    "transcript_record": {
+      "type": "object",
+      "description": "Structured transcript container providing verbatim text, abstract, and file linkages.",
+      "unevaluatedProperties": false,
+      "required": [
+        "verbatim_text",
+        "word_count"
+      ],
+      "properties": {
+        "verbatim_text": {
+          "type": "string",
+          "description": "Literal historical transcription of the document text."
+        },
+        "word_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total count of words in verbatim_text."
+        },
+        "transcript_filename": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Optional derivative filename of the standalone text file."
+        },
+        "summary": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Comprehensive abstract or factual summary of the content."
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Indexed terms, topics, organizations, or search tags."
+        },
+        "text_quality": {
+          "$ref": "_shared_defs.schema.json#/$defs/enum_quality_assessment"
+        }
+      }
+    }
+  }
+}

@@ -1,42 +1,15 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://genealogy.archive/schemas/defs/_registry_definitions.schema.json",
-  "title": "Genealogy_Registry_Definitions",
-  "version": "1.0.0",
-  "description": "Centralized reusable administrative envelope properties and constraints for top-level archive entity registries.",
+  "$id": "https://genealogy.archive/schemas/defs/_registry_shared_defs.schema.json",
+  "title": "Genealogy_Registry_Definitions_Legacy_Wrapper",
+  "version": "1.0.1",
+  "description": "Backward-compatible wrapper referencing canonical definitions in _registry_defs.schema.json (v1.0.0).",
   "$defs": {
     "registry_header": {
-      "type": "object",
-      "required": [
-        "$schema",
-        "schema_version",
-        "created_at",
-        "last_modified"
-      ],
-      "properties": {
-        "$schema": {
-          "type": "string",
-          "description": "Relative URI or file path pointing to the governing registry schema."
-        },
-        "schema_version": {
-          "type": "string",
-          "description": "Semantic version of the registry schema.",
-          "pattern": "^\\d+\\.\\d+\\.\\d+$"
-        },
-        "created_at": {
-          "type": "string",
-          "description": "ISO-8601 timestamp representing when the registry container was initialized."
-        },
-        "last_modified": {
-          "type": "string",
-          "description": "ISO-8601 timestamp representing the last write/mutation operation on this registry."
-        }
-      }
+      "$ref": "_registry_defs.schema.json#/$defs/registry_header"
     },
     "total_count": {
-      "type": "integer",
-      "minimum": 0,
-      "description": "Total count of active entities contained in the registry payload array."
+      "$ref": "_registry_defs.schema.json#/$defs/total_count"
     }
   }
 }

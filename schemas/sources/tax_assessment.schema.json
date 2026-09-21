@@ -59,7 +59,7 @@
           "maximum": 2100
         },
         "taxing_district": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
           "description": "Township, borough, ward, or county collecting the assessment."
         },
         "assessor_name": { "type": ["string", "null"] }
@@ -96,10 +96,10 @@
           "required": ["full_name"],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id"
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name"
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
             },
             "classification": {
               "type": ["string", "null"],
@@ -129,14 +129,14 @@
           "description": "Marginal notations, exonerations, or marks (e.g., 'transferred to John Doe')."
         },
         "transcript": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
           "description": "Verbatim line readout, abstract, and keywords."
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
           },
           "description": "Image scans of the tax ledger folio."
         }
@@ -146,7 +146,7 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
       },
       "description": "Array of participants (taxpayer, landlord if tenant, assessor) mapped to roles and IDs."
     }

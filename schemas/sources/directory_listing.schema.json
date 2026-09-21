@@ -62,7 +62,7 @@
           "maximum": 2100
         },
         "coverage_area": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/location"
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location"
         }
       },
       "additionalProperties": false
@@ -94,16 +94,16 @@
           "required": ["full_name"],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id"
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name"
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
             },
             "stated_occupation": { "type": ["string", "null"] },
             "employer_or_business": { "type": ["string", "null"] },
             "residential_address": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                 { "type": "null" }
               ]
             },
@@ -120,13 +120,13 @@
           "description": "Notes on business advertisements or marginal notations."
         },
         "transcript": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record"
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record"
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
           }
         }
       },
@@ -135,7 +135,7 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
       },
       "description": "Array of participants (listed subject, spouse noted in parentheses, deceased husband if listed as 'widow of') mapped to roles and IDs."
     }

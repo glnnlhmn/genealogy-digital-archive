@@ -15,20 +15,20 @@
   ],
   "properties": {
     "$schema": {
-      "$ref": "../defs/_registry_definitions.schema.json#/$defs/registry_header/properties/$schema"
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/$schema"
     },
     "schema_version": {
-      "$ref": "../defs/_registry_definitions.schema.json#/$defs/registry_header/properties/schema_version",
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/schema_version",
       "const": "1.0.2"
     },
     "created_at": {
-      "$ref": "../defs/_registry_definitions.schema.json#/$defs/registry_header/properties/created_at"
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/created_at"
     },
     "last_modified": {
-      "$ref": "../defs/_registry_definitions.schema.json#/$defs/registry_header/properties/last_modified"
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/last_modified"
     },
     "total_facts": {
-      "$ref": "../defs/_registry_definitions.schema.json#/$defs/total_count",
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/total_count",
       "description": "Total count of discrete fact assertions contained in the registry."
     },
     "facts": {

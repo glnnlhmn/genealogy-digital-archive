@@ -59,7 +59,7 @@
           "description": "e.g., 'Recorder of Deeds of Cumberland County', 'Pennsylvania Land Office'."
         },
         "location": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
           "description": "Jurisdiction where deed was officially enrolled/recorded."
         },
         "recorder_or_deputy": { "type": ["string", "null"] }
@@ -97,19 +97,19 @@
           "required": ["date_written"],
           "properties": {
             "date_written": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted",
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted",
               "description": "Date indenture/conveyance was signed and sealed by grantors."
             },
             "date_acknowledged": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                 { "type": "null" }
               ],
               "description": "Date grantors appeared before a Justice of the Peace."
             },
             "date_recorded": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                 { "type": "null" }
               ],
               "description": "Date formally entered into county deed books."
@@ -125,14 +125,14 @@
             "required": ["full_name"],
             "properties": {
               "person_id": {
-                "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id"
+                "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
               },
               "full_name": {
-                "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name"
+                "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
               },
               "residence": {
                 "oneOf": [
-                  { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                  { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                   { "type": "null" }
                 ]
               },
@@ -150,14 +150,14 @@
             "required": ["full_name"],
             "properties": {
               "person_id": {
-                "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id"
+                "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
               },
               "full_name": {
-                "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name"
+                "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
               },
               "residence": {
                 "oneOf": [
-                  { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                  { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                   { "type": "null" }
                 ]
               }
@@ -185,7 +185,7 @@
           "required": ["location"],
           "properties": {
             "location": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
               "description": "Township/borough and physical tract location."
             },
             "tract_name": {
@@ -217,14 +217,14 @@
           "description": "Condition, marginal releases, or watermarks."
         },
         "transcript": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
           "description": "Verbatim deed text, abstract, and keywords."
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
           },
           "description": "Scans of the deed pages or deed book register leaves."
         }
@@ -234,7 +234,7 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
       },
       "description": "Array of participants (grantors, grantees, wives releasing dower, neighboring owners, witnesses, recorder) mapped to roles and IDs."
     }

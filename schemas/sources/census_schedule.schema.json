@@ -56,13 +56,13 @@
       "additionalProperties": false
     },
     "page_metadata": {
-      "$ref": "../defs/_census_definitions.schema.json#/$defs/census_page_metadata"
+      "$ref": "../defs/_census_shared_defs.schema.json#/$defs/census_page_metadata"
     },
     "entries": {
       "type": "array",
       "minItems": 1,
       "items": {
-        "$ref": "../defs/_census_definitions.schema.json#/$defs/census_line_entry"
+        "$ref": "../defs/_census_shared_defs.schema.json#/$defs/census_line_entry"
       },
       "description": "Line items enumerated on this schedule page."
     },
@@ -71,21 +71,21 @@
       "description": "Archival notes regarding page tears, illegible lines, or double enumerations."
     },
     "transcript": {
-      "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
       "description": "Verbatim transcript of enumerated household/line entries, abstract, and search keywords."
     },
     "media_files": {
       "type": "array",
       "minItems": 1,
       "items": {
-        "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
       },
       "description": "Scans of the microfilm roll or National Archives digital page."
     },
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
       },
       "description": "Array of participants (enumerated individuals, household head, enumerator) mapped to roles and IDs."
     }

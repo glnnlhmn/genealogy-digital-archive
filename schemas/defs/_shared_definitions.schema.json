@@ -1,697 +1,105 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://genealogy.archive/schemas/defs/_shared_definitions.schema.json",
-  "title": "Genealogy_Shared_Definitions",
-  "version": "1.0.6",
-  "description": "Centralized reusable definitions, cross-references, and primitive constraints for the digital genealogy archive. Single source of truth for child schemas (person registry, facts, locations, and source records).",
+  "$id": "https://genealogy.archive/schemas/defs/_shared_shared_defs.schema.json",
+  "title": "Genealogy_Shared_Definitions_Legacy_Wrapper",
+  "version": "1.0.7",
+  "description": "Backward-compatible wrapper referencing canonical definitions across modular schema definitions (_shared_defs, _death_defs, _document_defs, _external_xref_defs). Maintained to ensure uninterrupted resolution for legacy schema pointers.",
   "$defs": {
     "person_id": {
-      "type": "string",
-      "description": "Canonical internal person identifier matching pattern IND- followed by five digits (e.g., IND-00105). Controlled foreign key referencing an existing entity in the Master Person Registry (/data/entities/people.json). Assistants must NEVER mint or assign a new IND-##### unless confirmed in the registry.",
-      "pattern": "^(IND|TMP)-\\d{5}$"
+      "description": "Canonical internal person identifier matching pattern IND- followed by five digits. Managed in people.json.",
+      "$ref": "_shared_defs.schema.json#/$defs/person_id"
     },
     "temp_person_id": {
-      "type": "string",
-      "description": "Ephemeral staging identifier matching pattern TMP- followed by five digits (e.g., TMP-00001). Strictly reserved for unmerged pep-let staging files during the extraction and pre-ingestion phase. Assistants and intake tools must translate all TMP-##### tokens to canonical IND-##### before committing records to the Master Person Registry (/data/entities/people.json). Never committed to master storage.",
-      "pattern": "^TMP-\\d{5}$"
+      "description": "Ephemeral staging identifier matching pattern TMP- followed by five digits.",
+      "$ref": "_shared_defs.schema.json#/$defs/temp_person_id"
     },
     "any_person_id": {
-      "description": "Accepts either an established canonical IND-##### identifier or an ephemeral TMP-##### staging identifier during batch ingestion.",
-      "oneOf": [
-        {
-          "$ref": "#/$defs/person_id"
-        },
-        {
-          "$ref": "#/$defs/temp_person_id"
-        }
-      ]
+      "description": "Accepts either an established canonical IND-##### identifier or an ephemeral TMP-##### staging identifier.",
+      "$ref": "_shared_defs.schema.json#/$defs/any_person_id"
     },
     "location_id": {
-      "type": "string",
-      "description": "Canonical internal location identifier matching pattern LOC- followed by five digits (e.g., LOC-00105). Controlled foreign key referencing an existing entity in the Master Location Registry (/data/entities/locations.json).",
-      "pattern": "^LOC-\\d{5}$"
+      "description": "Canonical internal location identifier matching pattern LOC- followed by five digits.",
+      "$ref": "_shared_defs.schema.json#/$defs/location_id"
     },
     "fact_id": {
-      "type": "string",
       "description": "Canonical RFC 4122 compliant UUID (GUID) uniquely identifying a discrete fact assertion.",
-      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+      "$ref": "_shared_defs.schema.json#/$defs/fact_id"
     },
-    "record_urn": {
-      "type": "string",
-      "description": "Archival Uniform Resource Name representing source documents. Follows the hierarchy: URN:COLLECTION:YEAR:SUBTYPE:LOCATOR.",
-      "pattern": "^URN:[A-Z]+:[0-9]{4}:(?:[A-Z0-9_]+:)*[A-Za-z0-9_-]+(?::P\\d+)?(?::LINE:\\d+)?$"
+    "note_id": {
+      "description": "Canonical internal note identifier matching pattern NOT- followed by five digits.",
+      "$ref": "_shared_defs.schema.json#/$defs/note_id"
     },
     "quality_assessment": {
-      "type": "string",
-      "description": "Standardized qualitative assessment rating text legibility, OCR clarity, image quality, or transcription completeness.",
-      "enum": [
-        "EXCELLENT",
-        "GOOD",
-        "FAIR",
-        "POOR"
-      ],
-      "default": "GOOD"
+      "description": "Standardized qualitative assessment rating text legibility or scan quality.",
+      "$ref": "_shared_defs.schema.json#/$defs/enum_quality_assessment"
     },
     "quay_score": {
-      "type": "integer",
-      "description": "Standard genealogical quality assessment of evidence (maps to GEDCOM QUAY). Values: 0 = Unreliable / estimated; 1 = Questionable reliability; 2 = Secondary evidence; 3 = Direct primary evidence.",
-      "minimum": 0,
-      "maximum": 3,
-      "default": 0
+      "description": "Standard genealogical quality assessment of evidence (maps to GEDCOM QUAY).",
+      "$ref": "_shared_defs.schema.json#/$defs/quay_score"
     },
     "date_iso": {
-      "type": "string",
-      "description": "ISO-8601 calendar date or partial date formatted as YYYY, YYYY-MM, or YYYY-MM-DD. Preferred for sorting and database indexing.",
-      "pattern": "^\\d{4}(-(0[1-9]|1[0-2])(-(0[1-9]|[12]\\d|3[01]))?)?$"
-    },
-    "date_genealogical": {
-      "type": "string",
-      "description": "Free-form genealogical date string supporting qualifiers (abt, bef, aft, bet) and traditional three-letter month abbreviations (e.g., abt 12 Jan 1880).",
-      "pattern": "^((abt|bef|aft|bet)?\\s*((\\d{1,2}\\s+)?([A-Za-z]{3})\\s+\\d{4}|\\d{4}(-\\d{2}(-\\d{2})?)?))?$"
+      "description": "ISO-8601 calendar date or partial date formatted as YYYY, YYYY-MM, or YYYY-MM-DD.",
+      "$ref": "_shared_defs.schema.json#/$defs/date_iso"
     },
     "date_interpreted": {
-      "type": "object",
-      "description": "Structured date container breaking complex or uncertain genealogical dates into normalized ISO ranges alongside the original verbatim text.",
-      "additionalProperties": false,
-      "required": [
-        "date_start",
-        "modifier"
-      ],
-      "properties": {
-        "modifier": {
-          "type": "string",
-          "description": "Genealogical certainty or interval flag. Use EXACT for single dates; ABT/BEF/AFT for approximations; BET/FROM_TO for interval spans.",
-          "enum": [
-            "EXACT",
-            "ABT",
-            "BEF",
-            "AFT",
-            "BET",
-            "FROM_TO",
-            "UNKNOWN"
-          ],
-          "default": "EXACT"
-        },
-        "date_start": {
-          "description": "Primary or range start date in ISO format or null.",
-          "oneOf": [
-            {
-              "$ref": "#/$defs/date_iso"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "date_end": {
-          "description": "Range end date in ISO format or null. Populated only when modifier is BET or FROM_TO.",
-          "oneOf": [
-            {
-              "$ref": "#/$defs/date_iso"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "raw_text": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Literal historical text as written on the document before interpretation (e.g., 'the spring of '82')."
-        }
-      }
+      "description": "Structured date container breaking complex or uncertain genealogical dates into normalized ISO ranges alongside verbatim text.",
+      "$ref": "_shared_defs.schema.json#/$defs/date_interpreted"
     },
     "age_record": {
-      "type": "object",
-      "description": "Standardized container capturing chronological age expressed in completed years, months, days, or unparsed verbatim historical text.",
-      "additionalProperties": false,
-      "properties": {
-        "years": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "minimum": 0,
-          "maximum": 130,
-          "description": "Age in completed years."
-        },
-        "months": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "minimum": 0,
-          "maximum": 11,
-          "description": "Additional months (common in infant vital records or census returns)."
-        },
-        "days": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "minimum": 0,
-          "maximum": 30,
-          "description": "Additional days."
-        },
-        "raw_text": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Verbatim recorded age text (e.g., '24', '7/12', 'approx 40 yrs', 'stillborn')."
-        }
-      }
+      "description": "Standardized container capturing chronological age expressed in completed years, months, days, or unparsed verbatim text.",
+      "$ref": "_shared_defs.schema.json#/$defs/age_record"
     },
     "vital_year": {
-      "type": "object",
-      "description": "Four-digit calendar year container paired with a long-form certainty modifier flag.",
-      "additionalProperties": false,
-      "required": [
-        "year",
-        "modifier"
-      ],
-      "properties": {
-        "year": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "description": "Four-digit numerical calendar year or null for living/unknown dates.",
-          "minimum": 1000,
-          "maximum": 2100
-        },
-        "modifier": {
-          "type": "string",
-          "description": "Certainty or status descriptor.",
-          "enum": [
-            "EXACT",
-            "ABT",
-            "BEF",
-            "AFT",
-            "BET",
-            "FROM_TO",
-            "LIVING",
-            "UNKNOWN"
-          ]
-        }
-      }
+      "description": "Four-digit calendar year container paired with a certainty modifier flag.",
+      "$ref": "_shared_defs.schema.json#/$defs/vital_year"
     },
     "canonical_name": {
-      "type": "object",
       "description": "Structured canonical personal name, documentary raw representation, and core vital boundary markers.",
-      "additionalProperties": false,
-      "properties": {
-        "raw_name": {
-          "type": "string",
-          "minLength": 1,
-          "description": "Verbatim name text transcribed directly from the document (e.g., 'Mrs. William Lehman', 'Baby Boy Smith')."
-        },
-        "given": {
-          "type": "string",
-          "minLength": 1
-        },
-        "middle": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "surname": {
-          "type": "string",
-          "minLength": 1
-        },
-        "suffix": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "birth_year": {
-          "$ref": "#/$defs/vital_year"
-        },
-        "death_year": {
-          "$ref": "#/$defs/vital_year"
-        }
-      },
-      "anyOf": [
-        {
-          "required": [
-            "raw_name"
-          ]
-        },
-        {
-          "required": [
-            "given",
-            "surname"
-          ]
-        }
-      ]
+      "$ref": "_shared_defs.schema.json#/$defs/canonical_name"
     },
     "associated_role": {
-      "type": "string",
       "description": "Standardized genealogical association role defining a secondary participant's relationship to an event (maps to GEDCOM ASSO/ROLE).",
-      "enum": [
-        "CHIL",
-        "HUSB",
-        "WIFE",
-        "MOTH",
-        "FATH",
-        "SPOU",
-        "WITN",
-        "GODP",
-        "INFORMANT",
-        "CLERGY",
-        "OFFICIATOR",
-        "NEIGHBOR",
-        "ATND",
-        "UNDR",
-        "DEC",
-        "OTHR",
-        "UNKNOWN"
-      ]
+      "$ref": "_shared_defs.schema.json#/$defs/enum_associated_role"
     },
     "associated_person_entry": {
-      "type": "object",
-      "description": "Participant linked to an archival record or fact assertion. Supports a canonical person_id (IND-#####) or staging temp_person_id (TMP-#####), a literal name string (for external participants), or both.",
-      "additionalProperties": false,
-      "required": [
-        "role"
-      ],
-      "properties": {
-        "person_id": {
-          "description": "Foreign key pointing to an IND-##### entity in the master registry or TMP-##### in a staging container.",
-          "$ref": "#/$defs/any_person_id"
-        },
-        "name": {
-          "type": "string",
-          "minLength": 1,
-          "description": "Verbatim name of an external or unregistered participant, or human-readable label for a tracked individual."
-        },
-        "role": {
-          "$ref": "#/$defs/associated_role"
-        },
-        "is_primary_subject": {
-          "type": "boolean",
-          "default": false,
-          "description": "Optional flag indicating if this individual is the primary subject of the article or event (e.g., groom, bride, plaintiff, defendant)."
-        }
-      },
-      "anyOf": [
-        {
-          "required": [
-            "person_id"
-          ]
-        },
-        {
-          "required": [
-            "name"
-          ]
-        }
-      ]
+      "description": "Participant linked to an archival record or fact assertion, aligning with GEDCOM ASSO/ROLE/RELA conventions.",
+      "$ref": "_shared_defs.schema.json#/$defs/associated_person_entry"
     },
     "location_details": {
-      "type": "object",
       "description": "Detailed physical address, micro-jurisdictions, and coordinate points mapping directly to GEDCOM ADDR and MAP structures.",
-      "additionalProperties": false,
-      "properties": {
-        "location_name": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Specific name of the facility, church, parsonage, courthouse, institution, building, or landmark."
-        },
-        "address_line_1": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Primary street address, house number, or building name (maps to GEDCOM ADR1)."
-        },
-        "address_line_2": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Secondary address details such as apartment, suite, lot, rural route, or ward subdivision (maps to GEDCOM ADR2)."
-        },
-        "local_jurisdiction": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Township, town, city, borough, or civil parish (maps to GEDCOM CITY)."
-        },
-        "county": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "County, judicial district, or historical county equivalent."
-        },
-        "state_or_province": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "State, province, or federal territory (maps to GEDCOM STAE)."
-        },
-        "country": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "default": "USA",
-          "description": "National sovereignty or country name (maps to GEDCOM CTRY)."
-        },
-        "postal_code": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Postal code or ZIP code (maps to GEDCOM POST)."
-        },
-        "coordinates": {
-          "type": "object",
-          "description": "Geographic point coordinates for spatial mapping (maps to GEDCOM MAP.LATI / MAP.LONG).",
-          "additionalProperties": false,
-          "properties": {
-            "latitude": {
-              "type": "number",
-              "minimum": -90.0,
-              "maximum": 90.0,
-              "description": "Decimal latitude (-90.0 to 90.0)."
-            },
-            "longitude": {
-              "type": "number",
-              "minimum": -180.0,
-              "maximum": 180.0,
-              "description": "Decimal longitude (-180.0 to 180.0)."
-            }
-          }
-        }
-      }
+      "$ref": "_shared_defs.schema.json#/$defs/location/properties/details"
     },
     "location": {
-      "type": "object",
-      "description": "Standardized genealogical place entity providing a normalized lookup string, historical transcription, and optional physical address breakdown.",
-      "additionalProperties": false,
-      "required": [
-        "standardized"
-      ],
-      "properties": {
-        "standardized": {
-          "type": "string",
-          "description": "Normalized comma-separated jurisdiction populated to the known depth (e.g., 'Carlisle, Cumberland, Pennsylvania, USA'). Used as the primary lookup index."
-        },
-        "verbatim": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Literal historical place text as transcribed directly from the source document (e.g., 'Borough of Carlisle', 'at parsonage')."
-        },
-        "details": {
-          "description": "Optional breakdown of physical address components or null.",
-          "oneOf": [
-            {
-              "$ref": "#/$defs/location_details"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      }
+      "description": "Standardized genealogical place entity providing normalized lookup, historical transcription, and physical address breakdown.",
+      "$ref": "_shared_defs.schema.json#/$defs/location"
     },
     "cause_of_death": {
-      "type": "object",
       "description": "Structured medical certification and etiology detailing manner, causes, and circumstances of death.",
-      "additionalProperties": false,
-      "properties": {
-        "manner_of_death": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "Natural",
-            "Accident",
-            "Suicide",
-            "Homicide",
-            "Pending",
-            "Unknown",
-            null
-          ],
-          "default": "Natural"
-        },
-        "immediate_cause": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Primary disease or condition directly resulting in death."
-        },
-        "antecedent_causes": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "type": "string"
-          },
-          "description": "Sequentially underlying morbid conditions leading up to the immediate cause."
-        },
-        "contributory_causes": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "type": "string"
-          },
-          "description": "Other significant conditions contributing to death but not resulting in the underlying cause."
-        },
-        "interval_onset": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Verbatim duration between onset and death (e.g., '2 days', 'several years')."
-        },
-        "autopsy_performed": {
-          "type": [
-            "boolean",
-            "null"
-          ],
-          "description": "Indicates whether a post-mortem surgical examination was conducted."
-        },
-        "findings_considered": {
-          "type": [
-            "boolean",
-            "null"
-          ],
-          "description": "Indicates whether autopsy findings were utilized in determining the cause of death."
-        }
-      }
+      "$ref": "_death_defs.schema.json#/$defs/cause_of_death"
     },
     "source_media": {
-      "type": "object",
       "description": "Derivative scan image metadata and legibility assessment for an archival source record.",
-      "additionalProperties": false,
-      "required": [
-        "image_filename",
-        "image_quality"
-      ],
-      "properties": {
-        "image_filename": {
-          "type": "string",
-          "description": "Derivative scan image filename located in /data/media/."
-        },
-        "image_quality": {
-          "$ref": "#/$defs/quality_assessment",
-          "description": "Assessment of visual legibility and scan clarity."
-        },
-        "page_or_side": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Descriptor for multi-image records (e.g., 'Front', 'Reverse', 'Application Page 1', 'Minister Return')."
-        }
-      }
+      "$ref": "_document_defs.schema.json#/$defs/source_media"
     },
     "news_clipping": {
-      "type": "object",
       "description": "Physical clipping segment metadata linking visual scans to page and layout positions.",
-      "additionalProperties": false,
-      "properties": {
-        "page": {
-          "type": "string",
-          "description": "Page number or identifier where the clipping appears."
-        },
-        "column": {
-          "type": "string",
-          "description": "Column number or layout position on the page."
-        },
-        "section": {
-          "type": "string",
-          "description": "Newspaper section identifier (e.g., A, B, Local, Classifieds)."
-        },
-        "image_filename": {
-          "type": "string",
-          "description": "Specific visual scan file name corresponding to this clipping segment."
-        },
-        "image_quality": {
-          "$ref": "#/$defs/quality_assessment",
-          "description": "Assessment of visual text legibility and image scan clarity."
-        }
-      }
+      "$ref": "_document_defs.schema.json#/$defs/news_clipping"
     },
     "transcript_record": {
-      "type": "object",
       "description": "Structured transcript container providing verbatim text, abstract, search keywords, word count, and standalone file linkages.",
-      "additionalProperties": false,
-      "required": [
-        "verbatim_text",
-        "word_count"
-      ],
-      "properties": {
-        "verbatim_text": {
-          "type": "string",
-          "description": "Literal historical transcription of the document or clipping text."
-        },
-        "word_count": {
-          "type": "integer",
-          "minimum": 0,
-          "description": "Total count of words in verbatim_text (used to determine standalone file generation threshold)."
-        },
-        "transcript_filename": {
-          "type": "string",
-          "description": "Exact derivative filename of the standalone text file stored in /data/transcript/ (populated when word_count > 500)."
-        },
-        "summary": {
-          "type": "string",
-          "description": "Comprehensive abstract or factual summary of the article or document content, scaling to the depth of the text."
-        },
-        "keywords": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Indexed terms, topics, organizations, or search tags extracted from the text."
-        },
-        "text_quality": {
-          "$ref": "#/$defs/quality_assessment",
-          "description": "Standardized assessment of transcription fidelity and completeness."
-        }
-      }
+      "$ref": "_document_defs.schema.json#/$defs/transcript_record"
     },
     "external_identifiers": {
-      "type": "object",
-      "description": "Cross-reference container mapping internal IND-##### persons to external software pointers, global UUIDs, and genealogical repositories.",
-      "additionalProperties": false,
-      "properties": {
-        "gedcom_xref": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "File-level pointer tag from an active GEDCOM export (e.g., @I0001@). Note: pointers may change across exports.",
-          "pattern": "^@I[A-Za-z0-9_]+@$"
-        },
-        "gedcom_uid": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Persistent 32-character hexadecimal string or 36-character UUID from GEDCOM UID / _UID tags.",
-          "pattern": "^([0-9A-Fa-f]{32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"
-        },
-        "gedcom_refn": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "User-defined reference or catalog number recorded under the GEDCOM REFN tag."
-        },
-        "familysearch_id": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "FamilySearch person identifier (e.g., KWCQ-XYZ).",
-          "pattern": "^[A-Z0-9]{4}-[A-Z0-9]{3,4}$"
-        }
-      }
+      "description": "Cross-reference container mapping internal IND-##### persons to external software pointers, global UUIDs, and repositories.",
+      "$ref": "_external_xref_defs.schema.json#/$defs/external_identifiers"
     },
     "fact_external_identifiers": {
-      "type": "object",
       "description": "Cross-reference container mapping internal fact assertions to external GEDCOM event records and source citations.",
-      "additionalProperties": false,
-      "properties": {
-        "gedcom_tag": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Standard 3- or 4-letter GEDCOM event or attribute tag (e.g., BIRT, DEAT, CENS, RESI, MARR, OCCU, DIV)."
-        },
-        "gedcom_uid": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Persistent event-level UUID assigned by external genealogy software.",
-          "pattern": "^([0-9A-Fa-f]{32}|[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$"
-        },
-        "source_xref": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Pointer tag linking directly to an external GEDCOM source entity (e.g., @S0012@).",
-          "pattern": "^@S[A-Za-z0-9_]+@$"
-        }
-      }
+      "$ref": "_external_xref_defs.schema.json#/$defs/fact_external_identifiers"
     },
     "note_entry": {
-      "type": "object",
       "description": "Structured annotation or research task linked to an entity or fact.",
-      "additionalProperties": false,
-      "required": [
-        "note_id",
-        "category",
-        "text"
-      ],
-      "properties": {
-        "note_id": {
-          "type": "string",
-          "description": "Unique or sequential identifier for the note."
-        },
-        "category": {
-          "type": "string",
-          "description": "Classification of the note.",
-          "enum": [
-            "ANOMALY",
-            "RESEARCH_TODO",
-            "GENERAL"
-          ]
-        },
-        "title": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "Optional short summary or title for the note."
-        },
-        "text": {
-          "type": "string",
-          "description": "Full note narrative or documentation."
-        }
-      }
+      "$ref": "_shared_defs.schema.json#/$defs/note_entry"
     }
   }
 }

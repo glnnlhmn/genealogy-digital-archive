@@ -55,7 +55,7 @@
           "description": "Full formal name of the publication."
         },
         "pub_date": { 
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted"
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted"
         },
         "pub_edition": { 
           "type": ["string", "null"]
@@ -79,7 +79,7 @@
           "maxLength": 6
         },
         "transcript": { 
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record"
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record"
         },
         "article_note": { 
           "type": ["string", "null"]
@@ -87,7 +87,7 @@
         "clippings": {
           "type": "array",
           "items": {
-            "$ref": "../defs/_shared_definitions.schema.json#/$defs/news_clipping"
+            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/news_clipping"
           }
         }
       },
@@ -96,7 +96,7 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
       }
     }
   },

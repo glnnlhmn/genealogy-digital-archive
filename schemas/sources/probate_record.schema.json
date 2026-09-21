@@ -58,7 +58,7 @@
           "description": "Name of probate jurisdiction (e.g., 'Orphans Court of Cumberland County', 'Register of Wills')."
         },
         "location": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
           "description": "Jurisdiction where the court sits."
         },
         "register_or_clerk": { "type": ["string", "null"] }
@@ -93,15 +93,15 @@
           "required": ["full_name"],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id",
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id",
               "description": "Foreign key pointing to the master Person Registry."
             },
             "full_name": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name"
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
             },
             "residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                 { "type": "null" }
               ]
             },
@@ -117,28 +117,28 @@
           "properties": {
             "date_written": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                 { "type": "null" }
               ],
               "description": "Date signed by testator (for wills/codicils)."
             },
             "date_probated": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                 { "type": "null" }
               ],
               "description": "Date proved before the register."
             },
             "date_letters_granted": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                 { "type": "null" }
               ],
               "description": "Date Letters of Administration or Testamentary were issued."
             },
             "date_appraised_or_accounted": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                 { "type": "null" }
               ],
               "description": "Date of inventory appraisal or final court accounting confirmation."
@@ -155,14 +155,14 @@
           "description": "Optional notes on caveat petitions, appraisals, or document condition."
         },
         "transcript": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
           "description": "Verbatim transcript, abstract summary, and keywords."
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
           },
           "description": "Image scans of the original record leaves."
         }
@@ -172,7 +172,7 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
       },
       "description": "Array of participants (decedent/testator, executors, administrators, appraisers, witnesses, beneficiaries) linked to standardized roles and IDs."
     }

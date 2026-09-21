@@ -25,7 +25,7 @@
       "description": "ISO-8601 timestamp of last index update."
     },
     "total_mappings": {
-      "$ref": "../defs/_registry_definitions.schema.json#/$defs/total_count",
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/total_count",
       "description": "Total count of redirect keys registered in the index."
     },
     "redirects": {
@@ -39,7 +39,7 @@
         ],
         "properties": {
           "location_id": {
-            "$ref": "../defs/_shared_definitions.schema.json#/$defs/location_id"
+            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location_id"
           },
           "standardized": {
             "type": "string",

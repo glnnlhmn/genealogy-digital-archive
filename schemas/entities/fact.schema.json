@@ -7,10 +7,10 @@
   "type": "object",
   "properties": {
     "fact_id": {
-      "$ref": "../defs/_shared_definitions.schema.json#/$defs/fact_id"
+      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/fact_id"
     },
     "person_id": {
-      "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id"
+      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
     },
     "fact_type": {
       "type": "string",
@@ -38,28 +38,13 @@
       ],
       "description": "[REQUIRED] Standardized category of the historical fact assertion."
     },
-    "source_urn": {
-      "description": "[REQUIRED] Primary source URN or list of corroborating source URNs.",
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        }
-      ]
-    },
     "quay_score": {
-      "$ref": "../defs/_shared_definitions.schema.json#/$defs/quay_score"
+      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/quay_score"
     },
     "date": {
       "oneOf": [
         {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted"
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted"
         },
         {
           "type": "null"
@@ -68,7 +53,7 @@
       "description": "[OPTIONAL] Genealogical date for the fact or null."
     },
     "location": {
-      "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
       "description": "[OPTIONAL] Standardized and verbatim location."
     },
     "description": {
@@ -95,12 +80,12 @@
         "null"
       ],
       "items": {
-        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
       },
       "description": "[OPTIONAL] List of other individuals involved in this event and their specific roles."
     },
     "external_identifiers": {
-      "$ref": "../defs/_shared_definitions.schema.json#/$defs/fact_external_identifiers",
+      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/fact_external_identifiers",
       "description": "[OPTIONAL] Cross-reference mapping to external GEDCOM events and sources."
     },
     "created_at": {
@@ -112,17 +97,32 @@
       "type": "string",
       "format": "date-time",
       "description": "[REQUIRED] ISO 8601 timestamp tracking when the fact entry was last modified. Matches created_at on initial insertion."
+    },
+    "source": {
+      "description": "[REQUIRED] Primary source reference pairing archival URNs with physical filenames.",
+      "oneOf": [
+        {
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/source_reference"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/source_reference"
+          },
+          "minItems": 1
+        }
+      ]
     }
   },
   "required": [
     "fact_id",
     "person_id",
     "fact_type",
-    "source_urn",
     "quay_score",
     "description",
     "created_at",
-    "updated_at"
+    "updated_at",
+    "source"
   ],
   "additionalProperties": false
 }

@@ -74,7 +74,7 @@
             },
             "date_issued": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                 { "type": "null" }
               ],
               "description": "Date the marriage license was granted by the court or clerk."
@@ -95,36 +95,36 @@
           "required": ["full_name"],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id",
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id",
               "description": "Controlled foreign key referencing the master Person Registry (/data/entities/people.json). Must be verified with 3 corroborating data points before assignment."
             },
             "full_name": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name",
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name",
               "description": "Groom's name parsed canonically or captured via raw_name."
             },
             "age": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/age_record" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/age_record" },
                 { "type": "null" }
               ],
               "description": "Age of groom as stated on the license application."
             },
             "date_of_birth": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                 { "type": "null" }
               ]
             },
             "birthplace": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                 { "type": "null" }
               ],
               "description": "Birthplace of the groom. Must align with 'jurisdictions', 'counties', and 'states' in schemas/naming/_token_registry.json."
             },
             "residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                 { "type": "null" }
               ],
               "description": "Groom's place of residence at the time of application."
@@ -156,13 +156,13 @@
               "properties": {
                 "father_name": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name" },
+                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name" },
                     { "type": "null" }
                   ]
                 },
                 "mother_maiden_name": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name" },
+                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name" },
                     { "type": "null" }
                   ]
                 }
@@ -177,11 +177,11 @@
           "required": ["full_name"],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id",
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id",
               "description": "Controlled foreign key referencing the master Person Registry (/data/entities/people.json). Must be verified with 3 corroborating data points before assignment."
             },
             "full_name": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name",
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name",
               "description": "Bride's legal name parsed canonically or captured via raw_name."
             },
             "maiden_name": {
@@ -190,27 +190,27 @@
             },
             "age": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/age_record" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/age_record" },
                 { "type": "null" }
               ],
               "description": "Age of bride as stated on the license application."
             },
             "date_of_birth": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                 { "type": "null" }
               ]
             },
             "birthplace": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                 { "type": "null" }
               ],
               "description": "Birthplace of the bride. Must align with 'jurisdictions', 'counties', and 'states' in schemas/naming/_token_registry.json."
             },
             "residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                 { "type": "null" }
               ],
               "description": "Bride's place of residence at the time of application."
@@ -242,13 +242,13 @@
               "properties": {
                 "father_name": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name" },
+                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name" },
                     { "type": "null" }
                   ]
                 },
                 "mother_maiden_name": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name" },
+                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name" },
                     { "type": "null" }
                   ]
                 }
@@ -263,14 +263,14 @@
           "properties": {
             "date_of_marriage": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                 { "type": "null" }
               ],
               "description": "Actual date ceremony was solemnized."
             },
             "place_of_marriage": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                 { "type": "null" }
               ],
               "description": "Standardized location of the ceremony. Must align with 'jurisdictions', 'counties', and 'states' in schemas/naming/_token_registry.json."
@@ -283,7 +283,7 @@
                 "religious_denomination": { "type": ["string", "null"] },
                 "residence": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                     { "type": "null" }
                   ]
                 }
@@ -303,14 +303,14 @@
           "description": "Optional archival or contextual notes regarding endorsements, clerk notations, parental consents, or physical document condition."
         },
         "transcript": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
           "description": "Structured verbatim form field readout, abstract summary, and keyword indexing."
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
           },
           "description": "Array of derivative media scan images comprising this source record."
         }
@@ -320,7 +320,7 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
       },
       "description": "Canonical participants (groom, bride, parents, officiator, witnesses) mapped to standardized roles and IND IDs."
     }

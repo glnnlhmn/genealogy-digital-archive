@@ -55,7 +55,7 @@
       "additionalProperties": false
     },
     "church": {
-      "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
       "description": "Church parish or congregation facility. Church name is populated in church.details.location_name."
     },
     "baptism_details": {
@@ -92,11 +92,11 @@
           "required": ["full_name"],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id",
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id",
               "description": "Foreign key referencing the master Person Registry (/data/entities/people.json)."
             },
             "full_name": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name",
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name",
               "description": "Candidate's name parsed canonically or captured via raw_name."
             },
             "sex": {
@@ -105,14 +105,14 @@
             },
             "date_of_birth": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                 { "type": "null" }
               ],
               "description": "Date of birth if recorded in the baptismal ledger."
             },
             "place_of_birth": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                 { "type": "null" }
               ],
               "description": "Place of birth if recorded."
@@ -121,7 +121,7 @@
           "additionalProperties": false
         },
         "date_of_baptism": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted",
           "description": "Date baptism or christening was performed."
         },
         "baptism_note": {
@@ -129,14 +129,14 @@
           "description": "Optional notes regarding clerk annotations, illegible German script, or ledger condition."
         },
         "transcript": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
           "description": "Verbatim transcript of the register entry, abstract summary, and keyword indexing."
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
           },
           "description": "Scans of the church ledger page or baptismal certificate."
         }
@@ -146,7 +146,7 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
       },
       "description": "Linked participants (baptized person, father, mother, officiator, godparents/sponsors) with roles and person IDs."
     }

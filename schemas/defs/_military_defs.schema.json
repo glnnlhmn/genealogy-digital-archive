@@ -1,0 +1,403 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/defs/_military_defs.schema.json",
+  "title": "Military_And_Draft_Definitions",
+  "version": "1.0.0",
+  "description": "Conflict- and era-specific enrollment containers, draft registrations, and service particulars.",
+  "$defs": {
+    "civil_war_particulars": {
+      "type": "object",
+      "description": "Enrollment particulars specific to the U.S. Civil War Enrollment Act of 1863.",
+      "unevaluatedProperties": false,
+      "properties": {
+        "enrollment_class": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Recorded enrollment classification (e.g., Class 1, Class 2, Volunteers)."
+        },
+        "former_military_service": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Prior regiment, company, or service recorded on the roll."
+        },
+        "marital_status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "Single",
+            "Married",
+            "Widowed",
+            "Divorced",
+            null
+          ]
+        }
+      }
+    },
+    "wwi_particulars": {
+      "type": "object",
+      "description": "Registration particulars specific to WWI Draft Registrations (1917\u20131918).",
+      "unevaluatedProperties": false,
+      "properties": {
+        "registration_card_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "Card A (1917)",
+            "Card B (1918)",
+            "Card C (1918)",
+            null
+          ]
+        },
+        "serial_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "order_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "citizenship_status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "Native Born",
+            "Naturalized",
+            "Alien",
+            "Declarant",
+            "Non-Declarant",
+            null
+          ]
+        },
+        "father_birthplace": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "$ref": "_shared_defs.schema.json#/$defs/location"
+        },
+        "nearest_relative": {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "relationship": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "address": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "$ref": "_shared_defs.schema.json#/$defs/location"
+            }
+          }
+        },
+        "employer": {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "work_location": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "$ref": "_shared_defs.schema.json#/$defs/location"
+            }
+          }
+        },
+        "exemption_claimed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "wwii_particulars": {
+      "type": "object",
+      "description": "Registration particulars specific to WWII Draft Registrations (1940\u20131946).",
+      "unevaluatedProperties": false,
+      "properties": {
+        "registration_round": {
+          "type": "string",
+          "description": "e.g., 'Fourth Registration (Old Man's Draft)', 'First Registration (1940)'."
+        },
+        "serial_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "order_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "telephone_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "person_who_will_always_know_address": {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "relationship": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "address": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "$ref": "_shared_defs.schema.json#/$defs/location"
+            }
+          }
+        },
+        "employer": {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "place_of_employment": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "$ref": "_shared_defs.schema.json#/$defs/location"
+            }
+          }
+        }
+      }
+    },
+    "selective_service_modern_particulars": {
+      "type": "object",
+      "description": "Particulars for Cold War Peacetime, Korean War, and Vietnam Era registrations.",
+      "unevaluatedProperties": false,
+      "properties": {
+        "selective_service_number": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Standardized SSS number format (State - Board - Year - Sequence)."
+        },
+        "classification_status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Selective Service classification (e.g., 1-A, 1-D, 2-S, 4-F)."
+        },
+        "lottery_sequence_number": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Vietnam draft lottery sequence draw number (1-366)."
+        },
+        "marital_status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "Single",
+            "Married",
+            "Divorced",
+            "Widowed",
+            null
+          ]
+        },
+        "number_of_dependents": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "person_who_will_always_know_address": {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "relationship": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "address": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "$ref": "_shared_defs.schema.json#/$defs/location"
+            }
+          }
+        },
+        "employer_or_school": {
+          "type": "object",
+          "unevaluatedProperties": false,
+          "properties": {
+            "institution_name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "location": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "$ref": "_shared_defs.schema.json#/$defs/location"
+            }
+          }
+        }
+      }
+    },
+    "generic_draft_particulars": {
+      "type": "object",
+      "description": "Flexible container for state militia enrollments or non-standard peacetime conscriptions.",
+      "unevaluatedProperties": false,
+      "properties": {
+        "conscription_act": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "militia_district_or_ward": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exemptions_claimed": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "prior_service_notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "schedule_fields": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Key-value pairs for non-standard local enrollment columns."
+        }
+      }
+    },
+    "physical_description": {
+      "type": "object",
+      "description": "Physical characteristics recorded by the registrar.",
+      "unevaluatedProperties": false,
+      "properties": {
+        "race_or_color": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "height": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "weight": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "build": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "eyes_color": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "hair_color": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "complexion": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "physical_disabilities_or_marks": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

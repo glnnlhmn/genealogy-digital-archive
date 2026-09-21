@@ -93,14 +93,14 @@ def stage_1_validate_syntax(files: List[Path], verbose: bool = False) -> Tuple[L
         log(f"Schema not found: {PERSON_SCHEMA_FILE}", level="ERROR")
         return [], []
 
-    shared_schema_file = PERSON_SCHEMA_FILE.parent.parent / "defs/_shared_definitions.schema.json"
+    shared_schema_file = PERSON_SCHEMA_FILE.parent.parent / "defs/_shared_defs.schema.json"
     schema_data = load_json(PERSON_SCHEMA_FILE)
     shared_data = load_json(shared_schema_file)
 
     store = {
-        shared_data.get("$id", "https://genealogy.archive/schemas/defs/_shared_definitions.schema.json"): shared_data,
+        shared_data.get("$id", "https://genealogy.archive/schemas/defs/_shared_defs.schema.json"): shared_data,
         shared_schema_file.as_uri(): shared_data,
-        "../defs/_shared_definitions.schema.json": shared_data
+        "../defs/_shared_defs.schema.json": shared_data
     }
 
     resolver = jsonschema.RefResolver(

@@ -56,7 +56,7 @@
           "description": "e.g., 'U.S. District Court for Middle District of Pennsylvania', 'Court of Common Pleas of Cumberland County'."
         },
         "location": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
           "description": "Seat of the court."
         },
         "presiding_judge_or_clerk": { "type": ["string", "null"] }
@@ -91,26 +91,26 @@
           "required": ["full_name"],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id"
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name"
+              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
             },
             "current_residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                 { "type": "null" }
               ]
             },
             "date_of_birth": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                 { "type": "null" }
               ]
             },
             "place_of_birth": {
               "oneOf": [
-                { "$ref": "../defs/_shared_definitions.schema.json#/$defs/location" },
+                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
                 { "type": "null" }
               ]
             },
@@ -124,7 +124,7 @@
                 "port_of_entry": { "type": ["string", "null"] },
                 "arrival_date": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                     { "type": "null" }
                   ]
                 },
@@ -136,7 +136,7 @@
           "additionalProperties": false
         },
         "event_date": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted",
           "description": "Date sworn, signed, or certificate admitted."
         },
         "witnesses": {
@@ -157,14 +157,14 @@
           "description": "Notes on previous declarations, certificate denials, or physical photo stubs."
         },
         "transcript": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
           "description": "Verbatim transcript, abstract, and search keywords."
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
           },
           "description": "Scans of the petition leaf, declaration stub, or certificate."
         }
@@ -174,7 +174,7 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
       },
       "description": "Array of participants (applicant, character witnesses, clerk, judge) mapped to roles and IDs."
     }

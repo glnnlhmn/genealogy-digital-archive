@@ -57,7 +57,7 @@
       "additionalProperties": false
     },
     "cemetery": {
-      "$ref": "../defs/_shared_definitions.schema.json#/$defs/location",
+      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
       "description": "Cemetery facility and geographic location. The formal cemetery name must be recorded in cemetery.details.location_name (e.g., 'Big Spring Presbyterian Church Cemetery')."
     },
     "marker": {
@@ -149,30 +149,30 @@
             "required": ["inscribed_name"],
             "properties": {
               "person_id": {
-                "$ref": "../defs/_shared_definitions.schema.json#/$defs/person_id",
+                "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id",
                 "description": "Controlled foreign key referencing the master Person Registry (/data/entities/people.json). Must be verified with 3 corroborating data points before assignment."
               },
               "inscribed_name": {
-                "$ref": "../defs/_shared_definitions.schema.json#/$defs/canonical_name",
+                "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name",
                 "description": "Inscribed name parsed canonically or captured verbatim in raw_name."
               },
               "birth_date": {
                 "oneOf": [
-                  { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                  { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                   { "type": "null" }
                 ],
                 "description": "Birth date inscribed on the stone or interpreted from age/death."
               },
               "death_date": {
                 "oneOf": [
-                  { "$ref": "../defs/_shared_definitions.schema.json#/$defs/date_interpreted" },
+                  { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
                   { "type": "null" }
                 ],
                 "description": "Death date inscribed on the stone."
               },
               "age_at_death": {
                 "oneOf": [
-                  { "$ref": "../defs/_shared_definitions.schema.json#/$defs/age_record" },
+                  { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/age_record" },
                   { "type": "null" }
                 ],
                 "description": "Age as inscribed on the stone (e.g., 'Aged 74 ys, 3 ms, 12 ds')."
@@ -191,14 +191,14 @@
           "description": "Optional notes regarding iconography, symbols (e.g., Masonic compass, weeping willow), footstone alignment, or field observations."
         },
         "transcript": {
-          "$ref": "../defs/_shared_definitions.schema.json#/$defs/transcript_record",
+          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
           "description": "Verbatim transcript of the complete epitaph and all inscribed lettering, search keywords, and legibility assessment."
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_definitions.schema.json#/$defs/source_media"
+            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
           },
           "description": "Array of original photographic scans/images of the headstone, footstone, or monument."
         }
@@ -208,7 +208,7 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_definitions.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
       },
       "description": "Array of participants (deceased interred, named spouse/parents in epitaph, stone carver) linked to roles and master person IDs."
     }
