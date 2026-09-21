@@ -70,3 +70,7 @@ gemini-code-*.*
 gtemp/
 logs/
 reports/
+
+# Archive & Legacy Definitions
+schemas/archive/
+schemas/defs/*_definitions.schema.json
