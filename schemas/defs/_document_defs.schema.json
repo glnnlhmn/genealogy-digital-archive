@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/defs/_document_defs.schema.json",
   "title": "Genealogy_Document_Definitions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Definitions for documentary sources, media scans, clipping coordinates, and transcripts.",
   "$defs": {
     "source_media": {
@@ -19,7 +19,7 @@
           "description": "Derivative scan image filename."
         },
         "image_quality": {
-          "$ref": "_shared_defs.schema.json#/$defs/enum_quality_assessment"
+          "$ref": "_enums.schema.json#/$defs/enum_quality_assessment"
         },
         "page_or_side": {
           "type": [
@@ -52,7 +52,7 @@
           "description": "Specific visual scan file name corresponding to this clipping segment."
         },
         "image_quality": {
-          "$ref": "_shared_defs.schema.json#/$defs/enum_quality_assessment"
+          "$ref": "_enums.schema.json#/$defs/enum_quality_assessment"
         }
       }
     },
@@ -96,7 +96,7 @@
           "description": "Indexed terms, topics, organizations, or search tags."
         },
         "text_quality": {
-          "$ref": "_shared_defs.schema.json#/$defs/enum_quality_assessment"
+          "$ref": "_enums.schema.json#/$defs/enum_quality_assessment"
         }
       }
     }

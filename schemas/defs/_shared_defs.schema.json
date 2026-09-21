@@ -2,127 +2,32 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/defs/_shared_defs.schema.json",
   "title": "Genealogy_Shared_Definitions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Canonical definitions, cross-references, and primitive constraints for the digital genealogy archive.",
   "$defs": {
     "enum_quality_assessment": {
-      "type": "string",
-      "enum": [
-        "EXCELLENT",
-        "GOOD",
-        "FAIR",
-        "POOR"
-      ],
-      "default": "GOOD"
+      "$ref": "_enums.schema.json#/$defs/enum_quality_assessment"
     },
     "enum_date_modifier": {
-      "type": "string",
-      "enum": [
-        "EXACT",
-        "ABT",
-        "BEF",
-        "AFT",
-        "BET",
-        "FROM_TO",
-        "UNKNOWN"
-      ],
-      "default": "EXACT"
+      "$ref": "_enums.schema.json#/$defs/enum_date_modifier"
     },
     "enum_vital_modifier": {
-      "type": "string",
-      "enum": [
-        "EXACT",
-        "ABT",
-        "BEF",
-        "AFT",
-        "BET",
-        "FROM_TO",
-        "LIVING",
-        "UNKNOWN"
-      ]
+      "$ref": "_enums.schema.json#/$defs/enum_vital_modifier"
     },
     "enum_associated_role": {
-      "type": "string",
-      "enum": [
-        "CHIL",
-        "HUSB",
-        "WIFE",
-        "MOTH",
-        "FATH",
-        "SPOU",
-        "WITN",
-        "GODP",
-        "INFORMANT",
-        "CLERGY",
-        "OFFICIATOR",
-        "NEIGHBOR",
-        "ATND",
-        "UNDR",
-        "DEC",
-        "OTHR",
-        "UNKNOWN"
-      ]
+      "$ref": "_enums.schema.json#/$defs/enum_associated_role"
     },
     "enum_note_category": {
-      "type": "string",
-      "enum": [
-        "ANOMALY",
-        "RESEARCH_TODO",
-        "GENERAL"
-      ]
+      "$ref": "_enums.schema.json#/$defs/enum_note_category"
     },
     "enum_fact_type": {
-      "type": "string",
-      "description": "Standardized category of the historical fact assertion.",
-      "enum": [
-        "Association",
-        "Award",
-        "Baptism",
-        "Birth",
-        "Burial",
-        "Census",
-        "Civic",
-        "Death",
-        "Divorce",
-        "Education",
-        "Incident",
-        "Legal",
-        "Marriage",
-        "Military",
-        "Occupation",
-        "Parentage",
-        "Probate",
-        "Property",
-        "Residence",
-        "Other"
-      ]
+      "$ref": "_enums.schema.json#/$defs/enum_fact_type"
     },
     "enum_sex": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "Biological sex classification.",
-      "enum": [
-        "Male",
-        "Female",
-        "Unknown",
-        null
-      ]
+      "$ref": "_enums.schema.json#/$defs/enum_sex"
     },
     "enum_location_type": {
-      "type": "string",
-      "description": "Classification distinguishing civil jurisdictions from physical venues, landmarks, and cemeteries.",
-      "enum": [
-        "JURISDICTION",
-        "CEMETERY",
-        "CHURCH",
-        "HOSPITAL",
-        "FACILITY",
-        "RESIDENCE",
-        "LANDMARK",
-        "OTHER"
-      ]
+      "$ref": "_enums.schema.json#/$defs/enum_location_type"
     },
     "person_id": {
       "type": "string",

@@ -2,25 +2,11 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/defs/_death_defs.schema.json",
   "title": "Genealogy_Death_Definitions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Standard definitions for mortality, medical certification, and etiology records.",
   "$defs": {
     "enum_manner_of_death": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "Categorical manner of death classification.",
-      "enum": [
-        "Natural",
-        "Accident",
-        "Suicide",
-        "Homicide",
-        "Pending",
-        "Unknown",
-        null
-      ],
-      "default": "Natural"
+      "$ref": "_enums.schema.json#/$defs/enum_manner_of_death"
     },
     "cause_of_death": {
       "type": "object",

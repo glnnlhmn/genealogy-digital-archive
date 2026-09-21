@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/defs/_census_defs.schema.json",
   "title": "Census_Definitions",
-  "version": "1.0.0",
-  "description": "Era-specific schedule columns, tally brackets, line items, and page metadata for U.S. Federal Censuses (1790\u20131950).",
+  "version": "1.0.1",
+  "description": "Era-specific schedule columns, tally brackets, line items, and page metadata for U.S. Federal Censuses (1790–1950).",
   "$defs": {
     "census_page_metadata": {
       "type": "object",
@@ -368,7 +368,7 @@
     },
     "population_individual_particulars": {
       "type": "object",
-      "description": "Nominal population schedule questions used across 1850\u20131950 censuses.",
+      "description": "Nominal population schedule questions used across 1850–1950 censuses.",
       "unevaluatedProperties": false,
       "properties": {
         "age": {
@@ -379,16 +379,7 @@
           "$ref": "_shared_defs.schema.json#/$defs/age_record"
         },
         "sex": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "Male",
-            "Female",
-            "Unknown",
-            null
-          ]
+          "$ref": "_enums.schema.json#/$defs/enum_sex"
         },
         "color_or_race": {
           "type": [
@@ -403,17 +394,7 @@
           ]
         },
         "marital_status": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "Single",
-            "Married",
-            "Widowed",
-            "Divorced",
-            null
-          ]
+          "$ref": "_enums.schema.json#/$defs/enum_marital_status"
         },
         "birth_month": {
           "type": [
@@ -534,17 +515,7 @@
           ]
         },
         "home_owned_or_rented": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "Owned",
-            "Rented",
-            "Free",
-            "Mortgaged",
-            null
-          ]
+          "$ref": "_enums.schema.json#/$defs/enum_home_ownership"
         }
       }
     },

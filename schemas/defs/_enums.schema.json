@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/defs/_enums.schema.json",
+  "title": "Genealogy_Controlled_Vocabularies",
+  "version": "1.0.0",
+  "description": "Centralized controlled vocabularies and categorical enumerations for the digital genealogy archive.",
+  "$defs": {
+    "enum_quality_assessment": {
+      "type": "string",
+      "enum": [
+        "EXCELLENT",
+        "GOOD",
+        "FAIR",
+        "POOR"
+      ],
+      "default": "GOOD"
+    },
+    "enum_date_modifier": {
+      "type": "string",
+      "enum": [
+        "EXACT",
+        "ABT",
+        "BEF",
+        "AFT",
+        "BET",
+        "FROM_TO",
+        "UNKNOWN"
+      ],
+      "default": "EXACT"
+    },
+    "enum_vital_modifier": {
+      "type": "string",
+      "enum": [
+        "EXACT",
+        "ABT",
+        "BEF",
+        "AFT",
+        "BET",
+        "FROM_TO",
+        "LIVING",
+        "UNKNOWN"
+      ]
+    },
+    "enum_associated_role": {
+      "type": "string",
+      "enum": [
+        "CHIL",
+        "HUSB",
+        "WIFE",
+        "MOTH",
+        "FATH",
+        "SPOU",
+        "WITN",
+        "GODP",
+        "INFORMANT",
+        "CLERGY",
+        "OFFICIATOR",
+        "NEIGHBOR",
+        "ATND",
+        "UNDR",
+        "DEC",
+        "OTHR",
+        "UNKNOWN"
+      ]
+    },
+    "enum_note_category": {
+      "type": "string",
+      "enum": [
+        "ANOMALY",
+        "RESEARCH_TODO",
+        "GENERAL"
+      ]
+    },
+    "enum_fact_type": {
+      "type": "string",
+      "description": "Standardized category of historical fact assertions.",
+      "enum": [
+        "Association",
+        "Award",
+        "Baptism",
+        "Birth",
+        "Burial",
+        "Census",
+        "Civic",
+        "Death",
+        "Divorce",
+        "Education",
+        "Incident",
+        "Legal",
+        "Marriage",
+        "Military",
+        "Occupation",
+        "Parentage",
+        "Probate",
+        "Property",
+        "Residence",
+        "Other"
+      ]
+    },
+    "enum_sex": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Biological sex classification.",
+      "enum": [
+        "Male",
+        "Female",
+        "Unknown",
+        null
+      ]
+    },
+    "enum_marital_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Marital status recorded on historical schedules.",
+      "enum": [
+        "Single",
+        "Married",
+        "Widowed",
+        "Divorced",
+        null
+      ]
+    },
+    "enum_manner_of_death": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Categorical manner of death classification.",
+      "enum": [
+        "Natural",
+        "Accident",
+        "Suicide",
+        "Homicide",
+        "Pending",
+        "Unknown",
+        null
+      ],
+      "default": "Natural"
+    },
+    "enum_home_ownership": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Tenure status of home recorded on federal census schedules.",
+      "enum": [
+        "Owned",
+        "Rented",
+        "Free",
+        "Mortgaged",
+        null
+      ]
+    },
+    "enum_location_type": {
+      "type": "string",
+      "description": "Classification distinguishing civil jurisdictions from physical venues, landmarks, and cemeteries.",
+      "enum": [
+        "JURISDICTION",
+        "CEMETERY",
+        "CHURCH",
+        "HOSPITAL",
+        "FACILITY",
+        "RESIDENCE",
+        "LANDMARK",
+        "OTHER"
+      ]
+    },
+    "enum_citizenship_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Native Born",
+        "Naturalized",
+        "Alien",
+        "Declarant",
+        "Non-Declarant",
+        null
+      ]
+    },
+    "enum_wwi_card_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Card A (1917)",
+        "Card B (1918)",
+        "Card C (1918)",
+        null
+      ]
+    }
+  }
+}
