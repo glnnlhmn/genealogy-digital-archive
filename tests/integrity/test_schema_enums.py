@@ -1,5 +1,5 @@
 # Name: test_schema_enums.py
-# Path: tools/tests/test_schema_enums.py
+# Path: tests/integrity/test_schema_enums.py
 
 """
 Pytest test suite for SchemaEnums registry within gda_core.

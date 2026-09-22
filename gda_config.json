@@ -1,68 +1,116 @@
 {
   "ConfigVersion": "1.0.0",
-  "LastUpdated": "2026-09-19",
+  "LastUpdated": "2026-09-21",
   "ArchiveName": "Genealogy Digital Archive",
   "RootAnchor": "G:\\My Drive\\genealogy-digital-archive",
   "TrackedAssets": {
     "schemas": [
       {
-        "path": "schemas/defs/_census_definitions.schema.json",
+        "path": "schemas/defs/_census_defs.schema.json",
         "expected_version": "1.0.1",
-        "sha256": "8479a5ecdb618d15e37ae5cd0b9a14204f7160d85b23e0e1e678abd4c5dbc947",
-        "purpose": "JSON Metadata / Config entity (_census_definitions.schema.json)"
+        "sha256": "7d8348606e02b29a59acdb76dc8a123dc545a3b22225e077b521b8a5d857a3fe",
+        "purpose": "JSON Metadata / Config entity (_census_defs.schema.json)"
       },
       {
-        "path": "schemas/defs/_draft_definitions.schema.json",
+        "path": "schemas/defs/_death_defs.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "9aa095e8ec2aa937233f9b4fb4326c951c88694e601aecd842c69052905c7d37",
+        "purpose": "JSON Metadata / Config entity (_death_defs.schema.json)"
+      },
+      {
+        "path": "schemas/defs/_document_defs.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "7031c5f6be2ecfadef2c7860f002aa3f38b62ea4971445ac7278ef3bd297fc55",
+        "purpose": "JSON Metadata / Config entity (_document_defs.schema.json)"
+      },
+      {
+        "path": "schemas/defs/_enums.schema.json",
         "expected_version": "1.0.0",
-        "sha256": "ceceb08e99aa2d8d06c93c84f760ebfbd039ea9b50829be10026549c52357897",
-        "purpose": "JSON Metadata / Config entity (_draft_definitions.schema.json)"
+        "sha256": "c99fbdd0f83c99a9a26f0d5467b47f82b78c57bdccbe963a658e4cc807de377a",
+        "purpose": "JSON Metadata / Config entity (_enums.schema.json)"
       },
       {
-        "path": "schemas/defs/_shared_definitions.schema.json",
-        "expected_version": "1.0.5",
-        "sha256": "22ba17884a649115e11445d277349cad75cf1ccc72c5d03a9d0946409a8b67a6",
-        "purpose": "JSON Metadata / Config entity (_shared_definitions.schema.json)"
+        "path": "schemas/defs/_external_xref_defs.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "a7e5e20625cdcf3ff48f6a039f7e81ffcdabf2bb6dc8f84dd7c092cce8070b32",
+        "purpose": "JSON Metadata / Config entity (_external_xref_defs.schema.json)"
+      },
+      {
+        "path": "schemas/defs/_military_defs.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "72c574afe25dd0f791ae5ee2bf9c4c818cafe8d98d47fd9c5a1f14f9b2cfd3d3",
+        "purpose": "JSON Metadata / Config entity (_military_defs.schema.json)"
+      },
+      {
+        "path": "schemas/defs/_registry_defs.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "330ebe42a3a859d4dffaacf504db5e89636b1c4951fc27df27612f90f49e4307",
+        "purpose": "JSON Metadata / Config entity (_registry_defs.schema.json)"
+      },
+      {
+        "path": "schemas/defs/_shared_defs.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "45bc38d21fcb967b7a9f39111f50b22b079f9aac578583c535c4c9f31d31897c",
+        "purpose": "JSON Metadata / Config entity (_shared_defs.schema.json)"
       },
       {
         "path": "schemas/entities/fact.schema.json",
         "expected_version": "1.0.4",
-        "sha256": "5b0c0925d9e3d8e2968e343d14823cfa456468304aef19dcf2b63952259b9278",
+        "sha256": "f817e70f906b192d1b3c3eee7db3ea11a40f6aa1581dc572d68185bc7fcb7a62",
         "purpose": "JSON Metadata / Config entity (fact.schema.json)"
       },
       {
         "path": "schemas/entities/fact_registry.schema.json",
-        "expected_version": "1.0.1",
-        "sha256": "eb5e09d4209e0242103dac2bdb1cbee42e45323510114564c9cc0cf74c22271f",
+        "expected_version": "1.0.2",
+        "sha256": "2a14ebcd7ded63842feb022db11a6145c68dab59baa4e568ddf020627e1bd6da",
         "purpose": "JSON Metadata / Config entity (fact_registry.schema.json)"
       },
       {
+        "path": "schemas/entities/location.schema.json",
+        "expected_version": "1.0.1",
+        "sha256": "22b83134dc5bf658499030ef88c63ef67585ea6d3fd0621a5bef03248d6f1ef5",
+        "purpose": "JSON Metadata / Config entity (location.schema.json)"
+      },
+      {
+        "path": "schemas/entities/location_registry.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "974192271e367487048887616a8a499f25aaa0cda9347f8763a68038fc58477e",
+        "purpose": "JSON Metadata / Config entity (location_registry.schema.json)"
+      },
+      {
         "path": "schemas/entities/person.schema.json",
-        "expected_version": "1.0.3",
-        "sha256": "dce506852a2bc9f3e56edb0c147835234acb20db695475678d58859957fbebb2",
+        "expected_version": "1.0.4",
+        "sha256": "84f5577682d0c45508c77ad3a4c5bfa3a4ccf3b8ef47f51f10012dc27dbae430",
         "purpose": "JSON Metadata / Config entity (person.schema.json)"
       },
       {
         "path": "schemas/entities/person_registry.schema.json",
-        "expected_version": "1.0.1",
-        "sha256": "ae2f0e7feb5c323da99cb641782fa7d2cd8a7e62eb518531d252a0917df86e01",
+        "expected_version": "1.0.2",
+        "sha256": "bc0bf3820d39ec44de878e7d332509b0268ebf14dee50c17b35fd536dd320d62",
         "purpose": "JSON Metadata / Config entity (person_registry.schema.json)"
       },
       {
-        "path": "schemas/indices/ahnentafel_index.schema.json",
+        "path": "schemas/indexes/ahnentafel_index.schema.json",
         "expected_version": "0.0.999",
         "sha256": "e5201280b5aab1483e87fe673db5cd20dc2268a7aa602a493aec847ceb59c370",
         "purpose": "JSON Metadata / Config entity (ahnentafel_index.schema.json)"
       },
       {
-        "path": "schemas/indices/newspaper_index.schema.json",
+        "path": "schemas/indexes/location_index.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "c1c177ada0e0dd1be6d48bdf8c819f532b60245e35e1f5962d75833a424853ac",
+        "purpose": "JSON Metadata / Config entity (location_index.schema.json)"
+      },
+      {
+        "path": "schemas/indexes/newspaper_index.schema.json",
         "expected_version": "1.0.1",
-        "sha256": "40b62c393628ae2347e7183d73e0e3d8e32b3c3fa64867e9b7bbc9c1d5915a2b",
+        "sha256": "f5f610326bc0fa990819efb7f88b549875642b493388a9618700ddeeb648138a",
         "purpose": "JSON Metadata / Config entity (newspaper_index.schema.json)"
       },
       {
         "path": "schemas/naming/_token_registry.json",
         "expected_version": "1.0.17",
-        "sha256": "f73af5b361886cbd630832c5d8709200848595f1e526e812f91ab3ab8f8b938a",
+        "sha256": "acc0176e8f0af32bb09e8b41922a570657160ed906af9836290f8ae2acc95129",
         "purpose": "JSON Metadata / Config entity (_token_registry.json)"
       },
       {
@@ -74,109 +122,109 @@
       {
         "path": "schemas/sources/academic_credential.schema.json",
         "expected_version": "1.0.0",
-        "sha256": "2514fadfb23ae2abb22ee064394e200e025798aedd8dc35283439f8929b32def",
+        "sha256": "a477bf5e97d8ae92726dd5cc61a6f6fad33a54fcd615da1edc60fb5b2fc9d1f7",
         "purpose": "JSON Metadata / Config entity (academic_credential.schema.json)"
       },
       {
         "path": "schemas/sources/birth_certificate.schema.json",
         "expected_version": "1.0.1",
-        "sha256": "e88c703e82ae1c72ec7c9b3861744cbe306745e1a85c7a930f3be8d363a115dd",
+        "sha256": "4d20869d15e910438449b1ca6ee598f4d04508a78a2ee6e68411989c0ccea3a9",
         "purpose": "JSON Metadata / Config entity (birth_certificate.schema.json)"
       },
       {
         "path": "schemas/sources/cemetery_marker.schema.json",
         "expected_version": "1.0.0",
-        "sha256": "5b4baf9115631e0b93818197e383eaed4d22128f20d5f4e98552a79a4a69b8c5",
+        "sha256": "0c89d83a3579675c4ebf330952f3e0dffea267521e62076a01638dc61007b6bf",
         "purpose": "JSON Metadata / Config entity (cemetery_marker.schema.json)"
       },
       {
         "path": "schemas/sources/census_schedule.schema.json",
         "expected_version": "1.0.1",
-        "sha256": "27dae0841d4fc5372c330756297c039187c33e90448a213b19fa01652754e189",
+        "sha256": "bdac1a91a7b9e6193b89bb7fc6d669b4d02ece69992990f08b9024634e63a403",
         "purpose": "JSON Metadata / Config entity (census_schedule.schema.json)"
       },
       {
         "path": "schemas/sources/church_baptism.schema.json",
         "expected_version": "1.0.0",
-        "sha256": "cb6b9f9ec64fc3da99216671bb498b300ba45bf79d1ed37a2d0fa885529ec546",
+        "sha256": "f2c111a7c70567885a583f7960472cc76ea7a90f3fec0bcec0ea3def5b5529b9",
         "purpose": "JSON Metadata / Config entity (church_baptism.schema.json)"
       },
       {
         "path": "schemas/sources/death_certificate.schema.json",
         "expected_version": "1.0.4",
-        "sha256": "95300ffcf9fb951c3ead9899e00721b626b872bcfb5e60396fe0c56ee07fc0c6",
+        "sha256": "f7cf6ff8179bac97ef7da3f62a76dbfcadb2284cb3abcf071fcc9577840aa72d",
         "purpose": "JSON Metadata / Config entity (death_certificate.schema.json)"
       },
       {
         "path": "schemas/sources/directory_listing.schema.json",
         "expected_version": "1.0.1",
-        "sha256": "691c80406ef3ee67f7371277ec7d35a41b4fca1195ea9a5529af14efacefc050",
+        "sha256": "0356ade41ae5264d572c3606f7f850c3415953b81495572b1f650fe43c483c60",
         "purpose": "JSON Metadata / Config entity (directory_listing.schema.json)"
       },
       {
         "path": "schemas/sources/divorce_report.schema.json",
         "expected_version": "1.0.4",
-        "sha256": "5bf7910be3dfde70f67271951568f0248ba178545eb20875dece88681054546d",
+        "sha256": "cc1611dfda924cd294c14b31f24369af929e549f3d4739832e6ef968f575bb9e",
         "purpose": "JSON Metadata / Config entity (divorce_report.schema.json)"
       },
       {
         "path": "schemas/sources/immigration_manifest.schema.json",
         "expected_version": "1.0.0",
-        "sha256": "4517b41c7a1e8e557c2359a121eb18e9b9d8259f7a402be2c32938393c9e8595",
+        "sha256": "45e2597d1fb25ea856ebde2bd6553a1df097b37a20e22ce04f17bf4ca8c39fc7",
         "purpose": "JSON Metadata / Config entity (immigration_manifest.schema.json)"
       },
       {
         "path": "schemas/sources/land_deed.schema.json",
         "expected_version": "1.0.0",
-        "sha256": "6141d0a034aedad3c18c895de3b4ae84736f60ec44111135427fde84b83afa97",
+        "sha256": "5b955710ee08777ac15f015f0fc42730253baba99744c77521c253dfd2632c26",
         "purpose": "JSON Metadata / Config entity (land_deed.schema.json)"
       },
       {
         "path": "schemas/sources/marriage_license.schema.json",
         "expected_version": "1.0.4",
-        "sha256": "d8c7298f8101732f4646801babf7265b4eff02061cda14e5e7aa6d4f8bb96d4e",
+        "sha256": "e803e7214d25a15492e1adc9577d427fd66ee7977d461444451bf64ecaaf531d",
         "purpose": "JSON Metadata / Config entity (marriage_license.schema.json)"
       },
       {
         "path": "schemas/sources/military_draft.schema.json",
         "expected_version": "1.0.1",
-        "sha256": "7d2b6915ff46b7715ae78b9932add6a8e4df23e73f6c5dbe8edf80932a8ebb15",
+        "sha256": "4c470cd535fb9f98e800c1703a4cdadcd3e73deda6da5df15fbb57755fa1491a",
         "purpose": "JSON Metadata / Config entity (military_draft.schema.json)"
       },
       {
         "path": "schemas/sources/naturalization_record.schema.json",
         "expected_version": "1.0.0",
-        "sha256": "1fb4185492f95201a3c45f24ec70fedbc2bc5c9c8aedf7f599c218a426444417",
+        "sha256": "b2bcf00f413fdac45a388d3ff5cbfef43252ee86e5cc4a9141a27bc042d68c2e",
         "purpose": "JSON Metadata / Config entity (naturalization_record.schema.json)"
       },
       {
         "path": "schemas/sources/newspaper_article.schema.json",
         "expected_version": "1.0.1",
-        "sha256": "11537a3e8624af126078c3f90414a29269b166f04a2f74a2d2eea5f0bcdb2d22",
+        "sha256": "0ea1fbc1b1c921a32a74e60165dbc08c149f7ec8b63974a9d0207b2cf7c53577",
         "purpose": "JSON Metadata / Config entity (newspaper_article.schema.json)"
       },
       {
         "path": "schemas/sources/other_miscellaneous.schema.json",
         "expected_version": "1.0.0",
-        "sha256": "df4d4df6f05948340d0eada7a1ee14de25dfec9fa0fbb6705be82298b98327c5",
+        "sha256": "992a6907da5de722c81d950b64afe26945e2a02c913f196954d1ddfa5cca12b9",
         "purpose": "JSON Metadata / Config entity (other_miscellaneous.schema.json)"
       },
       {
         "path": "schemas/sources/personal_testimony.schema.json",
         "expected_version": "1.0.0",
-        "sha256": "eb2ca2e5b73c265b9e4006aaafb9903ea40ad6efc50fd1c412db694b79f3e5c0",
+        "sha256": "17ea18c8ec570537cdbab05cd18db36cf12248a5e0773d72c4ca9db84d22bfdb",
         "purpose": "JSON Metadata / Config entity (personal_testimony.schema.json)"
       },
       {
         "path": "schemas/sources/probate_record.schema.json",
         "expected_version": "1.0.0",
-        "sha256": "40d091cf700c58c0171ac1816480f507ddc2e766b5cdab68fde34adbe8b5a63f",
+        "sha256": "9812928a4585078fb7bf879afc4f8900377e4dd0e40dbb12a02491b29a3548e7",
         "purpose": "JSON Metadata / Config entity (probate_record.schema.json)"
       },
       {
         "path": "schemas/sources/tax_assessment.schema.json",
         "expected_version": "1.0.0",
-        "sha256": "c7591c50404a77cd72f35a7949cc18afcbd36e59a21be2fa05450e7f03f1ac8e",
+        "sha256": "e739b6937cf83d8b5dd597b187899e2e62b5e73829433c5f864f513b62727461",
         "purpose": "JSON Metadata / Config entity (tax_assessment.schema.json)"
       }
     ],
@@ -249,8 +297,8 @@
       },
       {
         "path": "prompts/core/MIP-Core.md",
-        "expected_version": "1.0.3",
-        "sha256": "a9fface9836623f8ef493cbb46a88f6865919e10e3e8b57672c8dd90f23ece72",
+        "expected_version": "1.0.4",
+        "sha256": "84d2e62959b51497944059ef23081cfb9d75cdba06fae4a164f83d711487383a",
         "purpose": "SYSTEM INSTRUCTION: MIP (Master Intelligence Profile)"
       },
       {
@@ -340,7 +388,7 @@
       {
         "path": "prompts/topics/mip-topic-backup-protocol.md",
         "expected_version": "1.0.0",
-        "sha256": "766a4a0e9910e1279e5269a3f3ad5fb4b8e96305bd86e4e35e668c48bf9c1c21",
+        "sha256": "35178f211199e97891677b5f35a445a30de66a1b1ad43cb791a8193e4294766b",
         "purpose": "MIP-Topic: Data Protection and Backup Architecture"
       },
       {
