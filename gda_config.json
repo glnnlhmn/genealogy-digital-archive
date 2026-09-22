@@ -1,6 +1,6 @@
 {
   "ConfigVersion": "1.0.0",
-  "LastUpdated": "2026-09-21",
+  "LastUpdated": "2026-09-22",
   "ArchiveName": "Genealogy Digital Archive",
   "RootAnchor": "G:\\My Drive\\genealogy-digital-archive",
   "TrackedAssets": {
@@ -297,9 +297,27 @@
       },
       {
         "path": "prompts/core/MIP-Core.md",
-        "expected_version": "1.0.4",
-        "sha256": "84d2e62959b51497944059ef23081cfb9d75cdba06fae4a164f83d711487383a",
+        "expected_version": "1.0.5",
+        "sha256": "7ee601c697c7bce133d3183b1e3a043f091ef7a4e790fec6cdefa5d4a35641a6",
         "purpose": "SYSTEM INSTRUCTION: MIP (Master Intelligence Profile)"
+      },
+      {
+        "path": "prompts/core/miplet-001.md",
+        "expected_version": "1.0.0",
+        "sha256": "4b32467828bde04177b728a74de42e5fad8c638171ef0aed80a1a78406d353c6",
+        "purpose": "MIPLET-001: Testing Protocol for Frozen Architecture & Dynamic Config Mocking"
+      },
+      {
+        "path": "prompts/core/miplet-002.md",
+        "expected_version": "1.0.0",
+        "sha256": "488b427e91680c985bc4482b837b389c51845393946606d8084eee234c5db10e",
+        "purpose": "MIPLET-002: Operational Tool Versioning & Build Protocol (PEP 440)"
+      },
+      {
+        "path": "prompts/core/miplet-003.md",
+        "expected_version": "1.0.0",
+        "sha256": "2d6686791a16c71ce3166366914cca17ae27d31c0c6ce452bb0a39e3c35a757a",
+        "purpose": "MIPLET-003: Operational Tool Acronym Realignment (GNA -> GAM)"
       },
       {
         "path": "prompts/core/Pappy-Core.md",

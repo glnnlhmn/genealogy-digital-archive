@@ -1,64 +1,71 @@
-# Genealogy Person Intake Pipeline (GPI) Runbook
+# Technical Runbook: GPI (Genealogy Person Intake)
 
-## Overview
-The Genealogy Person Intake Pipeline (\`tools/ops/gpi.py\`) is an automated 7-stage state machine designed to discover, validate, canonicalize, and commit individual person entities (\`pep-let-*.json\`) into the master person registry (\`data/entities/people.json\`).
+| Property | Value |
+| :--- | :--- |
+| **Tool Name** | `gpi.py` |
+| **Script Path** | `tools/ops/gpi.py` |
+| **Version** | `1.0.4+build.20260922.2` |
+| **Test Suite** | `tests/integration/test_gpi.py` |
+| **Log Output** | `logs/gpi-[YYYYMMDD_HHMMSS].log` |
+| **Target Registry** | `data/entities/people.json` |
 
+---
 
-## Pipeline Stages
+## 1. Operator Reference & Quick-Start
 
-1. **Stage 0: Discovery**
-   * Scans the archive root for staged entity fragments matching \`data/entities/pep-let-*.json\`.
-2. **Stage 1: Syntax & Schema Validation**
-   * Validates each staged JSON record against \`schemas/entities/person.schema.json\` using pre-loaded shared definitions (\`schemas/defs/_shared_definitions.schema.json\`). Invalid records are safely routed to quarantine.
-3. **Stage 2: Graph Topology Verification**
-   * Ensures every staged entity maintains a connected relationship path back to the primary root node (\`IND-00000\`). Isolated nodes are quarantined.
-4. **Stage 3: Deduplication & Drift Detection**
-   * Evaluates record fingerprints (\`given | surname | birth_year\`) against the master registry to prevent duplicate ingestion collisions.
-5. **Stage 4: Location Canonicalization**
-   * Resolves raw birth and death place strings against master location entities (\`data/entities/locations.json\`) and lookup redirects (\`data/indexes/location_index.json\`).
-6. **Stage 5: Minting & Reciprocal Linking**
-   * Automatically calculates the highest existing master identifier (\`IND-#####\`), assigns permanent canonical IDs to incoming records, and injects reciprocal genealogical links (e.g., \`FATH\` to \`CHIL\`).
-7. **Stage 6: Atomic Commit & Cleanup**
-   * Generates a pre-execution backup in \`backups/\`, atomically rewrites \`data/entities/people.json\` with updated registry metadata, and unlinks successfully processed staging files.
+### Operational Intent
+GPI processes staged person entity fragments (`data/entities/pep-let-*.json`) into the master registry (`data/entities/people.json`). It enforces schema validation, verifies graph traversal to root ancestor `IND-00000`, mints sequential IDs, injects reciprocal kinship links, and cleans staging workspaces.
 
+### CLI Syntax
+```powershell
+python tools/ops/gpi.py [-a] [-r] [-v] [--debug]
+```
 
-## Command-Line Interface (CLI)
+### Options & Parameter Reference
+* `-a, --append`: Executes the full 7-stage intake pipeline, committing valid staged files to `people.json`.
+* `-r, --restore`: Recovers all quarantined person files from `data/entities/quarantine/` back to `data/entities/`.
+* `-v, --verbose`: Logs detailed record-level diagnostic traces.
+* `--debug`: Outputs live execution traces directly to stderr.
 
-Execute operations from the archive root via PowerShell using the virtual environment:
-
-### Ingestion Execution (\`--append\`)
-Processes all valid staged pep-lets, merges them into the master registry, creates an atomic backup, and cleans up staging files:
+### Quick Runbook
+Execute intake and commit staged fragments:
 ```powershell
 python tools/ops/gpi.py --append
 ```
-
-### Verbose Diagnostic Logging (\`--verbose\`)
-Emits itemized record-level diagnostic logs to the session output and writes detailed execution traces to \`logs/gpi-[timestamp].log\`:
-```powershell
-python tools/ops/gpi.py --append --verbose
-```
-
-### Quarantine Restoration (\`--restore\`)
-Recovers all quarantined files from the quarantine buffer back to \`data/entities/\` for re-evaluation and correction:
+Restore quarantined person fragments for review:
 ```powershell
 python tools/ops/gpi.py --restore
 ```
 
 ---
 
-## Error Handling & Quarantine
+## 2. Technical Architecture & Data Lifecycle
 
-* **Quarantine Buffer:** Unverified, malformed, or topologically invalid files are safely copied to \`data/entities/Quarantine\` and removed from staging.
-* **Cross-Drive Compatibility:** File movements utilize safe copy-and-unlink routines to prevent cross-volume system exceptions (\`WinError 17\`) between temporary environments and virtual drives.
+### Pipeline Execution Stages
+1. **Discovery:** Identifies `data/entities/pep-let-*.json` staging fragments.
+2. **Schema Conformance:** Validates each fragment against `person.schema.json`. Malformed records route to `data/entities/quarantine/`.
+3. **Graph Topology Verification:** Confirms that each candidate entity maintains a traversal path back to root ancestor `IND-00000`. Isolated nodes route to quarantine.
+4. **Deduplication:** Evaluates `given | surname | birth_year` fingerprints against `people.json` to prevent duplicate ingestion.
+5. **Location Canonicalization:** Normalizes place names against master indexes (`data/entities/locations.json`, `data/indexes/location_index.json`).
+6. **Minting & Reciprocal Linking:** Allocates the next sequential `IND-#####` ID and generates reciprocal kinship relations (e.g., `FATH` -> `CHIL`).
+7. **Atomic Commit & Cleanup:** Creates an atomic Safe Backup of `people.json` in `backups/`, writes the updated registry, and deletes processed staging files.
+
+### Framework Integration
+* `tools.lib.gda_core.GDAConfig.CONFIG`: Resolves registry paths (`CONFIG.people`, `CONFIG.quarantine`, `CONFIG.backups`).
+* `tools.lib.gda_core.GDALogger.setup_logger`: Configures `[SYS]` event-aware logging.
+* `tools.lib.gda_core.GDAUtil.GDAUtil`: Coordinates safe backups, atomic JSON persistence, and quarantine isolation.
 
 ---
 
-## 5. Testing Architecture & Validation Standards
-Automated test suites ensure pipeline integrity, schema conformity, and regression safety across all ingestion modules. All unit and integration tests reside in \`tools/tests/\` and are executed via \`pytest\` within the active virtual environment. Test fixtures must mock archive states cleanly without mutating production datasets under \`data/\`. When modifying pipeline logic or staging operations, developers must run the full test suite to verify that syntax validation, topological graph tracing, and deduplication logic pass successfully before committing operational changes.
-'''
+## 3. Verification Harness & Diagnostics
 
-target = Path("docs/tools/gpi.md")
-target.parent.mkdir(parents=True, exist_ok=True)
-target.write_text(content, encoding="utf-8")
-print(f"Successfully generated {target}")
-"@
+### Test Suite
+* **Location:** `tests/integration/test_gpi.py`
+* **Execution:**
+```powershell
+pytest tests/integration/test_gpi.py -v
+```
+
+### Diagnostic Matrix
+* **Quarantined (`Schema violation`):** Check syntax and required fields against `schemas/entities/person.schema.json`.
+* **Quarantined (`Topology failure`):** The person has no valid parent or spouse path connecting back to progenitor `IND-00000`.
