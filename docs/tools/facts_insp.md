@@ -1,47 +1,68 @@
-# Name: facts_insp.md
-# Path: docs/tools/facts_insp.md
+# Technical Runbook: FACTS_INSP (Fact Registry Inspection Engine)
 
-# Technical Runbook: Fact Registry Inspection Engine (`facts_insp.py`)
-
-## 1. Overview
-The `facts_insp.py` operational tool (Build 20) is the core validation and auditing engine for `data/entities/facts.json`. It performs comprehensive integrity checks across the archive's fact registry, ensuring schema conformance, vocabulary validity, chronological soundness, biological plausibility, duplication detection, and relational consistency.
-
----
-
-## 2. Execution Syntax & Parameters
-
-Execute the inspection tool from the root directory (`G:/My Drive/genealogy-digital-archive/`):
-
-python tools/ops/facts_insp.py [--verbose] [--debug]
-
-### Supported Arguments:
-* `--verbose` / `-v`: Emits detailed diagnostic log entries directly to session logs in `logs/`.
-* `--debug`: Routes runtime traces and verbose errors directly to `sys.stderr`.
+| Property | Value |
+| :--- | :--- |
+| **Tool Name** | `facts_insp.py` |
+| **Script Path** | `tools/ops/facts_insp.py` |
+| **Version** | `1.0.1+build.20260922.1` |
+| **Test Suite** | `tests/integration/test_facts_insp.py` |
+| **Log Output** | `logs/facts_insp-[YYYYMMDD_HHMMSS].log` |
+| **Summary Report** | `reports/facts_audit_summary_[timestamp].json` |
+| **Merge Proposals** | `reports/fact_merge_candidates_[timestamp].csv` |
 
 ---
 
-## 3. The Four-Tier Audit Pipeline
+## 1. Operator Reference & Quick-Start
 
-### Stage 1: Record Validation & Formatting
-* **Stage 1.1 (Schema Conformance):** Validates that all fact records conform to standard GUID/UUID formatting patterns. Violations are classified as **Warnings**.
-* **Stage 1.2 (Typology & Vocabulary):** Evaluates `fact_type` strings against controlled vocabularies defined in `_enums.schema.json`. Unrecognized types are classified as **Errors**.
-* **Stage 1.3 (Temporal Modifiers):** Validates date modifiers (`EXACT`, `ABT`, `BEF`, `AFT`, `BET`, `FROM_TO`, `UNKNOWN`) against controlled schemas. Unrecognized modifiers are classified as **Errors**.
+### Operational Intent
+`facts_insp.py` is the validation and auditing engine for `data/entities/facts.json`. It verifies schema conformance, controlled vocabularies, biological plausibility against `people.json`, deduplication, and relational partnership reciprocity.
 
-### Stage 2: Biological & Chronological Plausibility
-* **Deep Vitals Traversal:** Evaluates historical facts against individual lifespans loaded from `people.json`. The engine resolves birth and death years dynamically across nested wrappers (`vitals.birth`, `vitals.death`, and `canonical_name` year blocks).
-* **Pre-Natal Checks:** Flags any non-exempt fact occurring prior to subject birth as a **Biological Error**.
-* **Post-Mortem Checks:** Flags facts occurring after subject death as **Biological Errors**, with specific exemptions for post-mortem administrative and documentary types (`Death`, `Burial`, `Probate`, `Association`, and `Parentage`). The `Parentage` exemption permits post-mortem parent assertions (e.g., child death certificates or estate filings created after a parent's demise) without triggering false positives.
+### CLI Syntax
+```powershell
+python tools/ops/facts_insp.py [-v] [--debug]
+```
 
-### Stage 3: Deduplication & Merge Proposals
-* **Dedup-Source:** Identifies multiple redundant extractions for the same fact type originating from an identical source URN (**Warnings**).
-* **Dedup-Event:** Detects multi-source corroborating records representing the same real-world historical event (**Warnings**).
-* **Deliverable:** Automatically generates a merge candidate CSV report in `reports/` when proposals exist.
+### Options & Parameter Reference
+* `-v, --verbose`: Logs detailed diagnostic traces to `logs/facts_insp-[timestamp].log`.
+* `--debug`: Outputs live execution traces directly to stderr.
 
-### Stage 4: Relational Reciprocal Consistency
-* **Reciprocal Pairing:** Validates marriage and partner linkages across entity records. Unreciprocated partner assertions are classified as informational notes (**Info**).
+### Quick Runbook
+Execute fact inspection audit:
+```powershell
+python tools/ops/facts_insp.py
+```
+Execute audit with verbose logging:
+```powershell
+python tools/ops/facts_insp.py --verbose
+```
 
 ---
 
-## 4. Audit Deliverables & Outputs
-* **Summary JSON:** Emits a comprehensive audit summary report to `reports/facts_audit_summary_[TIMESTAMP].json`.
-* **Merge CSV:** Conditionally exports a remediation CSV file (`reports/fact_merge_candidates_[TIMESTAMP].csv`) if duplicate records or merge proposals are identified.
+## 2. Technical Architecture & Data Lifecycle
+
+### The Four-Tier Audit Pipeline
+* **Stage 1 (Schema & Vocabulary Conformance):** Verifies UUID formatting on fact IDs. Validates `fact_type` and date modifiers against `SchemaEnums`.
+* **Stage 2 (Biological & Chronological Plausibility):** Traverses lifespans from `people.json`. Flags facts occurring before birth as errors. Flags post-mortem assertions as errors, with mandatory exemptions for post-mortem relational types: `Death`, `Burial`, `Probate`, `Association`, and `Parentage`.
+* **Stage 3 (Deduplication & Merge Proposals):** Detects redundant extractions sharing identical source URNs (`Dedup-Source`) and corroborating records representing the same event (`Dedup-Event`). Emits `reports/fact_merge_candidates_[timestamp].csv`.
+* **Stage 4 (Relational Consistency):** Validates spouse and partner linkages across records for reciprocal pairing.
+
+### Framework Integration
+* `tools.lib.gda_core.GDAConfig.CONFIG`: Resolves paths to facts, people, reports, and schemas.
+* `tools.lib.gda_core.GDALogger.setup_logger`: Configures `[SYS]` event-aware logging.
+* `tools.lib.gda_core.GDAUtil.GDAUtil`: Coordinates atomic JSON loading and reporting exports.
+* `tools.lib.gda_core.registry.SchemaEnums`: Provides authoritative enums loaded from `_enums.schema.json`.
+
+---
+
+## 3. Verification Harness & Diagnostics
+
+### Test Suite
+* **Location:** `tests/integration/test_facts_insp.py`
+* **Execution:**
+```powershell
+pytest tests/integration/test_facts_insp.py -v
+```
+
+### Diagnostic Matrix
+* **Biological Error (`Post-mortem assertion`):** Non-exempt fact occurred after subject death year. If record represents an administrative/parentage assertion, verify `fact_type` matches an exempted type.
+* **Merge Proposal CSV Emitted:** Inspect `reports/fact_merge_candidates_[timestamp].csv` for proposed fact consolidations.
