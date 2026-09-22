@@ -8,40 +8,34 @@ Read-only operational inspection tool to audit facts.json integrity:
 - Temporal and modifier validity via SchemaEnums (classified as ERROR)
 - Biological & chronological plausibility against people.json (classified as ERROR)
   * Deep resolution of vitals.birth, vitals.death, and canonical_name years
-  * Exempts post-mortem 'Parentage' (parent documented on child vital records post-mortem)
+  * Exempts post-mortem fact types: 'Burial', 'Death', 'Probate', 'Association', 'Parentage'
 - Duplicate extractions (Dedup-Source and Dedup-Event classified as WARN)
 - Relational reciprocal consistency (strictly classified as INFO)
 - Enriched log formatting: FCT <short_id> (<person_id> (<full_name>))
 - Multi-variant name resolution across canonical_name, name, names, and root strings
-- System execution traces prefixed with [SYS]
+- System execution traces prefixed with [SYS] via GDALogger
 - Robust extraction of singular/array record_urn from fact['source']
 - Conditional CSV export (only when merge proposals exist)
-- Audit summary emitted to JSON in reports/
+- Audit summary emitted to JSON in reports/ via GDAUtil
 
-Version: 1.0.0 Build 20
+Version: 1.0.1 (Build 1)
 """
 
 import argparse
 import csv
-import json
+import logging
 import re
 import sys
 from datetime import datetime
 from pathlib import Path
 
-ROOT_DIR = Path("G:/My Drive/genealogy-digital-archive")
-if str(ROOT_DIR) not in sys.path:
-    sys.path.insert(0, str(ROOT_DIR))
-
+from tools.lib.gda_core.GDAConfig import CONFIG
+from tools.lib.gda_core.GDALogger import setup_logger
+from tools.lib.gda_core.GDAUtil import GDAUtil
 from tools.lib.gda_core.registry import SchemaEnums
 
-__version__ = "1.0.0"
-__build__ = 20
-
-FACTS_PATH = ROOT_DIR / "data/entities/facts.json"
-PEOPLE_PATH = ROOT_DIR / "data/entities/people.json"
-LOGS_DIR = ROOT_DIR / "logs"
-REPORTS_DIR = ROOT_DIR / "reports"
+__version__ = "1.0.1"
+__build__ = 1
 
 UUID_PATTERN = re.compile(
     r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -50,23 +44,6 @@ UUID_PATTERN = re.compile(
 
 SPOUSE_ROLES = {"spouse", "husband", "wife", "partner", "fiancé", "fiancee", "groom", "bride"}
 POST_MORTEM_ALLOWED_TYPES = {"Burial", "Death", "Probate", "Association", "Parentage"}
-
-
-def setup_logger(timestamp: str):
-    """Initializes execution logging to logs/."""
-    LOGS_DIR.mkdir(parents=True, exist_ok=True)
-    log_file = LOGS_DIR / f"facts_insp-{timestamp}.log"
-
-    def log(message: str, level: str = "SYS", to_stderr: bool = False):
-        formatted = f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] [{level}] {message}"
-        if to_stderr:
-            sys.stderr.write(formatted + "\n")
-        else:
-            print(formatted)
-        with open(log_file, "a", encoding="utf-8") as f:
-            f.write(formatted + "\n")
-
-    return log
 
 
 def extract_year(date_val) -> int | None:
@@ -141,7 +118,7 @@ def extract_source_keys(fact: dict) -> list[str]:
     return sorted(keys)
 
 
-def extract_person_name(person: dict, default_id: str) -> str:
+def extract_person_name(person: dict | None, default_id: str) -> str:
     """Extracts formatted display name across all person schema variations."""
     if not isinstance(person, dict):
         return default_id
@@ -188,7 +165,7 @@ def extract_person_name(person: dict, default_id: str) -> str:
     return default_id
 
 
-def extract_person_lifespan(person: dict) -> tuple[int | None, int | None]:
+def extract_person_lifespan(person: dict | None) -> tuple[int | None, int | None]:
     """
     Extracts birth and death calendar years across all schema representations:
       - person['vitals']['birth']['date']
@@ -269,12 +246,13 @@ def extract_person_lifespan(person: dict) -> tuple[int | None, int | None]:
     return b_year, d_year
 
 
-def load_people() -> dict[str, dict]:
+def load_people(people_path: Path | None = None) -> dict[str, dict]:
     """Loads people registry mapping person_id across all registry structures."""
-    if not PEOPLE_PATH.exists():
+    p_path = people_path or CONFIG.people
+    if not p_path.exists():
         return {}
     try:
-        data = json.loads(PEOPLE_PATH.read_text(encoding="utf-8"))
+        data = GDAUtil.load_json(p_path)
     except Exception:
         return {}
 
@@ -313,7 +291,7 @@ def format_subject_label(person_id: str | None, people_map: dict[str, dict]) -> 
 
 def short_fact_id(fact_id: str) -> str:
     """Extracts short 8-char identifier for log formatting."""
-    cleaned = fact_id.replace("factoid-", "")
+    cleaned = str(fact_id).replace("factoid-", "")
     return cleaned[:8]
 
 
@@ -322,14 +300,16 @@ def write_audit_deliverables(
     total_facts: int,
     findings: list[dict],
     merge_candidates: list[dict],
+    reports_dir: Path | None = None,
 ) -> tuple[Path, Path | None]:
     """Generates JSON audit summary and exports CSV only if merge proposals exist."""
-    REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    report_json_path = REPORTS_DIR / f"facts_audit_summary_{timestamp}.json"
+    r_dir = reports_dir or CONFIG.reports
+    r_dir.mkdir(parents=True, exist_ok=True)
+    report_json_path = r_dir / f"facts_audit_summary_{timestamp}.json"
     csv_file: Path | None = None
 
     if merge_candidates:
-        csv_file = REPORTS_DIR / f"fact_merge_candidates_{timestamp}.csv"
+        csv_file = r_dir / f"fact_merge_candidates_{timestamp}.csv"
         csv_headers = ["Primary Fact ID", "Absorbed IDs", "Subject", "Fact Type", "Rationale"]
         with open(csv_file, "w", encoding="utf-8", newline="") as f:
             writer = csv.writer(f)
@@ -368,31 +348,42 @@ def write_audit_deliverables(
         "findings": findings,
     }
 
-    report_json_path.write_text(json.dumps(summary_data, indent=2, ensure_ascii=False), encoding="utf-8")
+    GDAUtil.save_json(report_json_path, summary_data)
     return report_json_path, csv_file
 
 
-def inspect_facts(verbose: bool = False, debug: bool = False) -> int:
+def inspect_facts(
+    facts_path: Path | None = None,
+    people_path: Path | None = None,
+    reports_dir: Path | None = None,
+    verbose: bool = False,
+    debug: bool = False,
+    logger: logging.Logger | None = None,
+) -> int:
     """Performs full archival integrity inspection on facts.json."""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log = setup_logger(timestamp)
-    log(f"=== Commencing Fact Registry Inspection (facts_insp.py v{__version__} Build {__build__}) ===")
+    f_path = facts_path or CONFIG.facts
+    p_path = people_path or CONFIG.people
+    r_dir = reports_dir or CONFIG.reports
 
-    if not FACTS_PATH.exists():
-        log(f"Target facts file missing at: {FACTS_PATH}", level="ERROR", to_stderr=True)
+    log = logger or setup_logger("facts_insp", console_level=logging.DEBUG if debug else logging.INFO)
+    log.info(f"=== Commencing Fact Registry Inspection (facts_insp.py v{__version__} Build {__build__}) ===", extra={"sys_event": True})
+
+    if not f_path.exists():
+        log.error(f"Target facts file missing at: {f_path}")
         return 1
 
     try:
-        facts_data = json.loads(FACTS_PATH.read_text(encoding="utf-8"))
+        facts_data = GDAUtil.load_json(f_path)
     except Exception as e:
-        log(f"Failed to parse {FACTS_PATH}: {e}", level="ERROR", to_stderr=True)
+        log.error(f"Failed to parse {f_path}: {e}")
         return 1
 
     records = facts_data if isinstance(facts_data, list) else facts_data.get("facts", [])
-    log(f"Loaded {len(records)} fact records for evaluation")
+    log.info(f"Loaded {len(records)} fact records for evaluation")
 
-    people_map = load_people()
-    log(f"Loaded {len(people_map)} reference entities from people.json")
+    people_map = load_people(p_path)
+    log.info(f"Loaded {len(people_map)} reference entities from {p_path.name}")
 
     findings = []
     merge_candidates = []
@@ -401,11 +392,13 @@ def inspect_facts(verbose: bool = False, debug: bool = False) -> int:
     event_tracker: dict[tuple, list[str]] = {}
     marriages_by_person: dict[str, set[tuple[str, str]]] = {}
 
-    log("[Stage-1] --- Record Validation ---")
-    log("[Stage-1.1] Verifying Identifier Formats & Registry References...")
+    log.info("[Stage-1] --- Record Validation ---", extra={"sys_event": True})
+    log.info("[Stage-1.1] Verifying Identifier Formats & Registry References...", extra={"sys_event": True})
     s1_issues = 0
 
     for idx, fact in enumerate(records):
+        if not isinstance(fact, dict):
+            continue
         fact_id = fact.get("fact_id", f"INDEX_{idx}")
         person_id = fact.get("person_id")
         ftype = fact.get("fact_type")
@@ -424,7 +417,7 @@ def inspect_facts(verbose: bool = False, debug: bool = False) -> int:
                 "person_id": person_id,
                 "message": msg,
             })
-            log(f"[Schema] FCT {fct_short} ({subj_label}): {msg}", level="WARN", to_stderr=debug)
+            log.warning(f"[Schema] FCT {fct_short} ({subj_label}): {msg}")
             s1_issues += 1
 
         # 2. Typology (ERROR)
@@ -437,7 +430,7 @@ def inspect_facts(verbose: bool = False, debug: bool = False) -> int:
                 "person_id": person_id,
                 "message": msg,
             })
-            log(f"[Typology] FCT {fct_short} ({subj_label}): {msg}", level="ERROR", to_stderr=debug)
+            log.error(f"[Typology] FCT {fct_short} ({subj_label}): {msg}")
 
         # 3. Temporal (ERROR)
         date_obj = fact.get("date")
@@ -452,7 +445,7 @@ def inspect_facts(verbose: bool = False, debug: bool = False) -> int:
                     "person_id": person_id,
                     "message": msg,
                 })
-                log(f"[Temporal] FCT {fct_short} ({subj_label}): {msg}", level="ERROR", to_stderr=debug)
+                log.error(f"[Temporal] FCT {fct_short} ({subj_label}): {msg}")
 
         # 4. Biological & Chronological Plausibility (ERROR)
         if person_id and person_id in people_map and fact_year:
@@ -468,7 +461,7 @@ def inspect_facts(verbose: bool = False, debug: bool = False) -> int:
                     "person_id": person_id,
                     "message": msg,
                 })
-                log(f"[Biological] FCT {fct_short} ({subj_label}): {msg}", level="ERROR", to_stderr=debug)
+                log.error(f"[Biological] FCT {fct_short} ({subj_label}): {msg}")
 
             if d_year and fact_year > (d_year + 1) and ftype not in POST_MORTEM_ALLOWED_TYPES:
                 msg = f"Post-mortem event: '{ftype}' in {fact_year} occurs after subject death ({d_year})."
@@ -479,7 +472,7 @@ def inspect_facts(verbose: bool = False, debug: bool = False) -> int:
                     "person_id": person_id,
                     "message": msg,
                 })
-                log(f"[Biological] FCT {fct_short} ({subj_label}): {msg}", level="ERROR", to_stderr=debug)
+                log.error(f"[Biological] FCT {fct_short} ({subj_label}): {msg}")
 
         # 5. Deduplication Indexing
         source_keys = extract_source_keys(fact)
@@ -501,10 +494,10 @@ def inspect_facts(verbose: bool = False, debug: bool = False) -> int:
                     if target_id and rel in SPOUSE_ROLES:
                         marriages_by_person.setdefault(person_id, set()).add((target_id, fact_id))
 
-    log(f"[Stage-1.1] Completed: {s1_issues} issues detected")
+    log.info(f"[Stage-1.1] Completed: {s1_issues} issues detected", extra={"sys_event": True})
 
     # Stage 3: Duplicate Discovery & Merges
-    log("[Stage-3] --- Duplicate Discovery & Merge Proposals ---")
+    log.info("[Stage-3] --- Duplicate Discovery & Merge Proposals ---", extra={"sys_event": True})
     merged_fact_ids: set[str] = set()
 
     for (pid, ftype, urn), fids in source_urn_tracker.items():
@@ -523,7 +516,7 @@ def inspect_facts(verbose: bool = False, debug: bool = False) -> int:
             })
             fct_short = short_fact_id(primary)
             subj_label = format_subject_label(pid, people_map)
-            log(f"[Dedup-Source] FCT {fct_short} ({subj_label}): {msg}", level="WARN", to_stderr=debug)
+            log.warning(f"[Dedup-Source] FCT {fct_short} ({subj_label}): {msg}")
             merge_candidates.append({
                 "primary_id": primary,
                 "absorbed_ids": "<br>".join(absorbed),
@@ -549,7 +542,7 @@ def inspect_facts(verbose: bool = False, debug: bool = False) -> int:
                 })
                 fct_short = short_fact_id(primary)
                 subj_label = format_subject_label(pid, people_map)
-                log(f"[Dedup-Event] FCT {fct_short} ({subj_label}): {msg}", level="WARN", to_stderr=debug)
+                log.warning(f"[Dedup-Event] FCT {fct_short} ({subj_label}): {msg}")
                 merge_candidates.append({
                     "primary_id": primary,
                     "absorbed_ids": "<br>".join(absorbed),
@@ -558,10 +551,10 @@ def inspect_facts(verbose: bool = False, debug: bool = False) -> int:
                     "rationale": "Multi-source corroboration of identical event",
                 })
 
-    log(f"[Stage-3] Completed: {len(merge_candidates)} merge candidates proposed")
+    log.info(f"[Stage-3] Completed: {len(merge_candidates)} merge candidates proposed", extra={"sys_event": True})
 
     # Stage 4: Relational Consistency
-    log("[Stage-4] --- Relational Consistency & Reciprocal Pairing ---")
+    log.info("[Stage-4] --- Relational Consistency & Reciprocal Pairing ---", extra={"sys_event": True})
     rel_count = 0
     for p1_id, partner_facts in marriages_by_person.items():
         for p2_id, fact_id in partner_facts:
@@ -578,34 +571,36 @@ def inspect_facts(verbose: bool = False, debug: bool = False) -> int:
                 })
                 fct_short = short_fact_id(fact_id)
                 subj_label = format_subject_label(p1_id, people_map)
-                log(f"[Relational] FCT {fct_short} ({subj_label}): {msg}", level="INFO", to_stderr=debug)
+                log.info(f"[Relational] FCT {fct_short} ({subj_label}): {msg}")
                 rel_count += 1
 
-    log(f"[Stage-4] Completed: {rel_count} unreciprocated partner assertions")
+    log.info(f"[Stage-4] Completed: {rel_count} unreciprocated partner assertions", extra={"sys_event": True})
 
     report_json, csv_file = write_audit_deliverables(
         timestamp,
         len(records),
         findings,
         merge_candidates,
+        reports_dir=r_dir,
     )
 
     errors = sum(1 for item in findings if item["level"] == "ERROR")
     warnings = sum(1 for item in findings if item["level"] == "WARN")
     infos = sum(1 for item in findings if item["level"] == "INFO")
 
-    log("--- SUMMARY ---")
-    log(
+    log.info("--- SUMMARY ---", extra={"sys_event": True})
+    log.info(
         f"Total Findings: {len(findings)} | Errors: {errors} | Warnings: {warnings} | "
-        f"Proposals: {len(merge_candidates)} | Reciprocal: {infos}"
+        f"Proposals: {len(merge_candidates)} | Reciprocal: {infos}",
+        extra={"sys_event": True},
     )
-    log(f"Audit completed. Summary JSON: {report_json.name}")
+    log.info(f"Audit completed. Summary JSON: {report_json.name}", extra={"sys_event": True})
     if csv_file:
-        log(f"Remediation candidates: {csv_file.name}")
+        log.info(f"Remediation candidates: {csv_file.name}", extra={"sys_event": True})
     else:
-        log("No merge candidates identified; CSV output skipped.")
+        log.info("No merge candidates identified; CSV output skipped.", extra={"sys_event": True})
 
-    log(f"=== Fact Registry Inspection Complete (facts_insp.py v{__version__} Build {__build__}) ===")
+    log.info(f"=== Fact Registry Inspection Complete (facts_insp.py v{__version__} Build {__build__}) ===", extra={"sys_event": True})
 
     return 0 if errors == 0 else 2
 
@@ -618,11 +613,14 @@ def main():
         "--verbose", "-v", action="store_true", help="Emit diagnostic logs to session log."
     )
     parser.add_argument(
-        "--debug", action="store_true", help="Route runtime traces directly to sys.stderr."
+        "--debug", action="store_true", help="Route runtime traces directly to console/stderr."
     )
     args = parser.parse_args()
 
-    exit_code = inspect_facts(verbose=args.verbose, debug=args.debug)
+    c_level = logging.DEBUG if args.debug else logging.INFO
+    logger = setup_logger("facts_insp", console_level=c_level, file_level=logging.DEBUG)
+
+    exit_code = inspect_facts(verbose=args.verbose, debug=args.debug, logger=logger)
     sys.exit(exit_code)
 
 

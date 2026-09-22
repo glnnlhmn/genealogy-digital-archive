@@ -1,21 +1,25 @@
 # Name: GDAConfig.py
 # Path: tools/lib/gda_core/GDAConfig.py
 
-import os
 import json
-from pathlib import Path
+import os
 from dataclasses import dataclass, field
-from typing import Dict, Any
+from pathlib import Path
+from typing import Any, Dict
+
+__version__ = "1.0.1+build.20260922.1"
 
 DEFAULT_ROOT_ANCHOR = Path("G:/My Drive/genealogy-digital-archive")
 
 
 @dataclass(frozen=True)
 class GDAConfig:
+    """Centralized Archive Configuration and Path Resolution.
+
+    Provides immutable pathlib.Path attributes across the entire digital
+    archive topology.
     """
-    Centralized Archive Configuration and Path Resolution.
-    Provides immutable pathlib.Path attributes across the entire digital archive topology.
-    """
+
     root: Path
     manifest: Dict[str, Any] = field(default_factory=dict)
 
@@ -61,6 +65,11 @@ class GDAConfig:
     def indexes(self) -> Path:
         """Structured lookup tables, cross-reference registries, and master index files."""
         return self.data / "indexes"
+
+    @property
+    def locations_index(self) -> Path:
+        """The canonical location index and alias redirects table (location_index.json)."""
+        return self.indexes / "location_index.json"
 
     @property
     def media(self) -> Path:
@@ -137,6 +146,11 @@ class GDAConfig:
         return self.schemas / "naming"
 
     @property
+    def token_registry(self) -> Path:
+        """Controlled vocabulary and jurisdiction token registry (_token_registry.json)."""
+        return self.schema_naming / "_token_registry.json"
+
+    @property
     def schema_sources(self) -> Path:
         """Specifications defining source citation templates and evidence containers."""
         return self.schemas / "sources"
@@ -155,6 +169,26 @@ class GDAConfig:
     def schema_entities(self) -> Path:
         """Validation contracts for primary entities (person.schema.json, fact.schema.json)."""
         return self.schemas / "entities"
+
+    @property
+    def person_schema(self) -> Path:
+        """Validation contract for individual person entities (person.schema.json)."""
+        return self.schema_entities / "person.schema.json"
+
+    @property
+    def person_registry_schema(self) -> Path:
+        """Validation contract for the canonical person registry container (person_registry.schema.json)."""
+        return self.schema_entities / "person_registry.schema.json"
+
+    @property
+    def fact_schema(self) -> Path:
+        """Validation contract for individual fact assertion entities (fact.schema.json)."""
+        return self.schema_entities / "fact.schema.json"
+
+    @property
+    def fact_registry_schema(self) -> Path:
+        """Validation contract for the canonical fact registry container (fact_registry.schema.json)."""
+        return self.schema_entities / "fact_registry.schema.json"
 
     @property
     def enums(self) -> Path:
@@ -220,8 +254,8 @@ class GDAConfig:
     # ---------------------------------------------------------
     @classmethod
     def load(cls, custom_root: Path | str | None = None) -> "GDAConfig":
-        """
-        Resolves the root anchor in order of precedence:
+        """Resolves the root anchor in order of precedence:
+
         1. Explicit path passed as argument.
         2. GDA_ROOT environment variable.
         3. Standard Google Drive mount (G:/My Drive/genealogy-digital-archive).
