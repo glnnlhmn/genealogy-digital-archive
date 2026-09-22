@@ -43,7 +43,7 @@ All paths anchor strictly to `G:/My Drive/genealogy-digital-archive` using forwa
   * Validation contracts governing system validation, entity modeling, and structural consistency:
     * `schemas/defs/`: Base data types, field definitions, reusable primitives, and enum constraints. **`_enums.schema.json` serves as the centralized single source of truth for all system enums and controlled vocabularies.**
     * `schemas/entities/`: Structural schemas defining core entities (`person.schema.json`, `fact.schema.json`).
-    * `schemas/indices/`: Schemas governing index files, registries, and cross-reference maps.
+    * `schemas/indexes/`: Schemas governing index files, registries, and cross-reference maps.
     * `schemas/naming/`: Standardized file naming conventions and identifier formatting specifications.
     * `schemas/sources/`: Specifications defining source citation templates and repository structures.
     * `schemas/archive/`: Deprecated schema revisions and historical metadata standards.

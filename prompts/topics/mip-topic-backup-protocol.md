@@ -2,7 +2,7 @@
 <!-- Version: 1.0.0 -->
 
 * **Topic ID:** `mip-topic-backup-protocol`
-* **Target Scope:** Operational scripts modifying JSON records, indices, and system configurations.
+* **Target Scope:** Operational scripts modifying JSON records, indexes, and system configurations.
 * **Anchor Location:** `G:/My Drive/genealogy-digital-archive`
 
 ---

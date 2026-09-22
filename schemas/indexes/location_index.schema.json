@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://genealogy.archive/schemas/indices/location_index.schema.json",
+  "$id": "https://genealogy.archive/schemas/indexes/location_index.schema.json",
   "title": "Location_Index",
   "version": "1.0.0",
   "description": "Lightweight lookup and redirection index resolving verbatim, shorthand, or historical location strings to canonical location IDs.",
