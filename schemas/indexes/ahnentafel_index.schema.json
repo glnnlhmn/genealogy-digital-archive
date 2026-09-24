@@ -1,67 +1,58 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "AhnentafelIndex",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/indexes/ahnentafel_index.schema.json",
+  "title": "Ahnentafel_Index",
+  "version": "1.0.0",
+  "description": "Structured Ahnentafel ancestor index mapping sequential lineage numbers to canonical person records.",
   "type": "object",
-  "additionalProperties": false,
+  "unevaluatedProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "last_modified",
+    "total_ancestors",
+    "ancestors"
+  ],
   "properties": {
     "$schema": {
-      "type": "string"
+      "type": "string",
+      "description": "JSON Schema draft specification URI."
     },
     "schema_version": {
-      "type": "string"
-    },
-    "proband_id": {
       "type": "string",
-      "pattern": "^IND-\\d{5}$"
+      "const": "1.0.0",
+      "description": "Version identifier for the Ahnentafel index schema."
     },
-    "generated_at": {
-      "type": "string"
+    "last_modified": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/date_iso",
+      "description": "[REQUIRED] ISO-8601 date of last index compilation."
     },
     "total_ancestors": {
-      "type": "integer"
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/total_count",
+      "description": "[REQUIRED] Total count of ancestor entries cataloged in the index."
     },
     "ancestors": {
       "type": "array",
+      "description": "[REQUIRED] Sequential list of ancestor records mapped by Ahnentafel numbers.",
       "items": {
         "type": "object",
-        "additionalProperties": false,
+        "unevaluatedProperties": false,
+        "required": [
+          "ahnentafel_number",
+          "person"
+        ],
         "properties": {
           "ahnentafel_number": {
             "type": "integer",
-            "minimum": 1
+            "minimum": 1,
+            "description": "[REQUIRED] Mathematical position of the ancestor in the pedigree tree."
           },
-          "person_id": {
-            "type": "string",
-            "pattern": "^IND-\\d{5}$"
-          },
-          "canonical_name": {
-            "type": "string"
-          },
-          "focus": {
-            "type": "string",
-            "enum": [
-              "yes",
-              "no"
-            ],
-            "default": "no"
-          },
-          "notes": {
-            "type": "string"
+          "person": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/person_brief",
+            "description": "[REQUIRED] Lightweight person identifier and assembled display name."
           }
-        },
-        "required": [
-          "ahnentafel_number",
-          "person_id",
-          "canonical_name",
-          "focus"
-        ]
+        }
       }
     }
-  },
-  "required": [
-    "schema_version",
-    "proband_id",
-    "ancestors"
-  ],
-  "SchemaVersion": "0.0.999"
+  }
 }

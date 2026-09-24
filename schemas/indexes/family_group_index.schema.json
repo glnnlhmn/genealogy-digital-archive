@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/indexes/family_group_index.schema.json",
+  "title": "Family_Group_Index",
+  "version": "1.1.0",
+  "description": "Master index of nuclear family groups mapping parental pairings to children with contextual relationship annotations.",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "last_modified",
+    "total_families",
+    "families"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.1.0"
+    },
+    "last_modified": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/date_iso"
+    },
+    "total_families": {
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/total_count"
+    },
+    "families": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^FAM-[0-9]{5}-[A-Z]$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "unevaluatedProperties": false,
+        "required": [
+          "family_id",
+          "parent_x",
+          "parent_y",
+          "total_children",
+          "children"
+        ],
+        "properties": {
+          "family_id": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/family_id"
+          },
+          "parent_x": {
+            "oneOf": [
+              {
+                "type": "object",
+                "unevaluatedProperties": false,
+                "required": [
+                  "person_id",
+                  "display_name",
+                  "canonical_name"
+                ],
+                "properties": {
+                  "person_id": {
+                    "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
+                  },
+                  "display_name": {
+                    "type": "string"
+                  },
+                  "canonical_name": {
+                    "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "parent_y": {
+            "oneOf": [
+              {
+                "type": "object",
+                "unevaluatedProperties": false,
+                "required": [
+                  "person_id",
+                  "display_name",
+                  "canonical_name"
+                ],
+                "properties": {
+                  "person_id": {
+                    "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
+                  },
+                  "display_name": {
+                    "type": "string"
+                  },
+                  "canonical_name": {
+                    "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "total_children": {
+            "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/total_count"
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "unevaluatedProperties": false,
+              "required": [
+                "person_id",
+                "display_name",
+                "canonical_name",
+                "relationship_note"
+              ],
+              "properties": {
+                "person_id": {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
+                },
+                "display_name": {
+                  "type": "string"
+                },
+                "canonical_name": {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
+                },
+                "relationship_note": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

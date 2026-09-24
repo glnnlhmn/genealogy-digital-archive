@@ -11,7 +11,7 @@ from typing import Any, List, Optional, Union
 
 from tools.lib.gda_core.GDAConfig import CONFIG
 
-__version__ = "1.0.1+build.20260922.1"
+__version__ = "1.0.2+build.20260922.2"
 
 
 class GDAUtil:
@@ -218,3 +218,40 @@ class GDAUtil:
             f.write("\n")
         temp_dest.replace(path)
         return path
+    # -------------------------------------------------------------------------
+    # Canonical Name & Identity Utilities
+    # -------------------------------------------------------------------------
+    @classmethod
+    def build_display_name(cls, canonical_name: Optional[dict]) -> str:
+        """Assembles a canonical display name from a canonical_name dictionary.
+
+        Standard order: given + middle + surname + suffix.
+        Strips all periods from names, initials, and suffixes.
+        Falls back to raw_name if structured fields are absent.
+        """
+        if not canonical_name or not isinstance(canonical_name, dict):
+            return "UNKNOWN"
+
+        parts: List[str] = []
+        given = canonical_name.get("given")
+        middle = canonical_name.get("middle")
+        surname = canonical_name.get("surname")
+        suffix = canonical_name.get("suffix")
+
+        if given:
+            parts.append(str(given).strip())
+        if middle:
+            parts.append(str(middle).strip())
+        if surname:
+            parts.append(str(surname).strip())
+        if suffix:
+            parts.append(str(suffix).strip())
+
+        raw_assembled = " ".join(p for p in parts if p)
+        if not raw_assembled:
+            raw = canonical_name.get("raw_name")
+            raw_assembled = str(raw).strip() if raw and str(raw).strip() else "UNKNOWN"
+
+        # Strictly eliminate periods and collapse internal whitespace
+        clean_name = raw_assembled.replace(".", "")
+        return " ".join(clean_name.split())

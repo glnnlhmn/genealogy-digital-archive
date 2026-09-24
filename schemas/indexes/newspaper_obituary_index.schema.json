@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/indexes/newspaper_obituary_index.schema.json",
+  "title": "Newspaper_Obituary_Index",
+  "version": "1.0.0",
+  "description": "Specialized lookup index cataloging published obituaries and death notices with vital spans and source linkages.",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "last_modified",
+    "total_obituaries",
+    "obituaries"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema draft specification URI."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Version identifier for the newspaper obituary index schema."
+    },
+    "last_modified": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/date_iso",
+      "description": "[REQUIRED] ISO-8601 date of last index compilation."
+    },
+    "total_obituaries": {
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/total_count",
+      "description": "[REQUIRED] Total count of obituary entries cataloged in the index."
+    },
+    "obituaries": {
+      "type": "array",
+      "description": "[REQUIRED] Cataloged list of published obituaries.",
+      "items": {
+        "type": "object",
+        "unevaluatedProperties": false,
+        "required": [
+          "person",
+          "death_date",
+          "source_urn",
+          "pub_code",
+          "pub_date",
+          "headline",
+          "file_path"
+        ],
+        "properties": {
+          "person": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/person_brief",
+            "description": "[REQUIRED] Deceased individual reference (person_id, display_name, optional role)."
+          },
+          "birth_date": {
+            "oneOf": [
+              {
+                "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Interpreted birth date of the deceased, if stated or known."
+          },
+          "death_date": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted",
+            "description": "[REQUIRED] Interpreted death date of the deceased as reported in the obituary or master vital records."
+          },
+          "age_at_death": {
+            "oneOf": [
+              {
+                "$ref": "../defs/_shared_defs.schema.json#/$defs/age_record"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Reported age at death (years, months, days, raw text)."
+          },
+          "source_urn": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/record_urn",
+            "description": "[REQUIRED] Archival Uniform Resource Name for the obituary clipping."
+          },
+          "pub_code": {
+            "type": "string",
+            "maxLength": 6,
+            "description": "[REQUIRED] Standardized newspaper publication authority token."
+          },
+          "pub_date": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted",
+            "description": "[REQUIRED] Interpreted publication date of the obituary notice."
+          },
+          "headline": {
+            "type": "string",
+            "description": "[REQUIRED] Verbatim or standardized article headline."
+          },
+          "file_path": {
+            "type": "string",
+            "description": "[REQUIRED] Relative path to the granular archival record file on disk."
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,6 +4,7 @@
 import os
 import sys
 import logging
+import re
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -14,18 +15,32 @@ from tools.lib.gda_core.GDAConfig import CONFIG
 class GDALogFormatter(logging.Formatter):
     """
     Standardized log formatter for GDA operational tools.
-    Formats logs with timestamp, level tag, and optional record tags.
+    Renders timestamp, a single bracketed tag, and message.
+    If a tag ([SYS], [NEW], [ADD], [SKIP], etc.) is present or sys_event is True,
+    it replaces [%(levelname)s]; otherwise defaults to [%(levelname)s].
     """
-    DEFAULT_FORMAT = "%(asctime)s [%(levelname)s] %(message)s"
+    DEFAULT_FORMAT = "%(asctime)s [%(tag)s] %(clean_msg)s"
     DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+    TAG_REGEX = re.compile(r"^\s*\[([A-Za-z0-9_\-]+)\]\s*(.*)$")
 
     def __init__(self, fmt: Optional[str] = None, datefmt: Optional[str] = None):
         super().__init__(fmt=fmt or self.DEFAULT_FORMAT, datefmt=datefmt or self.DATE_FORMAT)
 
     def format(self, record: logging.LogRecord) -> str:
-        # Prepend [SYS] tag to system events if marked via extra
-        if getattr(record, "sys_event", False) and not record.msg.startswith("[SYS]"):
-            record.msg = f"[SYS] {record.msg}"
+        raw_msg = record.getMessage()
+
+        # Check for inline tag in message
+        match = self.TAG_REGEX.match(raw_msg)
+        if match:
+            record.tag = match.group(1).upper()
+            record.clean_msg = match.group(2)
+        elif getattr(record, "sys_event", False):
+            record.tag = "SYS"
+            record.clean_msg = raw_msg
+        else:
+            record.tag = record.levelname
+            record.clean_msg = raw_msg
+
         return super().format(record)
 
 
@@ -38,22 +53,13 @@ def setup_logger(
 ) -> logging.Logger:
     """
     Initializes and configures a standard logger for archive operations.
-    
-    Args:
-        tool_name: The script/tool name (e.g., 'facts_md', 'gsi').
-        log_dir: Optional target log directory. Defaults to CONFIG.logs (or CONFIG.temp if ephemeral).
-        console_level: Minimum logging level for stdout/stderr.
-        file_level: Minimum logging level for file log.
-        ephemeral: If True, writes to CONFIG.temp rather than CONFIG.logs.
     """
     logger = logging.getLogger(tool_name)
     logger.setLevel(logging.DEBUG)
 
-    # Avoid adding duplicate handlers if logger was already initialized
     if logger.handlers:
         return logger
 
-    # Resolve target directory
     target_dir = log_dir or (CONFIG.temp if ephemeral else CONFIG.logs)
     target_dir.mkdir(parents=True, exist_ok=True)
 
@@ -68,7 +74,7 @@ def setup_logger(
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
-    # 2. Console Handler (Streamlined Output)
+    # 2. Console Handler
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setLevel(console_level)
     console_handler.setFormatter(formatter)

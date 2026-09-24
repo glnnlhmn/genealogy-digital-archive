@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/indexes/surname_index.schema.json",
+  "title": "Surname_Index",
+  "version": "1.0.0",
+  "description": "Lightweight lookup index mapping normalized lowercase surnames and spelling variants to canonical person references.",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "required": [
+    "$schema",
+    "schema_version",
+    "last_modified",
+    "total_surnames",
+    "surnames"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema draft specification URI."
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Version identifier for the surname index schema."
+    },
+    "last_modified": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/date_iso",
+      "description": "[REQUIRED] ISO-8601 date of last index compilation."
+    },
+    "total_surnames": {
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/total_count",
+      "description": "[REQUIRED] Total count of canonical surnames indexed."
+    },
+    "aliases": {
+      "type": "object",
+      "description": "Lookup dictionary mapping normalized lowercase spelling variants directly to canonical surname keys.",
+      "additionalProperties": {
+        "type": "string",
+        "description": "Canonical normalized surname key."
+      }
+    },
+    "surnames": {
+      "type": "object",
+      "description": "[REQUIRED] Dictionary keyed by normalized lowercase surname mapping to matching person entries.",
+      "additionalProperties": {
+        "type": "object",
+        "unevaluatedProperties": false,
+        "required": [
+          "canonical_surname",
+          "total_persons",
+          "persons"
+        ],
+        "properties": {
+          "canonical_surname": {
+            "type": "string",
+            "description": "[REQUIRED] Standardized capitalized surname representation."
+          },
+          "spelling_variants": {
+            "type": "array",
+            "description": "Observed or historical spelling variations associated with this surname.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "total_persons": {
+            "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/total_count",
+            "description": "[REQUIRED] Total count of persons matching this surname."
+          },
+          "persons": {
+            "type": "array",
+            "description": "[REQUIRED] List of lightweight person references associated with this surname.",
+            "items": {
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/person_brief"
+            }
+          }
+        }
+      }
+    }
+  }
+}

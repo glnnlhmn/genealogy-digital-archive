@@ -16,6 +16,7 @@ def cfg() -> GDAConfig:
 class TestGDAConfigRoot:
     """Validates the root anchor resolution."""
 
+    @pytest.mark.smoke
     def test_root_exists(self, cfg: GDAConfig):
         assert cfg.root.exists(), f"Configured root anchor does not exist: {cfg.root}"
         assert cfg.root.is_dir(), f"Configured root anchor is not a directory: {cfg.root}"

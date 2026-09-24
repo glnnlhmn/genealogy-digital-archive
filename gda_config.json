@@ -49,8 +49,8 @@
       },
       {
         "path": "schemas/defs/_shared_defs.schema.json",
-        "expected_version": "1.0.1",
-        "sha256": "45bc38d21fcb967b7a9f39111f50b22b079f9aac578583c535c4c9f31d31897c",
+        "expected_version": "1.0.3",
+        "sha256": "fe8d777808f1a053a844a16f901105f3e430ce6c2e0a6fe1df8db0b8944bce65",
         "purpose": "JSON Metadata / Config entity (_shared_defs.schema.json)"
       },
       {
@@ -78,6 +78,12 @@
         "purpose": "JSON Metadata / Config entity (location_registry.schema.json)"
       },
       {
+        "path": "schemas/entities/newspaper_registry.schema.json",
+        "expected_version": "1.1.0",
+        "sha256": "4f6f8eb9d85ea7ad4c327e4192b1867a21307bf916d1eaf6fc8e5dc9b8033b44",
+        "purpose": "JSON Metadata / Config entity (newspaper_registry.schema.json)"
+      },
+      {
         "path": "schemas/entities/person.schema.json",
         "expected_version": "1.0.4",
         "sha256": "84f5577682d0c45508c77ad3a4c5bfa3a4ccf3b8ef47f51f10012dc27dbae430",
@@ -91,9 +97,15 @@
       },
       {
         "path": "schemas/indexes/ahnentafel_index.schema.json",
-        "expected_version": "0.0.999",
-        "sha256": "e5201280b5aab1483e87fe673db5cd20dc2268a7aa602a493aec847ceb59c370",
+        "expected_version": "1.0.0",
+        "sha256": "a44520e3a674a6a4bb5497d7af698ef03bc37ffc11d77c43d3a735a1d521552c",
         "purpose": "JSON Metadata / Config entity (ahnentafel_index.schema.json)"
+      },
+      {
+        "path": "schemas/indexes/family_group_index.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "09cb6660b4aec01c4ba5cdda1a3fc49b5aa84143cc7b4ef37b677c822cce8da8",
+        "purpose": "JSON Metadata / Config entity (family_group_index.schema.json)"
       },
       {
         "path": "schemas/indexes/location_index.schema.json",
@@ -102,10 +114,22 @@
         "purpose": "JSON Metadata / Config entity (location_index.schema.json)"
       },
       {
-        "path": "schemas/indexes/newspaper_index.schema.json",
+        "path": "schemas/indexes/newspaper_obituary_index.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "5f69d23d6a5899a0708d094caa0b3f704699bb3c716fd73aa0f6918de9708323",
+        "purpose": "JSON Metadata / Config entity (newspaper_obituary_index.schema.json)"
+      },
+      {
+        "path": "schemas/indexes/surname_aliases.schema.json",
         "expected_version": "1.0.1",
-        "sha256": "f5f610326bc0fa990819efb7f88b549875642b493388a9618700ddeeb648138a",
-        "purpose": "JSON Metadata / Config entity (newspaper_index.schema.json)"
+        "sha256": "7c2efe85cca5ac52bee5d541fc2dddfb6d39094ce955903beddc14ce84e354e3",
+        "purpose": "JSON Metadata / Config entity (surname_aliases.schema.json)"
+      },
+      {
+        "path": "schemas/indexes/surname_index.schema.json",
+        "expected_version": "1.0.0",
+        "sha256": "9fc51d3c696f42041dcb992d860d7ab22d0bb2fd08d3119ce34d7c479311bbe9",
+        "purpose": "JSON Metadata / Config entity (surname_index.schema.json)"
       },
       {
         "path": "schemas/naming/_token_registry.json",
@@ -297,27 +321,9 @@
       },
       {
         "path": "prompts/core/MIP-Core.md",
-        "expected_version": "1.0.5",
-        "sha256": "7ee601c697c7bce133d3183b1e3a043f091ef7a4e790fec6cdefa5d4a35641a6",
+        "expected_version": "1.0.6",
+        "sha256": "34a02bdd62b1ad08b292c8ff04096187c9f22a51e074e5f9122307d9e49665a8",
         "purpose": "SYSTEM INSTRUCTION: MIP (Master Intelligence Profile)"
-      },
-      {
-        "path": "prompts/core/miplet-001.md",
-        "expected_version": "1.0.0",
-        "sha256": "4b32467828bde04177b728a74de42e5fad8c638171ef0aed80a1a78406d353c6",
-        "purpose": "MIPLET-001: Testing Protocol for Frozen Architecture & Dynamic Config Mocking"
-      },
-      {
-        "path": "prompts/core/miplet-002.md",
-        "expected_version": "1.0.0",
-        "sha256": "488b427e91680c985bc4482b837b389c51845393946606d8084eee234c5db10e",
-        "purpose": "MIPLET-002: Operational Tool Versioning & Build Protocol (PEP 440)"
-      },
-      {
-        "path": "prompts/core/miplet-003.md",
-        "expected_version": "1.0.0",
-        "sha256": "2d6686791a16c71ce3166366914cca17ae27d31c0c6ce452bb0a39e3c35a757a",
-        "purpose": "MIPLET-003: Operational Tool Acronym Realignment (GNA -> GAM)"
       },
       {
         "path": "prompts/core/Pappy-Core.md",
@@ -372,6 +378,12 @@
         "expected_version": "1.0.0",
         "sha256": "0e08f18d604dcba8d80778499c552591c9e89f1133578937da8c8975e9400c13",
         "purpose": "Yente: Civil Marriage Record Archival Processing Protocol"
+      },
+      {
+        "path": "prompts/tools/Conf-Validator.md",
+        "expected_version": "1.0.0",
+        "sha256": "0f7d1518916c8e564c76fbd22cd09c03b53780b43e5f0f41633ed34f36403a18",
+        "purpose": "TOOL PROMPT: Unified Domain & Technical Persona Configuration Validator"
       },
       {
         "path": "prompts/tools/def-safe-backup-v1.0.0.md",

@@ -39,7 +39,7 @@ class TestGDALogFormatter:
         )
         record.sys_event = True  # Emulate extra={"sys_event": True}
         output = formatter.format(record)
-        assert "[INFO] [SYS] Database connection established" in output
+        assert "[SYS] Database connection established" in output
 
     def test_sys_event_avoids_duplicate_tags(self):
         formatter = GDALogFormatter()

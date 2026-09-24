@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/defs/_shared_defs.schema.json",
   "title": "Genealogy_Shared_Definitions",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Canonical definitions, cross-references, and primitive constraints for the digital genealogy archive.",
   "$defs": {
     "enum_quality_assessment": {
@@ -46,6 +46,11 @@
           "$ref": "#/$defs/temp_person_id"
         }
       ]
+    },
+    "family_id": {
+      "type": "string",
+      "pattern": "^FAM-[0-9]{5}-[A-Z]$",
+      "description": "Canonical family unit identifier (FAM-#####)."
     },
     "location_id": {
       "type": "string",
@@ -461,6 +466,29 @@
             "null"
           ],
           "description": "Relative subdirectory path within data/ if stored outside the default collection root."
+        }
+      }
+    },
+    "person_brief": {
+      "type": "object",
+      "unevaluatedProperties": false,
+      "required": [
+        "person_id",
+        "display_name"
+      ],
+      "properties": {
+        "person_id": {
+          "$ref": "#/$defs/any_person_id",
+          "description": "[REQUIRED] Canonical or temporary person identifier."
+        },
+        "display_name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "[REQUIRED] Assembled canonical full name string derived from canonical_name (given + middle + surname + suffix)."
+        },
+        "role": {
+          "$ref": "#/$defs/enum_associated_role",
+          "description": "Functional or contextual role of the person."
         }
       }
     }

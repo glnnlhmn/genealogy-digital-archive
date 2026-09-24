@@ -85,6 +85,7 @@ def test_prune_backups_retention(workspace_setup):
     assert len(remaining) == 2
 
 
+@pytest.mark.smoke
 def test_json_load_and_atomic_save(workspace_setup):
     dest = workspace_setup["temp"] / "output.json"
     payload = {"records": [1, 2, 3], "status": "active"}
