@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genealogy-digital-archive"
+version = "1.2.0"
+description = "Production archival system, indexing engine, and validation pipeline."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Glenn D. Lehman" }
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-ra -q --basetemp=gtemp/pytest_tmp --strict-markers"
+norecursedirs = [
+    ".git",
+    ".venv",
+    "gtemp",
+    "backups",
+    "import",
+    "logs",
+    "data",
+    "schemas/archive"
+]
+markers = [
+    "smoke: Fast sanity checks executed prior to commit (< 5s)",
+    "unit: Isolated standalone unit tests with zero disk I/O",
+    "integration: Multi-file pipeline mutations and tool runs",
+    "integrity: Whole-archive schema, topology, and drift validation",
+    "slow: Tests with execution duration exceeding 2s"
+]
+
+[tool.coverage.run]
+branch = true
+source = ["tools"]
+omit = [
+    "tests/*",
+    "gtemp/*"
+]
+
+[tool.coverage.report]
+fail_under = 80
+precision = 2
+show_missing = true
+skip_covered = true
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:"
+]
