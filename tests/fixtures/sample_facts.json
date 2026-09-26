@@ -1,0 +1,370 @@
+{
+  "$schema": "schemas/entities/fact_registry.schema.json",
+  "schema_version": "1.0.1",
+  "generated_at": "2026-09-19 20:47:43",
+  "total_facts": 11,
+  "last_modified": "2026-09-25T00:41:50.394978+00:00",
+  "facts": [
+    {
+      "$schema": "schemas/entities/fact.schema.json",
+      "fact_id": "c3f45549-a057-4c03-8576-04884e9689b4",
+      "fact_type": "Residence",
+      "date": {
+        "date_start": "1981-01-11",
+        "modifier": "EXACT"
+      },
+      "associated_people": [],
+      "description": "Residence of Daniel W. Lehman",
+      "notes": "Residing at 443 Goose Valley Road, Dauphin County, Pennsylvania; identified as father of the fiancé.",
+      "person_id": "IND-00019",
+      "location": {
+        "details": {
+          "state_or_province": "Pennsylvania",
+          "county": "Dauphin County",
+          "address_line_1": "443 Goose Valley Road",
+          "country": "USA"
+        },
+        "standardized": "Dauphin County, Pennsylvania, USA",
+        "verbatim": "443 Goose Valley Road, Dauphin, Pennsylvania, USA"
+      },
+      "quay_score": 2,
+      "created_at": "2026-09-19T20:47:43Z",
+      "updated_at": "2026-09-19T20:47:43Z",
+      "source": {
+        "record_urn": "urn:cite:PATNEWS:19810111:19810111_NEWS_SOC_PA_Dauphin_PATNEWS_Manum_Lehman_P75.jpg",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "bc368bf6-f396-5a7b-a215-c9ecbb00e6ff",
+      "person_id": "IND-00000",
+      "fact_type": "Association",
+      "quay_score": 2,
+      "created_at": "2026-09-11T00:58:16Z",
+      "updated_at": "2026-09-11T00:58:16Z",
+      "date": {
+        "date_start": "2018-06-30",
+        "modifier": "EXACT",
+        "raw_text": "30 Jun 2018"
+      },
+      "location": {
+        "standardized": "Pennsylvania, USA"
+      },
+      "description": "Survived father Daniel W. Lehman Jr.",
+      "notes": "Listed among surviving children in published obituary.",
+      "life_story": "Glenn Lehman survived his father, Daniel W. Lehman Jr., who passed away on June 30, 2018.",
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "Parent",
+          "relationship": "Father"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:DAUPHIN:HARRISBURG:THE_PATRIOT_NEWS:2018-07-03:PAGE_A18:OBIT_DANIEL_W_LEHMAN_JR",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "25c24c73-ebeb-4b11-ab98-6981b1becf48",
+      "person_id": "IND-00130",
+      "fact_type": "Divorce",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-09-02T02:04:21Z",
+      "date": {
+        "date_start": "1986-03-20",
+        "modifier": "EXACT",
+        "raw_text": "20 Mar 1986"
+      },
+      "location": {
+        "standardized": "Pennsylvania, USA"
+      },
+      "description": "Historical Record - PRIMARY_DIVORCE_RECORD",
+      "notes": "Wife. Age 20, b. 07 Jan 1966 in WV. Residence: Hancock, WV.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "Witness"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:DIVORCE:VA:1986:003641",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "$schema": "schemas/entities/fact.schema.json",
+      "fact_id": "7225ee1f-3629-4ca0-96b4-006433a4252c",
+      "fact_type": "Marriage",
+      "date": {
+        "date_start": "1990-06-23",
+        "modifier": "EXACT"
+      },
+      "associated_people": [
+        {
+          "role": "Spouse",
+          "person_id": "IND-00023",
+          "name": "Leann Christine Lehman",
+          "relationship": "Spouse"
+        }
+      ],
+      "description": "Marriage Announcement to Leann Christine Lehman",
+      "notes": "United in marriage recently in Christ Evangelical Lutheran Church; reception held in the Shellsville VFW; wedding trip to York.",
+      "person_id": "IND-00142",
+      "location": {
+        "details": {
+          "state_or_province": "Pennsylvania",
+          "county": "Dauphin County",
+          "location_name": "Christ Evangelical Lutheran Church",
+          "country": "USA"
+        },
+        "standardized": "Dauphin County, Pennsylvania, USA",
+        "verbatim": "Christ Evangelical Lutheran Church, Shellsville VFW, York, Dauphin, Pennsylvania, USA"
+      },
+      "quay_score": 2,
+      "created_at": "2026-09-19T20:47:43Z",
+      "updated_at": "2026-09-19T20:47:43Z",
+      "source": {
+        "record_urn": "urn:cite:PATNEWS:19900623:19900623-news-hoch-lehman-a8f3c2b1-9e42-4d7a-81bf-12b4c928e341.jpg",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "$schema": "schemas/entities/fact.schema.json",
+      "fact_id": "cf0e66b4-523d-4110-8a96-3cda1e37ce79",
+      "fact_type": "Association",
+      "date": {
+        "date_start": "1990-06-23",
+        "modifier": "EXACT"
+      },
+      "associated_people": [
+        {
+          "role": "Associate",
+          "person_id": "IND-00023",
+          "name": "Leann Christine Lehman",
+          "relationship": "Associate"
+        }
+      ],
+      "description": "Wedding Party Attendance (Matron of Honor)",
+      "notes": "Served as matron of honor for her sister.",
+      "person_id": "IND-00022",
+      "location": {
+        "details": {
+          "state_or_province": "Pennsylvania",
+          "county": "Dauphin County",
+          "location_name": "Christ Evangelical Lutheran Church",
+          "country": "USA"
+        },
+        "standardized": "Dauphin County, Pennsylvania, USA",
+        "verbatim": "Christ Evangelical Lutheran Church, Dauphin, Pennsylvania, USA"
+      },
+      "quay_score": 2,
+      "created_at": "2026-09-19T20:47:43Z",
+      "updated_at": "2026-09-19T20:47:43Z",
+      "source": {
+        "record_urn": "urn:cite:PATNEWS:19900623:19900623-news-hoch-lehman-a8f3c2b1-9e42-4d7a-81bf-12b4c928e341.jpg",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "$schema": "schemas/entities/fact.schema.json",
+      "fact_id": "4b45dcb6-a2cf-479d-8c48-3c8ac98af27f",
+      "fact_type": "Residence",
+      "date": {
+        "date_start": "1981-01-11",
+        "modifier": "EXACT"
+      },
+      "associated_people": [],
+      "description": "Residence of Karen Mummert",
+      "notes": "Residing at 4439 Ethel Road, Dauphin County, Pennsylvania; identified as mother of the fiancé.",
+      "person_id": "IND-00020",
+      "location": {
+        "details": {
+          "state_or_province": "Pennsylvania",
+          "county": "Dauphin County",
+          "address_line_1": "4439 Ethel Road",
+          "country": "USA"
+        },
+        "standardized": "Dauphin County, Pennsylvania, USA",
+        "verbatim": "4439 Ethel Road, Dauphin, Pennsylvania, USA"
+      },
+      "quay_score": 2,
+      "created_at": "2026-09-19T20:47:43Z",
+      "updated_at": "2026-09-19T20:47:43Z",
+      "source": {
+        "record_urn": "urn:cite:PATNEWS:19810111:19810111_NEWS_SOC_PA_Dauphin_PATNEWS_Manum_Lehman_P75.jpg",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "$schema": "schemas/entities/fact.schema.json",
+      "fact_id": "97722bdb-7e2c-4e03-9475-4f933351c76f",
+      "fact_type": "Marriage",
+      "date": {
+        "date_start": "1990-06-23",
+        "modifier": "EXACT"
+      },
+      "associated_people": [],
+      "description": "Marriage Announcement to Wesley Allen Hoch",
+      "notes": "United in marriage recently in Christ Evangelical Lutheran Church; reception held in the Shellsville VFW; wedding trip to York.",
+      "person_id": "IND-00023",
+      "location": {
+        "details": {
+          "state_or_province": "Pennsylvania",
+          "county": "Dauphin County",
+          "location_name": "Christ Evangelical Lutheran Church",
+          "country": "USA"
+        },
+        "standardized": "Dauphin County, Pennsylvania, USA",
+        "verbatim": "Christ Evangelical Lutheran Church, Shellsville VFW, York, Dauphin, Pennsylvania, USA"
+      },
+      "quay_score": 2,
+      "created_at": "2026-09-19T20:47:43Z",
+      "updated_at": "2026-09-19T20:47:43Z",
+      "source": {
+        "record_urn": "urn:cite:PATNEWS:19900623:19900623-news-hoch-lehman-a8f3c2b1-9e42-4d7a-81bf-12b4c928e341.jpg",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "$schema": "schemas/entities/fact.schema.json",
+      "fact_id": "8b4e1f91-9eab-446d-8d2c-24593ed2d49b",
+      "fact_type": "Engagement",
+      "date": {
+        "date_start": "1981-01-11",
+        "modifier": "EXACT"
+      },
+      "associated_people": [],
+      "description": "Engagement Announcement to Coleen Manum",
+      "notes": "Wedding planned for October at Christ Lutheran Church, Linglestown, Dauphin County, Pennsylvania.",
+      "person_id": "IND-00021",
+      "location": {
+        "details": {
+          "local_jurisdiction": "Linglestown",
+          "county": "Dauphin County",
+          "state_or_province": "Pennsylvania",
+          "country": "USA"
+        },
+        "standardized": "Linglestown, Dauphin County, Pennsylvania, USA",
+        "verbatim": "Christ Lutheran Church, Linglestown, Dauphin, Pennsylvania, USA"
+      },
+      "quay_score": 2,
+      "created_at": "2026-09-19T20:47:43Z",
+      "updated_at": "2026-09-19T20:47:43Z",
+      "source": {
+        "record_urn": "urn:cite:PATNEWS:19810111:19810111_NEWS_SOC_PA_Dauphin_PATNEWS_Manum_Lehman_P75.jpg",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "fe272056-e4aa-49d4-b707-16678da97151",
+      "person_id": "IND-00144",
+      "fact_type": "Civic",
+      "quay_score": 2,
+      "created_at": "2026-09-01T07:59:22Z",
+      "updated_at": "2026-09-01T07:59:22Z",
+      "date": {
+        "date_start": "1966-01-27",
+        "modifier": "EXACT",
+        "raw_text": "27 Jan 1966"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Elected Treasurer of the Harrisburg Saab Club.",
+      "notes": null,
+      "life_story": "Anna Mae was elected Treasurer of the Harrisburg Saab Club as part of the executive staff preparing to host the national convention.",
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "Associate",
+          "relationship": "Club Member"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:DAU:HBG:THE_EVENING_NEWS:1966-01-27:P12:SAAB_CLUB_OFFICERS",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "46d7f744-1771-57cb-8bbe-e2f35859984c",
+      "person_id": "IND-00140",
+      "fact_type": "Association",
+      "quay_score": 2,
+      "created_at": "2026-09-11T00:58:16Z",
+      "updated_at": "2026-09-11T00:58:16Z",
+      "date": {
+        "date_start": "2018-06-30",
+        "modifier": "EXACT",
+        "raw_text": "30 Jun 2018"
+      },
+      "location": {
+        "standardized": "Pennsylvania, USA"
+      },
+      "description": "Survived father Daniel W. Lehman Jr.",
+      "notes": "Listed among surviving children in published obituary.",
+      "life_story": "Matthew Lehman survived his father, Daniel W. Lehman Jr., who died on June 30, 2018.",
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "Parent",
+          "relationship": "Father"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:DAUPHIN:HARRISBURG:THE_PATRIOT_NEWS:2018-07-03:PAGE_A18:OBIT_DANIEL_W_LEHMAN_JR",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "$schema": "schemas/entities/fact.schema.json",
+      "fact_id": "489b5e88-53ba-4e70-ae14-8e2108088e5f",
+      "fact_type": "Association",
+      "date": {
+        "date_start": "1990-06-23",
+        "modifier": "EXACT"
+      },
+      "associated_people": [
+        {
+          "role": "Associate",
+          "person_id": "IND-00023",
+          "name": "Leann Christine Lehman",
+          "relationship": "Associate"
+        }
+      ],
+      "description": "Wedding Party Attendance (Bridesmaid)",
+      "notes": "Served as a bridesmaid for the marriage of Leann Christine Lehman.",
+      "person_id": "IND-00148",
+      "location": {
+        "details": {
+          "state_or_province": "Pennsylvania",
+          "county": "Dauphin County",
+          "location_name": "Christ Evangelical Lutheran Church",
+          "country": "USA"
+        },
+        "standardized": "Dauphin County, Pennsylvania, USA",
+        "verbatim": "Christ Evangelical Lutheran Church, Dauphin, Pennsylvania, USA"
+      },
+      "quay_score": 2,
+      "created_at": "2026-09-19T20:47:42Z",
+      "updated_at": "2026-09-19T20:47:42Z",
+      "source": {
+        "record_urn": "urn:cite:PATNEWS:19900623:19900623-news-hoch-lehman-a8f3c2b1-9e42-4d7a-81bf-12b4c928e341.jpg",
+        "file_name": null,
+        "repository_path": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,933 @@
+{
+  "$schema": "schemas\\entities\\person_registry.schema.json",
+  "schema_version": "1.0.1",
+  "created_at": "2026-01-01T00:00:00Z",
+  "last_modified": "2026-09-25T00:41:50.394978+00:00",
+  "total_persons": 13,
+  "persons": [
+    {
+      "person_id": "IND-00132",
+      "last_updated": "2026-09-15T11:02:58Z",
+      "canonical_name": {
+        "given": "Ricardo",
+        "middle": "Jose",
+        "surname": "Lehman",
+        "birth_year": {
+          "year": 1984,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1984-09-29",
+            "modifier": "EXACT",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "UNKNOWN",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        }
+      },
+      "display_name": "Ricardo Jose Lehman",
+      "notes": [],
+      "sex": "Male",
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00130",
+          "role": "MOTH"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00023",
+      "last_updated": "2026-09-15T11:02:58Z",
+      "canonical_name": {
+        "given": "Leann",
+        "middle": "Christine",
+        "surname": "Lehman",
+        "birth_year": {
+          "year": 1967,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1967-11-25",
+            "modifier": "EXACT",
+            "raw_text": "25 Nov 1967"
+          },
+          "place": {
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "location_name": null,
+              "address_line_1": null,
+              "address_line_2": null,
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA",
+              "postal_code": null,
+              "coordinates": null
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "UNKNOWN",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        }
+      },
+      "display_name": "Leann Christine Lehman",
+      "notes": [
+        {
+          "note_id": "NOTE-001",
+          "category": "GENERAL",
+          "title": "Marriage History",
+          "text": "Married Wesley Hoch on 19 May 1990 in Harrisburg, Dauphin County, Pennsylvania, USA (divorced 19 Mar 1994). Married Douglas Scott Lamparter on 19 Sep 1995 in Harrisburg, Dauphin County, Pennsylvania, USA (divorced 2014). Married Richard Dino Magaro on 10 Jun 2016 in Harrisburg, Dauphin County, Pennsylvania, USA. Married Chuck Thomas Landis (Chuck is Tiffany's father)."
+        }
+      ],
+      "sex": "Female",
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00020",
+          "role": "MOTH"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00134",
+      "last_updated": "2026-09-15T11:02:58Z",
+      "canonical_name": {
+        "given": "Daniel",
+        "middle": "Roy",
+        "surname": "Lehman",
+        "birth_year": {
+          "year": 1986,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1986-12-03",
+            "modifier": "EXACT",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "Thurso, Caithness, Scotland",
+            "standardized": "Thurso, Caithness, Scotland",
+            "details": {
+              "location_name": null,
+              "address_line_1": null,
+              "address_line_2": null,
+              "local_jurisdiction": "Thurso",
+              "county": null,
+              "state_or_province": "Caithness",
+              "country": "Scotland",
+              "postal_code": null,
+              "coordinates": null
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "UNKNOWN",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        }
+      },
+      "display_name": "Daniel Roy Lehman",
+      "notes": [],
+      "sex": "Male",
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00131",
+          "role": "MOTH"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00000",
+      "last_updated": "2026-09-15T11:02:58Z",
+      "canonical_name": {
+        "given": "Glenn",
+        "middle": "Daniel",
+        "surname": "Lehman",
+        "birth_year": {
+          "year": 1961,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1961-12-01",
+            "modifier": "EXACT",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "location_name": null,
+              "address_line_1": null,
+              "address_line_2": null,
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA",
+              "postal_code": null,
+              "coordinates": null
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "UNKNOWN",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        }
+      },
+      "display_name": "Glenn Daniel Lehman",
+      "notes": [],
+      "sex": "Male",
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00020",
+          "role": "MOTH"
+        },
+        {
+          "person_id": "IND-00130",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00131",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00132",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00133",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00134",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00135",
+          "role": "CHIL"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00133",
+      "last_updated": "2026-09-15T11:02:58Z",
+      "canonical_name": {
+        "given": "Mellissa",
+        "middle": "Jan Elisabeth",
+        "surname": "Lehman",
+        "birth_year": {
+          "year": 1984,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1984-03-17",
+            "modifier": "EXACT",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "Groton, Connecticut, USA",
+            "standardized": "Groton, New London County, Connecticut, USA",
+            "details": {
+              "location_name": null,
+              "address_line_1": null,
+              "address_line_2": null,
+              "local_jurisdiction": "Groton",
+              "county": "New London County",
+              "state_or_province": "Connecticut",
+              "country": "USA",
+              "postal_code": null,
+              "coordinates": null
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "UNKNOWN",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        }
+      },
+      "display_name": "Mellissa Jan Elisabeth Lehman",
+      "notes": [],
+      "sex": "Female",
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00131",
+          "role": "MOTH"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00019",
+      "last_updated": "2026-09-15T11:02:58Z",
+      "canonical_name": {
+        "given": "Daniel",
+        "middle": "Webster",
+        "surname": "Lehman",
+        "birth_year": {
+          "year": 1941,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 2018,
+          "modifier": "EXACT"
+        },
+        "suffix": "Jr"
+      },
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1941-05-16",
+            "modifier": "EXACT",
+            "raw_text": null
+          },
+          "place": {
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "location_name": null,
+              "address_line_1": null,
+              "address_line_2": null,
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA",
+              "postal_code": null,
+              "coordinates": null
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "2018-06-30",
+            "modifier": "EXACT",
+            "raw_text": null
+          },
+          "place": {
+            "standardized": "Mechanicsburg, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "location_name": null,
+              "address_line_1": null,
+              "address_line_2": null,
+              "local_jurisdiction": "Mechanicsburg",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA",
+              "postal_code": null,
+              "coordinates": null
+            }
+          }
+        }
+      },
+      "display_name": "Daniel Webster Lehman Jr",
+      "notes": [
+        {
+          "note_id": "NOTE-001",
+          "category": "GENERAL",
+          "title": "Marriage and Divorce (Karen Nadine Witmer)",
+          "text": "Married Karen Nadine Witmer on 28 January 1961 in Harrisburg, Dauphin County, Pennsylvania, USA; divorced in December 1971."
+        }
+      ],
+      "sex": "Male",
+      "associated_people": [
+        {
+          "person_id": "IND-00020",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00000",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00021",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00022",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00023",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00140",
+          "role": "CHIL",
+          "relationship": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00021",
+      "last_updated": "2026-09-15T11:02:58Z",
+      "canonical_name": {
+        "given": "Keith",
+        "middle": "Allen",
+        "surname": "Lehman",
+        "birth_year": {
+          "year": 1963,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1963-05-21",
+            "modifier": "EXACT",
+            "raw_text": "21 May 1963"
+          },
+          "place": {
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "location_name": null,
+              "address_line_1": null,
+              "address_line_2": null,
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA",
+              "postal_code": null,
+              "coordinates": null
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "UNKNOWN",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        }
+      },
+      "display_name": "Keith Allen Lehman",
+      "notes": [
+        {
+          "note_id": "NOTE-001",
+          "category": "GENERAL",
+          "title": "Marriage History",
+          "text": "Married Coleen Manum on 30 Mar 1981 in Frederick, Virginia, USA. Married Billie Lou Gregory in Oct 1983. Married Karen Webster on 29 Jul 2020 in Halifax, Dauphin County, Pennsylvania, USA."
+        }
+      ],
+      "sex": "Male",
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00020",
+          "role": "MOTH"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00020",
+      "last_updated": "2026-09-15T11:02:58Z",
+      "canonical_name": {
+        "given": "Karen",
+        "middle": "Nadine",
+        "surname": "Witmer",
+        "birth_year": {
+          "year": 1942,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1942-10-06",
+            "modifier": "EXACT",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "location_name": null,
+              "address_line_1": null,
+              "address_line_2": null,
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA",
+              "postal_code": null,
+              "coordinates": null
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "UNKNOWN",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        }
+      },
+      "display_name": "Karen Nadine Witmer",
+      "notes": [
+        {
+          "note_id": "NOTE-001",
+          "category": "GENERAL",
+          "title": "Marriage and Divorce (Daniel Webster Lehman)",
+          "text": "Married Daniel Webster Lehman on 28 January 1961 in Harrisburg, Dauphin County, Pennsylvania, USA; divorced in December 1971."
+        }
+      ],
+      "sex": "Female",
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00000",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00021",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00022",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00023",
+          "role": "CHIL"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00022",
+      "last_updated": "2026-09-15T11:02:58Z",
+      "canonical_name": {
+        "given": "Danelle",
+        "middle": "Marie",
+        "surname": "Lehman",
+        "birth_year": {
+          "year": 1964,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1964-10-21",
+            "modifier": "EXACT",
+            "raw_text": "21 Oct 1964"
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "location_name": null,
+              "address_line_1": null,
+              "address_line_2": null,
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA",
+              "postal_code": null,
+              "coordinates": null
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "UNKNOWN",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        }
+      },
+      "display_name": "Danelle Marie Lehman",
+      "notes": [
+        {
+          "note_id": "NOTE-001",
+          "category": "GENERAL",
+          "title": "Marriage and Divorce Details",
+          "text": "Married Kevin M Hoch on 10 Oct 1988; divorced in Jul 1998 in Dauphin County, Pennsylvania, USA. Married Jeffrey Allan Davis on 01 Oct 1999 in Mechanicsburg, Cumberland County, Pennsylvania, USA."
+        }
+      ],
+      "sex": "Female",
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00020",
+          "role": "MOTH"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00130",
+      "last_updated": "2026-09-07T02:14:33Z",
+      "canonical_name": {
+        "given": "Angela",
+        "middle": "Lynn",
+        "surname": "Snyder",
+        "birth_year": {
+          "year": 1966,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1966-01-07",
+            "modifier": "EXACT",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "West Virginia, USA",
+            "standardized": "West Virginia, USA",
+            "details": {
+              "location_name": null,
+              "address_line_1": null,
+              "address_line_2": null,
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "West Virginia",
+              "country": "USA",
+              "postal_code": null,
+              "coordinates": null
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "UNKNOWN",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        }
+      },
+      "display_name": "Angela Lynn Snyder",
+      "notes": [],
+      "sex": "Female",
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00132",
+          "role": "CHIL"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00140",
+      "last_updated": "2026-09-15T11:02:58Z",
+      "canonical_name": {
+        "given": "Matthew",
+        "middle": "",
+        "surname": "Lehman",
+        "birth_year": {
+          "year": 1968,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1968-01-05",
+            "modifier": "EXACT",
+            "raw_text": "5 Jan 1968"
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "UNKNOWN",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        }
+      },
+      "display_name": "Matthew Lehman",
+      "notes": [],
+      "sex": "Male",
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "FATH",
+          "relationship": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00135",
+      "last_updated": "2026-09-15T11:02:58Z",
+      "canonical_name": {
+        "given": "Brittany",
+        "middle": "Di'Anne",
+        "surname": "Lehman",
+        "birth_year": {
+          "year": 1988,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1988-06-13",
+            "modifier": "EXACT",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "Dunoon and Kilmun, Argyll, Scotland",
+            "standardized": "Dunoon and Kilmun, Argyll, Scotland",
+            "details": {
+              "location_name": null,
+              "address_line_1": null,
+              "address_line_2": null,
+              "local_jurisdiction": "Dunoon and Kilmun",
+              "county": null,
+              "state_or_province": "Argyll",
+              "country": "Scotland",
+              "postal_code": null,
+              "coordinates": null
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "UNKNOWN",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        }
+      },
+      "display_name": "Brittany Di'Anne Lehman",
+      "notes": [],
+      "sex": "Female",
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00131",
+          "role": "MOTH"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00131",
+      "last_updated": "2026-09-15T11:02:58Z",
+      "canonical_name": {
+        "given": "Dian",
+        "middle": "Lyn",
+        "surname": "Cilley",
+        "birth_year": {
+          "year": 1961,
+          "modifier": "ABT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1961",
+            "modifier": "ABT",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "Santa Barbara, California, USA",
+            "standardized": "Santa Barbara, California, USA",
+            "details": {
+              "location_name": null,
+              "address_line_1": null,
+              "address_line_2": null,
+              "local_jurisdiction": "Santa Barbara",
+              "county": null,
+              "state_or_province": "California",
+              "country": "USA",
+              "postal_code": null,
+              "coordinates": null
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "UNKNOWN",
+            "raw_text": null
+          },
+          "place": {
+            "verbatim": "",
+            "standardized": ""
+          }
+        }
+      },
+      "display_name": "Dian Lyn Cilley",
+      "notes": [],
+      "sex": "Female",
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00133",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00134",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00135",
+          "role": "CHIL"
+        }
+      ]
+    }
+  ]
+}

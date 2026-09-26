@@ -1,0 +1,4727 @@
+{
+  "$schema": "schemas/entities/person_registry.schema.json",
+  "schema_version": "1.0.2",
+  "created_at": "2026-01-01T00:00:00Z",
+  "last_modified": "2026-09-26T11:15:00Z",
+  "total_persons": 62,
+  "persons": [
+    {
+      "person_id": "IND-00000",
+      "display_name": "Arthur Pendelton Sterling",
+      "canonical_name": {
+        "given": "Arthur",
+        "middle": "Pendelton",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1961,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1961-12-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Dec 1961"
+          },
+          "place": "Harrisburg, Dauphin, Pennsylvania, USA"
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "LIVING",
+            "raw_text": null
+          },
+          "place": null
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00023",
+          "role": "MOTH"
+        },
+        {
+          "person_id": "IND-00029",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00031",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00037",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00041",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00043",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00047",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00029",
+          "status": "DIVORCED",
+          "marriage_date": {
+            "date_start": "1983-05-14",
+            "modifier": "EXACT",
+            "raw_text": "14 May 1983"
+          },
+          "end_date": {
+            "date_start": "1985-08-20",
+            "modifier": "EXACT",
+            "raw_text": "20 Aug 1985"
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": "Terminated by divorce decree"
+        },
+        {
+          "spouse_id": "IND-00031",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1986-03-22",
+            "modifier": "EXACT",
+            "raw_text": "22 Mar 1986"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": "Current marriage"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00029",
+      "display_name": "Eleanor Margaret Sinclair",
+      "canonical_name": {
+        "given": "Eleanor",
+        "middle": "Margaret",
+        "surname": "Sinclair",
+        "birth_year": {
+          "year": 1963,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1963-04-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Apr 1963"
+          },
+          "place": {
+            "county": "Dauphin County"
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "LIVING",
+            "raw_text": null
+          },
+          "place": null
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00179",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00181",
+          "role": "MOTH"
+        },
+        {
+          "person_id": "IND-00000",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00037",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00000",
+          "status": "DIVORCED",
+          "marriage_date": {
+            "date_start": "1983-05-14",
+            "modifier": "EXACT",
+            "raw_text": "14 May 1983"
+          },
+          "end_date": {
+            "date_start": "1985-08-20",
+            "modifier": "EXACT",
+            "raw_text": "20 Aug 1985"
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": "Reciprocal divorce decree"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00037",
+      "display_name": "Julian Sinclair Sterling",
+      "canonical_name": {
+        "given": "Julian",
+        "middle": "Sinclair",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1984,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1984-06-18",
+            "modifier": "EXACT",
+            "raw_text": "18 Jun 1984"
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "LIVING",
+            "raw_text": null
+          },
+          "place": null
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00029",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00031",
+      "display_name": "Clara Josephine Holloway",
+      "canonical_name": {
+        "given": "Clara",
+        "middle": "Josephine",
+        "surname": "Holloway",
+        "birth_year": {
+          "year": 1964,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1964-08-22",
+            "modifier": "EXACT",
+            "raw_text": "22 Aug 1964"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "LIVING",
+            "raw_text": null
+          },
+          "place": null
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00191",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00193",
+          "role": "MOTH"
+        },
+        {
+          "person_id": "IND-00000",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00041",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00043",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00047",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00000",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1986-03-22",
+            "modifier": "EXACT",
+            "raw_text": "22 Mar 1986"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": "Reciprocal marriage record"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00041",
+      "display_name": "Beatrice May Holloway",
+      "canonical_name": {
+        "given": "Beatrice",
+        "middle": "May",
+        "surname": "Holloway",
+        "birth_year": {
+          "year": 1983,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1983-02-10",
+            "modifier": "EXACT",
+            "raw_text": "10 Feb 1983"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "LIVING",
+            "raw_text": null
+          },
+          "place": null
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00031",
+          "role": "MOTH"
+        },
+        {
+          "person_id": null,
+          "role": "FATH",
+          "name": "Biological Father (Unknown)"
+        },
+        {
+          "person_id": "IND-00000",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00043",
+      "display_name": "Tristan Vance Sterling",
+      "canonical_name": {
+        "given": "Tristan",
+        "middle": "Vance",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1986,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1986-12-03",
+            "modifier": "EXACT",
+            "raw_text": "3 Dec 1986"
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "LIVING",
+            "raw_text": null
+          },
+          "place": null
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00031",
+          "role": "MOTH"
+        },
+        {
+          "person_id": "IND-00079",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00083",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00079",
+          "status": "PARTNER",
+          "marriage_date": null,
+          "end_date": null,
+          "place": null,
+          "notes": "Domestic partnership established c. 2001"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00079",
+      "display_name": "Sienna Nicole Kensington",
+      "canonical_name": {
+        "given": "Sienna",
+        "middle": "Nicole",
+        "surname": "Kensington",
+        "birth_year": {
+          "year": 1986,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1986-05-18",
+            "modifier": "EXACT",
+            "raw_text": "18 May 1986"
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "LIVING",
+            "raw_text": null
+          },
+          "place": null
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00043",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00083",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00043",
+          "status": "PARTNER",
+          "marriage_date": null,
+          "end_date": null,
+          "place": null,
+          "notes": "Domestic co-parent partner"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00083",
+      "display_name": "Rowan Chase Sterling",
+      "canonical_name": {
+        "given": "Rowan",
+        "middle": "Chase",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 2001,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "2001-12-15",
+            "modifier": "EXACT",
+            "raw_text": "15 Dec 2001"
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "LIVING",
+            "raw_text": null
+          },
+          "place": null
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00043",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00079",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00047",
+      "display_name": "Lydia Grace Sterling",
+      "canonical_name": {
+        "given": "Lydia",
+        "middle": "Grace",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1988,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1988-06-13",
+            "modifier": "EXACT",
+            "raw_text": "13 Jun 1988"
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "LIVING",
+            "raw_text": null
+          },
+          "place": null
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00031",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00019",
+      "display_name": "Garrison Montgomery Sterling III",
+      "canonical_name": {
+        "given": "Garrison",
+        "middle": "Montgomery",
+        "surname": "Sterling",
+        "suffix": "III",
+        "birth_year": {
+          "year": 1941,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 2018,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1941-05-16",
+            "modifier": "EXACT",
+            "raw_text": "16 May 1941"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "2018-06-30",
+            "modifier": "EXACT",
+            "raw_text": "30 Jun 2018"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00067",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00071",
+          "role": "MOTH"
+        },
+        {
+          "person_id": "IND-00023",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00000",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00023",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1960-08-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Aug 1960"
+          },
+          "end_date": {
+            "date_start": "2018-06-30",
+            "modifier": "EXACT",
+            "raw_text": "30 Jun 2018"
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": "Husband predeceased wife"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00073",
+      "display_name": "Raymond Bradley Sterling",
+      "canonical_name": {
+        "given": "Raymond",
+        "middle": "Bradley",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1938,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 2010,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1938-02-10",
+            "modifier": "EXACT",
+            "raw_text": "10 Feb 1938"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "2010-11-04",
+            "modifier": "EXACT",
+            "raw_text": "4 Nov 2010"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00067",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00071",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00023",
+      "display_name": "Genevieve Louise Thornton",
+      "canonical_name": {
+        "given": "Genevieve",
+        "middle": "Louise",
+        "surname": "Thornton",
+        "birth_year": {
+          "year": 1942,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": null,
+          "modifier": "LIVING"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1942-10-06",
+            "modifier": "EXACT",
+            "raw_text": "6 Oct 1942"
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": null,
+            "modifier": "LIVING",
+            "raw_text": null
+          },
+          "place": null
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00167",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00019",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00089",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00000",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00019",
+          "status": "WIDOWED",
+          "marriage_date": {
+            "date_start": "1960-08-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Aug 1960"
+          },
+          "end_date": {
+            "date_start": "2018-06-30",
+            "modifier": "EXACT",
+            "raw_text": "30 Jun 2018"
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": "Widowed upon death of husband"
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00089",
+      "display_name": "Adelaide Rose Thornton",
+      "canonical_name": {
+        "given": "Adelaide",
+        "middle": "Rose",
+        "surname": "Thornton",
+        "birth_year": {
+          "year": 1940,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 2015,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1940-08-14",
+            "modifier": "EXACT",
+            "raw_text": "14 Aug 1940"
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "2015-01-20",
+            "modifier": "EXACT",
+            "raw_text": "20 Jan 2015"
+          },
+          "place": {
+            "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+            "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Harrisburg",
+              "county": "Dauphin County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00167",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00023",
+          "role": "CHIL"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00067",
+      "display_name": "Garrison Montgomery Sterling Jr",
+      "canonical_name": {
+        "given": "Garrison",
+        "middle": "Montgomery",
+        "surname": "Sterling",
+        "suffix": "Jr",
+        "birth_year": {
+          "year": 1910,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1985,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1910-04-03",
+            "modifier": "EXACT",
+            "raw_text": "3 Apr 1910"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1985-09-18",
+            "modifier": "EXACT",
+            "raw_text": "18 Sep 1985"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00053",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00059",
+          "role": "MOTH"
+        },
+        {
+          "person_id": "IND-00071",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00019",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00073",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00071",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1935-06-20",
+            "modifier": "EXACT",
+            "raw_text": "20 Jun 1935"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00071",
+      "display_name": "Dorothy Evelyn Bradford",
+      "canonical_name": {
+        "given": "Dorothy",
+        "middle": "Evelyn",
+        "surname": "Bradford",
+        "birth_year": {
+          "year": 1914,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1999,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1914-07-25",
+            "modifier": "EXACT",
+            "raw_text": "25 Jul 1914"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1999-12-05",
+            "modifier": "EXACT",
+            "raw_text": "5 Dec 1999"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00067",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00019",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00073",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00067",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1935-06-20",
+            "modifier": "EXACT",
+            "raw_text": "20 Jun 1935"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00053",
+      "display_name": "Garrison Montgomery Sterling Sr",
+      "canonical_name": {
+        "given": "Garrison",
+        "middle": "Montgomery",
+        "surname": "Sterling",
+        "suffix": "Sr",
+        "birth_year": {
+          "year": 1870,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1945,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1870-01-10",
+            "modifier": "EXACT",
+            "raw_text": "10 Jan 1870"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1945-05-20",
+            "modifier": "EXACT",
+            "raw_text": "20 May 1945"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00097",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00101",
+          "role": "MOTH"
+        },
+        {
+          "person_id": "IND-00059",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00067",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00059",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1905-10-18",
+            "modifier": "EXACT",
+            "raw_text": "18 Oct 1905"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00059",
+      "display_name": "Helena Beatrice Fairchild",
+      "canonical_name": {
+        "given": "Helena",
+        "middle": "Beatrice",
+        "surname": "Fairchild",
+        "birth_year": {
+          "year": 1878,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1960,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1878-03-14",
+            "modifier": "EXACT",
+            "raw_text": "14 Mar 1878"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1960-04-11",
+            "modifier": "EXACT",
+            "raw_text": "11 Apr 1960"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00053",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00067",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00053",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1905-10-18",
+            "modifier": "EXACT",
+            "raw_text": "18 Oct 1905"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00103",
+      "display_name": "Lawrence Sterling",
+      "canonical_name": {
+        "given": "Lawrence",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1872,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1872-02-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Feb 1872"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1940-08-19",
+            "modifier": "EXACT",
+            "raw_text": "19 Aug 1940"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00097",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00101",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00107",
+      "display_name": "Nathaniel Sterling",
+      "canonical_name": {
+        "given": "Nathaniel",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1874,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1874-05-30",
+            "modifier": "EXACT",
+            "raw_text": "30 May 1874"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1951-11-22",
+            "modifier": "EXACT",
+            "raw_text": "22 Nov 1951"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00097",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00101",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00109",
+      "display_name": "Cedric Sterling",
+      "canonical_name": {
+        "given": "Cedric",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1876,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1876-09-08",
+            "modifier": "EXACT",
+            "raw_text": "8 Sep 1876"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1955-03-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Mar 1955"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00097",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00101",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00113",
+      "display_name": "Zachary Sterling",
+      "canonical_name": {
+        "given": "Zachary",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1878,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1878-11-14",
+            "modifier": "EXACT",
+            "raw_text": "14 Nov 1878"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1962-06-15",
+            "modifier": "EXACT",
+            "raw_text": "15 Jun 1962"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00097",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00101",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00127",
+      "display_name": "Marian Sterling",
+      "canonical_name": {
+        "given": "Marian",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1881,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1881-01-20",
+            "modifier": "EXACT",
+            "raw_text": "20 Jan 1881"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1966-10-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Oct 1966"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00097",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00101",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00131",
+      "display_name": "Constance Sterling",
+      "canonical_name": {
+        "given": "Constance",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1883,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1883-04-18",
+            "modifier": "EXACT",
+            "raw_text": "18 Apr 1883"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1970-07-29",
+            "modifier": "EXACT",
+            "raw_text": "29 Jul 1970"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00097",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00101",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00137",
+      "display_name": "Evelyn Sterling",
+      "canonical_name": {
+        "given": "Evelyn",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1885,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1885-10-04",
+            "modifier": "EXACT",
+            "raw_text": "4 Oct 1885"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1974-02-18",
+            "modifier": "EXACT",
+            "raw_text": "18 Feb 1974"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00097",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00101",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00097",
+      "display_name": "William Luther Sterling",
+      "canonical_name": {
+        "given": "William",
+        "middle": "Luther",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1845,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1915,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1845-03-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Mar 1845"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1915-08-20",
+            "modifier": "EXACT",
+            "raw_text": "20 Aug 1915"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00271",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00101",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00053",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00103",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00107",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00109",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00113",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00127",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00131",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00137",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00101",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1868-04-10",
+            "modifier": "EXACT",
+            "raw_text": "10 Apr 1868"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00101",
+      "display_name": "Agnes Rachel Kensington",
+      "canonical_name": {
+        "given": "Agnes",
+        "middle": "Rachel",
+        "surname": "Kensington",
+        "birth_year": {
+          "year": 1848,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1920,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1848-06-25",
+            "modifier": "EXACT",
+            "raw_text": "25 Jun 1848"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1920-11-04",
+            "modifier": "EXACT",
+            "raw_text": "4 Nov 1920"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00097",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00053",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00103",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00107",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00109",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00113",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00127",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00131",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00137",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00097",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1868-04-10",
+            "modifier": "EXACT",
+            "raw_text": "10 Apr 1868"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00139",
+      "display_name": "Barnaby Sterling",
+      "canonical_name": {
+        "given": "Barnaby",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1740,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1844,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1740-02-10",
+            "modifier": "EXACT",
+            "raw_text": "10 Feb 1740"
+          },
+          "place": {
+            "verbatim": "Hornberg, Germany",
+            "standardized": "Hornberg, Baden-Württemberg, Germany",
+            "details": {
+              "local_jurisdiction": "Hornberg",
+              "county": null,
+              "state_or_province": "Baden-Württemberg",
+              "country": "Germany"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1844-04-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Apr 1844"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "notes": [
+        {
+          "note_id": "NOTE-001",
+          "category": "GENERAL",
+          "title": "Longevity Record",
+          "text": "Lived 104 years verified by church register."
+        }
+      ],
+      "associated_people": [
+        {
+          "person_id": "IND-00149",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00157",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00239",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00241",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00251",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00257",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00263",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00269",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00271",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00277",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00281",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00283",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00293",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00307",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00311",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00313",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00317",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00149",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1775-09-14",
+            "modifier": "EXACT",
+            "raw_text": "14 Sep 1775"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00149",
+      "display_name": "Hannah Vanderbilt",
+      "canonical_name": {
+        "given": "Hannah",
+        "surname": "Vanderbilt",
+        "birth_year": {
+          "year": 1755,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1825,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1755-06-19",
+            "modifier": "EXACT",
+            "raw_text": "19 Jun 1755"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1825-08-30",
+            "modifier": "EXACT",
+            "raw_text": "30 Aug 1825"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00271",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00139",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1775-09-14",
+            "modifier": "EXACT",
+            "raw_text": "14 Sep 1775"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00151",
+      "display_name": "William Luther Sterling",
+      "canonical_name": {
+        "given": "William",
+        "middle": "Luther",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1872,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1941,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1872-10-15",
+            "modifier": "EXACT",
+            "raw_text": "15 Oct 1872"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1941-03-22",
+            "modifier": "EXACT",
+            "raw_text": "22 Mar 1941"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00157",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00157",
+      "display_name": "Tobias Sterling",
+      "canonical_name": {
+        "given": "Tobias",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1840,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1910,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1840-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1840"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1910-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1910"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00151",
+          "role": "CHIL"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00163",
+      "display_name": "Rebecca Ann Thornton",
+      "canonical_name": {
+        "given": "Rebecca",
+        "middle": "Ann",
+        "surname": "Thornton",
+        "birth_year": {
+          "year": 1868,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1890,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1868-04-10",
+            "modifier": "EXACT",
+            "raw_text": "10 Apr 1868"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1890-06-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jun 1890"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "notes": [
+        {
+          "note_id": "NOTE-001",
+          "category": "GENERAL",
+          "title": "Cause of Death",
+          "text": "Died in childbirth delivery complications."
+        }
+      ],
+      "associated_people": [
+        {
+          "person_id": "IND-00199",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00197",
+          "role": "MOTH"
+        },
+        {
+          "person_id": "IND-00167",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00173",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00167",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1889-08-15",
+            "modifier": "EXACT",
+            "raw_text": "15 Aug 1889"
+          },
+          "end_date": {
+            "date_start": "1890-06-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jun 1890"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00167",
+      "display_name": "Gideon Thornton",
+      "canonical_name": {
+        "given": "Gideon",
+        "surname": "Thornton",
+        "birth_year": {
+          "year": 1865,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1945,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1865-03-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Mar 1865"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1945-12-10",
+            "modifier": "EXACT",
+            "raw_text": "10 Dec 1945"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00163",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00173",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00023",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00089",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00163",
+          "status": "WIDOWED",
+          "marriage_date": {
+            "date_start": "1889-08-15",
+            "modifier": "EXACT",
+            "raw_text": "15 Aug 1889"
+          },
+          "end_date": {
+            "date_start": "1890-06-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jun 1890"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00173",
+      "display_name": "Infant Thornton",
+      "canonical_name": {
+        "given": "Infant",
+        "surname": "Thornton",
+        "birth_year": {
+          "year": 1890,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1890,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1890-06-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jun 1890"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1890-06-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jun 1890"
+          },
+          "place": {
+            "verbatim": "Cumberland Co., Pa.",
+            "standardized": "Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "notes": [
+        {
+          "note_id": "NOTE-001",
+          "category": "GENERAL",
+          "title": "Stillborn",
+          "text": "Stillborn male infant."
+        }
+      ],
+      "associated_people": [
+        {
+          "person_id": "IND-00167",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00163",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00329",
+      "display_name": "Percival Sinclair",
+      "canonical_name": {
+        "given": "Percival",
+        "surname": "Sinclair",
+        "birth_year": {
+          "year": 1850,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1880,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1850-01-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Jan 1850"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1880-03-10",
+            "modifier": "EXACT",
+            "raw_text": "10 Mar 1880"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00331",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00337",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00331",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1875-10-10",
+            "modifier": "EXACT",
+            "raw_text": "10 Oct 1875"
+          },
+          "end_date": {
+            "date_start": "1880-03-10",
+            "modifier": "EXACT",
+            "raw_text": "10 Mar 1880"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00331",
+      "display_name": "Cordelia Holloway",
+      "canonical_name": {
+        "given": "Cordelia",
+        "surname": "Holloway",
+        "birth_year": {
+          "year": 1855,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1925,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1855-04-18",
+            "modifier": "EXACT",
+            "raw_text": "18 Apr 1855"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1925-09-02",
+            "modifier": "EXACT",
+            "raw_text": "2 Sep 1925"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00329",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00337",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00329",
+          "status": "WIDOWED",
+          "marriage_date": {
+            "date_start": "1875-10-10",
+            "modifier": "EXACT",
+            "raw_text": "10 Oct 1875"
+          },
+          "end_date": {
+            "date_start": "1880-03-10",
+            "modifier": "EXACT",
+            "raw_text": "10 Mar 1880"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00337",
+      "display_name": "Posthumous Sinclair",
+      "canonical_name": {
+        "given": "Posthumous",
+        "surname": "Sinclair",
+        "birth_year": {
+          "year": 1880,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1950,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1880-09-14",
+            "modifier": "EXACT",
+            "raw_text": "14 Sep 1880"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1950-05-12",
+            "modifier": "EXACT",
+            "raw_text": "12 May 1950"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "notes": [
+        {
+          "note_id": "NOTE-001",
+          "category": "GENERAL",
+          "title": "Posthumous Child",
+          "text": "Born 6 months after father's death."
+        }
+      ],
+      "associated_people": [
+        {
+          "person_id": "IND-00329",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00331",
+          "role": "MOTH"
+        },
+        {
+          "person_id": "IND-00229",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00179",
+          "role": "CHIL"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00197",
+      "display_name": "Eleanor Thornton",
+      "canonical_name": {
+        "given": "Eleanor",
+        "surname": "Thornton",
+        "birth_year": {
+          "year": 1820,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1885,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1820-03-15",
+            "modifier": "EXACT",
+            "raw_text": "15 Mar 1820"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1885-11-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Nov 1885"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00199",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00211",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00163",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00199",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1845-02-14",
+            "modifier": "EXACT",
+            "raw_text": "14 Feb 1845"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00199",
+      "display_name": "Horace Thornton",
+      "canonical_name": {
+        "given": "Horace",
+        "surname": "Thornton",
+        "birth_year": {
+          "year": 1818,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1890,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1818-05-10",
+            "modifier": "EXACT",
+            "raw_text": "10 May 1818"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1890-01-20",
+            "modifier": "EXACT",
+            "raw_text": "20 Jan 1890"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00197",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00211",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00163",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00197",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1845-02-14",
+            "modifier": "EXACT",
+            "raw_text": "14 Feb 1845"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00211",
+      "display_name": "Lateborn Thornton",
+      "canonical_name": {
+        "given": "Lateborn",
+        "surname": "Thornton",
+        "birth_year": {
+          "year": 1871,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1940,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1871-08-20",
+            "modifier": "EXACT",
+            "raw_text": "20 Aug 1871"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1940-02-14",
+            "modifier": "EXACT",
+            "raw_text": "14 Feb 1940"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "notes": [
+        {
+          "note_id": "NOTE-001",
+          "category": "GENERAL",
+          "title": "Late Birth",
+          "text": "Mother was 51 years and 5 months old at delivery."
+        }
+      ],
+      "associated_people": [
+        {
+          "person_id": "IND-00199",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00197",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00223",
+      "display_name": "Theodore Vance Vanderbilt",
+      "canonical_name": {
+        "given": "Theodore",
+        "middle": "Vance",
+        "surname": "Vanderbilt",
+        "birth_year": {
+          "year": 1925,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1925-11-23",
+            "modifier": "EXACT",
+            "raw_text": "23 Nov 1925 11:55 PM"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1998-04-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Apr 1998"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "notes": [
+        {
+          "note_id": "NOTE-001",
+          "category": "GENERAL",
+          "title": "Twin A",
+          "text": "Twin elder brother born 11:55 PM."
+        }
+      ],
+      "associated_people": [
+        {
+          "person_id": "IND-00227",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00229",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00233",
+      "display_name": "Thomas Walter Vanderbilt",
+      "canonical_name": {
+        "given": "Thomas",
+        "middle": "Walter",
+        "surname": "Vanderbilt",
+        "birth_year": {
+          "year": 1925,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1925-11-24",
+            "modifier": "EXACT",
+            "raw_text": "24 Nov 1925 12:10 AM"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "2001-09-03",
+            "modifier": "EXACT",
+            "raw_text": "3 Sep 2001"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "notes": [
+        {
+          "note_id": "NOTE-001",
+          "category": "GENERAL",
+          "title": "Twin B",
+          "text": "Twin younger brother born 12:10 AM next day."
+        }
+      ],
+      "associated_people": [
+        {
+          "person_id": "IND-00227",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00229",
+          "role": "MOTH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00227",
+      "display_name": "Arthur Vanderbilt",
+      "canonical_name": {
+        "given": "Arthur",
+        "surname": "Vanderbilt",
+        "birth_year": {
+          "year": 1895,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1895-03-04",
+            "modifier": "EXACT",
+            "raw_text": "4 Mar 1895"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1970-07-21",
+            "modifier": "EXACT",
+            "raw_text": "21 Jul 1970"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00229",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00223",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00233",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00229",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1920-06-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Jun 1920"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00229",
+      "display_name": "Madeline Sinclair",
+      "canonical_name": {
+        "given": "Madeline",
+        "surname": "Sinclair",
+        "birth_year": {
+          "year": 1898,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1898-09-19",
+            "modifier": "EXACT",
+            "raw_text": "19 Sep 1898"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1982-11-08",
+            "modifier": "EXACT",
+            "raw_text": "8 Nov 1982"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00337",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00227",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00223",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00233",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00227",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1920-06-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Jun 1920"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00179",
+      "display_name": "Kenneth Sinclair",
+      "canonical_name": {
+        "given": "Kenneth",
+        "surname": "Sinclair",
+        "birth_year": {
+          "year": 1935,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1935-01-15",
+            "modifier": "EXACT",
+            "raw_text": "15 Jan 1935"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "2005-08-11",
+            "modifier": "EXACT",
+            "raw_text": "11 Aug 2005"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00337",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00181",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00029",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00181",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1958-09-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Sep 1958"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00181",
+      "display_name": "Vivian Bradford",
+      "canonical_name": {
+        "given": "Vivian",
+        "surname": "Bradford",
+        "birth_year": {
+          "year": 1937,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1937-04-20",
+            "modifier": "EXACT",
+            "raw_text": "20 Apr 1937"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "2012-03-30",
+            "modifier": "EXACT",
+            "raw_text": "30 Mar 2012"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00179",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00029",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00179",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1958-09-12",
+            "modifier": "EXACT",
+            "raw_text": "12 Sep 1958"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00191",
+      "display_name": "Martin Holloway",
+      "canonical_name": {
+        "given": "Martin",
+        "surname": "Holloway",
+        "birth_year": {
+          "year": 1938,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1938-11-05",
+            "modifier": "EXACT",
+            "raw_text": "5 Nov 1938"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "2016-07-22",
+            "modifier": "EXACT",
+            "raw_text": "22 Jul 2016"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00193",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00031",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00193",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1962-06-18",
+            "modifier": "EXACT",
+            "raw_text": "18 Jun 1962"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00193",
+      "display_name": "Doris Fairchild",
+      "canonical_name": {
+        "given": "Doris",
+        "surname": "Fairchild",
+        "birth_year": {
+          "year": 1940,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Female",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1940-02-14",
+            "modifier": "EXACT",
+            "raw_text": "14 Feb 1940"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "2021-10-09",
+            "modifier": "EXACT",
+            "raw_text": "9 Oct 2021"
+          },
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00191",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00031",
+          "role": "CHIL"
+        }
+      ],
+      "unions": [
+        {
+          "spouse_id": "IND-00191",
+          "status": "MARRIED",
+          "marriage_date": {
+            "date_start": "1962-06-18",
+            "modifier": "EXACT",
+            "raw_text": "18 Jun 1962"
+          },
+          "end_date": null,
+          "place": {
+            "verbatim": "Carlisle, PA",
+            "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": "Carlisle",
+              "county": "Cumberland County",
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          },
+          "notes": null
+        }
+      ]
+    },
+    {
+      "person_id": "IND-00239",
+      "display_name": "Ancestor Node 239 Sterling",
+      "canonical_name": {
+        "given": "Node239",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1819,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1879,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1819-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1879-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00241",
+      "display_name": "Ancestor Node 241 Sterling",
+      "canonical_name": {
+        "given": "Node241",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1821,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1881,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1821-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1881-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00251",
+      "display_name": "Ancestor Node 251 Sterling",
+      "canonical_name": {
+        "given": "Node251",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1781,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1841,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1781-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1841-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00257",
+      "display_name": "Ancestor Node 257 Sterling",
+      "canonical_name": {
+        "given": "Node257",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1787,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1847,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1787-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1847-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00263",
+      "display_name": "Ancestor Node 263 Sterling",
+      "canonical_name": {
+        "given": "Node263",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1793,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1853,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1793-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1853-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00269",
+      "display_name": "Ancestor Node 269 Sterling",
+      "canonical_name": {
+        "given": "Node269",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1799,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1859,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1799-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1859-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00271",
+      "display_name": "Ancestor Node 271 Sterling",
+      "canonical_name": {
+        "given": "Node271",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1801,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1861,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1801-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1861-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00149",
+          "role": "MOTH"
+        },
+        {
+          "person_id": "IND-00097",
+          "role": "CHIL"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00277",
+      "display_name": "Ancestor Node 277 Sterling",
+      "canonical_name": {
+        "given": "Node277",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1807,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1867,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1807-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1867-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00281",
+      "display_name": "Ancestor Node 281 Sterling",
+      "canonical_name": {
+        "given": "Node281",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1811,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1871,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1811-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1871-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00283",
+      "display_name": "Ancestor Node 283 Sterling",
+      "canonical_name": {
+        "given": "Node283",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1813,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1873,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1813-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1873-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00293",
+      "display_name": "Ancestor Node 293 Sterling",
+      "canonical_name": {
+        "given": "Node293",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1823,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1883,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1823-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1883-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00307",
+      "display_name": "Ancestor Node 307 Sterling",
+      "canonical_name": {
+        "given": "Node307",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1787,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1847,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1787-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1847-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00311",
+      "display_name": "Ancestor Node 311 Sterling",
+      "canonical_name": {
+        "given": "Node311",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1791,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1851,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1791-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1851-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00313",
+      "display_name": "Ancestor Node 313 Sterling",
+      "canonical_name": {
+        "given": "Node313",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1793,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1853,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1793-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1853-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    },
+    {
+      "person_id": "IND-00317",
+      "display_name": "Ancestor Node 317 Sterling",
+      "canonical_name": {
+        "given": "Node317",
+        "surname": "Sterling",
+        "birth_year": {
+          "year": 1797,
+          "modifier": "EXACT"
+        },
+        "death_year": {
+          "year": 1857,
+          "modifier": "EXACT"
+        }
+      },
+      "sex": "Male",
+      "vitals": {
+        "birth": {
+          "date": {
+            "date_start": "1797-01-01",
+            "modifier": "EXACT",
+            "raw_text": "1 Jan"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        },
+        "death": {
+          "date": {
+            "date_start": "1857-12-31",
+            "modifier": "EXACT",
+            "raw_text": "31 Dec"
+          },
+          "place": {
+            "verbatim": "Pennsylvania",
+            "standardized": "Pennsylvania, USA",
+            "details": {
+              "local_jurisdiction": null,
+              "county": null,
+              "state_or_province": "Pennsylvania",
+              "country": "USA"
+            }
+          }
+        }
+      },
+      "associated_people": [
+        {
+          "person_id": "IND-00139",
+          "role": "FATH"
+        }
+      ],
+      "unions": []
+    }
+  ]
+}

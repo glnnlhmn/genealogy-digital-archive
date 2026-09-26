@@ -1,0 +1,90 @@
+{
+  "$schema": "schemas/indexes/location_index.schema.json",
+  "schema_version": "1.0.0",
+  "redirects": {
+    "pennsylvania": {
+      "location_id": "LOC-00001",
+      "standardized": "Pennsylvania, USA"
+    },
+    "cumb co": {
+      "location_id": "LOC-00002",
+      "standardized": "Cumberland County, Pennsylvania, USA"
+    },
+    "cumb. co., pa.": {
+      "location_id": "LOC-00002",
+      "standardized": "Cumberland County, Pennsylvania, USA"
+    },
+    "cumb. co., penna.": {
+      "location_id": "LOC-00002",
+      "standardized": "Cumberland County, Pennsylvania, USA"
+    },
+    "cumberland county, pennsylvania": {
+      "location_id": "LOC-00002",
+      "standardized": "Cumberland County, Pennsylvania, USA"
+    },
+    "cumberland, pennsylvania, usa": {
+      "location_id": "LOC-00002",
+      "standardized": "Cumberland County, Pennsylvania, USA"
+    },
+    "w. pennsboro, cumberland co., pa.": {
+      "location_id": "LOC-00003",
+      "standardized": "West Pennsboro Township, Cumberland County, Pennsylvania, USA"
+    },
+    "west pennsboro, cumberland, pennsylvania, usa": {
+      "location_id": "LOC-00003",
+      "standardized": "West Pennsboro Township, Cumberland County, Pennsylvania, USA"
+    },
+    "carlisle, pa": {
+      "location_id": "LOC-00004",
+      "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+    },
+    "carlisle pa": {
+      "location_id": "LOC-00004",
+      "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+    },
+    "carlisle cumberland, pennsylvania, usa": {
+      "location_id": "LOC-00004",
+      "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+    },
+    "carlisle hospital, carlisle, cumberland, pennsylvania": {
+      "location_id": "LOC-00004",
+      "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+    },
+    "harrisburg, dauphin, pennsylvania, usa": {
+      "location_id": "LOC-00005",
+      "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+    },
+    "harrisburg hospital, harrisburg, dauphin, pennsylvania": {
+      "location_id": "LOC-00005",
+      "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+    },
+    "polyclinic hospital, harrisburg, dauphin, pennsylvania": {
+      "location_id": "LOC-00005",
+      "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+    },
+    "newville, cumberland county, pennsylvania, usa": {
+      "location_id": "LOC-00006",
+      "standardized": "Newville, Cumberland County, Pennsylvania, USA"
+    },
+    "frankford, cumberland, pennsylvania, usa": {
+      "location_id": "LOC-00007",
+      "standardized": "Frankford Township, Cumberland County, Pennsylvania, USA"
+    },
+    "saltillo, huntingdon county, pennsylvania, usa": {
+      "location_id": "LOC-00008",
+      "standardized": "Saltillo, Huntingdon County, Pennsylvania, USA"
+    },
+    "groton, connecticut, usa": {
+      "location_id": "LOC-00009",
+      "standardized": "Groton, New London County, Connecticut, USA"
+    },
+    "thurso, caithness, scotland": {
+      "location_id": "LOC-00010",
+      "standardized": "Thurso, Caithness, Scotland"
+    },
+    "hornberg, germany": {
+      "location_id": "LOC-00011",
+      "standardized": "Hornberg, Baden-Württemberg, Germany"
+    }
+  }
+}

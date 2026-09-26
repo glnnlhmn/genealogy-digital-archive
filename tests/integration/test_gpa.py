@@ -1,337 +1,325 @@
 # Name: test_gpa.py
 # Path: tests/integration/test_gpa.py
 
-"""Unit test suite for GPA (Genealogy People Auditor).
+"""Integration test harness for GPA (Genealogy People Auditor).
 
-Exercises envelope container verification, entity schema validation,
-bidirectional kinship reciprocity, biological chronology limits,
-vital date synchronization, and incomplete date checks.
+Exercises schema compliance, reciprocal relationship validation,
+biological chronology rules, location verification, and topological
+reachability across golden baseline and domain failure fixtures.
 """
 
-import json
 import logging
 from pathlib import Path
 import pytest
 
 from tools.lib.gda_core.GDAConfig import GDAConfig
 from tools.lib.gda_core.GDAUtil import GDAUtil
-from tools.ops import gpa
-from tools.ops.gpa import RegistryAuditor, TieredFindings
+from tools.ops.gpa import RegistryAuditor, run_cli
+
+pytestmark = pytest.mark.integration
+
+FIXTURES_DIR = Path(__file__).resolve().parent.parent / "fixtures"
+GOLDEN_PEOPLE = FIXTURES_DIR / "golden" / "golden_people.json"
+FAILURES_DIR = FIXTURES_DIR / "failures"
 
 
 @pytest.fixture
 def mock_gpa_env(tmp_path, monkeypatch):
-    """Sets up an isolated digital archive environment by rebinding GDAConfig."""
-    data_dir = tmp_path / "data"
-    entities_dir = data_dir / "entities"
-    reports_dir = tmp_path / "reports"
-    logs_dir = tmp_path / "logs"
-
-    entities_dir.mkdir(parents=True, exist_ok=True)
-    reports_dir.mkdir(parents=True, exist_ok=True)
-    logs_dir.mkdir(parents=True, exist_ok=True)
-
+    """Sets up an isolated environment pointing to test fixtures."""
     mock_config = GDAConfig(root=tmp_path, manifest={})
     monkeypatch.setattr("tools.lib.gda_core.GDAConfig.CONFIG", mock_config)
     monkeypatch.setattr("tools.lib.gda_core.GDAUtil.CONFIG", mock_config)
-    monkeypatch.setattr("tools.ops.gpa.CONFIG", mock_config)
 
-    # Base valid registry container
-    initial_data = {
-        "$schema": "schemas/entities/person_registry.schema.json",
-        "schema_version": "1.0.1",
-        "total_persons": 0,
-        "persons": [],
-    }
-    GDAUtil.save_json(mock_config.people, initial_data)
-
-    test_logger = logging.getLogger("gpa_test")
-    test_logger.handlers.clear()
-    test_logger.addHandler(logging.NullHandler())
-
-    auditor = RegistryAuditor(
-        people_path=mock_config.people,
-        reports_dir=reports_dir,
-        debug=False,
-        verbose=False,
-        logger=test_logger,
-    )
+    logger = logging.getLogger("test_gpa")
+    logger.setLevel(logging.CRITICAL)
 
     return {
-        "auditor": auditor,
-        "people_path": mock_config.people,
-        "reports_dir": reports_dir,
-        "logger": test_logger,
+        "root": tmp_path,
+        "config": mock_config,
+        "golden_people": GOLDEN_PEOPLE,
+        "failures_dir": FAILURES_DIR,
+        "logger": logger,
     }
 
 
-def update_registry(auditor: RegistryAuditor, data_dict: dict) -> None:
-    """Helper to update auditor in-memory state and reload mappings."""
-    auditor.people_data = data_dict
-    auditor.persons = data_dict.get("persons", [])
-    auditor.person_map = {p["person_id"]: p for p in auditor.persons if "person_id" in p}
+@pytest.fixture(scope="module")
+def audit_cache():
+    """Caches audited fixtures across fine-grained tests to minimize disk I/O."""
+    cache = {}
+
+    def _get(file_path: Path):
+        if file_path not in cache:
+            data = GDAUtil.load_json(file_path)
+            null_logger = logging.getLogger(f"cache_{file_path.stem}")
+            null_logger.setLevel(logging.CRITICAL)
+            auditor = RegistryAuditor(people_data=data, logger=null_logger)
+            cache[file_path] = auditor.run_all()
+        return cache[file_path]
+
+    return _get
 
 
-def test_container_valid(mock_gpa_env):
-    """Verifies that a well-formed container passes without errors."""
-    auditor = mock_gpa_env["auditor"]
-    data = {
+# ==============================================================================
+# 1. GOLDEN BASELINE AUDIT
+# ==============================================================================
+@pytest.mark.smoke
+@pytest.mark.integrity
+def test_golden_people_audit_passes(mock_gpa_env, audit_cache):
+    """Verifies that the golden baseline contains zero critical errors."""
+    assert GOLDEN_PEOPLE.exists(), f"Missing fixture: {GOLDEN_PEOPLE}"
+    findings = audit_cache(GOLDEN_PEOPLE)
+    assert len(findings.critical) == 0, f"Expected zero critical errors, got: {findings.critical}"
+
+
+# ==============================================================================
+# 2. BIOLOGICAL CHRONOLOGY FAILURES (DISCRETE TESTS)
+# ==============================================================================
+CHRONO_FIXTURE = FAILURES_DIR / "failed_biological_chronology.json"
+
+
+@pytest.mark.regression
+def test_chrono_error_death_before_birth(audit_cache):
+    """Verifies detection of an individual who died before they were born."""
+    findings = audit_cache(CHRONO_FIXTURE)
+    matches = [f for f in findings.find_rules("CHRONO_DEATH_BEFORE_BIRTH") if f["person_id"] == "IND-00037"]
+    assert len(matches) == 1, "Failed to detect CHRONO_DEATH_BEFORE_BIRTH on IND-00037"
+
+
+@pytest.mark.regression
+def test_chrono_error_parent_too_young(audit_cache):
+    """Verifies detection of parents under minimum biological age at child's birth."""
+    findings = audit_cache(CHRONO_FIXTURE)
+    matches = [f for f in findings.find_rules("CHRONO_PARENT_TOO_YOUNG") if f["person_id"] == "IND-00043"]
+    assert len(matches) == 2, f"Expected 2 parent-too-young findings for IND-00043, got: {matches}"
+    parent_ids = {f["message"].split()[1] for f in matches}
+    assert parent_ids == {"IND-00000", "IND-00031"}
+
+
+@pytest.mark.regression
+def test_chrono_error_born_after_parent_death(audit_cache):
+    """Verifies detection of a child born after a parent's recorded death."""
+    findings = audit_cache(CHRONO_FIXTURE)
+    matches = [f for f in findings.find_rules("CHRONO_BORN_AFTER_PARENT_DEATH") if f["person_id"] == "IND-00083"]
+    assert len(matches) == 1, "Failed to detect CHRONO_BORN_AFTER_PARENT_DEATH on IND-00083"
+
+
+@pytest.mark.regression
+def test_chrono_warning_mother_too_old(audit_cache):
+    """Verifies warning for maternal delivery past biological boundary."""
+    findings = audit_cache(CHRONO_FIXTURE)
+    matches = [f for f in findings.find_rules("CHRONO_MOTHER_TOO_OLD") if f["person_id"] == "IND-00047"]
+    assert len(matches) == 1, "Failed to detect CHRONO_MOTHER_TOO_OLD on IND-00047"
+
+
+@pytest.mark.regression
+def test_chrono_warning_implausible_lifespan(audit_cache):
+    """Verifies warning for an extreme lifespan (>115y) without documentation."""
+    findings = audit_cache(CHRONO_FIXTURE)
+    matches = [f for f in findings.find_rules("CHRONO_IMPLAUSIBLE_LIFESPAN") if f["person_id"] == "IND-00109"]
+    assert len(matches) == 1, "Failed to detect CHRONO_IMPLAUSIBLE_LIFESPAN on IND-00109"
+
+
+@pytest.mark.regression
+def test_chrono_documented_longevity_exemption(audit_cache):
+    """Verifies Barnaby Sterling (104y) does not trigger CHRONO_IMPLAUSIBLE_LIFESPAN due to note."""
+    findings = audit_cache(GOLDEN_PEOPLE)
+    matches = [f for f in findings.find_rules("CHRONO_IMPLAUSIBLE_LIFESPAN") if f["person_id"] == "IND-00139"]
+    assert len(matches) == 0, "Barnaby Sterling was incorrectly flagged despite documented longevity note"
+
+
+@pytest.mark.regression
+def test_chrono_documented_late_birth_exemption(audit_cache):
+    """Verifies Eleanor Thornton (51y at delivery) does not trigger CHRONO_MOTHER_TOO_OLD due to note."""
+    findings = audit_cache(GOLDEN_PEOPLE)
+    matches = [f for f in findings.find_rules("CHRONO_MOTHER_TOO_OLD") if f["person_id"] == "IND-00211"]
+    assert len(matches) == 0, "Lateborn Thornton was incorrectly flagged despite documented late birth note"
+
+
+# ==============================================================================
+# 3. VITAL SYNCHRONIZATION FAILURES
+# ==============================================================================
+@pytest.mark.regression
+def test_vital_sync_birth_year_mismatch(mock_gpa_env):
+    """Verifies canonical birth_year desynchronized from vitals.birth triggers CRITICAL."""
+    desync_data = {
         "$schema": "schemas/entities/person_registry.schema.json",
-        "schema_version": "1.0.1",
-        "total_persons": 1,
-        "persons": [{"person_id": "IND-00001"}],
-    }
-    update_registry(auditor, data)
-    findings = auditor.audit_container()
-    assert len(findings.errors) == 0
-    assert len(findings.warnings) == 0
-
-
-def test_container_schema_and_version_mismatch(mock_gpa_env):
-    """Verifies failure on invalid schema URI, incorrect version, and count mismatch."""
-    auditor = mock_gpa_env["auditor"]
-    data = {
-        "$schema": "invalid/path/schema.json",
-        "schema_version": "2.0.0",
-        "total_persons": 5,
-        "persons": [{"person_id": "IND-00001"}],
-    }
-    update_registry(auditor, data)
-    findings = auditor.audit_container()
-    assert len(findings.errors) == 3
-
-
-def test_schema_valid_entity(mock_gpa_env):
-    """Validates a structurally complete person record against controlled enums."""
-    auditor = mock_gpa_env["auditor"]
-    data = {
-        "$schema": "schemas/entities/person_registry.schema.json",
-        "schema_version": "1.0.1",
+        "schema_version": "1.0.2",
+        "created_at": "2026-01-01T00:00:00Z",
+        "last_modified": "2026-09-26T00:00:00Z",
         "total_persons": 1,
         "persons": [
             {
-                "person_id": "IND-00001",
-                "display_name": "John Doe",
-                "canonical_name": {"given": "John", "surname": "Doe"},
+                "person_id": "IND-99999",
+                "display_name": "Desync Person",
+                "canonical_name": {
+                    "given": "Desync",
+                    "surname": "Person",
+                    "birth_year": {"year": 1961, "modifier": "EXACT"},
+                },
                 "sex": "Male",
                 "vitals": {
-                    "birth": {"date": {"date_start": "1900-01-01", "modifier": "EXACT"}},
-                    "death": {"date": {"date_start": "1980-05-15", "modifier": "EXACT"}},
+                    "birth": {
+                        "date": {"date_start": "1965-06-15", "modifier": "EXACT"}
+                    }
                 },
                 "associated_people": [],
+                "unions": [],
             }
         ],
     }
-    update_registry(auditor, data)
-    findings = auditor.audit_schema()
-    assert len(findings.errors) == 0
+    auditor = RegistryAuditor(people_data=desync_data, logger=mock_gpa_env["logger"])
+    findings = auditor.run_all()
+    matches = findings.find_rules("VITAL_SYNC_BIRTH_YEAR")
+    assert len(matches) == 1
+    assert matches[0]["person_id"] == "IND-99999"
 
 
-def test_schema_invalid_id_and_enum_violations(mock_gpa_env):
-    """Catches invalid person_id formats, missing names, and controlled enum violations."""
-    auditor = mock_gpa_env["auditor"]
-    data = {
-        "$schema": "schemas/entities/person_registry.schema.json",
-        "schema_version": "1.0.1",
-        "total_persons": 1,
-        "persons": [
-            {
-                "person_id": "BAD-ID-123",
-                "canonical_name": {"raw_name": "Test Subject"},
-                "sex": "INVALID_SEX",
-                "vitals": {
-                    "birth": {"date": {"date_start": "1900-01-01", "modifier": "INVALID_MOD"}},
-                },
-                "associated_people": [{"person_id": "IND-00002", "role": "INVALID_ROLE"}],
-            }
-        ],
-    }
-    update_registry(auditor, data)
-    findings = auditor.audit_schema()
-    assert any("Invalid or missing person_id" in err for err in findings.errors)
-    assert any("Missing or invalid required string 'display_name'" in err for err in findings.errors)
-    assert any("Invalid 'sex' enum value" in err for err in findings.errors)
-    assert any("invalid modifier enum" in err for err in findings.errors)
-    assert any("invalid role enum" in err for err in findings.errors)
+@pytest.mark.regression
+def test_vital_sync_death_year_mismatch(audit_cache):
+    """Verifies canonical death_year desynchronized from vitals.death triggers VITAL_SYNC_DEATH_YEAR."""
+    findings = audit_cache(FAILURES_DIR / "failed_vital_sync_death.json")
+    matches = [f for f in findings.find_rules("VITAL_SYNC_DEATH_YEAR") if f["person_id"] == "IND-00019"]
+    assert len(matches) == 1, "Failed to detect VITAL_SYNC_DEATH_YEAR on IND-00019"
 
 
-def test_reciprocity_valid(mock_gpa_env):
-    """Verifies that reciprocal kinship relationships evaluate cleanly."""
-    auditor = mock_gpa_env["auditor"]
-    data = {
-        "$schema": "schemas/entities/person_registry.schema.json",
-        "schema_version": "1.0.1",
-        "total_persons": 2,
-        "persons": [
-            {
-                "person_id": "IND-00001",
-                "sex": "Male",
-                "associated_people": [{"person_id": "IND-00002", "role": "CHIL"}],
-            },
-            {
-                "person_id": "IND-00002",
-                "sex": "Female",
-                "associated_people": [{"person_id": "IND-00001", "role": "FATH"}],
-            },
-        ],
-    }
-    update_registry(auditor, data)
-    findings = auditor.audit_reciprocity()
-    assert len(findings.errors) == 0
+# ==============================================================================
+# 4. ENVELOPE & DEDUPLICATION FAILURES
+# ==============================================================================
+@pytest.mark.regression
+def test_envelope_missing_required_property(audit_cache):
+    """Verifies envelope audit catches missing top-level manifest keys."""
+    findings = audit_cache(FAILURES_DIR / "failed_envelope_and_schema.json")
+    matches = findings.find_rules("ENV_REQ")
+    assert len(matches) > 0, "Failed to detect ENV_REQ"
 
 
-def test_reciprocity_missing_child_link(mock_gpa_env):
-    """Detects when a parent links to a child but child fails to link back."""
-    auditor = mock_gpa_env["auditor"]
-    data = {
-        "$schema": "schemas/entities/person_registry.schema.json",
-        "schema_version": "1.0.1",
-        "total_persons": 2,
-        "persons": [
-            {
-                "person_id": "IND-00001",
-                "sex": "Female",
-                "associated_people": [{"person_id": "IND-00002", "role": "CHIL"}],
-            },
-            {
-                "person_id": "IND-00002",
-                "sex": "Male",
-                "associated_people": [],
-            },
-        ],
-    }
-    update_registry(auditor, data)
-    findings = auditor.audit_reciprocity()
-    assert len(findings.errors) == 1
-    assert "does not link back as MOTH" in findings.errors[0]
+@pytest.mark.regression
+def test_envelope_count_mismatch(audit_cache):
+    """Verifies envelope audit catches total_persons count desynchronization."""
+    findings = audit_cache(FAILURES_DIR / "failed_envelope_and_schema.json")
+    matches = findings.find_rules("COUNT_MISMATCH")
+    assert len(matches) > 0, "Failed to detect COUNT_MISMATCH"
 
 
-def test_chronology_valid_and_bounds_violations(mock_gpa_env):
-    """Tests biologically plausible parent-child age differences and flags violations."""
-    auditor = mock_gpa_env["auditor"]
-
-    # 1. Too young (< 12)
-    data_young = {
-        "$schema": "schemas/entities/person_registry.schema.json",
-        "schema_version": "1.0.1",
-        "total_persons": 2,
-        "persons": [
-            {
-                "person_id": "IND-00001",
-                "canonical_name": {"birth_year": {"year": 1950}},
-                "associated_people": [],
-            },
-            {
-                "person_id": "IND-00002",
-                "canonical_name": {"birth_year": {"year": 1955}},
-                "associated_people": [{"person_id": "IND-00001", "role": "FATH"}],
-            },
-        ],
-    }
-    update_registry(auditor, data_young)
-    findings_young = auditor.audit_chronology()
-    assert len(findings_young.errors) == 1
-    assert "Minimum threshold: 12" in findings_young.errors[0]
-
-    # 2. Too old (> 85)
-    data_old = {
-        "$schema": "schemas/entities/person_registry.schema.json",
-        "schema_version": "1.0.1",
-        "total_persons": 2,
-        "persons": [
-            {
-                "person_id": "IND-00003",
-                "canonical_name": {"birth_year": {"year": 1850}},
-                "associated_people": [],
-            },
-            {
-                "person_id": "IND-00004",
-                "canonical_name": {"birth_year": {"year": 1940}},
-                "associated_people": [{"person_id": "IND-00003", "role": "FATH"}],
-            },
-        ],
-    }
-    update_registry(auditor, data_old)
-    findings_old = auditor.audit_chronology()
-    assert len(findings_old.errors) == 1
-    assert "Maximum threshold: 85" in findings_old.errors[0]
+@pytest.mark.regression
+def test_dedup_duplicate_person_id(audit_cache):
+    """Verifies duplicate person identifier collisions are flagged as CRITICAL."""
+    findings = audit_cache(FAILURES_DIR / "failed_dedup_and_drift.json")
+    matches = [f for f in findings.find_rules("DUPLICATE_PERSON_ID") if f["person_id"] == "IND-00073"]
+    assert len(matches) == 1, "Failed to detect DUPLICATE_PERSON_ID for IND-00073"
 
 
-def test_vital_synchronization_conflict(mock_gpa_env):
-    """Detects discrepancies between canonical year summaries and vitals dates."""
-    auditor = mock_gpa_env["auditor"]
-    data = {
-        "$schema": "schemas/entities/person_registry.schema.json",
-        "schema_version": "1.0.1",
-        "total_persons": 1,
-        "persons": [
-            {
-                "person_id": "IND-00001",
-                "canonical_name": {"birth_year": {"year": 1880, "modifier": "EXACT"}},
-                "vitals": {
-                    "birth": {"date": {"date_start": "1885-06-12", "modifier": "EXACT"}},
-                },
-            }
-        ],
-    }
-    update_registry(auditor, data)
-    findings = auditor.audit_vital_synchronization()
-    assert len(findings.errors) == 1
-    assert "Birth year conflict" in findings.errors[0]
-    assert len(auditor.remediation_rows) == 1
-    assert auditor.remediation_rows[0]["proposed_action"] == "UPDATE_CANONICAL_YEAR"
+@pytest.mark.regression
+def test_dedup_fingerprint_collision(audit_cache):
+    """Verifies duplicate name and birth year collisions trigger warnings."""
+    findings = audit_cache(FAILURES_DIR / "failed_dedup_and_drift.json")
+    matches = findings.find_rules("DEDUP_COLLISION")
+    assert len(matches) > 0, "Failed to detect DEDUP_COLLISION"
 
 
-def test_audit_incomplete_dates(mock_gpa_env):
-    """Verifies that missing and partial vital dates are cataloged."""
-    auditor = mock_gpa_env["auditor"]
-    data = {
-        "$schema": "schemas/entities/person_registry.schema.json",
-        "schema_version": "1.0.1",
-        "total_persons": 2,
-        "persons": [
-            {
-                "person_id": "IND-00001",
-                "canonical_name": {"birth_year": {"year": 1920}},
-                "vitals": {"birth": {"date": {}}},
-            },
-            {
-                "person_id": "IND-00002",
-                "canonical_name": {"birth_year": {"year": 1930}},
-                "vitals": {"birth": {"date": {"date_start": "1930-04"}}},
-            },
-        ],
-    }
-    update_registry(auditor, data)
-    findings = auditor.audit_incomplete_dates()
-    assert len(findings.warnings) >= 1
-    assert len(findings.notes) >= 1
-    assert any("Missing vital date" in w for w in findings.warnings)
-    assert any("Partial date [YYYY-MM]" in n for n in findings.notes)
+# ==============================================================================
+# 5. KINSHIP, UNIONS & TOPOLOGY FAILURES
+# ==============================================================================
+@pytest.mark.regression
+def test_kinship_missing_reciprocal_association(audit_cache):
+    """Verifies asymmetric reciprocal kinship linkages are flagged."""
+    findings = audit_cache(FAILURES_DIR / "failed_kinship_and_unions.json")
+    matches = [f for f in findings.find_rules("ASYM_ASSOC") if f["person_id"] == "IND-00029"]
+    assert len(matches) > 0, "Failed to detect ASYM_ASSOC for IND-00029"
 
 
-def test_write_report_and_remediation_csv(mock_gpa_env):
-    """Verifies full audit report writing and CSV ledger generation."""
-    auditor = mock_gpa_env["auditor"]
-    data = {
-        "$schema": "schemas/entities/person_registry.schema.json",
-        "schema_version": "1.0.1",
-        "total_persons": 1,
-        "persons": [
-            {
-                "person_id": "IND-00001",
-                "canonical_name": {"birth_year": {"year": 1880}},
-                "vitals": {"birth": {"date": {"date_start": "1885-06-12"}}},
-            }
-        ],
-    }
-    update_registry(auditor, data)
-    findings = auditor.audit_vital_synchronization()
-    auditor.write_report("vital_synchronization", findings)
+@pytest.mark.regression
+def test_kinship_unknown_role_handling(audit_cache):
+    """Verifies associated role not in reciprocal_map is gracefully handled."""
+    findings = audit_cache(FAILURES_DIR / "failed_kinship_unknown_role.json")
+    matches = [f for f in findings.find_rules("ASYM_ASSOC") if f["person_id"] == "IND-00037"]
+    assert len(matches) == 0
 
-    reports = list(mock_gpa_env["reports_dir"].glob("audit_people_vital_synchronization_*.txt"))
-    csvs = list(mock_gpa_env["reports_dir"].glob("remediation_vital_sync_*.csv"))
 
-    assert len(reports) == 1
-    assert len(csvs) == 1
-    assert "Birth year conflict" in reports[0].read_text(encoding="utf-8")
+@pytest.mark.regression
+def test_unions_marriage_date_mismatch(audit_cache):
+    """Verifies conflicting marriage dates across reciprocal spouses are flagged."""
+    findings = audit_cache(FAILURES_DIR / "failed_kinship_and_unions.json")
+    matches = findings.find_rules("UNION_DATE_MISMATCH")
+    assert len(matches) > 0, "Failed to detect UNION_DATE_MISMATCH"
+
+
+@pytest.mark.regression
+def test_union_missing_spouse_id_detected(audit_cache):
+    """Verifies that a union entry lacking spouse_id triggers UNION_NO_SPOUSE."""
+    findings = audit_cache(FAILURES_DIR / "failed_unions_edge_cases.json")
+    matches = [f for f in findings.find_rules("UNION_NO_SPOUSE") if f["person_id"] == "IND-00000"]
+    assert len(matches) == 1, "Failed to detect UNION_NO_SPOUSE on IND-00000"
+
+
+@pytest.mark.regression
+def test_union_invalid_status_detected(audit_cache):
+    """Verifies that an unapproved union status triggers UNION_INVALID_STATUS."""
+    findings = audit_cache(FAILURES_DIR / "failed_unions_edge_cases.json")
+    matches = [f for f in findings.find_rules("UNION_INVALID_STATUS") if f["person_id"] == "IND-00031"]
+    assert len(matches) == 1, "Failed to detect UNION_INVALID_STATUS on IND-00031"
+
+
+@pytest.mark.regression
+def test_topology_dangling_association(audit_cache):
+    """Verifies references to non-existent person IDs are caught as CRITICAL."""
+    findings = audit_cache(FAILURES_DIR / "failed_topology_and_orphans.json")
+    matches = [f for f in findings.find_rules("DANGLING_ASSOC") if f["person_id"] == "IND-00083"]
+    assert len(matches) == 1, "Failed to detect DANGLING_ASSOC for IND-00083"
+
+
+@pytest.mark.regression
+def test_topology_disconnected_island(audit_cache):
+    """Verifies disconnected collateral branches are caught as CRITICAL."""
+    findings = audit_cache(FAILURES_DIR / "failed_topology_and_orphans.json")
+    matches = [f for f in findings.find_rules("TOPOLOGY_ISLAND") if f["person_id"] == "IND-00113"]
+    assert len(matches) == 1, "Failed to detect TOPOLOGY_ISLAND for IND-00113"
+
+
+# ==============================================================================
+# 6. LOCATION STRUCTURE FAILURES
+# ==============================================================================
+@pytest.mark.regression
+def test_location_malformed_string_detected(audit_cache):
+    """Verifies that a non-dict location place triggers LOCATION_MALFORMED."""
+    findings = audit_cache(FAILURES_DIR / "failed_locations_and_redirects.json")
+    matches = [f for f in findings.find_rules("LOCATION_MALFORMED") if f["person_id"] == "IND-00000"]
+    assert len(matches) == 1, "Failed to detect LOCATION_MALFORMED on IND-00000"
+
+
+@pytest.mark.regression
+def test_location_missing_standard_keys_detected(audit_cache):
+    """Verifies place object lacking verbatim and standardized triggers LOCATION_MISSING_STANDARD."""
+    findings = audit_cache(FAILURES_DIR / "failed_locations_and_redirects.json")
+    matches = [f for f in findings.find_rules("LOCATION_MISSING_STANDARD") if f["person_id"] == "IND-00029"]
+    assert len(matches) == 1, "Failed to detect LOCATION_MISSING_STANDARD on IND-00029"
+
+
+# ==============================================================================
+# 7. CLI OPERATIONS & EXIT CODES
+# ==============================================================================
+def test_gpa_cli_clean_execution(mock_gpa_env, monkeypatch):
+    """Verifies running GPA CLI against golden baseline returns exit code 0."""
+    monkeypatch.setattr("sys.argv", ["gpa.py", "--file", str(GOLDEN_PEOPLE)])
+    assert run_cli() == 0
+
+
+def test_gpa_cli_missing_file_error(mock_gpa_env, monkeypatch):
+    """Verifies running GPA CLI with a non-existent file returns exit code 1."""
+    non_existent = FIXTURES_DIR / "non_existent_file.json"
+    monkeypatch.setattr("sys.argv", ["gpa.py", "--file", str(non_existent)])
+    assert run_cli() == 1
+
+
+def test_gpa_cli_critical_failure_exit_code(mock_gpa_env, monkeypatch):
+    """Verifies running GPA CLI against a file with CRITICAL findings returns exit code 1."""
+    fail_path = FAILURES_DIR / "failed_envelope_and_schema.json"
+    monkeypatch.setattr("sys.argv", ["gpa.py", "--file", str(fail_path)])
+    assert run_cli() == 1
+
+
+def test_gpa_cli_warnings_verbose_emission(mock_gpa_env, monkeypatch):
+    """Verifies running GPA CLI against fixture with warnings triggers warning log loop."""
+    fail_path = FAILURES_DIR / "failed_kinship_and_unions.json"
+    monkeypatch.setattr("sys.argv", ["gpa.py", "--file", str(fail_path), "--verbose"])
+    assert run_cli() == 0

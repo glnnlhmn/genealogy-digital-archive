@@ -1,0 +1,163 @@
+{
+  "$schema": "schemas/entities/location_registry.schema.json",
+  "schema_version": "1.0.0",
+  "created_at": "2026-01-01T00:00:00Z",
+  "last_modified": "2026-09-26T00:46:00Z",
+  "total_locations": 11,
+  "locations": [
+    {
+      "location_id": "LOC-00001",
+      "location_type": "JURISDICTION",
+      "location": {
+        "standardized": "Pennsylvania, USA",
+        "verbatim": "Pennsylvania",
+        "details": {
+          "local_jurisdiction": null,
+          "county": null,
+          "state_or_province": "Pennsylvania",
+          "country": "USA"
+        }
+      }
+    },
+    {
+      "location_id": "LOC-00002",
+      "location_type": "JURISDICTION",
+      "location": {
+        "standardized": "Cumberland County, Pennsylvania, USA",
+        "verbatim": "Cumberland Co., Pa.",
+        "details": {
+          "local_jurisdiction": null,
+          "county": "Cumberland County",
+          "state_or_province": "Pennsylvania",
+          "country": "USA"
+        }
+      }
+    },
+    {
+      "location_id": "LOC-00003",
+      "location_type": "JURISDICTION",
+      "location": {
+        "standardized": "West Pennsboro Township, Cumberland County, Pennsylvania, USA",
+        "verbatim": "W. Pennsboro, Cumberland Co., Pa.",
+        "details": {
+          "local_jurisdiction": "West Pennsboro Township",
+          "county": "Cumberland County",
+          "state_or_province": "Pennsylvania",
+          "country": "USA"
+        }
+      }
+    },
+    {
+      "location_id": "LOC-00004",
+      "location_type": "MUNICIPALITY",
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA",
+        "verbatim": "Carlisle, PA",
+        "details": {
+          "local_jurisdiction": "Carlisle",
+          "county": "Cumberland County",
+          "state_or_province": "Pennsylvania",
+          "country": "USA"
+        }
+      }
+    },
+    {
+      "location_id": "LOC-00005",
+      "location_type": "MUNICIPALITY",
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA",
+        "verbatim": "Harrisburg, Dauphin, Pennsylvania, USA",
+        "details": {
+          "local_jurisdiction": "Harrisburg",
+          "county": "Dauphin County",
+          "state_or_province": "Pennsylvania",
+          "country": "USA"
+        }
+      }
+    },
+    {
+      "location_id": "LOC-00006",
+      "location_type": "MUNICIPALITY",
+      "location": {
+        "standardized": "Newville, Cumberland County, Pennsylvania, USA",
+        "verbatim": "Newville, Cumberland County, Pennsylvania, USA",
+        "details": {
+          "local_jurisdiction": "Newville",
+          "county": "Cumberland County",
+          "state_or_province": "Pennsylvania",
+          "country": "USA"
+        }
+      }
+    },
+    {
+      "location_id": "LOC-00007",
+      "location_type": "JURISDICTION",
+      "location": {
+        "standardized": "Frankford Township, Cumberland County, Pennsylvania, USA",
+        "verbatim": "Frankford, Cumberland, Pennsylvania, USA",
+        "details": {
+          "local_jurisdiction": "Frankford Township",
+          "county": "Cumberland County",
+          "state_or_province": "Pennsylvania",
+          "country": "USA"
+        }
+      }
+    },
+    {
+      "location_id": "LOC-00008",
+      "location_type": "MUNICIPALITY",
+      "location": {
+        "standardized": "Saltillo, Huntingdon County, Pennsylvania, USA",
+        "verbatim": "Saltillo, Huntingdon County, Pennsylvania, USA",
+        "details": {
+          "local_jurisdiction": "Saltillo",
+          "county": "Huntingdon County",
+          "state_or_province": "Pennsylvania",
+          "country": "USA"
+        }
+      }
+    },
+    {
+      "location_id": "LOC-00009",
+      "location_type": "MUNICIPALITY",
+      "location": {
+        "standardized": "Groton, New London County, Connecticut, USA",
+        "verbatim": "Groton, Connecticut, USA",
+        "details": {
+          "local_jurisdiction": "Groton",
+          "county": "New London County",
+          "state_or_province": "Connecticut",
+          "country": "USA"
+        }
+      }
+    },
+    {
+      "location_id": "LOC-00010",
+      "location_type": "JURISDICTION",
+      "location": {
+        "standardized": "Thurso, Caithness, Scotland",
+        "verbatim": "Thurso, Caithness, Scotland",
+        "details": {
+          "local_jurisdiction": "Thurso",
+          "county": null,
+          "state_or_province": "Caithness",
+          "country": "Scotland"
+        }
+      }
+    },
+    {
+      "location_id": "LOC-00011",
+      "location_type": "MUNICIPALITY",
+      "location": {
+        "standardized": "Hornberg, Baden-Württemberg, Germany",
+        "verbatim": "Hornberg, Germany",
+        "details": {
+          "local_jurisdiction": "Hornberg",
+          "county": null,
+          "state_or_province": "Baden-Württemberg",
+          "country": "Germany"
+        }
+      }
+    }
+  ]
+}
