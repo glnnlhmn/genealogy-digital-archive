@@ -491,6 +491,9 @@
           "description": "Functional or contextual role of the person."
         }
       }
+    },
+    "enum_union_status": {
+      "$ref": "_enums.schema.json#/$defs/enum_union_status"
     }
   }
 }

@@ -1,628 +1,461 @@
 # Name: facts_insp.py
 # Path: tools/ops/facts_insp.py
 
-"""
-Read-only operational inspection tool to audit facts.json integrity:
-- Schema conformance (UUID/GUID pattern checks classified as WARN)
-- Typology and controlled vocabulary via SchemaEnums (classified as ERROR)
-- Temporal and modifier validity via SchemaEnums (classified as ERROR)
-- Biological & chronological plausibility against people.json (classified as ERROR)
-  * Deep resolution of vitals.birth, vitals.death, and canonical_name years
-  * Exempts post-mortem fact types: 'Burial', 'Death', 'Probate', 'Association', 'Parentage'
-- Duplicate extractions (Dedup-Source and Dedup-Event classified as WARN)
-- Relational reciprocal consistency (strictly classified as INFO)
-- Enriched log formatting: FCT <short_id> (<person_id> (<full_name>))
-- Multi-variant name resolution across canonical_name, name, names, and root strings
-- System execution traces prefixed with [SYS] via GDALogger
-- Robust extraction of singular/array record_urn from fact['source']
-- Conditional CSV export (only when merge proposals exist)
-- Audit summary emitted to JSON in reports/ via GDAUtil
+"""Fact Registry Inspection Engine.
 
-Version: 1.0.1 (Build 1)
+Audits facts.json against schema specifications, controlled vocabularies,
+biological chronology plausibility, deduplication criteria, and relational
+consistency against people.json unions.
 """
 
 import argparse
 import csv
+from datetime import datetime
+import json
 import logging
+from pathlib import Path
 import re
 import sys
-from datetime import datetime
-from pathlib import Path
+from typing import Any, Dict, List, Optional, Set, Tuple
 
-from tools.lib.gda_core.GDAConfig import CONFIG
+ROOT_DIR = Path(__file__).resolve().parents[2]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from tools.lib.gda_core.GDAConfig import GDAConfig
 from tools.lib.gda_core.GDALogger import setup_logger
 from tools.lib.gda_core.GDAUtil import GDAUtil
-from tools.lib.gda_core.registry import SchemaEnums
 
-__version__ = "1.0.1"
-__build__ = 1
+__version__ = "1.0.2+build.20260925.2"
 
-UUID_PATTERN = re.compile(
-    r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-    re.IGNORECASE,
+UUID_REGEX = re.compile(
+    r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+)
+DATE_ISO_REGEX = re.compile(
+    r"^\d{4}(-(0[1-9]|1[0-2])(-(0[1-9]|[12]\d|3[01]))?)?$"
 )
 
-SPOUSE_ROLES = {"spouse", "husband", "wife", "partner", "fiancé", "fiancee", "groom", "bride"}
-POST_MORTEM_ALLOWED_TYPES = {"Burial", "Death", "Probate", "Association", "Parentage"}
+POST_MORTEM_EXEMPT_FACT_TYPES: Set[str] = {
+    "Parentage",
+    "Death",
+    "Burial",
+    "Probate",
+    "Association",
+}
+
+DEFAULT_FACT_TYPES: Set[str] = {
+    "Birth",
+    "Death",
+    "Burial",
+    "Marriage",
+    "Divorce",
+    "Parentage",
+    "Residence",
+    "Census",
+    "Occupation",
+    "Probate",
+    "Association",
+    "Immigration",
+    "Military",
+    "Education",
+    "Other",
+}
+
+DEFAULT_DATE_MODIFIERS: Set[str] = {
+    "EXACT",
+    "ABT",
+    "BEF",
+    "AFT",
+    "BET",
+    "EST",
+    "CAL",
+    "LIVING",
+    "UNKNOWN",
+}
 
 
-def extract_year(date_val) -> int | None:
-    """Extracts a 4-digit calendar year from date field variants."""
-    if not date_val:
-        return None
-    if isinstance(date_val, int):
-        return date_val if 1000 <= date_val <= 2100 else None
-    if isinstance(date_val, dict):
-        if "year" in date_val and isinstance(date_val["year"], int):
-            return date_val["year"]
-        date_val = (
-            date_val.get("date")
-            or date_val.get("date_start")
-            or date_val.get("raw_text")
-            or date_val.get("raw")
-            or ""
-        )
-    match = re.search(r"\b(1[6-9]\d{2}|20\d{2})\b", str(date_val))
-    return int(match.group(1)) if match else None
+def load_vocabularies(config: GDAConfig) -> Tuple[Set[str], Set[str]]:
+    """Loads controlled vocabularies from schemas/defs/_enums.schema.json."""
+    enums_path = (
+        getattr(config, "schemas_dir", ROOT_DIR / "schemas")
+        / "defs"
+        / "_enums.schema.json"
+    )
+    if not enums_path.is_file():
+        enums_path = ROOT_DIR / "schemas" / "defs" / "_enums.schema.json"
+
+    fact_types = set(DEFAULT_FACT_TYPES)
+    date_modifiers = set(DEFAULT_DATE_MODIFIERS)
+
+    if enums_path.is_file():
+        try:
+            schema_data = GDAUtil.load_json(enums_path)
+            defs = schema_data.get("$defs", {})
+            if "enum_fact_type" in defs and "enum" in defs["enum_fact_type"]:
+                fact_types = set(defs["enum_fact_type"]["enum"])
+            if "enum_date_modifier" in defs and "enum" in defs["enum_date_modifier"]:
+                date_modifiers = set(defs["enum_date_modifier"]["enum"])
+        except Exception:
+            pass
+
+    return fact_types, date_modifiers
 
 
-def normalize_date_str(date_val) -> str:
-    """Normalizes date structure into comparable string representation."""
-    if not date_val:
-        return ""
-    if isinstance(date_val, dict):
-        return str(
-            date_val.get("date")
-            or date_val.get("date_start")
-            or date_val.get("raw_text")
-            or date_val.get("raw")
-            or ""
-        ).strip()
-    return str(date_val).strip()
+class FactInspector:
+    """Core auditing engine for facts.json validation and plausibility."""
 
+    def __init__(
+        self,
+        facts_payload: Dict[str, Any],
+        people_payload: Dict[str, Any],
+        logger: logging.Logger,
+        valid_fact_types: Optional[Set[str]] = None,
+        valid_date_modifiers: Optional[Set[str]] = None,
+    ) -> None:
+        self.facts_data = facts_payload
+        self.people_data = people_payload
+        self.logger = logger
+        self.valid_fact_types = valid_fact_types or DEFAULT_FACT_TYPES
+        self.valid_date_modifiers = valid_date_modifiers or DEFAULT_DATE_MODIFIERS
 
-def extract_source_keys(fact: dict) -> list[str]:
-    """
-    Extracts a deduplicated list of source/record URN strings from a fact.
-    Handles scalar strings, lists of strings, and nested dictionaries across:
-      - fact['source']['record_urn']
-      - fact['source']['source_urn']
-      - fact['sources'][*]['record_urn']
-      - fact['record_urn'], fact['source_urn'], fact['source_reference']
-    """
-    keys = set()
+        self.facts: List[Dict[str, Any]] = self.facts_data.get("facts", [])
+        self.persons: List[Dict[str, Any]] = self.people_data.get("persons", [])
+        self.person_map: Dict[str, Dict[str, Any]] = {
+            p["person_id"]: p for p in self.persons if "person_id" in p
+        }
 
-    def _collect(val):
-        if not val:
-            return
-        if isinstance(val, str):
-            cleaned = val.strip()
-            if cleaned:
-                keys.add(cleaned)
-        elif isinstance(val, list):
-            for item in val:
-                _collect(item)
-        elif isinstance(val, dict):
-            for attr in ("record_urn", "source_urn", "urn", "source_id", "source_reference"):
-                if attr in val:
-                    _collect(val[attr])
+        self.errors: List[Dict[str, Any]] = []
+        self.warnings: List[Dict[str, Any]] = []
+        self.info: List[Dict[str, Any]] = []
+        self.merge_proposals: List[Dict[str, Any]] = []
 
-    if "source" in fact:
-        _collect(fact["source"])
-    if "sources" in fact:
-        _collect(fact["sources"])
-    for top_attr in ("record_urn", "source_urn", "source_reference", "source_id"):
-        if top_attr in fact:
-            _collect(fact[top_attr])
+    def _format_fct_label(self, fact: Dict[str, Any]) -> str:
+        fid = str(fact.get("fact_id", "UNKNOWN"))
+        short_id = fid[:8] if len(fid) >= 8 else fid
+        pid = str(fact.get("person_id", "UNKNOWN"))
+        person = self.person_map.get(pid, {})
+        name = person.get("display_name")
+        if not name:
+            cname = person.get("canonical_name", {})
+            given = cname.get("given", "")
+            surname = cname.get("surname", "")
+            name = f"{given} {surname}".strip() or "Unknown Name"
+        return f"FCT {short_id} ({pid} ({name}))"
 
-    return sorted(keys)
-
-
-def extract_person_name(person: dict | None, default_id: str) -> str:
-    """Extracts formatted display name across all person schema variations."""
-    if not isinstance(person, dict):
-        return default_id
-
-    # 1. Direct display_name string
-    if isinstance(person.get("display_name"), str) and person["display_name"].strip():
-        return person["display_name"].strip()
-
-    # 2. Canonical name
-    canonical = person.get("canonical_name")
-    if isinstance(canonical, dict):
-        name = canonical.get("full") or canonical.get("display") or canonical.get("name")
-        if name:
-            return str(name).strip()
-        given = canonical.get("given") or ""
-        middle = canonical.get("middle") or ""
-        surname = canonical.get("surname") or ""
-        parts = [p for p in (given, middle, surname) if p]
-        if parts:
-            return " ".join(parts).strip()
-    elif isinstance(canonical, str) and canonical.strip():
-        return canonical.strip()
-
-    # 3. Name object or string
-    name_obj = person.get("name")
-    if isinstance(name_obj, dict):
-        name = name_obj.get("display_name") or name_obj.get("full") or name_obj.get("display")
-        if name:
-            return str(name).strip()
-    elif isinstance(name_obj, str) and name_obj.strip():
-        return name_obj.strip()
-
-    # 4. Names array
-    names = person.get("names")
-    if isinstance(names, list) and names:
-        first = names[0]
-        if isinstance(first, dict):
-            name = first.get("full") or first.get("display") or first.get("display_name")
-            if name:
-                return str(name).strip()
-        elif isinstance(first, str) and first.strip():
-            return first.strip()
-
-    return default_id
-
-
-def extract_person_lifespan(person: dict | None) -> tuple[int | None, int | None]:
-    """
-    Extracts birth and death calendar years across all schema representations:
-      - person['vitals']['birth']['date']
-      - person['vitals']['death']['date']
-      - person['canonical_name']['birth_year']['year']
-      - person['canonical_name']['death_year']['year']
-      - person['events'] / person['vitals'] arrays
-      - person['birth'] / person['death'] root objects
-    """
-    if not isinstance(person, dict):
-        return None, None
-
-    b_year = None
-    d_year = None
-
-    def _resolve_year(val) -> int | None:
-        if not val:
+    def _resolve_year(self, date_dict: Optional[Dict[str, Any]]) -> Optional[int]:
+        if not isinstance(date_dict, dict):
             return None
-        if isinstance(val, int):
-            return val if 1000 <= val <= 2100 else None
-        if isinstance(val, dict):
-            if "year" in val and isinstance(val["year"], int):
-                return val["year"]
-            sub_date = val.get("date")
-            if sub_date:
-                res = _resolve_year(sub_date)
-                if res:
-                    return res
-            for field in ("date_start", "date_end", "raw_text", "raw", "year"):
-                if field in val:
-                    res = extract_year(val[field])
-                    if res:
-                        return res
-        return extract_year(val)
+        ds = date_dict.get("date_start")
+        if ds and isinstance(ds, str) and len(ds) >= 4 and ds[:4].isdigit():
+            return int(ds[:4])
+        return None
 
-    # 1. Structured vitals wrapper
-    vitals = person.get("vitals")
-    if isinstance(vitals, dict):
-        if "birth" in vitals:
-            b_year = _resolve_year(vitals["birth"])
-        if "death" in vitals:
-            d_year = _resolve_year(vitals["death"])
+    def _resolve_person_lifespan(
+        self, person: Dict[str, Any]
+    ) -> Tuple[Optional[int], Optional[int]]:
+        birth_yr = None
+        v_birth = person.get("vitals", {}).get("birth", {}).get("date")
+        birth_yr = self._resolve_year(v_birth)
+        if birth_yr is None:
+            c_birth = person.get("canonical_name", {}).get("birth_year", {})
+            if isinstance(c_birth, dict):
+                birth_yr = c_birth.get("year")
 
-    # 2. Canonical name year integers
-    canonical = person.get("canonical_name")
-    if isinstance(canonical, dict):
-        if not b_year and "birth_year" in canonical:
-            b_year = _resolve_year(canonical["birth_year"])
-        if not d_year and "death_year" in canonical:
-            d_year = _resolve_year(canonical["death_year"])
+        death_yr = None
+        v_death = person.get("vitals", {}).get("death", {}).get("date")
+        death_yr = self._resolve_year(v_death)
+        if death_yr is None:
+            c_death = person.get("canonical_name", {}).get("death_year", {})
+            if isinstance(c_death, dict):
+                death_yr = c_death.get("year")
 
-    # 3. Direct root attributes
-    if not b_year and "birth" in person:
-        b_year = _resolve_year(person["birth"])
-    if not b_year and "birth_date" in person:
-        b_year = _resolve_year(person["birth_date"])
-    if not b_year and "birth_year" in person:
-        b_year = _resolve_year(person["birth_year"])
+        return birth_yr, death_yr
 
-    if not d_year and "death" in person:
-        d_year = _resolve_year(person["death"])
-    if not d_year and "death_date" in person:
-        d_year = _resolve_year(person["death_date"])
-    if not d_year and "death_year" in person:
-        d_year = _resolve_year(person["death_year"])
-
-    # 4. Events or vitals array traversal
-    events = person.get("events")
-    if isinstance(events, list):
-        for ev in events:
-            if isinstance(ev, dict):
-                ev_type = str(ev.get("type") or ev.get("event_type") or "").lower()
-                if "birth" in ev_type and not b_year:
-                    b_year = _resolve_year(ev.get("date") or ev)
-                elif "death" in ev_type and not d_year:
-                    d_year = _resolve_year(ev.get("date") or ev)
-
-    return b_year, d_year
-
-
-def load_people(people_path: Path | None = None) -> dict[str, dict]:
-    """Loads people registry mapping person_id across all registry structures."""
-    p_path = people_path or CONFIG.people
-    if not p_path.exists():
-        return {}
-    try:
-        data = GDAUtil.load_json(p_path)
-    except Exception:
-        return {}
-
-    people_map = {}
-    if isinstance(data, list):
-        for p in data:
-            if isinstance(p, dict) and p.get("person_id"):
-                people_map[p["person_id"]] = p
-    elif isinstance(data, dict):
-        candidates = data.get("people") or data.get("persons") or data.get("records")
-        if isinstance(candidates, list):
-            for p in candidates:
-                if isinstance(p, dict) and p.get("person_id"):
-                    people_map[p["person_id"]] = p
-        elif isinstance(candidates, dict):
-            for k, v in candidates.items():
-                if isinstance(v, dict):
-                    pid = v.get("person_id") or k
-                    people_map[pid] = v
-        else:
-            for k, v in data.items():
-                if isinstance(v, dict):
-                    pid = v.get("person_id") or k
-                    people_map[pid] = v
-    return people_map
-
-
-def format_subject_label(person_id: str | None, people_map: dict[str, dict]) -> str:
-    """Formats person reference as 'IND-XXXXX (Full Name)'."""
-    if not person_id:
-        return "N/A"
-    person = people_map.get(person_id, {})
-    name = extract_person_name(person, person_id)
-    return f"{person_id} ({name})"
-
-
-def short_fact_id(fact_id: str) -> str:
-    """Extracts short 8-char identifier for log formatting."""
-    cleaned = str(fact_id).replace("factoid-", "")
-    return cleaned[:8]
-
-
-def write_audit_deliverables(
-    timestamp: str,
-    total_facts: int,
-    findings: list[dict],
-    merge_candidates: list[dict],
-    reports_dir: Path | None = None,
-) -> tuple[Path, Path | None]:
-    """Generates JSON audit summary and exports CSV only if merge proposals exist."""
-    r_dir = reports_dir or CONFIG.reports
-    r_dir.mkdir(parents=True, exist_ok=True)
-    report_json_path = r_dir / f"facts_audit_summary_{timestamp}.json"
-    csv_file: Path | None = None
-
-    if merge_candidates:
-        csv_file = r_dir / f"fact_merge_candidates_{timestamp}.csv"
-        csv_headers = ["Primary Fact ID", "Absorbed IDs", "Subject", "Fact Type", "Rationale"]
-        with open(csv_file, "w", encoding="utf-8", newline="") as f:
-            writer = csv.writer(f)
-            writer.writerow(csv_headers)
-            for row in merge_candidates:
-                writer.writerow([
-                    row["primary_id"],
-                    row["absorbed_ids"].replace("<br>", "; "),
-                    row["subject"],
-                    row["fact_type"],
-                    row["rationale"],
-                ])
-
-    error_count = sum(1 for item in findings if item["level"] == "ERROR")
-    warn_count = sum(1 for item in findings if item["level"] == "WARN")
-    info_count = sum(1 for item in findings if item["level"] == "INFO")
-
-    category_counts: dict[str, int] = {}
-    for item in findings:
-        cat = item["category"]
-        category_counts[cat] = category_counts.get(cat, 0) + 1
-
-    summary_data = {
-        "timestamp": timestamp,
-        "engine": f"facts_insp v{__version__} (Build {__build__})",
-        "total_facts_audited": total_facts,
-        "total_findings": len(findings),
-        "counts": {
-            "errors": error_count,
-            "warnings": warn_count,
-            "info": info_count,
-            "proposals": len(merge_candidates),
-        },
-        "distribution_by_category": category_counts,
-        "merge_candidates_exported": str(csv_file.name) if csv_file else None,
-        "findings": findings,
-    }
-
-    GDAUtil.save_json(report_json_path, summary_data)
-    return report_json_path, csv_file
-
-
-def inspect_facts(
-    facts_path: Path | None = None,
-    people_path: Path | None = None,
-    reports_dir: Path | None = None,
-    verbose: bool = False,
-    debug: bool = False,
-    logger: logging.Logger | None = None,
-) -> int:
-    """Performs full archival integrity inspection on facts.json."""
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    f_path = facts_path or CONFIG.facts
-    p_path = people_path or CONFIG.people
-    r_dir = reports_dir or CONFIG.reports
-
-    log = logger or setup_logger("facts_insp", console_level=logging.DEBUG if debug else logging.INFO)
-    log.info(f"=== Commencing Fact Registry Inspection (facts_insp.py v{__version__} Build {__build__}) ===", extra={"sys_event": True})
-
-    if not f_path.exists():
-        log.error(f"Target facts file missing at: {f_path}")
-        return 1
-
-    try:
-        facts_data = GDAUtil.load_json(f_path)
-    except Exception as e:
-        log.error(f"Failed to parse {f_path}: {e}")
-        return 1
-
-    records = facts_data if isinstance(facts_data, list) else facts_data.get("facts", [])
-    log.info(f"Loaded {len(records)} fact records for evaluation")
-
-    people_map = load_people(p_path)
-    log.info(f"Loaded {len(people_map)} reference entities from {p_path.name}")
-
-    findings = []
-    merge_candidates = []
-
-    source_urn_tracker: dict[tuple, list[str]] = {}
-    event_tracker: dict[tuple, list[str]] = {}
-    marriages_by_person: dict[str, set[tuple[str, str]]] = {}
-
-    log.info("[Stage-1] --- Record Validation ---", extra={"sys_event": True})
-    log.info("[Stage-1.1] Verifying Identifier Formats & Registry References...", extra={"sys_event": True})
-    s1_issues = 0
-
-    for idx, fact in enumerate(records):
-        if not isinstance(fact, dict):
-            continue
-        fact_id = fact.get("fact_id", f"INDEX_{idx}")
-        person_id = fact.get("person_id")
-        ftype = fact.get("fact_type")
-        fact_year = extract_year(fact.get("date"))
-        date_str = normalize_date_str(fact.get("date"))
-        subj_label = format_subject_label(person_id, people_map)
-        fct_short = short_fact_id(fact_id)
-
-        # 1. Schema Validation (WARN)
-        if not UUID_PATTERN.match(str(fact_id)):
-            msg = f"Identifier does not conform to standard GUID/UUID format: '{fact_id}'."
-            findings.append({
-                "level": "WARN",
-                "category": "Schema",
-                "fact_id": fact_id,
-                "person_id": person_id,
-                "message": msg,
-            })
-            log.warning(f"[Schema] FCT {fct_short} ({subj_label}): {msg}")
-            s1_issues += 1
-
-        # 2. Typology (ERROR)
-        if not SchemaEnums.is_valid("enum_fact_type", ftype):
-            msg = f"Invalid fact_type '{ftype}' not in controlled vocabulary."
-            findings.append({
-                "level": "ERROR",
-                "category": "Typology",
-                "fact_id": fact_id,
-                "person_id": person_id,
-                "message": msg,
-            })
-            log.error(f"[Typology] FCT {fct_short} ({subj_label}): {msg}")
-
-        # 3. Temporal (ERROR)
-        date_obj = fact.get("date")
-        if isinstance(date_obj, dict):
-            modifier = date_obj.get("modifier")
-            if modifier is not None and not SchemaEnums.is_valid("enum_date_modifier", modifier):
-                msg = f"Unrecognized date modifier '{modifier}'."
-                findings.append({
-                    "level": "ERROR",
-                    "category": "Temporal",
-                    "fact_id": fact_id,
-                    "person_id": person_id,
-                    "message": msg,
+    def audit_schema_conformance(self) -> None:
+        """Audits envelope, UUID formatting, and required fact fields."""
+        req_env = ["$schema", "schema_version", "created_at", "last_modified", "facts"]
+        for key in req_env:
+            if key not in self.facts_data:
+                self.warnings.append({
+                    "rule": "ENV_PROPERTY_MISSING",
+                    "message": f"Envelope missing key: {key}",
                 })
-                log.error(f"[Temporal] FCT {fct_short} ({subj_label}): {msg}")
 
-        # 4. Biological & Chronological Plausibility (ERROR)
-        if person_id and person_id in people_map and fact_year:
-            person = people_map[person_id]
-            b_year, d_year = extract_person_lifespan(person)
-
-            if b_year and fact_year < b_year:
-                msg = f"Pre-natal event: '{ftype}' in {fact_year} occurs before subject birth ({b_year})."
-                findings.append({
-                    "level": "ERROR",
-                    "category": "Biological",
-                    "fact_id": fact_id,
-                    "person_id": person_id,
-                    "message": msg,
+        for fact in self.facts:
+            label = self._format_fct_label(fact)
+            fid = fact.get("fact_id")
+            if not fid:
+                self.errors.append({
+                    "rule": "FACT_ID_MISSING",
+                    "label": label,
+                    "message": "Fact record is missing fact_id",
                 })
-                log.error(f"[Biological] FCT {fct_short} ({subj_label}): {msg}")
-
-            if d_year and fact_year > (d_year + 1) and ftype not in POST_MORTEM_ALLOWED_TYPES:
-                msg = f"Post-mortem event: '{ftype}' in {fact_year} occurs after subject death ({d_year})."
-                findings.append({
-                    "level": "ERROR",
-                    "category": "Biological",
-                    "fact_id": fact_id,
-                    "person_id": person_id,
-                    "message": msg,
+            elif not UUID_REGEX.match(str(fid)):
+                self.warnings.append({
+                    "rule": "UUID_PATTERN_INVALID",
+                    "label": label,
+                    "message": f"Fact ID '{fid}' does not adhere to standard UUID v4 regex",
                 })
-                log.error(f"[Biological] FCT {fct_short} ({subj_label}): {msg}")
 
-        # 5. Deduplication Indexing
-        source_keys = extract_source_keys(fact)
-        if person_id and ftype and source_keys:
-            for skey in source_keys:
-                src_sig = (person_id, ftype, skey)
-                source_urn_tracker.setdefault(src_sig, []).append(fact_id)
+            pid = fact.get("person_id")
+            if not pid:
+                self.errors.append({
+                    "rule": "PERSON_ID_MISSING",
+                    "label": label,
+                    "message": "Fact record is missing person_id",
+                })
+            elif pid not in self.person_map:
+                self.errors.append({
+                    "rule": "ORPHANED_PERSON_ID",
+                    "label": label,
+                    "message": f"Target person_id '{pid}' does not exist in people.json",
+                })
 
-        if person_id and ftype and date_str:
-            event_sig = (person_id, ftype, date_str)
-            event_tracker.setdefault(event_sig, []).append(fact_id)
+    def audit_controlled_vocabularies(self) -> None:
+        """Audits fact_type and date modifiers against controlled schemas."""
+        for fact in self.facts:
+            label = self._format_fct_label(fact)
+            ftype = fact.get("fact_type")
+            if not ftype:
+                self.errors.append({
+                    "rule": "FACT_TYPE_MISSING",
+                    "label": label,
+                    "message": "Fact record missing fact_type",
+                })
+            elif ftype not in self.valid_fact_types:
+                self.errors.append({
+                    "rule": "FACT_TYPE_INVALID",
+                    "label": label,
+                    "message": f"Fact type '{ftype}' not defined in controlled schema",
+                })
 
-        # 6. Relational Reciprocal Indexing
-        if ftype == "Marriage" and person_id:
+            date_obj = fact.get("date")
+            if isinstance(date_obj, dict):
+                d_start = date_obj.get("date_start")
+                if d_start and not DATE_ISO_REGEX.match(str(d_start)):
+                    self.errors.append({
+                        "rule": "DATE_START_FORMAT_INVALID",
+                        "label": label,
+                        "message": f"date_start '{d_start}' does not match ISO 8601 pattern",
+                    })
+
+                mod = date_obj.get("modifier")
+                if mod and mod not in self.valid_date_modifiers:
+                    self.errors.append({
+                        "rule": "DATE_MODIFIER_INVALID",
+                        "label": label,
+                        "message": f"date modifier '{mod}' not defined in controlled schema",
+                    })
+
+    def audit_biological_plausibility(self) -> None:
+        """Validates chronology against lifespan, exempting post-mortem types."""
+        for fact in self.facts:
+            label = self._format_fct_label(fact)
+            pid = fact.get("person_id")
+            if not pid or pid not in self.person_map:
+                continue
+
+            person = self.person_map[pid]
+            birth_yr, death_yr = self._resolve_person_lifespan(person)
+            fact_yr = self._resolve_year(fact.get("date"))
+
+            if fact_yr is None:
+                continue
+
+            ftype = fact.get("fact_type", "")
+
+            if birth_yr is not None and fact_yr < birth_yr:
+                if ftype != "Birth":
+                    self.errors.append({
+                        "rule": "ANACHRONISTIC_PRE_BIRTH",
+                        "label": label,
+                        "message": f"Fact year ({fact_yr}) predates individual birth year ({birth_yr})",
+                    })
+
+            if death_yr is not None and fact_yr > death_yr:
+                if ftype in POST_MORTEM_EXEMPT_FACT_TYPES:
+                    self.info.append({
+                        "rule": "POST_MORTEM_EXEMPTION_APPLIED",
+                        "label": label,
+                        "message": f"Post-mortem assertion ({ftype} in {fact_yr}) permitted after death ({death_yr})",
+                    })
+                else:
+                    self.errors.append({
+                        "rule": "ANACHRONISTIC_POST_DEATH",
+                        "label": label,
+                        "message": f"Event fact '{ftype}' in {fact_yr} occurs after death year ({death_yr})",
+                    })
+
+    def audit_unions_cross_validation(self) -> None:
+        """Cross-validates Marriage and Divorce facts against person unions."""
+        for fact in self.facts:
+            ftype = fact.get("fact_type")
+            if ftype not in ("Marriage", "Divorce"):
+                continue
+
+            label = self._format_fct_label(fact)
+            pid = fact.get("person_id")
+            if not pid or pid not in self.person_map:
+                continue
+
+            person = self.person_map[pid]
+            unions = person.get("unions", [])
+
+            spouse_ids: Set[str] = set()
             for assoc in fact.get("associated_people", []):
-                if isinstance(assoc, dict):
-                    rel = (assoc.get("relationship") or assoc.get("role") or "").lower().strip()
-                    target_id = assoc.get("person_id")
-                    if target_id and rel in SPOUSE_ROLES:
-                        marriages_by_person.setdefault(person_id, set()).add((target_id, fact_id))
+                if isinstance(assoc, dict) and assoc.get("person_id"):
+                    spouse_ids.add(assoc["person_id"])
 
-    log.info(f"[Stage-1.1] Completed: {s1_issues} issues detected", extra={"sys_event": True})
+            if not spouse_ids:
+                continue
 
-    # Stage 3: Duplicate Discovery & Merges
-    log.info("[Stage-3] --- Duplicate Discovery & Merge Proposals ---", extra={"sys_event": True})
-    merged_fact_ids: set[str] = set()
+            for sid in spouse_ids:
+                matched_union = next(
+                    (u for u in unions if u.get("spouse_id") == sid), None
+                )
+                if not matched_union:
+                    self.warnings.append({
+                        "rule": "UNION_FACT_NOT_IN_PERSON",
+                        "label": label,
+                        "message": f"Fact {ftype} with {sid} has no corresponding union record in people.json",
+                    })
+                    continue
 
-    for (pid, ftype, urn), fids in source_urn_tracker.items():
-        unique_fids = list(dict.fromkeys(fids))
-        if len(unique_fids) > 1:
-            primary = unique_fids[0]
-            absorbed = unique_fids[1:]
-            merged_fact_ids.update(unique_fids)
-            msg = f"{len(unique_fids)} redundant extractions for '{ftype}' from identical source URN."
-            findings.append({
-                "level": "WARN",
-                "category": "Dedup-Source",
-                "fact_id": primary,
-                "person_id": pid,
-                "message": msg,
-            })
-            fct_short = short_fact_id(primary)
-            subj_label = format_subject_label(pid, people_map)
-            log.warning(f"[Dedup-Source] FCT {fct_short} ({subj_label}): {msg}")
-            merge_candidates.append({
-                "primary_id": primary,
-                "absorbed_ids": "<br>".join(absorbed),
-                "subject": pid,
-                "fact_type": ftype,
-                "rationale": "Duplicate extraction from identical source URN",
-            })
+                if ftype == "Divorce" and matched_union.get("status") != "DIVORCED":
+                    self.warnings.append({
+                        "rule": "UNION_STATUS_DIVORCE_MISMATCH",
+                        "label": label,
+                        "message": f"Person union status is '{matched_union.get('status')}', expected 'DIVORCED'",
+                    })
 
-    for (pid, ftype, d_str), fids in event_tracker.items():
-        unique_fids = list(dict.fromkeys(fids))
-        if len(unique_fids) > 1:
-            unmerged = [fid for fid in unique_fids if fid not in merged_fact_ids]
-            if len(unmerged) > 1:
-                primary = unmerged[0]
-                absorbed = unmerged[1:]
-                msg = f"{len(unmerged)} multi-source records match '{ftype}' ({d_str}) representing same real-world event."
-                findings.append({
-                    "level": "WARN",
-                    "category": "Dedup-Event",
-                    "fact_id": primary,
+                f_date = (fact.get("date") or {}).get("date_start")
+                u_mdate = (matched_union.get("marriage_date") or {}).get("date_start")
+                if ftype == "Marriage" and f_date and u_mdate and f_date != u_mdate:
+                    self.warnings.append({
+                        "rule": "UNION_MARRIAGE_DATE_MISMATCH",
+                        "label": label,
+                        "message": f"Marriage fact date '{f_date}' differs from union date '{u_mdate}'",
+                    })
+
+    def audit_deduplication(self) -> None:
+        """Identifies duplicate source citations and redundant event assertions."""
+        seen_events: Dict[Tuple[str, str, Optional[str]], str] = {}
+
+        for fact in self.facts:
+            fid = str(fact.get("fact_id", ""))
+            pid = str(fact.get("person_id", ""))
+            ftype = str(fact.get("fact_type", ""))
+            d_start = (fact.get("date") or {}).get("date_start")
+
+            key = (pid, ftype, d_start)
+            if key in seen_events:
+                prior_fid = seen_events[key]
+                self.warnings.append({
+                    "rule": "DEDUP_EVENT_COLLISION",
+                    "label": self._format_fct_label(fact),
+                    "message": f"Redundant event signature matches earlier fact {prior_fid[:8]}",
+                })
+                self.merge_proposals.append({
+                    "primary_fact_id": prior_fid,
+                    "duplicate_fact_id": fid,
                     "person_id": pid,
-                    "message": msg,
-                })
-                fct_short = short_fact_id(primary)
-                subj_label = format_subject_label(pid, people_map)
-                log.warning(f"[Dedup-Event] FCT {fct_short} ({subj_label}): {msg}")
-                merge_candidates.append({
-                    "primary_id": primary,
-                    "absorbed_ids": "<br>".join(absorbed),
-                    "subject": pid,
                     "fact_type": ftype,
-                    "rationale": "Multi-source corroboration of identical event",
+                    "date": d_start,
                 })
+            else:
+                seen_events[key] = fid
 
-    log.info(f"[Stage-3] Completed: {len(merge_candidates)} merge candidates proposed", extra={"sys_event": True})
+    def run_all(self) -> Dict[str, Any]:
+        self.audit_schema_conformance()
+        self.audit_controlled_vocabularies()
+        self.audit_biological_plausibility()
+        self.audit_unions_cross_validation()
+        self.audit_deduplication()
 
-    # Stage 4: Relational Consistency
-    log.info("[Stage-4] --- Relational Consistency & Reciprocal Pairing ---", extra={"sys_event": True})
-    rel_count = 0
-    for p1_id, partner_facts in marriages_by_person.items():
-        for p2_id, fact_id in partner_facts:
-            p2_partners = {t[0] for t in marriages_by_person.get(p2_id, set())}
-            if p1_id not in p2_partners:
-                p2_name = extract_person_name(people_map.get(p2_id, {}), p2_id)
-                msg = f"Partner {p2_id} ({p2_name}) has no reciprocal 'Marriage' fact asserted."
-                findings.append({
-                    "level": "INFO",
-                    "category": "Relational",
-                    "fact_id": fact_id,
-                    "person_id": p1_id,
-                    "message": msg,
-                })
-                fct_short = short_fact_id(fact_id)
-                subj_label = format_subject_label(p1_id, people_map)
-                log.info(f"[Relational] FCT {fct_short} ({subj_label}): {msg}")
-                rel_count += 1
-
-    log.info(f"[Stage-4] Completed: {rel_count} unreciprocated partner assertions", extra={"sys_event": True})
-
-    report_json, csv_file = write_audit_deliverables(
-        timestamp,
-        len(records),
-        findings,
-        merge_candidates,
-        reports_dir=r_dir,
-    )
-
-    errors = sum(1 for item in findings if item["level"] == "ERROR")
-    warnings = sum(1 for item in findings if item["level"] == "WARN")
-    infos = sum(1 for item in findings if item["level"] == "INFO")
-
-    log.info("--- SUMMARY ---", extra={"sys_event": True})
-    log.info(
-        f"Total Findings: {len(findings)} | Errors: {errors} | Warnings: {warnings} | "
-        f"Proposals: {len(merge_candidates)} | Reciprocal: {infos}",
-        extra={"sys_event": True},
-    )
-    log.info(f"Audit completed. Summary JSON: {report_json.name}", extra={"sys_event": True})
-    if csv_file:
-        log.info(f"Remediation candidates: {csv_file.name}", extra={"sys_event": True})
-    else:
-        log.info("No merge candidates identified; CSV output skipped.", extra={"sys_event": True})
-
-    log.info(f"=== Fact Registry Inspection Complete (facts_insp.py v{__version__} Build {__build__}) ===", extra={"sys_event": True})
-
-    return 0 if errors == 0 else 2
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "facts_total": len(self.facts),
+            "errors_count": len(self.errors),
+            "warnings_count": len(self.warnings),
+            "info_count": len(self.info),
+            "merge_proposals_count": len(self.merge_proposals),
+            "errors": self.errors,
+            "warnings": self.warnings,
+            "info": self.info,
+            "merge_proposals": self.merge_proposals,
+        }
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="Full audit inspection engine for facts.json across schema, typology, temporal, and relational rules."
-    )
-    parser.add_argument(
-        "--verbose", "-v", action="store_true", help="Emit diagnostic logs to session log."
-    )
-    parser.add_argument(
-        "--debug", action="store_true", help="Route runtime traces directly to console/stderr."
-    )
+def run_cli() -> int:
+    parser = argparse.ArgumentParser(description="Fact Registry Inspection Engine (FactsInsp)")
+    parser.add_argument("--facts", "-f", type=Path, default=None, help="Custom facts.json path")
+    parser.add_argument("--people", "-p", type=Path, default=None, help="Custom people.json path")
+    parser.add_argument("--verbose", "-v", action="store_true", help="Emit verbose logging traces")
+    parser.add_argument("--export-csv", action="store_true", help="Force export merge proposals to CSV")
     args = parser.parse_args()
 
-    c_level = logging.DEBUG if args.debug else logging.INFO
-    logger = setup_logger("facts_insp", console_level=c_level, file_level=logging.DEBUG)
+    logger = setup_logger("facts_insp", ephemeral=True, console_level=logging.DEBUG if args.verbose else logging.INFO)
+    logger.info("FactsInsp version %s initializing", __version__)
 
-    exit_code = inspect_facts(verbose=args.verbose, debug=args.debug, logger=logger)
-    sys.exit(exit_code)
+    config = GDAConfig(ROOT_DIR)
+    facts_path = args.facts or getattr(config, "entities_dir", ROOT_DIR / "data" / "entities") / "facts.json"
+    people_path = args.people or getattr(config, "entities_dir", ROOT_DIR / "data" / "entities") / "people.json"
+
+    if not facts_path.is_file():
+        logger.error("Facts registry file missing: %s", facts_path)
+        return 1
+    if not people_path.is_file():
+        logger.error("People registry file missing: %s", people_path)
+        return 1
+
+    facts_payload = GDAUtil.load_json(facts_path)
+    people_payload = GDAUtil.load_json(people_path)
+
+    fact_types, date_modifiers = load_vocabularies(config)
+
+    inspector = FactInspector(
+        facts_payload,
+        people_payload,
+        logger,
+        valid_fact_types=fact_types,
+        valid_date_modifiers=date_modifiers,
+    )
+    results = inspector.run_all()
+
+    logger.info("==========================================")
+    logger.info("FACTS INSPECTION AUDIT REPORT")
+    logger.info("==========================================")
+    logger.info("Total Facts Audited:      %d", results["facts_total"])
+    logger.info("Errors Encountered:       %d", results["errors_count"])
+    logger.info("Warnings Flagged:         %d", results["warnings_count"])
+    logger.info("Informational Notes:      %d", results["info_count"])
+    logger.info("Merge Proposals Pending:  %d", results["merge_proposals_count"])
+    logger.info("==========================================")
+
+    for err in results["errors"][:15]:
+        logger.error("[%s] %s: %s", err.get("rule"), err.get("label", ""), err.get("message"))
+    for warn in results["warnings"][:15]:
+        logger.warning("[%s] %s: %s", warn.get("rule"), warn.get("label", ""), warn.get("message"))
+
+    reports_dir = getattr(config, "reports_dir", ROOT_DIR / "reports")
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    report_file = reports_dir / f"facts_insp_audit_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+    GDAUtil.save_json(report_file, results)
+    logger.info("Audit report emitted to: %s", report_file.name)
+
+    if (results["merge_proposals"] or args.export_csv) and results["merge_proposals_count"] > 0:
+        csv_file = reports_dir / f"merge_proposals_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+        with open(csv_file, "w", encoding="utf-8", newline="") as fp:
+            writer = csv.DictWriter(
+                fp,
+                fieldnames=["primary_fact_id", "duplicate_fact_id", "person_id", "fact_type", "date"],
+            )
+            writer.writeheader()
+            writer.writerows(results["merge_proposals"])
+        logger.info("Merge proposals CSV emitted: %s", csv_file.name)
+
+    return 0 if results["errors_count"] == 0 else 1
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(run_cli())

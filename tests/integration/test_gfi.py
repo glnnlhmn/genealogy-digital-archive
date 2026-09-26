@@ -3,13 +3,12 @@
 
 """Integration test suite for GFI (Genealogy Fact Intake).
 
-Validates:
-- Fact semantic normalization and validation rules
-- Batch chunking and automated quarantine routing
-- Master append, de-duplication, dual safe backup generation, and workspace cleanup
-- Quarantine restoration workflow
+Validates factoid validation, quarantine isolation, duplicate rejection,
+master facts appending, Safe Backup creation, unions synchronization,
+edge case handling, and CLI execution paths.
 """
 
+from datetime import datetime
 import json
 import logging
 from pathlib import Path
@@ -17,231 +16,320 @@ import pytest
 
 from tools.lib.gda_core.GDAConfig import GDAConfig
 from tools.lib.gda_core.GDAUtil import GDAUtil
-from tools.ops import gfi
-from tools.ops.gfi import (
-    load_valid_person_ids,
-    normalize_and_validate_fact,
-    intake_and_batch,
-    append_and_cleanup,
-    restore_quarantine_files,
-)
+from tools.ops.gfi import FactIntakeEngine, load_valid_person_ids, run_cli, sync_union_for_fact
 
 
 @pytest.fixture
-def mock_gfi_env(tmp_path, monkeypatch):
-    """Sets up an isolated digital archive environment by rebinding GDAConfig[cite: 8]."""
-    data_dir = tmp_path / "data"
-    entities_dir = data_dir / "entities"
+def mock_gfi_env(tmp_path: Path):
+    """Sets up an isolated digital archive environment for GFI integration tests."""
+    root_dir = tmp_path / "genealogy-digital-archive"
+    entities_dir = root_dir / "data" / "entities"
+    staging_dir = root_dir / "import" / "staging"
     quarantine_dir = entities_dir / "quarantine"
-    backups_dir = tmp_path / "backups"
-    logs_dir = tmp_path / "logs"
+    backups_dir = root_dir / "backups"
 
-    entities_dir.mkdir(parents=True, exist_ok=True)
-    quarantine_dir.mkdir(parents=True, exist_ok=True)
-    backups_dir.mkdir(parents=True, exist_ok=True)
-    logs_dir.mkdir(parents=True, exist_ok=True)
+    for d in [entities_dir, staging_dir, quarantine_dir, backups_dir]:
+        d.mkdir(parents=True, exist_ok=True)
 
-    mock_config = GDAConfig(root=tmp_path, manifest={})
-    monkeypatch.setattr("tools.lib.gda_core.GDAConfig.CONFIG", mock_config)
-    monkeypatch.setattr("tools.lib.gda_core.GDAUtil.CONFIG", mock_config)
-    monkeypatch.setattr("tools.ops.gfi.CONFIG", mock_config)
-
-    # Populate baseline people registry
     people_payload = {
+        "$schema": "schemas/entities/person_registry.schema.json",
+        "schema_version": "1.0.1",
+        "created_at": "2026-01-01T00:00:00Z",
+        "last_modified": "2026-09-25T06:00:00Z",
+        "total_persons": 2,
         "persons": [
-            {"person_id": "IND-00001", "display_name": "John Doe"},
-            {"person_id": "IND-00002", "display_name": "Jane Doe"},
-        ]
+            {
+                "person_id": "IND-00001",
+                "display_name": "John Doe",
+                "canonical_name": {
+                    "given": "John",
+                    "surname": "Doe",
+                    "birth_year": {"year": 1960, "modifier": "EXACT"},
+                    "death_year": {"year": None, "modifier": "LIVING"},
+                },
+                "unions": [],
+            },
+            {
+                "person_id": "IND-00002",
+                "display_name": "Jane Smith",
+                "canonical_name": {
+                    "given": "Jane",
+                    "surname": "Smith",
+                    "birth_year": {"year": 1962, "modifier": "EXACT"},
+                    "death_year": {"year": None, "modifier": "LIVING"},
+                },
+                "unions": [],
+            },
+        ],
     }
-    GDAUtil.save_json(mock_config.people, people_payload)
 
-    # Populate baseline facts registry
     facts_payload = {
         "$schema": "schemas/entities/fact_registry.schema.json",
         "schema_version": "1.0.1",
-        "total_facts": 1,
+        "created_at": "2026-01-01T00:00:00Z",
+        "last_modified": "2026-09-25T06:00:00Z",
         "facts": [
             {
-                "fact_id": "EXISTING-FACT-001",
+                "fact_id": "00000000-0000-4000-8000-000000000000",
                 "person_id": "IND-00001",
                 "fact_type": "Birth",
-                "description": "Original birth assertion",
-                "source_urn": "urn:cite:RECORD:001",
+                "date": {"date_start": "1960-01-01", "modifier": "EXACT"},
             }
         ],
     }
-    GDAUtil.save_json(mock_config.facts, facts_payload)
 
-    test_logger = logging.getLogger("gfi_test")
-    test_logger.handlers.clear()
-    test_logger.addHandler(logging.NullHandler())
+    p_path = entities_dir / "people.json"
+    f_path = entities_dir / "facts.json"
+    GDAUtil.save_json(p_path, people_payload)
+    GDAUtil.save_json(f_path, facts_payload)
 
-    return {
-        "root": tmp_path,
-        "config": mock_config,
-        "entities_dir": entities_dir,
-        "quarantine_dir": quarantine_dir,
-        "backups_dir": backups_dir,
-        "people_path": mock_config.people,
-        "facts_path": mock_config.facts,
-        "logger": test_logger,
-    }
+    config = GDAConfig(root_dir)
+    return config, staging_dir, quarantine_dir, f_path, p_path
 
 
-def test_normalize_and_validate_fact():
-    """Verifies semantic validation and place mapping."""
-    valid_ids = {"IND-00001", "IND-00002"}
+def test_gfi_intake_appends_and_syncs_unions(mock_gfi_env):
+    config, staging_dir, quarantine_dir, f_path, p_path = mock_gfi_env
+    logger = logging.getLogger("test_gfi")
 
-    # 1. Valid fact with citations
-    raw_fact = {
+    staged_file = staging_dir / "factoid-11111111.json"
+    fact_payload = {
+        "fact_id": "11111111-1111-4111-8111-111111111111",
         "person_id": "IND-00001",
-        "fact_type": "Census",
-        "description": "1900 US Census Record",
-        "place": "Cumberland, PA",
-        "citations": [{"publication_code": "CENSUS", "publication_date": "1900-06-01", "media_file": "PAGE1"}],
-    }
-    is_valid, msg, norm = normalize_and_validate_fact(raw_fact, valid_ids)
-    assert is_valid is True
-    assert "location" in norm
-    assert "place" not in norm
-    assert norm["source_urn"] == "urn:cite:CENSUS:19000601:PAGE1"
-
-    # 2. Self-referencing loop violation
-    loop_fact = {
-        "person_id": "IND-00001",
-        "display_name": "John Doe",
         "fact_type": "Marriage",
-        "description": "Marriage assertion",
-        "source_urn": "urn:cite:GEN:1",
-        "associated_people": [{"person_id": "IND-00001", "name": "Different Person", "role": "SPOUSE"}],
+        "date": {"date_start": "1985-06-15", "modifier": "EXACT", "raw_text": "15 Jun 1985"},
+        "location": {"standardized": "Carlisle, Cumberland County, Pennsylvania, USA"},
+        "notes": "Parish register",
+        "associated_people": [{"person_id": "IND-00002", "role": "Spouse"}],
     }
-    is_valid_loop, msg_loop, _ = normalize_and_validate_fact(loop_fact, valid_ids)
-    assert is_valid_loop is False
-    assert "Self-referencing loop" in msg_loop
+    GDAUtil.save_json(staged_file, fact_payload)
+
+    engine = FactIntakeEngine(config, logger)
+    results = engine.process_staged_factoids([staged_file])
+
+    assert results["processed"] == 1
+    assert results["accepted"] == 1
+    assert results["quarantined"] == 0
+    assert results["unions_synced"] == 2
+
+    # Verify facts.json updated
+    f_data = GDAUtil.load_json(f_path)
+    assert any(f["fact_id"] == "11111111-1111-4111-8111-111111111111" for f in f_data["facts"])
+
+    # Verify people.json unions synchronized symmetrically
+    p_data = GDAUtil.load_json(p_path)
+    p1 = next(p for p in p_data["persons"] if p["person_id"] == "IND-00001")
+    p2 = next(p for p in p_data["persons"] if p["person_id"] == "IND-00002")
+
+    assert len(p1["unions"]) == 1
+    assert p1["unions"][0]["spouse_id"] == "IND-00002"
+    assert p1["unions"][0]["status"] == "MARRIED"
+    assert p1["unions"][0]["marriage_date"]["date_start"] == "1985-06-15"
+
+    assert len(p2["unions"]) == 1
+    assert p2["unions"][0]["spouse_id"] == "IND-00001"
+    assert p2["unions"][0]["status"] == "MARRIED"
+    assert p2["unions"][0]["marriage_date"]["date_start"] == "1985-06-15"
 
 
-def test_intake_and_batch_quarantines_and_chunks(mock_gfi_env):
-    """Verifies chunking of valid factoids and isolation of invalid records[cite: 7]."""
-    entities_dir = mock_gfi_env["entities_dir"]
-    quarantine_dir = mock_gfi_env["quarantine_dir"]
+def test_gfi_quarantines_invalid_person_id(mock_gfi_env):
+    config, staging_dir, quarantine_dir, f_path, p_path = mock_gfi_env
+    logger = logging.getLogger("test_gfi")
 
-    # Valid factoid
-    valid_file = entities_dir / "factoid-valid.json"
-    GDAUtil.save_json(valid_file, {
-        "fact_id": "FCT-NEW-001",
+    staged_file = staging_dir / "factoid-invalid-person.json"
+    fact_payload = {
+        "fact_id": "22222222-2222-4222-8222-222222222222",
+        "person_id": "IND-99999",
+        "fact_type": "Marriage",
+    }
+    GDAUtil.save_json(staged_file, fact_payload)
+
+    engine = FactIntakeEngine(config, logger)
+    results = engine.process_staged_factoids([staged_file])
+
+    assert results["accepted"] == 0
+    assert results["quarantined"] == 1
+    assert (engine.quarantine_dir / "factoid-invalid-person.json").is_file()
+
+
+def test_gfi_quarantines_duplicate_fact_id(mock_gfi_env):
+    config, staging_dir, quarantine_dir, f_path, p_path = mock_gfi_env
+    logger = logging.getLogger("test_gfi")
+
+    staged_file = staging_dir / "factoid-dup.json"
+    fact_payload = {
+        "fact_id": "00000000-0000-4000-8000-000000000000",
+        "person_id": "IND-00001",
+        "fact_type": "Birth",
+    }
+    GDAUtil.save_json(staged_file, fact_payload)
+
+    engine = FactIntakeEngine(config, logger)
+    results = engine.process_staged_factoids([staged_file])
+
+    assert results["accepted"] == 0
+    assert results["quarantined"] == 1
+    assert (engine.quarantine_dir / "factoid-dup.json").is_file()
+
+
+def test_gfi_quarantines_corrupt_json(mock_gfi_env):
+    config, staging_dir, quarantine_dir, f_path, p_path = mock_gfi_env
+    logger = logging.getLogger("test_gfi")
+
+    staged_file = staging_dir / "factoid-corrupt.json"
+    staged_file.write_text("{ corrupt json ...", encoding="utf-8")
+
+    engine = FactIntakeEngine(config, logger)
+    results = engine.process_staged_factoids([staged_file])
+
+    assert results["accepted"] == 0
+    assert results["quarantined"] == 1
+    assert (engine.quarantine_dir / "factoid-corrupt.json").is_file()
+
+
+def test_gfi_validation_failures(mock_gfi_env):
+    config, staging_dir, quarantine_dir, f_path, p_path = mock_gfi_env
+    logger = logging.getLogger("test_gfi")
+    engine = FactIntakeEngine(config, logger)
+    valid_pids = {"IND-00001"}
+
+    # Not a dictionary
+    ok, reason = engine.validate_factoid(["not-dict"], valid_pids)
+    assert not ok
+
+    # Missing fact_id
+    ok, reason = engine.validate_factoid({"person_id": "IND-00001", "fact_type": "Birth"}, valid_pids)
+    assert not ok
+
+    # Missing person_id
+    ok, reason = engine.validate_factoid({"fact_id": "xyz", "fact_type": "Birth"}, valid_pids)
+    assert not ok
+
+    # Missing fact_type
+    ok, reason = engine.validate_factoid({"fact_id": "xyz", "person_id": "IND-00001"}, valid_pids)
+    assert not ok
+
+
+def test_gfi_sync_unions_edge_cases(mock_gfi_env):
+    config, staging_dir, quarantine_dir, f_path, p_path = mock_gfi_env
+    logger = logging.getLogger("test_gfi")
+    p_data = GDAUtil.load_json(p_path)
+
+    # 1. Non-marriage/divorce fact returns 0
+    res = sync_union_for_fact(p_data, {"fact_type": "Birth"})
+    assert res == 0
+
+    # 2. Fact missing person_id returns 0
+    res = sync_union_for_fact(p_data, {"fact_type": "Marriage"})
+    assert res == 0
+
+    # 3. Fact missing associated spouses returns 0
+    res = sync_union_for_fact(p_data, {"fact_type": "Marriage", "person_id": "IND-00001"})
+    assert res == 0
+
+    # 4. Unknown person_id returns 0
+    res = sync_union_for_fact(
+        p_data,
+        {"fact_type": "Marriage", "person_id": "IND-99999", "associated_people": [{"person_id": "IND-00002"}]}
+    )
+    assert res == 0
+
+    # 5. Unknown spouse returns 0
+    res = sync_union_for_fact(
+        p_data,
+        {"fact_type": "Marriage", "person_id": "IND-00001", "associated_people": [{"person_id": "IND-88888"}]}
+    )
+    assert res == 0
+
+    # 6. Update existing marriage union location and date
+    p_data["persons"][0]["unions"] = [{
+        "spouse_id": "IND-00002",
+        "status": "MARRIED",
+        "marriage_date": {"date_start": "1985-01-01"},
+    }]
+    p_data["persons"][1]["unions"] = [{
+        "spouse_id": "IND-00001",
+        "status": "MARRIED",
+        "marriage_date": {"date_start": "1985-01-01"},
+    }]
+    m_fact = {
+        "fact_type": "Marriage",
+        "person_id": "IND-00001",
+        "associated_people": [{"person_id": "IND-00002"}],
+        "date": {"date_start": "1985-06-15"},
+        "location": {"standardized": "New Place"},
+    }
+    synced = sync_union_for_fact(p_data, m_fact, logger)
+    assert synced == 2
+    assert p_data["persons"][0]["unions"][0]["place"]["standardized"] == "New Place"
+
+
+def test_gfi_sync_divorce_fact(mock_gfi_env):
+    config, staging_dir, quarantine_dir, f_path, p_path = mock_gfi_env
+    logger = logging.getLogger("test_gfi")
+
+    p_data = GDAUtil.load_json(p_path)
+    p_data["persons"][0]["unions"] = [{
+        "spouse_id": "IND-00002",
+        "status": "MARRIED",
+        "marriage_date": {"date_start": "1985-06-15"},
+    }]
+    p_data["persons"][1]["unions"] = [{
+        "spouse_id": "IND-00001",
+        "status": "MARRIED",
+        "marriage_date": {"date_start": "1985-06-15"},
+    }]
+    GDAUtil.save_json(p_path, p_data)
+
+    divorce_fact = {
+        "fact_id": "33333333-3333-4333-8333-333333333333",
+        "person_id": "IND-00001",
+        "fact_type": "Divorce",
+        "date": {"date_start": "1995-12-01", "modifier": "EXACT"},
+        "associated_people": [{"person_id": "IND-00002"}],
+    }
+    synced = sync_union_for_fact(p_data, divorce_fact, logger)
+    assert synced == 2
+    assert p_data["persons"][0]["unions"][0]["status"] == "DIVORCED"
+    assert p_data["persons"][0]["unions"][0]["end_date"]["date_start"] == "1995-12-01"
+    assert p_data["persons"][1]["unions"][0]["status"] == "DIVORCED"
+    assert p_data["persons"][1]["unions"][0]["end_date"]["date_start"] == "1995-12-01"
+
+
+def test_gfi_load_valid_person_ids_fallbacks(tmp_path):
+    logger = logging.getLogger("test_gfi")
+
+    # Missing file returns empty set
+    missing_path = tmp_path / "nonexistent.json"
+    pids = load_valid_person_ids(missing_path, logger)
+    assert pids == set()
+
+    # Corrupt file returns empty set
+    corrupt_path = tmp_path / "corrupt.json"
+    corrupt_path.write_text("{ corrupt ...", encoding="utf-8")
+    pids = load_valid_person_ids(corrupt_path, logger)
+    assert pids == set()
+
+
+def test_gfi_cli_execution_with_files(mock_gfi_env, monkeypatch):
+    config, staging_dir, quarantine_dir, f_path, p_path = mock_gfi_env
+
+    # Stage a valid factoid for CLI intake
+    staged_file = staging_dir / "factoid-cli-test.json"
+    fact_payload = {
+        "fact_id": "55555555-5555-4555-8555-555555555555",
         "person_id": "IND-00001",
         "fact_type": "Residence",
-        "description": "Living in Carlisle",
-        "source_urn": "urn:cite:TEST:1",
-    })
-
-    # Invalid factoid (unknown person_id)
-    invalid_file = entities_dir / "factoid-invalid.json"
-    GDAUtil.save_json(invalid_file, {
-        "fact_id": "FCT-NEW-002",
-        "person_id": "IND-99999",
-        "fact_type": "Residence",
-        "description": "Living elsewhere",
-        "source_urn": "urn:cite:TEST:2",
-    })
-
-    batched_count = intake_and_batch(
-        batch_size=75,
-        entities_dir=entities_dir,
-        people_path=mock_gfi_env["people_path"],
-        quarantine_dir=quarantine_dir,
-        verbose=False,
-        logger=mock_gfi_env["logger"],
-    )
-
-    assert batched_count == 1
-
-    # Verify batch envelope was created
-    fact_new = entities_dir / "fact-new"
-    batches = list(fact_new.glob("factoids-*.json"))
-    assert len(batches) == 1
-
-    # Verify invalid file moved to quarantine
-    assert not invalid_file.exists()
-    assert (quarantine_dir / "factoid-invalid.json").exists()
-
-
-def test_append_and_cleanup_merges_and_purges_staging(mock_gfi_env):
-    """Verifies master append, de-duplication, backup creation, and staging purge[cite: 10]."""
-    entities_dir = mock_gfi_env["entities_dir"]
-    facts_path = mock_gfi_env["facts_path"]
-    backups_dir = mock_gfi_env["backups_dir"]
-    fact_new = entities_dir / "fact-new"
-    fact_new.mkdir(parents=True, exist_ok=True)
-
-    # Create staging batch with 1 duplicate and 1 novel fact
-    batch_envelope = {
-        "$schema": "schemas/entities/fact_registry.schema.json",
-        "schema_version": "1.0.1",
-        "total_facts": 2,
-        "facts": [
-            {
-                "fact_id": "EXISTING-FACT-001",  # Duplicate ID
-                "person_id": "IND-00001",
-                "fact_type": "Birth",
-                "description": "Duplicate assertion",
-                "source_urn": "urn:cite:RECORD:001",
-            },
-            {
-                "fact_id": "NEW-FACT-002",  # Novel ID
-                "person_id": "IND-00002",
-                "fact_type": "Death",
-                "description": "Novel death assertion",
-                "source_urn": "urn:cite:RECORD:002",
-            },
-        ],
+        "date": {"date_start": "1990-01-01"},
     }
-    batch_file = fact_new / "factoids-0001.json"
-    GDAUtil.save_json(batch_file, batch_envelope)
+    GDAUtil.save_json(staged_file, fact_payload)
 
-    append_and_cleanup(
-        batch_size=75,
-        entities_dir=entities_dir,
-        master_facts_path=facts_path,
-        backups_dir=backups_dir,
-        quarantine_dir=mock_gfi_env["quarantine_dir"],
-        verbose=True,
-        logger=mock_gfi_env["logger"],
-    )
-
-    # 1. Verify merged master facts
-    updated_master = GDAUtil.load_json(facts_path)
-    assert updated_master["total_facts"] == 2
-    fids = [f["fact_id"] for f in updated_master["facts"]]
-    assert "EXISTING-FACT-001" in fids
-    assert "NEW-FACT-002" in fids
-
-    # 2. Verify staging directory purged
-    assert not fact_new.exists()
-
-    # 3. Verify paired backups created
-    master_backups = list(backups_dir.glob("facts.json.*.bk"))
-    ingest_backups = list(backups_dir.glob("factoids_ingested_*.bk"))
-    assert len(master_backups) == 1
-    assert len(ingest_backups) == 1
+    monkeypatch.setattr("sys.argv", ["gfi.py", "-d", str(staging_dir), "--verbose"])
+    exit_code = run_cli()
+    assert exit_code == 0
 
 
-def test_restore_quarantine_files(mock_gfi_env):
-    """Verifies restoration of quarantined factoid files back to staging entities[cite: 7]."""
-    entities_dir = mock_gfi_env["entities_dir"]
-    quarantine_dir = mock_gfi_env["quarantine_dir"]
-
-    quarantined = quarantine_dir / "factoid-recovered.json"
-    GDAUtil.save_json(quarantined, {"fact_id": "FCT-RECOVERED"})
-
-    restore_quarantine_files(
-        entities_dir=entities_dir,
-        quarantine_dir=quarantine_dir,
-        verbose=False,
-        logger=mock_gfi_env["logger"],
-    )
-
-    assert not quarantined.exists()
-    restored = entities_dir / "factoid-recovered.json"
-    assert restored.exists()
-    assert GDAUtil.load_json(restored)["fact_id"] == "FCT-RECOVERED"
+def test_gfi_cli_missing_dir(tmp_path, monkeypatch):
+    missing_dir = tmp_path / "nonexistent_staging"
+    monkeypatch.setattr("sys.argv", ["gfi.py", "-d", str(missing_dir)])
+    exit_code = run_cli()
+    assert exit_code == 1

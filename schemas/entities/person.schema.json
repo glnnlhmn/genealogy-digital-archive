@@ -81,6 +81,47 @@
       "items": {
         "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
       }
+    },
+    "unions": {
+      "type": "array",
+      "description": "List of domestic partnerships and spousal unions for identity, disambiguation, and chronological indexing.",
+      "items": {
+        "type": "object",
+        "unevaluatedProperties": false,
+        "required": [
+          "spouse_id",
+          "status"
+        ],
+        "properties": {
+          "spouse_id": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id",
+            "description": "Identifier of the spouse or domestic/biological co-parent."
+          },
+          "status": {
+            "$ref": "../defs/_enums.schema.json#/$defs/enum_union_status",
+            "description": "Current or final lifecycle status of the partnership."
+          },
+          "marriage_date": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted",
+            "description": "Working date and modifier for wedding or union establishment."
+          },
+          "end_date": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted",
+            "description": "Working date and modifier for union dissolution, divorce, or termination."
+          },
+          "place": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/location",
+            "description": "Geographic location of the marriage or domestic union."
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Working contextual note regarding union circumstances or unverified source mentions."
+          }
+        }
+      }
     }
   }
 }

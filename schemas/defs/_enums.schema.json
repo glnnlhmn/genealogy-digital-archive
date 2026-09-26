@@ -194,6 +194,19 @@
         "Card C (1918)",
         null
       ]
+    },
+    "enum_union_status": {
+      "type": "string",
+      "description": "Controlled vocabulary defining legal, domestic, or biological partnership status.",
+      "enum": [
+        "MARRIED",
+        "DIVORCED",
+        "ANNULLED",
+        "SEPARATED",
+        "WIDOWED",
+        "PARTNER",
+        "UNKNOWN"
+      ]
     }
   }
 }

@@ -1,327 +1,274 @@
 # Name: test_facts_insp.py
 # Path: tests/integration/test_facts_insp.py
 
+"""Integration test suite for FactsInsp (Fact Registry Inspection Engine).
+
+Tests schema validation, controlled vocabularies, biological plausibility,
+post-mortem exemptions, union cross-validation, and CLI execution.
+"""
+
 import json
 import logging
-import uuid
-import pytest
 from pathlib import Path
+import pytest
 
 from tools.lib.gda_core.GDAConfig import GDAConfig
 from tools.lib.gda_core.GDAUtil import GDAUtil
-from tools.ops import facts_insp
-from tools.ops.facts_insp import (
-    extract_person_name,
-    extract_person_lifespan,
-    extract_source_keys,
-    extract_year,
-    normalize_date_str,
-    short_fact_id,
-    write_audit_deliverables,
-    inspect_facts,
-)
+from tools.ops.facts_insp import FactInspector, run_cli
 
 
 @pytest.fixture
-def mock_insp_env(tmp_path, monkeypatch):
-    """Sets up an isolated filesystem environment by rebinding the GDAConfig singleton."""
-    reports_dir = tmp_path / "reports"
-    logs_dir = tmp_path / "logs"
-    entities_dir = tmp_path / "data" / "entities"
-
-    reports_dir.mkdir(parents=True, exist_ok=True)
-    logs_dir.mkdir(parents=True, exist_ok=True)
+def mock_facts_env(tmp_path: Path):
+    """Sets up mock entities directories and sample facts/people payloads."""
+    root_dir = tmp_path / "genealogy-digital-archive"
+    entities_dir = root_dir / "data" / "entities"
     entities_dir.mkdir(parents=True, exist_ok=True)
 
-    mock_config = GDAConfig(root=tmp_path, manifest={})
-
-    monkeypatch.setattr("tools.lib.gda_core.GDAConfig.CONFIG", mock_config)
-    monkeypatch.setattr("tools.lib.gda_core.GDAUtil.CONFIG", mock_config)
-    monkeypatch.setattr("tools.ops.facts_insp.CONFIG", mock_config)
-
-    test_logger = logging.getLogger("facts_insp_test")
-    test_logger.handlers.clear()
-    test_logger.addHandler(logging.NullHandler())
-
-    return {
-        "root": tmp_path,
-        "config": mock_config,
-        "facts_file": mock_config.facts,
-        "people_file": mock_config.people,
-        "reports_dir": mock_config.reports,
-        "logger": test_logger,
-    }
-
-
-# --- 1. Unit Tests: Person Display Name Extraction ---
-
-def test_extract_person_name_from_canonical_dict():
-    person = {"canonical_name": {"full": "Daniel Webster Lehman", "display": "Daniel Lehman"}}
-    assert extract_person_name(person, "IND-00008") == "Daniel Webster Lehman"
-
-
-def test_extract_person_name_from_canonical_str():
-    person = {"canonical_name": "Daniel Webster Lehman"}
-    assert extract_person_name(person, "IND-00008") == "Daniel Webster Lehman"
-
-
-def test_extract_person_name_from_name_dict():
-    person = {"name": {"display_name": "Karen Nadine Witmer", "full": "Karen Witmer"}}
-    assert extract_person_name(person, "IND-00020") == "Karen Nadine Witmer"
-
-
-def test_extract_person_name_from_names_list():
-    person = {"names": [{"full": "Harold Edward Goddard"}]}
-    assert extract_person_name(person, "IND-00143") == "Harold Edward Goddard"
-
-
-def test_extract_person_name_fallback_to_id():
-    assert extract_person_name({}, "IND-99999") == "IND-99999"
-    assert extract_person_name(None, "IND-99999") == "IND-99999"
-
-
-# --- 2. Unit Tests: Source and Record URN Extraction ---
-
-def test_extract_source_keys_singular_dict_scalar():
-    fact = {
-        "source": {
-            "record_urn": "URN:NEWSPAPER:PA:DAUPHIN:HARRISBURG:THE_PATRIOT_NEWS:1964-04-05:PAGE_18:HERSHEY_HILL_CLIMB"
-        }
-    }
-    keys = extract_source_keys(fact)
-    assert keys == ["URN:NEWSPAPER:PA:DAUPHIN:HARRISBURG:THE_PATRIOT_NEWS:1964-04-05:PAGE_18:HERSHEY_HILL_CLIMB"]
-
-
-def test_extract_source_keys_singular_dict_array():
-    fact = {
-        "source": {
-            "record_urn": [
-                "URN:CENSUS:US:1840:PA:DAUPHIN:MEMBER-1",
-                "URN:CENSUS:US:1840:PA:DAUPHIN:MEMBER-2",
-            ]
-        }
-    }
-    keys = extract_source_keys(fact)
-    assert keys == [
-        "URN:CENSUS:US:1840:PA:DAUPHIN:MEMBER-1",
-        "URN:CENSUS:US:1840:PA:DAUPHIN:MEMBER-2",
-    ]
-
-
-def test_extract_source_keys_plural_sources():
-    fact = {
-        "sources": [
-            {"record_urn": "URN:ARCHIVE:DOC_001"},
-            {"source_urn": "URN:ARCHIVE:DOC_002"},
-        ]
-    }
-    keys = extract_source_keys(fact)
-    assert keys == ["URN:ARCHIVE:DOC_001", "URN:ARCHIVE:DOC_002"]
-
-
-def test_extract_source_keys_fallback_root():
-    fact = {"record_urn": "URN:ROOT:REC_123"}
-    assert extract_source_keys(fact) == ["URN:ROOT:REC_123"]
-
-
-def test_extract_source_keys_empty():
-    assert extract_source_keys({"description": "No sources attached"}) == []
-
-
-# --- 3. Unit Tests: Date and Identifier Utilities ---
-
-@pytest.mark.parametrize(
-    "date_input,expected_year",
-    [
-        ({"date_start": "1964-04-05", "modifier": "EXACT"}, 1964),
-        ({"date": "1840", "modifier": "ABOUT"}, 1840),
-        ({"raw_text": "Born on 2 Apr 1965"}, 1965),
-        ("1923-11-12", 1923),
-        ("Circa 1888", 1888),
-        (None, None),
-        ("Unknown", None),
-    ],
-)
-def test_extract_year(date_input, expected_year):
-    assert extract_year(date_input) == expected_year
-
-
-def test_normalize_date_str():
-    assert normalize_date_str({"date_start": "1965-04-02"}) == "1965-04-02"
-    assert normalize_date_str("1840") == "1840"
-    assert normalize_date_str(None) == ""
-
-
-def test_short_fact_id():
-    assert short_fact_id("factoid-3c9a1d4f-b271-49e2-8f32-194b8e217031") == "3c9a1d4f"
-    assert short_fact_id("59e1f1e8-897d-4ae5-b3e0-6155fc76b909") == "59e1f1e8"
-
-
-# --- 4. Integration Tests: Deliverables & Conditional CSV Export ---
-
-def test_write_audit_deliverables_with_merges(mock_insp_env):
-    timestamp = "20260921_999999"
-    findings = [
-        {"level": "ERROR", "category": "Temporal", "fact_id": "F1", "person_id": "IND-1", "message": "Err"},
-        {"level": "WARN", "category": "Schema", "fact_id": "F2", "person_id": "IND-2", "message": "Warn"},
-        {"level": "INFO", "category": "Relational", "fact_id": "F3", "person_id": "IND-3", "message": "Info"},
-    ]
-    merge_candidates = [
-        {
-            "primary_id": "F4",
-            "absorbed_ids": "F5<br>F6",
-            "subject": "IND-4",
-            "fact_type": "Other",
-            "rationale": "Duplicate URN",
-        }
-    ]
-
-    json_path, csv_path = write_audit_deliverables(
-        timestamp, 10, findings, merge_candidates, reports_dir=mock_insp_env["reports_dir"]
-    )
-
-    assert json_path.exists()
-    assert csv_path is not None
-    assert csv_path.exists()
-
-    payload = GDAUtil.load_json(json_path)
-    assert payload["total_findings"] == 3
-    assert payload["counts"]["errors"] == 1
-    assert payload["counts"]["warnings"] == 1
-    assert payload["counts"]["info"] == 1
-    assert payload["counts"]["proposals"] == 1
-
-
-def test_write_audit_deliverables_suppresses_csv_when_no_merges(mock_insp_env):
-    timestamp = "20260921_999998"
-    findings = [
-        {"level": "WARN", "category": "Schema", "fact_id": "F2", "person_id": "IND-2", "message": "Warn"}
-    ]
-    merge_candidates = []
-
-    json_path, csv_path = write_audit_deliverables(
-        timestamp, 5, findings, merge_candidates, reports_dir=mock_insp_env["reports_dir"]
-    )
-
-    assert json_path.exists()
-    assert csv_path is None
-
-    payload = GDAUtil.load_json(json_path)
-    assert payload["counts"]["proposals"] == 0
-    assert payload["merge_candidates_exported"] is None
-
-
-# --- 5. Integration Tests: Audit Engine Execution & Rule Enforcement ---
-
-def test_inspect_facts_missing_file(mock_insp_env):
-    """Verifies that inspecting a non-existent facts file exits with code 1."""
-    code = inspect_facts(
-        facts_path=mock_insp_env["facts_file"],
-        people_path=mock_insp_env["people_file"],
-        reports_dir=mock_insp_env["reports_dir"],
-        logger=mock_insp_env["logger"],
-    )
-    assert code == 1
-
-
-def test_inspect_facts_clean_registry_exits_zero(mock_insp_env):
-    """Verifies that a conformant facts registry generates zero errors and exits with code 0."""
-    uid = str(uuid.uuid4())
-    facts_payload = {
-        "facts": [
-            {
-                "fact_id": uid,
-                "person_id": "IND-001",
-                "fact_type": "Birth",
-                "date": {"date_start": "1900-01-01", "modifier": "EXACT"},
-            }
-        ]
-    }
     people_payload = {
-        "people": [
+        "$schema": "schemas/entities/person_registry.schema.json",
+        "schema_version": "1.0.1",
+        "created_at": "2026-01-01T00:00:00Z",
+        "last_modified": "2026-09-25T06:00:00Z",
+        "total_persons": 2,
+        "persons": [
             {
-                "person_id": "IND-001",
-                "canonical_name": "John Doe",
-                "vitals": {"birth": {"date": "1900-01-01"}},
-            }
-        ]
+                "person_id": "IND-00001",
+                "display_name": "John Doe",
+                "canonical_name": {
+                    "given": "John",
+                    "surname": "Doe",
+                    "birth_year": {"year": 1850, "modifier": "EXACT"},
+                    "death_year": {"year": 1920, "modifier": "EXACT"},
+                },
+                "vitals": {
+                    "birth": {"date": {"date_start": "1850-01-01", "modifier": "EXACT"}},
+                    "death": {"date": {"date_start": "1920-01-01", "modifier": "EXACT"}},
+                },
+                "unions": [
+                    {
+                        "spouse_id": "IND-00002",
+                        "status": "MARRIED",
+                        "marriage_date": {"date_start": "1875-06-15", "modifier": "EXACT"},
+                    }
+                ],
+            },
+            {
+                "person_id": "IND-00002",
+                "display_name": "Jane Smith",
+                "canonical_name": {
+                    "given": "Jane",
+                    "surname": "Smith",
+                    "birth_year": {"year": 1855, "modifier": "EXACT"},
+                    "death_year": {"year": 1930, "modifier": "EXACT"},
+                },
+                "vitals": {
+                    "birth": {"date": {"date_start": "1855-05-10", "modifier": "EXACT"}},
+                    "death": {"date": {"date_start": "1930-10-10", "modifier": "EXACT"}},
+                },
+                "unions": [
+                    {
+                        "spouse_id": "IND-00001",
+                        "status": "MARRIED",
+                        "marriage_date": {"date_start": "1875-06-15", "modifier": "EXACT"},
+                    }
+                ],
+            },
+        ],
     }
-    GDAUtil.save_json(mock_insp_env["facts_file"], facts_payload)
-    GDAUtil.save_json(mock_insp_env["people_file"], people_payload)
 
-    code = inspect_facts(
-        facts_path=mock_insp_env["facts_file"],
-        people_path=mock_insp_env["people_file"],
-        reports_dir=mock_insp_env["reports_dir"],
-        logger=mock_insp_env["logger"],
-    )
-    assert code == 0
-
-
-def test_inspect_facts_post_mortem_exemption(mock_insp_env):
-    """Verifies that post-mortem fact types (e.g., Parentage, Burial) do not trigger biological errors."""
-    uid = str(uuid.uuid4())
     facts_payload = {
+        "$schema": "schemas/entities/fact_registry.schema.json",
+        "schema_version": "1.0.1",
+        "created_at": "2026-01-01T00:00:00Z",
+        "last_modified": "2026-09-25T06:00:00Z",
         "facts": [
             {
-                "fact_id": uid,
-                "person_id": "IND-001",
+                "fact_id": "11111111-1111-4111-8111-111111111111",
+                "person_id": "IND-00001",
+                "fact_type": "Marriage",
+                "date": {"date_start": "1875-06-15", "modifier": "EXACT"},
+                "associated_people": [{"person_id": "IND-00002", "role": "Spouse"}],
+            },
+            {
+                "fact_id": "22222222-2222-4222-8222-222222222222",
+                "person_id": "IND-00001",
+                "fact_type": "Burial",
+                "date": {"date_start": "1920-01-05", "modifier": "EXACT"},
+            },
+            {
+                "fact_id": "33333333-3333-4333-8333-333333333333",
+                "person_id": "IND-00001",
                 "fact_type": "Parentage",
-                "date": {"date_start": "1960-01-01", "modifier": "EXACT"},
-            }
-        ]
+                "date": {"date_start": "1925-06-01", "modifier": "EXACT"},
+            },
+        ],
     }
-    people_payload = {
-        "people": [
-            {
-                "person_id": "IND-001",
-                "canonical_name": "Parent Person",
-                "vitals": {"birth": {"date": "1890-01-01"}, "death": {"date": "1950-01-01"}},
-            }
-        ]
-    }
-    GDAUtil.save_json(mock_insp_env["facts_file"], facts_payload)
-    GDAUtil.save_json(mock_insp_env["people_file"], people_payload)
 
-    code = inspect_facts(
-        facts_path=mock_insp_env["facts_file"],
-        people_path=mock_insp_env["people_file"],
-        reports_dir=mock_insp_env["reports_dir"],
-        logger=mock_insp_env["logger"],
+    p_path = entities_dir / "people.json"
+    f_path = entities_dir / "facts.json"
+    GDAUtil.save_json(p_path, people_payload)
+    GDAUtil.save_json(f_path, facts_payload)
+
+    config = GDAConfig(root_dir)
+    return config, f_path, p_path, facts_payload, people_payload
+
+
+def test_facts_insp_passes_valid_registry(mock_facts_env):
+    config, f_path, p_path, f_payload, p_payload = mock_facts_env
+    logger = logging.getLogger("test_facts_insp")
+    inspector = FactInspector(f_payload, p_payload, logger)
+    results = inspector.run_all()
+    assert results["errors_count"] == 0
+    assert results["warnings_count"] == 0
+
+
+def test_facts_insp_exempts_post_mortem_facts(mock_facts_env):
+    config, f_path, p_path, f_payload, p_payload = mock_facts_env
+    logger = logging.getLogger("test_facts_insp")
+    inspector = FactInspector(f_payload, p_payload, logger)
+    results = inspector.run_all()
+    assert results["errors_count"] == 0
+    assert any(i["rule"] == "POST_MORTEM_EXEMPTION_APPLIED" for i in results["info"])
+
+
+def test_facts_insp_flags_non_exempt_post_death_events(mock_facts_env):
+    config, f_path, p_path, f_payload, p_payload = mock_facts_env
+    logger = logging.getLogger("test_facts_insp")
+    f_payload["facts"].append({
+        "fact_id": "44444444-4444-4444-8444-444444444444",
+        "person_id": "IND-00001",
+        "fact_type": "Residence",
+        "date": {"date_start": "1928-01-01", "modifier": "EXACT"},
+    })
+    inspector = FactInspector(f_payload, p_payload, logger)
+    results = inspector.run_all()
+    assert any(e["rule"] == "ANACHRONISTIC_POST_DEATH" for e in results["errors"])
+
+
+def test_facts_insp_flags_anachronistic_pre_birth_events(mock_facts_env):
+    config, f_path, p_path, f_payload, p_payload = mock_facts_env
+    logger = logging.getLogger("test_facts_insp")
+    f_payload["facts"].append({
+        "fact_id": "55555555-5555-4555-8555-555555555555",
+        "person_id": "IND-00001",
+        "fact_type": "Occupation",
+        "date": {"date_start": "1840-01-01", "modifier": "EXACT"},
+    })
+    inspector = FactInspector(f_payload, p_payload, logger)
+    results = inspector.run_all()
+    assert any(e["rule"] == "ANACHRONISTIC_PRE_BIRTH" for e in results["errors"])
+
+
+def test_facts_insp_cross_validates_unions(mock_facts_env):
+    config, f_path, p_path, f_payload, p_payload = mock_facts_env
+    logger = logging.getLogger("test_facts_insp")
+    f_payload["facts"][0]["date"]["date_start"] = "1880-01-01"
+    inspector = FactInspector(f_payload, p_payload, logger)
+    results = inspector.run_all()
+    assert any(w["rule"] == "UNION_MARRIAGE_DATE_MISMATCH" for w in results["warnings"])
+
+
+def test_facts_insp_flags_dedup_collisions(mock_facts_env):
+    config, f_path, p_path, f_payload, p_payload = mock_facts_env
+    logger = logging.getLogger("test_facts_insp")
+    f_payload["facts"].append({
+        "fact_id": "66666666-6666-4666-8666-666666666666",
+        "person_id": "IND-00001",
+        "fact_type": "Marriage",
+        "date": {"date_start": "1875-06-15", "modifier": "EXACT"},
+    })
+    inspector = FactInspector(f_payload, p_payload, logger)
+    results = inspector.run_all()
+    assert any(w["rule"] == "DEDUP_EVENT_COLLISION" for w in results["warnings"])
+    assert results["merge_proposals_count"] > 0
+
+
+def test_facts_insp_flags_schema_conformance_and_vocab_violations(mock_facts_env):
+    config, f_path, p_path, f_payload, p_payload = mock_facts_env
+    logger = logging.getLogger("test_facts_insp")
+
+    # Envelope missing key
+    del f_payload["$schema"]
+
+    # Invalid UUID pattern, missing ftype, invalid date format, invalid modifier, orphaned person
+    f_payload["facts"].extend([
+        {
+            "fact_id": "bad-guid",
+            "person_id": "IND-99999",
+            "fact_type": "InvalidFactType",
+            "date": {"date_start": "bad-date", "modifier": "INVALID_MOD"},
+        },
+        {
+            "fact_id": None,
+            "person_id": None,
+            "fact_type": None,
+        }
+    ])
+
+    inspector = FactInspector(f_payload, p_payload, logger)
+    results = inspector.run_all()
+
+    rules = {e["rule"] for e in results["errors"]}
+    warn_rules = {w["rule"] for w in results["warnings"]}
+
+    assert "ENV_PROPERTY_MISSING" in warn_rules
+    assert "UUID_PATTERN_INVALID" in warn_rules
+    assert "ORPHANED_PERSON_ID" in rules
+    assert "FACT_TYPE_INVALID" in rules
+    assert "DATE_START_FORMAT_INVALID" in rules
+    assert "DATE_MODIFIER_INVALID" in rules
+    assert "FACT_ID_MISSING" in rules
+    assert "PERSON_ID_MISSING" in rules
+    assert "FACT_TYPE_MISSING" in rules
+
+
+def test_facts_insp_union_divorce_mismatch_and_missing_union(mock_facts_env):
+    config, f_path, p_path, f_payload, p_payload = mock_facts_env
+    logger = logging.getLogger("test_facts_insp")
+
+    # Add divorce fact against a person whose union is MARRIED
+    f_payload["facts"].append({
+        "fact_id": "77777777-7777-4777-8777-777777777777",
+        "person_id": "IND-00001",
+        "fact_type": "Divorce",
+        "date": {"date_start": "1890-01-01", "modifier": "EXACT"},
+        "associated_people": [{"person_id": "IND-00002"}],
+    })
+
+    # Add marriage fact pointing to person with no unions
+    f_payload["facts"].append({
+        "fact_id": "88888888-8888-4888-8888-888888888888",
+        "person_id": "IND-00002",
+        "fact_type": "Marriage",
+        "date": {"date_start": "1900-01-01", "modifier": "EXACT"},
+        "associated_people": [{"person_id": "IND-00001"}],
+    })
+    p_payload["persons"][1]["unions"] = []
+
+    inspector = FactInspector(f_payload, p_payload, logger)
+    results = inspector.run_all()
+
+    warn_rules = {w["rule"] for w in results["warnings"]}
+    assert "UNION_STATUS_DIVORCE_MISMATCH" in warn_rules
+    assert "UNION_FACT_NOT_IN_PERSON" in warn_rules
+
+
+def test_facts_insp_cli_execution(mock_facts_env, monkeypatch):
+    config, f_path, p_path, f_payload, p_payload = mock_facts_env
+    monkeypatch.setattr(
+        "sys.argv",
+        ["facts_insp.py", "-f", str(f_path), "-p", str(p_path), "--verbose", "--export-csv"],
     )
-    # Parentage occurring in 1960 after death in 1950 is exempt; no ERROR findings produced
-    assert code == 0
+    exit_code = run_cli()
+    assert exit_code == 0
 
 
-def test_inspect_facts_flags_non_exempt_post_mortem(mock_insp_env):
-    """Verifies that non-exempt post-mortem fact types (e.g., Residence) trigger biological ERROR."""
-    uid = str(uuid.uuid4())
-    facts_payload = {
-        "facts": [
-            {
-                "fact_id": uid,
-                "person_id": "IND-001",
-                "fact_type": "Residence",
-                "date": {"date_start": "1960-01-01", "modifier": "EXACT"},
-            }
-        ]
-    }
-    people_payload = {
-        "people": [
-            {
-                "person_id": "IND-001",
-                "canonical_name": "Deceased Subject",
-                "vitals": {"birth": {"date": "1890-01-01"}, "death": {"date": "1950-01-01"}},
-            }
-        ]
-    }
-    GDAUtil.save_json(mock_insp_env["facts_file"], facts_payload)
-    GDAUtil.save_json(mock_insp_env["people_file"], people_payload)
-
-    code = inspect_facts(
-        facts_path=mock_insp_env["facts_file"],
-        people_path=mock_insp_env["people_file"],
-        reports_dir=mock_insp_env["reports_dir"],
-        logger=mock_insp_env["logger"],
+def test_facts_insp_cli_missing_files(tmp_path, monkeypatch):
+    missing_f = tmp_path / "missing_facts.json"
+    missing_p = tmp_path / "missing_people.json"
+    monkeypatch.setattr(
+        "sys.argv",
+        ["facts_insp.py", "-f", str(missing_f), "-p", str(missing_p)],
     )
-    assert code == 2
+    exit_code = run_cli()
+    assert exit_code == 1

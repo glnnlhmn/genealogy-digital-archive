@@ -476,7 +476,22 @@ def stage_6_atomic_commit(
         "persons": all_persons,
     }
 
-    GDAUtil.save_json(target_people, registry_container)
+    try:
+
+
+        GDAUtil.save_json(target_people, registry_container)
+
+
+    except OSError as e:
+
+
+        if logger:
+
+
+            logger.error(f'Failed to commit: {e}')
+
+
+        return False
     log.info(f"Successfully committed {len(all_persons)} persons to {target_people}")
 
     for f in staged_files:
