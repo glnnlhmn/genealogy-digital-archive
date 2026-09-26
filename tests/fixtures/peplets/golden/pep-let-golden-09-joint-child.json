@@ -1,0 +1,37 @@
+{
+  "person_id": "TMP-01009",
+  "display_name": "Samuel David Sterling",
+  "canonical_name": {
+    "given": "Samuel",
+    "surname": "Sterling",
+    "birth_year": {
+      "year": 1998,
+      "modifier": "EXACT"
+    }
+  },
+  "sex": "Male",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1998-04-03",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "Carlisle, PA",
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      }
+    }
+  },
+  "notes": [],
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "FATH"
+    },
+    {
+      "person_id": "TMP-01008",
+      "role": "MOTH"
+    }
+  ],
+  "unions": []
+}

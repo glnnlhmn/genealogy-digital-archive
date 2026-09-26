@@ -1,0 +1,41 @@
+{
+  "person_id": "TMP-FAIL-LOC-02",
+  "display_name": "Unregistered Death Person",
+  "canonical_name": {
+    "given": "Unregistered",
+    "surname": "Death",
+    "birth_year": {
+      "year": 1950,
+      "modifier": "EXACT"
+    }
+  },
+  "sex": "Female",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1950-05-10",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "Carlisle, PA",
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      }
+    },
+    "death": {
+      "date": {
+        "date_start": "2010-08-20",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "Avalon",
+        "standardized": "Avalon, Mythic Isles"
+      }
+    }
+  },
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "FATH"
+    }
+  ]
+}

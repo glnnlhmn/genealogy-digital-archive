@@ -1,0 +1,33 @@
+{
+  "person_id": "TMP-01005",
+  "display_name": "Franklin Pierce Sterling",
+  "canonical_name": {
+    "given": "Franklin",
+    "surname": "Sterling",
+    "birth_year": {
+      "year": 1968,
+      "modifier": "EXACT"
+    }
+  },
+  "sex": "Male",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1968-02-10",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "West Pennsboro, PA",
+        "standardized": "West Pennsboro Township, Cumberland County, Pennsylvania, USA"
+      }
+    }
+  },
+  "notes": [],
+  "associated_people": [
+    {
+      "person_id": "IND-00019",
+      "role": "FATH"
+    }
+  ],
+  "unions": []
+}

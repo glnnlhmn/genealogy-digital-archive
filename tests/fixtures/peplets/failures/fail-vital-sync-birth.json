@@ -1,0 +1,25 @@
+{
+  "person_id": "TMP-FAIL-01",
+  "display_name": "Sync Birth Fail",
+  "canonical_name": {
+    "given": "Sync",
+    "surname": "Fail",
+    "birth_year": {
+      "year": 1980
+    }
+  },
+  "sex": "Male",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1985-01-01"
+      }
+    }
+  },
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "FATH"
+    }
+  ]
+}

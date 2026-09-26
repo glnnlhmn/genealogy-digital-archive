@@ -1,0 +1,33 @@
+{
+  "person_id": "TMP-01001",
+  "display_name": "Eleanor Vance Sterling",
+  "canonical_name": {
+    "given": "Eleanor",
+    "surname": "Sterling",
+    "birth_year": {
+      "year": 1988,
+      "modifier": "EXACT"
+    }
+  },
+  "sex": "Female",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1988-03-14",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "Carlisle, PA",
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      }
+    }
+  },
+  "notes": [],
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "FATH"
+    }
+  ],
+  "unions": []
+}

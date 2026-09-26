@@ -1,0 +1,32 @@
+{
+  "person_id": "TMP-FAIL-CHRONO-01",
+  "display_name": "Impossible Child Sterling",
+  "canonical_name": {
+    "given": "Impossible",
+    "surname": "Sterling",
+    "birth_year": {
+      "year": 1966,
+      "modifier": "EXACT"
+    }
+  },
+  "sex": "Female",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1966-06-15",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "Carlisle, PA",
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      }
+    }
+  },
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "FATH"
+    }
+  ],
+  "unions": []
+}

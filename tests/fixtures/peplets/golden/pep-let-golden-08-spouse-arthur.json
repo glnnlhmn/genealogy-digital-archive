@@ -1,0 +1,41 @@
+{
+  "person_id": "TMP-01008",
+  "display_name": "Margaret Jean Davis",
+  "canonical_name": {
+    "given": "Margaret",
+    "surname": "Davis",
+    "birth_year": {
+      "year": 1963,
+      "modifier": "EXACT"
+    }
+  },
+  "sex": "Female",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1963-08-19",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "Carlisle, PA",
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      }
+    }
+  },
+  "notes": [],
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "SPOU"
+    }
+  ],
+  "unions": [
+    {
+      "spouse_id": "IND-00000",
+      "status": "MARRIED",
+      "date": {
+        "date_start": "1985-05-12"
+      }
+    }
+  ]
+}

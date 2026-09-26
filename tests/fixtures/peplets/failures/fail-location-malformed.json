@@ -1,0 +1,26 @@
+{
+  "person_id": "TMP-FAIL-04",
+  "display_name": "Malformed Place",
+  "canonical_name": {
+    "given": "Bad",
+    "surname": "Place",
+    "birth_year": {
+      "year": 1991
+    }
+  },
+  "sex": "Female",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1991-01-01"
+      },
+      "place": "Carlisle, PA"
+    }
+  },
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "FATH"
+    }
+  ]
+}

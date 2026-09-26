@@ -1,0 +1,31 @@
+{
+  "person_id": "TMP-FAIL-LOC-01",
+  "display_name": "Unregistered Birth Person",
+  "canonical_name": {
+    "given": "Unregistered",
+    "surname": "Birth",
+    "birth_year": {
+      "year": 1970,
+      "modifier": "EXACT"
+    }
+  },
+  "sex": "Male",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1970-01-01",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "Atlantis",
+        "standardized": "Atlantis, Atlantic Ocean"
+      }
+    }
+  },
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "FATH"
+    }
+  ]
+}

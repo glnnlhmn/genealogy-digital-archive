@@ -1,0 +1,33 @@
+{
+  "person_id": "TMP-FAIL-03",
+  "display_name": "Backwards Time",
+  "canonical_name": {
+    "given": "Backwards",
+    "surname": "Time",
+    "birth_year": {
+      "year": 1990
+    },
+    "death_year": {
+      "year": 1985
+    }
+  },
+  "sex": "Male",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1990-01-01"
+      }
+    },
+    "death": {
+      "date": {
+        "date_start": "1985-01-01"
+      }
+    }
+  },
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "FATH"
+    }
+  ]
+}

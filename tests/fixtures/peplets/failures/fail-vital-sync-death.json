@@ -1,0 +1,33 @@
+{
+  "person_id": "TMP-FAIL-02",
+  "display_name": "Sync Death Fail",
+  "canonical_name": {
+    "given": "SyncDeath",
+    "surname": "Fail",
+    "birth_year": {
+      "year": 1950
+    },
+    "death_year": {
+      "year": 2010
+    }
+  },
+  "sex": "Female",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1950-01-01"
+      }
+    },
+    "death": {
+      "date": {
+        "date_start": "2005-01-01"
+      }
+    }
+  },
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "FATH"
+    }
+  ]
+}

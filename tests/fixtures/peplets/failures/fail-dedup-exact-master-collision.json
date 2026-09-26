@@ -1,0 +1,32 @@
+{
+  "person_id": "TMP-FAIL-DEDUP-01",
+  "display_name": "Arthur Pendelton Sterling",
+  "canonical_name": {
+    "given": "Arthur",
+    "middle": "Pendelton",
+    "surname": "Sterling",
+    "birth_year": {
+      "year": 1961,
+      "modifier": "EXACT"
+    }
+  },
+  "sex": "Male",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1961-12-01",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "Harrisburg, PA",
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      }
+    }
+  },
+  "associated_people": [
+    {
+      "person_id": "IND-00019",
+      "role": "CHIL"
+    }
+  ]
+}

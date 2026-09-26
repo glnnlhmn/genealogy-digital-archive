@@ -1,0 +1,24 @@
+{
+  "person_id": "TMP-FAIL-07",
+  "display_name": "Invalid Status",
+  "canonical_name": {
+    "given": "Bad",
+    "surname": "Status",
+    "birth_year": {
+      "year": 1986
+    }
+  },
+  "sex": "Female",
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "FATH"
+    }
+  ],
+  "unions": [
+    {
+      "spouse_id": "IND-00000",
+      "status": "COHABITATING"
+    }
+  ]
+}

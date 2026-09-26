@@ -1,0 +1,41 @@
+{
+  "person_id": "TMP-01003",
+  "display_name": "Hannah Marie Albright",
+  "canonical_name": {
+    "given": "Hannah",
+    "surname": "Albright",
+    "birth_year": {
+      "year": 1992,
+      "modifier": "EXACT"
+    }
+  },
+  "sex": "Female",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1992-11-05",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "West Pennsboro, PA",
+        "standardized": "West Pennsboro Township, Cumberland County, Pennsylvania, USA"
+      }
+    }
+  },
+  "notes": [],
+  "associated_people": [
+    {
+      "person_id": "TMP-01002",
+      "role": "SPOU"
+    }
+  ],
+  "unions": [
+    {
+      "spouse_id": "TMP-01002",
+      "status": "MARRIED",
+      "date": {
+        "date_start": "2016-06-18"
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "person_id": "TMP-FAIL-DEDUP-02",
+  "display_name": "Clara Belle Sterling",
+  "canonical_name": {
+    "given": "Clara",
+    "middle": "Belle",
+    "surname": "Sterling",
+    "birth_year": {
+      "year": 1975,
+      "modifier": "EXACT"
+    }
+  },
+  "sex": "Female",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1975-03-15",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "Carlisle, PA",
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      }
+    }
+  },
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "FATH"
+    }
+  ]
+}

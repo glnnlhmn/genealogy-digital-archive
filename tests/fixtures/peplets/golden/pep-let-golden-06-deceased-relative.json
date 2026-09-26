@@ -1,0 +1,47 @@
+{
+  "person_id": "TMP-01006",
+  "display_name": "Cordelia Ann Sterling",
+  "canonical_name": {
+    "given": "Cordelia",
+    "surname": "Sterling",
+    "birth_year": {
+      "year": 1965,
+      "modifier": "EXACT"
+    },
+    "death_year": {
+      "year": 2012,
+      "modifier": "EXACT"
+    }
+  },
+  "sex": "Female",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1965-05-18",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "Carlisle, PA",
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      }
+    },
+    "death": {
+      "date": {
+        "date_start": "2012-10-04",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "Carlisle, PA",
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      }
+    }
+  },
+  "notes": [],
+  "associated_people": [
+    {
+      "person_id": "IND-00019",
+      "role": "FATH"
+    }
+  ],
+  "unions": []
+}

@@ -1,0 +1,26 @@
+{
+  "person_id": "TMP-FAIL-06",
+  "display_name": "Spouseless Union",
+  "canonical_name": {
+    "given": "No",
+    "surname": "Spouse",
+    "birth_year": {
+      "year": 1985
+    }
+  },
+  "sex": "Male",
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "FATH"
+    }
+  ],
+  "unions": [
+    {
+      "status": "MARRIED",
+      "date": {
+        "date_start": "2010-01-01"
+      }
+    }
+  ]
+}

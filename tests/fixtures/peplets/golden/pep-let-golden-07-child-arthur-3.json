@@ -1,0 +1,33 @@
+{
+  "person_id": "TMP-01007",
+  "display_name": "Beatrice Claire Sterling",
+  "canonical_name": {
+    "given": "Beatrice",
+    "surname": "Sterling",
+    "birth_year": {
+      "year": 1995,
+      "modifier": "EXACT"
+    }
+  },
+  "sex": "Female",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1995-12-01",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "Carlisle, PA",
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      }
+    }
+  },
+  "notes": [],
+  "associated_people": [
+    {
+      "person_id": "IND-00000",
+      "role": "FATH"
+    }
+  ],
+  "unions": []
+}

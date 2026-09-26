@@ -1,0 +1,41 @@
+{
+  "person_id": "TMP-01010",
+  "display_name": "Nathaniel Robert Hayes",
+  "canonical_name": {
+    "given": "Nathaniel",
+    "surname": "Hayes",
+    "birth_year": {
+      "year": 1987,
+      "modifier": "EXACT"
+    }
+  },
+  "sex": "Male",
+  "vitals": {
+    "birth": {
+      "date": {
+        "date_start": "1987-01-25",
+        "modifier": "EXACT"
+      },
+      "place": {
+        "verbatim": "West Pennsboro, PA",
+        "standardized": "West Pennsboro Township, Cumberland County, Pennsylvania, USA"
+      }
+    }
+  },
+  "notes": [],
+  "associated_people": [
+    {
+      "person_id": "TMP-01001",
+      "role": "SPOU"
+    }
+  ],
+  "unions": [
+    {
+      "spouse_id": "TMP-01001",
+      "status": "MARRIED",
+      "date": {
+        "date_start": "2014-09-20"
+      }
+    }
+  ]
+}

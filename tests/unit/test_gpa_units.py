@@ -11,7 +11,7 @@ from tools.ops.gpa import RegistryAuditor, run_cli
 
 pytestmark = pytest.mark.unit
 
-FIXTURES_DIR = Path(__file__).resolve().parent.parent / "fixtures"
+FIXTURES_DIR = Path(__file__).resolve().parent.parent / "fixtures" / "people"
 FAILURES_DIR = FIXTURES_DIR / "failures"
 
 
