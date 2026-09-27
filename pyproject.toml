@@ -6,7 +6,6 @@ build-backend = "setuptools.build_meta"
 name = "genealogy-digital-archive"
 version = "1.0.1"
 description = "Production archival system, indexing engine, and validation pipeline."
-readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [
@@ -33,7 +32,8 @@ dependencies = [
     "jsonschema>=4.26.0",
     "pandas>=3.0.6",
     "pillow>=12.3.0",
-    "rich>=15.0.0"
+    "rich>=15.0.0",
+    "rapidfuzz>=3.0.0"
 ]
 
 [project.urls]
@@ -98,3 +98,7 @@ exclude_lines = [
     "if __name__ == .__main__.:",
     "sys.exit"
 ]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["tools*"]
+exclude = ["data*", "logs*", "backups*", "gtemp*", "import*", "schemas*", "reports*", "prompts*", "tests*"]

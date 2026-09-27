@@ -1,0 +1,1475 @@
+{
+  "$schema": "schemas/entities/fact_registry.schema.json",
+  "schema_version": "1.0.2",
+  "created_at": "2026-09-26T21:00:00Z",
+  "last_modified": "2026-09-26T21:00:00Z",
+  "total_facts": 49,
+  "facts": [
+    {
+      "fact_id": "00000001-0001-4000-8000-000000000001",
+      "person_id": "IND-00019",
+      "fact_type": "Marriage",
+      "quay_score": 2,
+      "created_at": "2026-09-01T11:00:00Z",
+      "updated_at": "2026-09-01T11:00:00Z",
+      "date": {
+        "date_start": "1960-08-12",
+        "modifier": "EXACT",
+        "raw_text": "12 Aug 1960"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Genevieve Louise Thornton",
+      "notes": "Wedding reported in The Patriot-News society section.",
+      "life_story": "Garrison Montgomery Sterling III married Genevieve Louise Thornton in Harrisburg.",
+      "associated_people": [
+        {
+          "person_id": "IND-00023",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00067",
+          "role": "FATH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:DAU:HBG:THE_PATRIOT_NEWS:1960-08-15:PAGE_14:WEDDING_STERLING_THORNTON",
+        "file_name": "1960_wedding_patriot.pdf",
+        "repository_path": "data/transcript/"
+      }
+    },
+    {
+      "fact_id": "00000001-0001-4000-8000-000000000002",
+      "person_id": "IND-00019",
+      "fact_type": "Marriage",
+      "quay_score": 3,
+      "created_at": "2026-09-01T11:05:00Z",
+      "updated_at": "2026-09-01T11:05:00Z",
+      "date": {
+        "date_start": "1960-08-12",
+        "modifier": "EXACT",
+        "raw_text": "12 Aug 1960"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Genevieve Louise Thornton",
+      "notes": "Ceremony solemnized at Grace Methodist Church.",
+      "life_story": "Garrison Montgomery Sterling III married Genevieve Louise Thornton in Harrisburg.",
+      "associated_people": [
+        {
+          "person_id": "IND-00023",
+          "role": "SPOU"
+        },
+        {
+          "person_id": "IND-00073",
+          "role": "WITN"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:DAU:HBG:THE_EVENING_NEWS:1960-08-15:PAGE_10:WEDDING_STERLING_THORNTON",
+        "file_name": "1960_wedding_evening.jpg",
+        "repository_path": "data/media/"
+      }
+    },
+    {
+      "fact_id": "00000001-0001-4000-8000-000000000003",
+      "person_id": "IND-00019",
+      "fact_type": "Marriage",
+      "quay_score": 2,
+      "created_at": "2026-09-01T11:10:00Z",
+      "updated_at": "2026-09-01T11:10:00Z",
+      "date": {
+        "date_start": "1960-08-12",
+        "modifier": "EXACT",
+        "raw_text": "12 Aug 1960"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Genevieve Louise Thornton",
+      "notes": "Parish register solemnization entry.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00023",
+          "role": "SPOU"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:CHURCH:PA:DAU:HBG:GRACE_METHODIST:1960:MARR:STERLING_THORNTON",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "00000002-0001-4000-8000-000000000001",
+      "person_id": "IND-00023",
+      "fact_type": "Marriage",
+      "quay_score": 3,
+      "created_at": "2026-09-01T11:00:00Z",
+      "updated_at": "2026-09-01T11:00:00Z",
+      "date": {
+        "date_start": "1960-08-12",
+        "modifier": "EXACT",
+        "raw_text": "12 Aug 1960"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Garrison Montgomery Sterling III",
+      "notes": "Announcement published in The Patriot-News.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "SPOU"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:DAU:HBG:THE_PATRIOT_NEWS:1960-08-15:PAGE_14:WEDDING_STERLING_THORNTON",
+        "file_name": "1960_wedding_patriot.pdf",
+        "repository_path": "data/transcript/"
+      }
+    },
+    {
+      "fact_id": "00000002-0001-4000-8000-000000000002",
+      "person_id": "IND-00023",
+      "fact_type": "Marriage",
+      "quay_score": 2,
+      "created_at": "2026-09-01T11:05:00Z",
+      "updated_at": "2026-09-01T11:05:00Z",
+      "date": {
+        "date_start": "1960-08-12",
+        "modifier": "EXACT",
+        "raw_text": "12 Aug 1960"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Garrison Montgomery Sterling III",
+      "notes": "Announcement published in The Evening News.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "SPOU"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:DAU:HBG:THE_EVENING_NEWS:1960-08-15:PAGE_10:WEDDING_STERLING_THORNTON",
+        "file_name": "1960_wedding_evening.jpg",
+        "repository_path": "data/media/"
+      }
+    },
+    {
+      "fact_id": "00000003-0001-4000-8000-000000000001",
+      "person_id": "IND-00000",
+      "fact_type": "Marriage",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1983-05-14",
+        "modifier": "EXACT",
+        "raw_text": "14 May 1983"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Eleanor Margaret Sinclair",
+      "notes": "Dauphin County Marriage Docket #1983-0492.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00029",
+          "role": "SPOU"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:MARRIAGE:PA:DAU:1983:0492",
+        "file_name": "dauphin_marr_1983_0492.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000003-0001-4000-8000-000000000002",
+      "person_id": "IND-00000",
+      "fact_type": "Marriage",
+      "quay_score": 2,
+      "created_at": "2026-08-26T22:35:00Z",
+      "updated_at": "2026-08-26T22:35:00Z",
+      "date": {
+        "date_start": "1983-05-14",
+        "modifier": "EXACT",
+        "raw_text": "14 May 1983"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Eleanor Margaret Sinclair",
+      "notes": "Society section notice in The Patriot-News.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00029",
+          "role": "SPOU"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:DAU:HBG:THE_PATRIOT_NEWS:1983-05-18:PAGE_22:MARRIAGE_STERLING_SINCLAIR",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "00000004-0001-4000-8000-000000000001",
+      "person_id": "IND-00000",
+      "fact_type": "Marriage",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1986-03-22",
+        "modifier": "EXACT",
+        "raw_text": "22 Mar 1986"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Clara Josephine Holloway",
+      "notes": "Cumberland County Marriage License #1986-0184.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00031",
+          "role": "SPOU"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:MARRIAGE:PA:CUM:1986:0184",
+        "file_name": "cumberland_marr_1986_0184.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000004-0001-4000-8000-000000000002",
+      "person_id": "IND-00000",
+      "fact_type": "Marriage",
+      "quay_score": 2,
+      "created_at": "2026-08-26T22:36:00Z",
+      "updated_at": "2026-08-26T22:36:00Z",
+      "date": {
+        "date_start": "1986-03-22",
+        "modifier": "EXACT",
+        "raw_text": "22 Mar 1986"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Clara Josephine Holloway",
+      "notes": "Announced in The Sentinel, Carlisle, PA.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00031",
+          "role": "SPOU"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:CUM:CARLISLE:SENTINEL:1986-03-25:PAGE_8:MARRIAGE_STERLING_HOLLOWAY",
+        "file_name": "sentinel_19860325_p8.pdf",
+        "repository_path": "data/transcript/"
+      }
+    },
+    {
+      "fact_id": "00000005-0001-4000-8000-000000000001",
+      "person_id": "IND-00019",
+      "fact_type": "Burial",
+      "quay_score": 3,
+      "created_at": "2026-09-01T11:15:01Z",
+      "updated_at": "2026-09-01T11:15:01Z",
+      "date": {
+        "date_start": "2018-07-06",
+        "modifier": "EXACT",
+        "raw_text": "06 Jul 2018"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Burial at Westminster Memorial Gardens",
+      "notes": "Funeral service at First Presbyterian Church; interment Westminster Memorial Gardens.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "CHIL"
+        },
+        {
+          "person_id": "IND-00023",
+          "role": "WIFE"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:CUM:CARLISLE:SENTINEL:2018-07-03:PAGE_A6:OBIT_GARRISON_STERLING_III",
+        "file_name": "obit_garrison_sterling_2018.pdf",
+        "repository_path": "data/transcript/"
+      }
+    },
+    {
+      "fact_id": "00000005-0001-4000-8000-000000000002",
+      "person_id": "IND-00019",
+      "fact_type": "Burial",
+      "quay_score": 3,
+      "created_at": "2026-09-01T11:20:00Z",
+      "updated_at": "2026-09-01T11:20:00Z",
+      "date": {
+        "date_start": "2018-07-06",
+        "modifier": "EXACT",
+        "raw_text": "06 Jul 2018"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Burial at Westminster Memorial Gardens",
+      "notes": "Cemetery plot index card and perpetual care deed record.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "CHIL"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:CEMETERY:PA:CUM:CARLISLE:WESTMINSTER:PLOT:2018:GARRISON_STERLING",
+        "file_name": "westminster_plot_card_2018.jpg",
+        "repository_path": "data/media/"
+      }
+    },
+    {
+      "fact_id": "00000006-0001-4000-8000-000000000001",
+      "person_id": "IND-00067",
+      "fact_type": "Burial",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1985-09-21",
+        "modifier": "EXACT",
+        "raw_text": "21 Sep 1985"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Burial at Westminster Memorial Gardens",
+      "notes": "Obituary notice in Carlisle Sentinel.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00071",
+          "role": "WIFE"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:CUM:CARLISLE:SENTINEL:1985-09-19:PAGE_4:OBIT_GARRISON_STERLING_JR",
+        "file_name": "sentinel_19850919_p4.pdf",
+        "repository_path": "data/transcript/"
+      }
+    },
+    {
+      "fact_id": "00000006-0001-4000-8000-000000000002",
+      "person_id": "IND-00067",
+      "fact_type": "Burial",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:36:00Z",
+      "updated_at": "2026-08-26T22:36:00Z",
+      "date": {
+        "date_start": "1985-09-21",
+        "modifier": "EXACT",
+        "raw_text": "21 Sep 1985"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Burial at Westminster Memorial Gardens",
+      "notes": "Interment register record for Westminster Memorial Gardens.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00071",
+          "role": "WIFE"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:CEMETERY:PA:CUM:CARLISLE:WESTMINSTER:1985:GARRISON_STERLING_JR",
+        "file_name": "westminster_interment_1985.jpg",
+        "repository_path": "data/media/"
+      }
+    },
+    {
+      "fact_id": "00000007-0001-4000-8000-000000000001",
+      "person_id": "IND-00071",
+      "fact_type": "Burial",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1999-12-09",
+        "modifier": "EXACT",
+        "raw_text": "09 Dec 1999"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Burial at Westminster Memorial Gardens",
+      "notes": "Published obituary notice in The Sentinel.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "CHIL"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:CUM:CARLISLE:SENTINEL:1999-12-07:PAGE_B2:OBIT_DOROTHY_STERLING",
+        "file_name": "sentinel_19991207_b2.pdf",
+        "repository_path": "data/transcript/"
+      }
+    },
+    {
+      "fact_id": "00000007-0001-4000-8000-000000000002",
+      "person_id": "IND-00071",
+      "fact_type": "Burial",
+      "quay_score": 2,
+      "created_at": "2026-08-26T22:40:00Z",
+      "updated_at": "2026-08-26T22:40:00Z",
+      "date": {
+        "date_start": "1999-12-09",
+        "modifier": "EXACT",
+        "raw_text": "09 Dec 1999"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Burial at Westminster Memorial Gardens",
+      "notes": "Memorial card record from Hoffman Funeral Home.",
+      "life_story": null,
+      "associated_people": null,
+      "source": {
+        "record_urn": "URN:FUNERAL:PA:CUM:CARLISLE:HOFFMAN:1999:DOROTHY_STERLING",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "00000008-0001-4000-8000-000000000001",
+      "person_id": "IND-00053",
+      "fact_type": "Marriage",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1905-10-18",
+        "modifier": "EXACT",
+        "raw_text": "18 Oct 1905"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Helena Beatrice Fairchild",
+      "notes": "Cumberland County marriage license volume 24, page 112.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00059",
+          "role": "SPOU"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:MARRIAGE:PA:CUM:1905:V24:P112",
+        "file_name": "cumberland_marr_1905_v24.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000008-0001-4000-8000-000000000002",
+      "person_id": "IND-00053",
+      "fact_type": "Marriage",
+      "quay_score": 2,
+      "created_at": "2026-08-26T22:38:00Z",
+      "updated_at": "2026-08-26T22:38:00Z",
+      "date": {
+        "date_start": "1905-10-18",
+        "modifier": "EXACT",
+        "raw_text": "18 Oct 1905"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Helena Beatrice Fairchild",
+      "notes": "Wedding announcement in Carlisle Evening Herald.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00059",
+          "role": "SPOU"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:CUM:CARLISLE:EVENING_HERALD:1905-10-19:PAGE_3:MARRIAGE_STERLING_FAIRCHILD",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "00000009-0001-4000-8000-000000000001",
+      "person_id": "IND-00097",
+      "fact_type": "Marriage",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1868-04-10",
+        "modifier": "EXACT",
+        "raw_text": "10 Apr 1868"
+      },
+      "location": {
+        "standardized": "Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Agnes Rachel Kensington",
+      "notes": "Parish register of First Evangelical Lutheran Church, Carlisle.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00101",
+          "role": "SPOU"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:CHURCH:PA:CUM:CARLISLE:LUTHERAN:1868:MARR:STERLING_KENSINGTON",
+        "file_name": "first_lutheran_marriages_1868.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000009-0001-4000-8000-000000000002",
+      "person_id": "IND-00097",
+      "fact_type": "Marriage",
+      "quay_score": 2,
+      "created_at": "2026-08-26T22:40:00Z",
+      "updated_at": "2026-08-26T22:40:00Z",
+      "date": {
+        "date_start": "1868-04-10",
+        "modifier": "EXACT",
+        "raw_text": "10 Apr 1868"
+      },
+      "location": {
+        "standardized": "Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Agnes Rachel Kensington",
+      "notes": "Marriage announcement in American Volunteer newspaper.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00101",
+          "role": "SPOU"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:CUM:CARLISLE:AMERICAN_VOLUNTEER:1868-04-16:PAGE_2:MARR_STERLING_KENSINGTON",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "00000010-0001-4000-8000-000000000001",
+      "person_id": "IND-00167",
+      "fact_type": "Marriage",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1889-08-15",
+        "modifier": "EXACT",
+        "raw_text": "15 Aug 1889"
+      },
+      "location": {
+        "standardized": "Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Rebecca Ann Thornton",
+      "notes": "Cumberland County marriage record #1889-0214.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00163",
+          "role": "SPOU"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:MARRIAGE:PA:CUM:1889:0214",
+        "file_name": "cumberland_marr_1889_0214.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000010-0001-4000-8000-000000000002",
+      "person_id": "IND-00167",
+      "fact_type": "Marriage",
+      "quay_score": 2,
+      "created_at": "2026-08-26T22:42:00Z",
+      "updated_at": "2026-08-26T22:42:00Z",
+      "date": {
+        "date_start": "1889-08-15",
+        "modifier": "EXACT",
+        "raw_text": "15 Aug 1889"
+      },
+      "location": {
+        "standardized": "Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Marriage to Rebecca Ann Thornton",
+      "notes": "Announced in The Daily Herald, Carlisle.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00163",
+          "role": "SPOU"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:CUM:CARLISLE:DAILY_HERALD:1889-08-17:PAGE_3:MARR_THORNTON_THORNTON",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "00000011-0001-4000-8000-000000000001",
+      "person_id": "IND-00067",
+      "fact_type": "Census",
+      "quay_score": 3,
+      "created_at": "2026-08-26T21:58:11Z",
+      "updated_at": "2026-08-26T21:58:11Z",
+      "date": {
+        "date_start": "1930",
+        "modifier": "EXACT",
+        "raw_text": "1930"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "1930 U.S. Federal Census",
+      "notes": "Head, Age 20, Single, Clerk in Retail Store.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00053",
+          "role": "FATH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:CENSUS:1930:PA:CUM:CARLISLE:ED21-12:S4:L18",
+        "file_name": "1930_carlisle_ed12.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000011-0001-4000-8000-000000000002",
+      "person_id": "IND-00067",
+      "fact_type": "Occupation",
+      "quay_score": 3,
+      "created_at": "2026-08-26T21:58:11Z",
+      "updated_at": "2026-08-26T21:58:11Z",
+      "date": {
+        "date_start": "1930",
+        "modifier": "EXACT",
+        "raw_text": "1930"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "1930 U.S. Federal Census - Occupation: Store Clerk",
+      "notes": "Occupation listed as Retail Store Clerk.",
+      "life_story": null,
+      "associated_people": null,
+      "source": {
+        "record_urn": "URN:CENSUS:1930:PA:CUM:CARLISLE:ED21-12:S4:L18",
+        "file_name": "1930_carlisle_ed12.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000012-0001-4000-8000-000000000001",
+      "person_id": "IND-00019",
+      "fact_type": "Civic",
+      "quay_score": 2,
+      "created_at": "2026-09-02T17:09:00Z",
+      "updated_at": "2026-09-02T17:09:00Z",
+      "date": {
+        "date_start": "1974-04-17",
+        "modifier": "EXACT",
+        "raw_text": "17 Apr 1974"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Safety presentation to State Traffic Bureau",
+      "notes": "Presented safety recommendations on fleet operations.",
+      "life_story": null,
+      "associated_people": null,
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:DAU:HBG:THE_PATRIOT_NEWS:1974-04-18:P12:SAFETY_PRESENTATION",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "00000012-0001-4000-8000-000000000002",
+      "person_id": "IND-00019",
+      "fact_type": "Occupation",
+      "quay_score": 2,
+      "created_at": "2026-09-02T17:09:00Z",
+      "updated_at": "2026-09-02T17:09:00Z",
+      "date": {
+        "date_start": "1974-04-17",
+        "modifier": "EXACT",
+        "raw_text": "17 Apr 1974"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Transportation manager duties log",
+      "notes": "Supervised daily dispatch operations.",
+      "life_story": null,
+      "associated_people": null,
+      "source": {
+        "record_urn": "URN:MUNICIPAL:PA:DAU:HBG:LOG:1974-04-17:DISPATCH",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "00000013-0001-4000-8000-000000000001",
+      "person_id": "IND-00053",
+      "fact_type": "Census",
+      "quay_score": 3,
+      "created_at": "2026-08-26T21:56:47Z",
+      "updated_at": "2026-08-26T21:56:47Z",
+      "date": {
+        "date_start": "1920",
+        "modifier": "EXACT",
+        "raw_text": "1920"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "1920 U.S. Federal Census",
+      "notes": "Head of household, Age 50, Bank Teller.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00059",
+          "role": "WIFE"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:CENSUS:1920:PA:CUM:CARLISLE:ED18:S6:L42",
+        "file_name": "1920_carlisle_census.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000013-0001-4000-8000-000000000002",
+      "person_id": "IND-00053",
+      "fact_type": "Census",
+      "quay_score": 1,
+      "created_at": "2026-08-26T21:56:47Z",
+      "updated_at": "2026-08-26T21:56:47Z",
+      "date": {
+        "date_start": "1920",
+        "modifier": "EXACT",
+        "raw_text": "1920"
+      },
+      "location": {
+        "standardized": "Chambersburg, Franklin County, Pennsylvania, USA"
+      },
+      "description": "1920 U.S. Federal Census",
+      "notes": "Erroneous match candidate in Franklin County.",
+      "life_story": null,
+      "associated_people": null,
+      "source": {
+        "record_urn": "URN:CENSUS:1920:PA:FRA:CHAMBERSBURG:ED44:S12:L15",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "00000014-0001-4000-8000-000000000001",
+      "person_id": "IND-00000",
+      "fact_type": "Education",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1979-06-07",
+        "modifier": "EXACT",
+        "raw_text": "07 Jun 1979"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "High School Graduation",
+      "notes": "Commencement list for Dauphin County Technical School Class of 1979.",
+      "life_story": null,
+      "associated_people": null,
+      "source": {
+        "record_urn": "URN:NEWSPAPER:PA:DAU:HBG:THE_PATRIOT:1979-06-07:P34:COUNTY_TECH_GRADUATES",
+        "file_name": "dcts_1979_grad.pdf",
+        "repository_path": "data/transcript/"
+      }
+    },
+    {
+      "fact_id": "00000014-0001-4000-8000-000000000002",
+      "person_id": "IND-00000",
+      "fact_type": "Education",
+      "quay_score": 2,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1984-06-05",
+        "modifier": "EXACT",
+        "raw_text": "05 Jun 1984"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "High School Graduation",
+      "notes": "Spurious duplicate entry with mismatched year.",
+      "life_story": null,
+      "associated_people": null,
+      "source": {
+        "record_urn": "URN:RECORD:PENDING:VERIFICATION",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000001",
+      "person_id": "IND-00000",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1961-12-01",
+        "modifier": "EXACT",
+        "raw_text": "1 Dec 1961"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Birth of Arthur Pendelton Sterling",
+      "notes": "Certified vital birth registration in Harrisburg.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00019",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00023",
+          "role": "MOTH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:BIRTH:PA:1961:ARTHUR_P_STERLING",
+        "file_name": "birth_cert_arthur_sterling.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000002",
+      "person_id": "IND-00000",
+      "fact_type": "Divorce",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1985-08-20",
+        "modifier": "EXACT",
+        "raw_text": "20 Aug 1985"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Divorce from Eleanor Margaret Sinclair",
+      "notes": "Dauphin County Court of Common Pleas divorce decree.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00029",
+          "role": "WITN"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:DIVORCE:PA:DAU:1985:0820",
+        "file_name": "divorce_decree_1985_0820.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000003",
+      "person_id": "IND-00029",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1963-04-12",
+        "modifier": "EXACT",
+        "raw_text": "12 Apr 1963"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Birth of Eleanor Margaret Sinclair",
+      "notes": "State Department of Health birth certificate.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00179",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00181",
+          "role": "MOTH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:BIRTH:PA:1963:ELEANOR_M_SINCLAIR",
+        "file_name": "birth_cert_eleanor_sinclair.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000004",
+      "person_id": "IND-00037",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1984-06-18",
+        "modifier": "EXACT",
+        "raw_text": "18 Jun 1984"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Birth of Julian Sinclair Sterling",
+      "notes": "Harrisburg Hospital birth registry.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00029",
+          "role": "MOTH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:BIRTH:PA:1984:JULIAN_S_STERLING",
+        "file_name": "birth_cert_julian_sterling.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000005",
+      "person_id": "IND-00031",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1964-08-22",
+        "modifier": "EXACT",
+        "raw_text": "22 Aug 1964"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Birth of Clara Josephine Holloway",
+      "notes": "Cumberland County vital birth entry.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00191",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00193",
+          "role": "MOTH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:BIRTH:PA:1964:CLARA_J_HOLLOWAY",
+        "file_name": "birth_cert_clara_holloway.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000006",
+      "person_id": "IND-00041",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1983-02-10",
+        "modifier": "EXACT",
+        "raw_text": "10 Feb 1983"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Birth of Beatrice May Holloway",
+      "notes": "Carlisle Hospital birth record.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00031",
+          "role": "MOTH"
+        },
+        {
+          "person_id": "IND-00000",
+          "role": "FATH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:BIRTH:PA:1983:BEATRICE_M_HOLLOWAY",
+        "file_name": "birth_cert_beatrice_holloway.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000007",
+      "person_id": "IND-00043",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1986-12-03",
+        "modifier": "EXACT",
+        "raw_text": "3 Dec 1986"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Birth of Tristan Vance Sterling",
+      "notes": "Hospital birth notification.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00031",
+          "role": "MOTH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:BIRTH:PA:1986:TRISTAN_V_STERLING",
+        "file_name": "birth_cert_tristan_sterling.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000008",
+      "person_id": "IND-00047",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1988-06-13",
+        "modifier": "EXACT",
+        "raw_text": "13 Jun 1988"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Birth of Lydia Grace Sterling",
+      "notes": "State certificate of live birth.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00000",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00031",
+          "role": "MOTH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:BIRTH:PA:1988:LYDIA_G_STERLING",
+        "file_name": "birth_cert_lydia_sterling.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000009",
+      "person_id": "IND-00019",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1941-05-16",
+        "modifier": "EXACT",
+        "raw_text": "16 May 1941"
+      },
+      "location": {
+        "standardized": "Pennsylvania, USA"
+      },
+      "description": "Birth of Garrison Montgomery Sterling III",
+      "notes": "Birth recorded in family Bible and county index.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00067",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00071",
+          "role": "MOTH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:BIRTH:PA:1941:GARRISON_STERLING_III",
+        "file_name": "birth_cert_garrison_iii.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000010",
+      "person_id": "IND-00019",
+      "fact_type": "Death",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "2018-06-30",
+        "modifier": "EXACT",
+        "raw_text": "30 Jun 2018"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Death of Garrison Montgomery Sterling III",
+      "notes": "Commonwealth of Pennsylvania death certificate #2018-063011.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00023",
+          "role": "WIFE"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:DEATH:PA:2018:063011",
+        "file_name": "death_cert_garrison_sterling_2018.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000011",
+      "person_id": "IND-00073",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1938-02-10",
+        "modifier": "EXACT",
+        "raw_text": "10 Feb 1938"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Birth of Raymond Bradley Sterling",
+      "notes": "Hospital birth register entry.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00067",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00071",
+          "role": "MOTH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:BIRTH:PA:1938:RAYMOND_B_STERLING",
+        "file_name": "birth_cert_raymond_sterling.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000012",
+      "person_id": "IND-00073",
+      "fact_type": "Death",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "2010-11-04",
+        "modifier": "EXACT",
+        "raw_text": "4 Nov 2010"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Death of Raymond Bradley Sterling",
+      "notes": "Pennsylvania Department of Health vital record.",
+      "life_story": null,
+      "associated_people": null,
+      "source": {
+        "record_urn": "URN:VITAL:DEATH:PA:2010:110488",
+        "file_name": "death_cert_raymond_sterling.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000013",
+      "person_id": "IND-00023",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1942-10-06",
+        "modifier": "EXACT",
+        "raw_text": "6 Oct 1942"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Birth of Genevieve Louise Thornton",
+      "notes": "Polyclinic Hospital birth record.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00167",
+          "role": "FATH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:BIRTH:PA:1942:GENEVIEVE_L_THORNTON",
+        "file_name": "birth_cert_genevieve_thornton.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000014",
+      "person_id": "IND-00089",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1940-08-14",
+        "modifier": "EXACT",
+        "raw_text": "14 Aug 1940"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Birth of Adelaide Rose Thornton",
+      "notes": "City of Harrisburg vital registry.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00167",
+          "role": "FATH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:BIRTH:PA:1940:ADELAIDE_R_THORNTON",
+        "file_name": null,
+        "repository_path": null
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000015",
+      "person_id": "IND-00089",
+      "fact_type": "Death",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "2015-01-20",
+        "modifier": "EXACT",
+        "raw_text": "20 Jan 2015"
+      },
+      "location": {
+        "standardized": "Harrisburg, Dauphin County, Pennsylvania, USA"
+      },
+      "description": "Death of Adelaide Rose Thornton",
+      "notes": "Pennsylvania death certificate #2015-00412.",
+      "life_story": null,
+      "associated_people": null,
+      "source": {
+        "record_urn": "URN:VITAL:DEATH:PA:2015:00412",
+        "file_name": "death_cert_adelaide_thornton.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000016",
+      "person_id": "IND-00067",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1910-04-03",
+        "modifier": "EXACT",
+        "raw_text": "3 Apr 1910"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Birth of Garrison Montgomery Sterling Jr",
+      "notes": "Carlisle Borough vital birth certificate.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00053",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00059",
+          "role": "MOTH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:VITAL:BIRTH:PA:1910:GARRISON_STERLING_JR",
+        "file_name": "birth_cert_garrison_jr.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000017",
+      "person_id": "IND-00071",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1914-07-25",
+        "modifier": "EXACT",
+        "raw_text": "25 Jul 1914"
+      },
+      "location": {
+        "standardized": "Carlisle, Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Birth of Dorothy Evelyn Bradford",
+      "notes": "Recorded in Cumberland County Courthouse ledger.",
+      "life_story": null,
+      "associated_people": null,
+      "source": {
+        "record_urn": "URN:VITAL:BIRTH:PA:1914:DOROTHY_E_BRADFORD",
+        "file_name": "birth_cert_dorothy_bradford.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000018",
+      "person_id": "IND-00053",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1870-01-10",
+        "modifier": "EXACT",
+        "raw_text": "10 Jan 1870"
+      },
+      "location": {
+        "standardized": "Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Birth of Garrison Montgomery Sterling Sr",
+      "notes": "Parish baptism record, Zion Lutheran Church.",
+      "life_story": null,
+      "associated_people": [
+        {
+          "person_id": "IND-00097",
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00101",
+          "role": "MOTH"
+        }
+      ],
+      "source": {
+        "record_urn": "URN:CHURCH:PA:CUM:CARLISLE:ZION:1870:BAP:GARRISON_STERLING",
+        "file_name": "zion_baptisms_1870.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000019",
+      "person_id": "IND-00059",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1878-03-14",
+        "modifier": "EXACT",
+        "raw_text": "14 Mar 1878"
+      },
+      "location": {
+        "standardized": "Cumberland County, Pennsylvania, USA"
+      },
+      "description": "Birth of Helena Beatrice Fairchild",
+      "notes": "Parish register entry.",
+      "life_story": null,
+      "associated_people": null,
+      "source": {
+        "record_urn": "URN:CHURCH:PA:CUM:CARLISLE:LUTHERAN:1878:BAP:HELENA_FAIRCHILD",
+        "file_name": "lutheran_baptisms_1878.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    },
+    {
+      "fact_id": "00000020-0001-4000-8000-000000000020",
+      "person_id": "IND-00139",
+      "fact_type": "Birth",
+      "quay_score": 3,
+      "created_at": "2026-08-26T22:33:25Z",
+      "updated_at": "2026-08-26T22:33:25Z",
+      "date": {
+        "date_start": "1740-02-10",
+        "modifier": "EXACT",
+        "raw_text": "10 Feb 1740"
+      },
+      "location": {
+        "standardized": "Hornberg, Baden-Württemberg, Germany"
+      },
+      "description": "Baptism of Barnaby Sterling",
+      "notes": "Parish register Hornberg Evangelical Church.",
+      "life_story": null,
+      "associated_people": null,
+      "source": {
+        "record_urn": "URN:CHURCH:1740:DEU:BW:HORNBERG:BAP:BARNABY_STERLING",
+        "file_name": "hornberg_bap_1740.pdf",
+        "repository_path": "data/archival_records/"
+      }
+    }
+  ]
+}

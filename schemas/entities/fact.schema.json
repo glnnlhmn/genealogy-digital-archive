@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/entities/fact.schema.json",
   "title": "Fact",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Represents an assertion linking a person to a source document for a specific historical reason, utilizing centralized shared definitions.",
   "type": "object",
   "properties": {
@@ -62,10 +62,13 @@
     },
     "notes": {
       "type": [
-        "string",
+        "array",
         "null"
       ],
-      "description": "[OPTIONAL] Research notes, conflict analysis, or transcription quirks (excluding individual names to prevent data drift)."
+      "items": {
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/note_entry"
+      },
+      "description": "[OPTIONAL] List of structured research notes adhering to canonical note_entry, or null."
     },
     "life_story": {
       "type": [
@@ -89,14 +92,12 @@
       "description": "[OPTIONAL] Cross-reference mapping to external GEDCOM events and sources."
     },
     "created_at": {
-      "type": "string",
-      "format": "date-time",
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso",
       "description": "[REQUIRED] ISO 8601 timestamp tracking when the fact entry was first created."
     },
     "updated_at": {
-      "type": "string",
-      "format": "date-time",
-      "description": "[REQUIRED] ISO 8601 timestamp tracking when the fact entry was last modified. Matches created_at on initial insertion."
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso",
+      "description": "[REQUIRED] ISO 8601 timestamp tracking when the fact entry was last modified."
     },
     "source": {
       "description": "[REQUIRED] Primary source reference pairing archival URNs with physical filenames.",
@@ -112,6 +113,28 @@
           "minItems": 1
         }
       ]
+    },
+    "absorbed_at": {
+      "oneOf": [
+        {
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "[OPTIONAL] ISO 8601 timestamp tracking when this assertion was absorbed by a canonical record, or null if active."
+    },
+    "canonical_fact_id": {
+      "oneOf": [
+        {
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/fact_id"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "[OPTIONAL] Pointer to the absorbing canonical fact_id if this assertion was consolidated, or null if active."
     }
   },
   "required": [

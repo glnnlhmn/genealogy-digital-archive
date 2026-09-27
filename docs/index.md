@@ -17,3 +17,4 @@
 * [GTR: Genealogy Token Registry](tools/gtr.md)
 * [FACTS_INSP: Fact Registry Inspection Engine](tools/facts_insp.md)
 * [FACTS_MD: Fact Markdown Synchronizer](tools/facts_md.md)
+* [FACTS_MERGE: Fact Consolidation & Assertion Merger](tools/facts_merge.md)
