@@ -1,11 +1,18 @@
 # Name: gsi.py
 # Path: tools/ops/gsi.py
+# Version: 1.0.5+build.20260926.04
 
-"""GSI (Genealogy Script Importer).
+"""Genealogy Script Importer (GSI).
 
-Permanent operational tool for scanning intake areas for executable scripts,
-parsing mandatory header metadata (# Name:, # Path:), enforcing safe pre-overwrite
-backups in backups/, routing to repository locations, and optional execution.
+Scan the repository root for intake candidate files matching 'gemini'
+(*.py, *.md, *.ps1, *.txt, *.json), extract destination routing metadata
+from headers, manage atomic Safe Backups, relocate files directly to their
+designated archive paths, and provide contextual execution:
+- Tests (test_*.py): pytest <file> -v
+- Markdown (*.md): Google Chrome
+- PowerShell (*.ps1): powershell.exe -ExecutionPolicy Bypass -File <file>
+- Python (*.py): python <file>
+- Non-executables (*.json, *.txt): Relocated with '(Can not execute)' suffix if -r is passed.
 """
 
 import argparse
@@ -16,230 +23,221 @@ import re
 import shutil
 import subprocess
 import sys
-from typing import List, Optional, Tuple
+import webbrowser
 
-# Ensure repository root is on sys.path for standalone invocation
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
+__version__ = "1.0.5+build.20260926.04"
 
-from tools.lib.gda_core.GDAConfig import CONFIG
+ROOT_DIR = Path(__file__).resolve().parents[2]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+
+from tools.lib.gda_core.GDAConfig import GDAConfig
 from tools.lib.gda_core.GDALogger import setup_logger
 from tools.lib.gda_core.GDAUtil import GDAUtil
 
-__version__ = "1.0.3+build.20260922.2"
 
-
-def extract_script_headers(file_path: Path) -> Tuple[Optional[str], Optional[Path]]:
-    """Parses script headers for mandatory '# Name:' and '# Path:' directives.
+def parse_metadata_header(file_path: Path) -> tuple[str | None, Path | None]:
+    """Extract target filename and relative path from the first 15 lines of a candidate file.
 
     Args:
-        file_path (Path): Source script candidate.
+        file_path: Absolute or relative Path pointing to candidate intake file.
 
     Returns:
-        Tuple[Optional[str], Optional[Path]]: Declared name and resolved target Path.
+        A tuple of (target_name, dest_path). If headers are missing, malformed,
+        or unreadable, returns (None, None).
     """
-    script_name = None
-    target_rel_path = None
-
     try:
-        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
-            lines = [f.readline() for _ in range(15)]
+        content = file_path.read_text(encoding="utf-8")
+    except Exception:
+        return None, None
 
-        for line in lines:
-            line_clean = line.strip()
-            name_match = re.match(r"^#\s*Name:\s*(\S+)", line_clean, re.IGNORECASE)
-            if name_match and not script_name:
-                script_name = name_match.group(1).strip()
+    lines = content.splitlines()[:15]
+    header_block = "\n".join(lines)
 
-            path_match = re.match(r"^#\s*Path:\s*(\S+)", line_clean, re.IGNORECASE)
-            if path_match and not target_rel_path:
-                raw_path = path_match.group(1).strip().replace("\\", "/")
-                target_rel_path = Path(raw_path)
-    except Exception as e:
-        sys.stderr.write(f"Error reading headers from {file_path.name}: {e}\n")
+    target_name = None
+    target_path_str = None
 
-    return script_name, target_rel_path
+    # 1. JSON-specific key parsing: "_name": "..." and "_path": "..."
+    if file_path.suffix.lower() == ".json":
+        name_json = re.search(r'"_?name"\s*:\s*"([^"]+)"', header_block, re.IGNORECASE)
+        path_json = re.search(r'"_?path"\s*:\s*"([^"]+)"', header_block, re.IGNORECASE)
+        if name_json and path_json:
+            target_name = name_json.group(1).strip()
+            target_path_str = path_json.group(1).strip()
 
+    # 2. General comment pattern across #, <!--, //, /* or multi-line HTML comment interiors
+    if not target_name or not target_path_str:
+        name_match = re.search(
+            r'^[ \t]*(?:#|<!--|//|/\*|\*)*[ \t]*Name:[ \t]*([^\r\n>*/]+)',
+            header_block,
+            re.MULTILINE | re.IGNORECASE,
+        )
+        path_match = re.search(
+            r'^[ \t]*(?:#|<!--|//|/\*|\*)*[ \t]*Path:[ \t]*([^\r\n>]+)',
+            header_block,
+            re.MULTILINE | re.IGNORECASE,
+        )
+        if name_match:
+            target_name = name_match.group(1).strip()
+        if path_match:
+            target_path_str = path_match.group(1).strip()
 
-def get_python_interpreter() -> str:
-    """Detects active virtual environment or fallback Python executable."""
-    venv_python = CONFIG.root / ".venv" / "Scripts" / "python.exe"
-    if venv_python.exists():
-        return str(venv_python)
-    return sys.executable
+    if not target_name or not target_path_str:
+        return None, None
 
+    # Clean comment delimiters, quotes, and whitespace
+    target_name = re.sub(r'\s*(-->|\*/).*$', '', target_name).strip().strip('"\'')
+    target_path_str = re.sub(r'\s*(-->|\*/).*$', '', target_path_str).strip().strip('"\'')
 
-def execute_script(target_path: Path, passthrough_args: List[str], logger: Optional[logging.Logger] = None) -> int:
-    """Executes target script post-import.
+    dest_raw = ROOT_DIR / Path(target_path_str)
 
-    Args:
-        target_path (Path): Script path to execute.
-        passthrough_args (List[str]): Arguments forwarded directly to script.
-        logger (Optional[logging.Logger]): Operational logger.
-
-    Returns:
-        int: Process return code.
-    """
-    log = logger or logging.getLogger("gsi")
-    log.info(f"Spawning execution for {target_path.relative_to(CONFIG.root).as_posix()}...")
-    cmd = []
-    if target_path.suffix.lower() == ".py":
-        cmd = [get_python_interpreter(), str(target_path)] + passthrough_args
-    elif target_path.suffix.lower() == ".ps1":
-        cmd = ["powershell.exe", "-ExecutionPolicy", "Bypass", "-File", str(target_path)] + passthrough_args
+    if dest_raw.is_dir() or target_path_str.endswith(("/", "\\")):
+        dest_path = (dest_raw / target_name).resolve()
     else:
-        log.error(f"Unsupported executable format for direct run: {target_path.suffix}")
-        return 1
+        dest_path = dest_raw.resolve()
 
-    try:
-        proc = subprocess.run(cmd, cwd=str(CONFIG.root))
-        log.info(f"Execution finished with exit code {proc.returncode}")
-        return proc.returncode
-    except Exception as e:
-        log.error(f"Subprocess invocation failed: {e}")
-        return 1
+    return target_name, dest_path
 
 
-def process_import(
-    source_dir: Path,
-    pattern: str,
-    force: bool,
-    run_after: bool,
-    passthrough_args: List[str],
-    logger: Optional[logging.Logger] = None,
-) -> None:
-    """Scans, verifies, backs up, relocates, and optionally executes candidate scripts.
+def execute_relocated_target(target_path: Path, logger: logging.Logger) -> int:
+    """Execute target based on file extension and naming pattern.
 
     Args:
-        source_dir (Path): Intake directory to scan.
-        pattern (str): Filename substring filter pattern.
-        force (bool): Bypasses interactive overwrite prompt if True.
-        run_after (bool): Spawns script post-import if True.
-        passthrough_args (List[str]): Forwarded CLI parameters.
-        logger (Optional[logging.Logger]): Operational logger.
+        target_path: Resolved Path pointing to the relocated file.
+        logger: Active logging instance for execution traces.
+
+    Returns:
+        Integer process exit code (0 for success, non-zero for failure).
     """
-    log = logger or logging.getLogger("gsi")
-    if not source_dir.exists():
-        log.error(f"Source directory not found: {source_dir}")
-        return
+    ext = target_path.suffix.lower()
+    file_name = target_path.name.lower()
 
-    rel_source = source_dir.relative_to(CONFIG.root).as_posix() if source_dir.is_relative_to(CONFIG.root) else str(source_dir)
-    log.info(f"Scanning '{rel_source}' for pattern: '{pattern}'")
+    if ext == ".py" and (file_name.startswith("test_") or file_name.endswith("_test.py")):
+        cmd = [sys.executable, "-m", "pytest", str(target_path), "-v"]
+        logger.info(f"Executing test target via pytest: {' '.join(cmd)}")
+        res = subprocess.run(cmd, cwd=str(ROOT_DIR))
+        return res.returncode
 
+    if ext == ".md":
+        logger.info(f"Opening markdown target in Chrome: {target_path}")
+        chrome_opened = False
+
+        # Check standard PATH candidates and default Windows locations
+        chrome_candidates = ["chrome", "chrome.exe", "google-chrome"]
+        for env_var in ["ProgramFiles", "ProgramFiles(x86)", "LocalAppData"]:
+            base = os.environ.get(env_var)
+            if base:
+                chrome_candidates.append(str(Path(base) / "Google" / "Chrome" / "Application" / "chrome.exe"))
+
+        for chrome_bin in chrome_candidates:
+            if shutil.which(chrome_bin) or Path(chrome_bin).is_file():
+                try:
+                    subprocess.Popen([chrome_bin, str(target_path)])
+                    chrome_opened = True
+                    break
+                except Exception:
+                    pass
+
+        if not chrome_opened:
+            webbrowser.open(target_path.as_uri())
+        return 0
+
+    if ext == ".ps1":
+        cmd = ["powershell.exe", "-ExecutionPolicy", "Bypass", "-File", str(target_path)]
+        logger.info(f"Executing PowerShell script: {' '.join(cmd)}")
+        res = subprocess.run(cmd, cwd=str(ROOT_DIR))
+        return res.returncode
+
+    if ext == ".py":
+        cmd = [sys.executable, str(target_path)]
+        logger.info(f"Executing Python script: {' '.join(cmd)}")
+        res = subprocess.run(cmd, cwd=str(ROOT_DIR))
+        return res.returncode
+
+    return 0
+
+
+def run_intake(run_target: bool = False) -> int:
+    """Scan repository root for candidate files matching 'gemini' and relocate them.
+
+    Args:
+        run_target: Whether to invoke contextual execution immediately after relocation.
+
+    Returns:
+        Integer status code (0 if all operations succeed, non-zero if execution fails).
+    """
+    config = GDAConfig(root=ROOT_DIR)
+    logger = setup_logger("gsi", log_dir=config.logs)
+    logger.info("Initialized GSI CLI.")
+
+    allowed_exts = {".py", ".md", ".ps1", ".txt", ".json"}
     candidates = [
-        p for p in source_dir.iterdir()
-        if p.is_file() and p.suffix.lower() in [".py", ".ps1"] and pattern.lower() in p.name.lower()
+        item for item in ROOT_DIR.iterdir()
+        if item.is_file() and "gemini" in item.name.lower() and item.suffix.lower() in allowed_exts
     ]
 
     if not candidates:
-        log.info("No matching script candidates located.")
-        return
+        logger.info("No intake candidate files found in root directory.")
+        return 0
 
-    for item in candidates:
-        log.info(f"Inspecting candidate: {item.name}")
-        name_hdr, path_hdr = extract_script_headers(item)
+    for cand in candidates:
+        logger.info(f"Inspecting candidate: {cand.name}")
+        target_name, dest_path = parse_metadata_header(cand)
 
-        if not path_hdr:
-            log.error(f"Skipping {item.name}: Missing valid '# Path:' header specification.")
+        if not target_name or not dest_path:
+            logger.warning(
+                f"Skipping {cand.name}: Missing valid metadata headers ('# Name:' / '# Path:' or JSON '_name' / '_path') within first 15 lines."
+            )
             continue
 
-        target_full_path = CONFIG.root / path_hdr
-
-        if target_full_path.resolve() == item.resolve():
-            log.info(f"File {item.name} is already at designated destination: {path_hdr.as_posix()}")
-            if run_after:
-                execute_script(target_full_path, passthrough_args, logger=log)
-            continue
-
-        if target_full_path.exists():
-            log.info(f"Collision detected for destination: {path_hdr.as_posix()}")
-            if not force:
-                prompt = input(f"Destination {path_hdr.as_posix()} exists. Overwrite? [Y/n]: ").strip().lower()
-                if prompt in ["n", "no"]:
-                    log.info(f"Import canceled by user for {item.name}")
-                    continue
-
-            try:
-                backup_path = GDAUtil.create_safe_backup(target_full_path)
-                log.info(f"Safe Backup generated: {backup_path.name}")
-            except Exception as e:
-                log.error(f"Aborting replacement of {path_hdr.as_posix()} due to backup failure: {e}")
-                continue
-
-        target_full_path.parent.mkdir(parents=True, exist_ok=True)
         try:
-            shutil.move(str(item), str(target_full_path))
-            log.info(f"Successfully relocated: {item.name} -> {path_hdr.as_posix()}")
-        except Exception as e:
-            log.error(f"Failed to move {item.name} to {target_full_path}: {e}")
+            dest_path.relative_to(ROOT_DIR)
+        except ValueError:
+            logger.error(f"Security error: Destination {dest_path} attempts escape outside repository root.")
             continue
 
-        if run_after:
-            execute_script(target_full_path, passthrough_args, logger=log)
+        dest_path.parent.mkdir(parents=True, exist_ok=True)
+
+        if dest_path.is_file():
+            GDAUtil.create_safe_backup(dest_path, backup_dir=config.backups)
+
+        shutil.move(str(cand), str(dest_path))
+
+        rel_display = f".\\{dest_path.relative_to(ROOT_DIR)}"
+        ext = dest_path.suffix.lower()
+
+        if run_target and ext in [".json", ".txt"]:
+            logger.info(f"Successfully relocated: {cand.name} -> {rel_display} (Can not execute)")
+        else:
+            logger.info(f"Successfully relocated: {cand.name} -> {rel_display}")
+
+        if run_target and ext in [".py", ".md", ".ps1"]:
+            ret = execute_relocated_target(dest_path, logger)
+            if ret != 0:
+                logger.error(f"Execution finished with non-zero exit code {ret}")
+                return ret
+
+    logger.info("GSI intake operation complete.")
+    return 0
 
 
-def main() -> None:
-    """CLI parameter parsing and router."""
+def main() -> int:
+    """Parse CLI options and execute the GSI intake workflow.
+
+    Returns:
+        Integer status code indicating program execution success or failure.
+    """
     parser = argparse.ArgumentParser(
-        description="GSI: Genealogy Script Importer and Deployment Utility."
-    )
-    parser.add_argument(
-        "-s", "--source-dir",
-        type=Path,
-        default=CONFIG.root,
-        help="Source directory to scan (Default: root archive directory)",
-    )
-    parser.add_argument(
-        "-p", "--pattern",
-        type=str,
-        default="gemini",
-        help="Filename filter pattern (Default: 'gemini')",
-    )
-    parser.add_argument(
-        "-f", "--force",
-        action="store_true",
-        help="Force overwrite of existing targets without prompting (always takes a safe backup)",
+        description="Genealogy Script Importer (GSI) - Relocates and executes staged files."
     )
     parser.add_argument(
         "-r", "--run",
         action="store_true",
-        help="Execute the relocated script immediately post-import",
+        help="Execute relocated target (pytest for tests, Chrome for .md, PowerShell for .ps1, Python for .py)."
     )
-    parser.add_argument(
-        "--debug",
-        action="store_true",
-        help="Route runtime traces directly to console/stderr",
-    )
-    parser.add_argument(
-        "passthrough",
-        nargs=argparse.REMAINDER,
-        help="Arguments to pass through to the executed script (use after --)",
-    )
-
     args = parser.parse_args()
-
-    c_level = logging.DEBUG if args.debug else logging.INFO
-    logger = setup_logger("gsi", console_level=c_level, file_level=logging.DEBUG)
-    logger.info("Initialized GSI CLI.", extra={"sys_event": True})
-
-    passthrough = args.passthrough
-    if passthrough and passthrough[0] == "--":
-        passthrough = passthrough[1:]
-
-    source_path = args.source_dir
-    if not source_path.is_absolute():
-        source_path = CONFIG.root / source_path
-
-    process_import(
-        source_dir=source_path,
-        pattern=args.pattern,
-        force=args.force,
-        run_after=args.run,
-        passthrough_args=passthrough,
-        logger=logger,
-    )
+    return run_intake(run_target=args.run)
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
