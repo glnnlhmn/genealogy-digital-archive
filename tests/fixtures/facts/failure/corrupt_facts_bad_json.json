@@ -1,0 +1,4 @@
+{
+  "$schema": "schemas/entities/fact_registry.schema.json",
+  "facts": [
+    {"fact_id": "bad-syntax"

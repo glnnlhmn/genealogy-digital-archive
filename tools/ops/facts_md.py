@@ -13,7 +13,7 @@ from tools.lib.gda_core.GDALogger import setup_logger
 from tools.lib.gda_core.GDAUtil import GDAUtil
 from tools.lib.gda_core.GDASchemaEnums import SchemaEnums
 
-BUILD_VERSION = "1.1.0"
+BUILD_VERSION = "1.0.0"
 
 
 def resolve_insp_report(insp_arg: str | None = None, reports_dir: Path | None = None) -> Path:
