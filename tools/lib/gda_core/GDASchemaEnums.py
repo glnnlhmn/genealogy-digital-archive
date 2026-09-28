@@ -1,5 +1,5 @@
-# Name: registry.py
-# Path: tools/lib/gda_core/registry.py
+# Name: GDASchemaEnums.py
+# Path: tools/lib/gda_core/GDASchemaEnums.py
 
 import json
 from pathlib import Path

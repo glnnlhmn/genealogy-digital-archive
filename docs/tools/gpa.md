@@ -69,7 +69,7 @@ When running `--vital-sync` or `--all`, discrepancies between `canonical_name.bi
 * `tools.lib.gda_core.GDAConfig.CONFIG`: Resolves registry path (`CONFIG.people`) and reports directory (`CONFIG.reports`).
 * `tools.lib.gda_core.GDALogger.setup_logger`: Configures `[SYS]` event-aware logging.
 * `tools.lib.gda_core.GDAUtil.GDAUtil`: Handles atomic Safe Backups and UTF-8 JSON I/O.
-* `tools.lib.gda_core.registry.SchemaEnums`: Validates sex, date modifier, and association role enums against `_enums.schema.json`.
+* `tools.lib.gda_core.GDASchemaEnums.SchemaEnums`: Validates sex, date modifier, and association role enums against `_enums.schema.json`.
 
 ---
 

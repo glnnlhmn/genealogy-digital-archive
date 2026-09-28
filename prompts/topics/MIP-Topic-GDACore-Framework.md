@@ -28,7 +28,7 @@ Atomic data manipulation and filesystem utilities:
 * **Integrity Hashing:** Calculates SHA-256 digests across archival assets and manifest tracking tables.
 * **Quarantine Routing:** Safely isolates non-conforming or corrupted payloads into `data/entities/quarantine/`.
 
-### SchemaEnums (`tools/lib/gda_core/registry.py`)
+### SchemaEnums (`../../tools/lib/gda_core/GDASchemaEnums.py`)
 Dynamic vocabulary resolver loading definitions directly from `schemas/defs/_enums.schema.json`:
 * **Single Source of Truth:** Centralizes valid enumerations for `fact_type`, `date_modifier`, `union_status`, and `kinship_role`.
 * **Zero Hardcoding:** Prevents drift by resolving valid vocabulary choices dynamically at runtime.

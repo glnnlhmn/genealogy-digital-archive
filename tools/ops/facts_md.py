@@ -11,7 +11,7 @@ from pathlib import Path
 from tools.lib.gda_core.GDAConfig import CONFIG
 from tools.lib.gda_core.GDALogger import setup_logger
 from tools.lib.gda_core.GDAUtil import GDAUtil
-from tools.lib.gda_core.registry import SchemaEnums
+from tools.lib.gda_core.GDASchemaEnums import SchemaEnums
 
 BUILD_VERSION = "1.1.0"
 

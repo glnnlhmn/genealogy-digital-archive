@@ -50,7 +50,7 @@ python tools/ops/facts_insp.py --verbose
 * `tools.lib.gda_core.GDAConfig.CONFIG`: Resolves paths to facts, people, reports, and schemas.
 * `tools.lib.gda_core.GDALogger.setup_logger`: Configures `[SYS]` event-aware logging.
 * `tools.lib.gda_core.GDAUtil.GDAUtil`: Coordinates atomic JSON loading and reporting exports.
-* `tools.lib.gda_core.registry.SchemaEnums`: Provides authoritative enums loaded from `_enums.schema.json`.
+* `tools.lib.gda_core.GDASchemaEnums.SchemaEnums`: Provides authoritative enums loaded from `_enums.schema.json`.
 
 ---
 
