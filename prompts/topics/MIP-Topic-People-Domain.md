@@ -1,6 +1,10 @@
+<!--
+Name: MIP-Topic-People-Domain.md
+Path: prompts/topics/MIP-Topic-People-Domain.md
+-->
 # Topic Specification: People Domain Entities, Kinship & Demographics
-<!-- Version: 1.0.0 -->
-<!-- Location: prompts/topics/MIP-Topic-People-Domain.md -->
+<!-- Version: 1.0.1 -->
+<!-- Operational Directive: Ingest this topic specification as a modular overlay extending the active MIP baseline. Do not execute or rewrite without explicit operator command. Confirm processing and state any conflicts. -->
 
 ## 1. Schema Authority & Entity Structure
 Governed by `schemas/entities/person.schema.json` and `schemas/entities/person_registry.schema.json`.

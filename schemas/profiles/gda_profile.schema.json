@@ -1,0 +1,183 @@
+{
+  "_name": "gda_profile.schema.json",
+  "_path": "schemas/profiles/gda_profile.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/profiles/gda_profile.schema.json",
+  "title": "GDA System Profile & Task Backlog Schema",
+  "type": "object",
+  "required": [
+    "_name",
+    "_path",
+    "system_profile"
+  ],
+  "properties": {
+    "_name": {
+      "type": "string",
+      "const": "gda_profile.schema.json"
+    },
+    "_path": {
+      "type": "string",
+      "const": "schemas/profiles/gda_profile.schema.json"
+    },
+    "system_profile": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "system_version",
+        "plan_of_action",
+        "groups",
+        "on_hold",
+        "archived"
+      ],
+      "properties": {
+        "schema_version": {
+          "type": "string"
+        },
+        "system_version": {
+          "type": "string"
+        },
+        "plan_of_action": {
+          "type": "object",
+          "required": [
+            "active_group_id",
+            "on_deck_task_ids"
+          ],
+          "properties": {
+            "active_group_id": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "in_progress_task_ids": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "on_deck_task_ids": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "session_state_notes": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/task_group"
+          }
+        },
+        "on_hold": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/task_item"
+          }
+        },
+        "archived": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/task_item"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "status_enum": {
+      "type": "string",
+      "enum": [
+        "not started",
+        "in progress",
+        "complete"
+      ]
+    },
+    "task_item": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/status_enum"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "subgroup": {
+      "type": "object",
+      "required": [
+        "subgroup_id",
+        "title",
+        "tasks"
+      ],
+      "properties": {
+        "subgroup_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/task_item"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "task_group": {
+      "type": "object",
+      "required": [
+        "group_id",
+        "title"
+      ],
+      "properties": {
+        "group_id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/task_item"
+          }
+        },
+        "subgroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/subgroup"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

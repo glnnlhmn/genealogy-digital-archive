@@ -63,12 +63,17 @@
         "UNKNOWN"
       ]
     },
-    "enum_note_category": {
+	"enum_note_category": {
       "type": "string",
       "enum": [
-        "ANOMALY",
+        "GENERAL",
         "RESEARCH_TODO",
-        "GENERAL"
+        "ANOMALY",
+        "RESEARCH",
+        "DISCREPANCY",
+        "TRANSCRIPTION",
+        "CORRECTION",
+        "PROVENANCE"
       ]
     },
     "enum_fact_type": {
