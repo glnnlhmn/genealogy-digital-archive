@@ -4,17 +4,18 @@ Path: docs/lib/gda_core/index.md
 -->
 # Core Framework Library: `tools.lib.gda_core`
 
-The `gda_core` package provides the foundational architecture, configuration singletons, transactional entity containers, and filesystem safeguards shared across all operational tools (`tools/ops/`) in the Genealogy Digital Archive.
+The `gda_core` package provides the foundational architecture, configuration singletons, transactional entity containers, and filesystem safeguards shared across all operational tools (`tools/ops/`), maintenance pipelines, and interactive notebooks in the Genealogy Digital Archive.
 
 ---
 
 ## Architecture Overview
 
-All tools in the archive interact with underlying file stores through `gda_core` abstractions rather than performing direct ad-hoc filesystem I/O. This ensures:
+All tools and interactive notebooks interact with underlying registries through `gda_core` abstractions rather than performing ad-hoc filesystem I/O. This ensures:
 * **Single Configuration Authority:** Paths anchor deterministically via `GDAConfig`.
 * **Zero Data Loss:** Write operations execute through the Safe Backup Protocol.
-* **Controlled Vocabularies:** Value constraints resolve against centralized schema definitions.
-* **Hermetic Test Isolation:** Core objects can be sandboxed in `tmp_path` without mutating production registries.
+* **Controlled Vocabularies & Normalization:** State validation and enum constraints resolve against centralized schema definitions and standard packages (`us`).
+* **Decoupled Registries:** Separates civil administrative jurisdictions (`GDALocations`) from physical facilities and landmarks (`GDASites`).
+* **Hermetic Test Isolation:** Core objects can be sandboxed in ephemeral `tmp_path` environments without mutating production stores.
 
 ```text
                     ┌─────────────────────────┐
@@ -29,6 +30,14 @@ All tools in the archive interact with underlying file stores through `gda_core`
 │ (Backups, JSON,  │   │  (Vocabularies,  │   │ (Facts Registry, │
 │  Hashing, Temp)  │   │   Validation)    │   │  Index & Xref)   │
 └──────────────────┘   └──────────────────┘   └──────────────────┘
+                                 │
+         ┌───────────────────────┴───────────────────────┐
+         ▼                                               ▼
+┌──────────────────┐                           ┌──────────────────┐
+│   GDALocations   │                           │     GDASites     │
+│(Jurisdictions,   │◄──────────────────────────┤(Facilities, Geo, │
+│ Lineage, US Norm)│     Foreign Key Pointer   │ Aliases, Filter) │
+└──────────────────┘     (location_id)         └──────────────────┘
 ```
 
 ---
@@ -39,22 +48,30 @@ All tools in the archive interact with underlying file stores through `gda_core`
 * **Role:** Centralized configuration singleton and environment resolver.
 * **Responsibilities:** Resolves root anchors (`G:/My Drive/genealogy-digital-archive`), manages runtime configuration (`gda_config.json`), provides absolute paths for all data stores, entities, schemas, and reports.
 
-### 2. [GDAFacts](GDAFacts.md)
+### 2. [GDALocations](GDALocations.md)
+* **Role:** Master civil jurisdiction and administrative boundary manager (`data/entities/locations.json`).
+* **Responsibilities:** Normalizes hierarchical administrative layers (Country > State > County > Local), executes offline US state validation via `us`, tracks temporal boundary lineage (`date_established`, `date_dissolved`, predecessor/successor splits), manages alias variants, and executes exact, wildcard, and fuzzy queries.
+
+### 3. [GDASites](GDASites.md)
+* **Role:** Master physical site and facility registry manager (`data/entities/sites.json`).
+* **Responsibilities:** Governs physical structures, cemeteries, churches, and landmarks. Enforces foreign key referential integrity against `GDALocations`, auto-mints monotonic `SITE-XXXXX` keys, handles geocoding coordinates, manages site aliases, and provides stateful view filtering.
+
+### 4. [GDAFacts](GDAFacts.md)
 * **Role:** Transactional container and indexing engine for `data/entities/facts.json`.
 * **Responsibilities:** Manages primary UUID index (`_index`) and secondary foreign-key index (`_person_xref`), tracks dirty state, enforces `fact_id` immutability, and coordinates atomic pre-write backups.
 
-### 3. [GDAUtil](GDAUtil.md)
+### 5. [GDAUtil](GDAUtil.md)
 * **Role:** Operational filesystem utilities and cryptographic routines.
 * **Responsibilities:** Executes Safe Backup Protocol (`create_safe_backup`, `restore_backup`, `prune_backups`), chunked SHA-256 calculation, atomic UTF-8 JSON read/write routines, and workspace hygiene (`clear_gtemp`).
 
-### 4. [GDASchemaEnums](GDASchemaEnums.md)
+### 6. [GDASchemaEnums](GDASchemaEnums.md)
 * **Role:** Controlled vocabulary cache and validation engine.
 * **Responsibilities:** Parses and caches enum constraints from `schemas/defs/_enums.schema.json`, handles schema discovery fallbacks, and validates entity attributes.
 
 ---
 
 ## Verification & Testing
-The `gda_core` suite maintains strict >= 95% branch coverage with isolated unit and regression test harnesses:
+The `gda_core` suite maintains strict >95% branch coverage with isolated unit and regression test harnesses:
 
 ```powershell
 # Run smoke tests across the core framework
