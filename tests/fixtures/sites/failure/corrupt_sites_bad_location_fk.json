@@ -1,0 +1,24 @@
+{
+  "_name": "corrupt_sites_bad_location_fk.json",
+  "_path": "tests/fixtures/sites/failure/corrupt_sites_bad_location_fk.json",
+  "$schema": "schemas/entities/site_registry.schema.json",
+  "schema_version": "1.0.0",
+  "total_sites": 1,
+  "sites": [
+    {
+      "site_id": "SITE-00001",
+      "site_type": "FACILITY",
+      "name": "Orphaned Medical Center",
+      "aliases": [],
+      "location_id": "LOC-99999",
+      "address": {
+        "address_line_1": "100 Phantom Way",
+        "address_line_2": null,
+        "postal_code": "00000",
+        "coordinates": null
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    }
+  ]
+}

@@ -11,7 +11,7 @@ from typing import Any, List, Optional, Union
 
 from tools.lib.gda_core.GDAConfig import CONFIG
 
-__version__ = "1.0.2+build.20260922.2"
+__version__ = "1.0.3+build.20260929.1"
 
 
 class GDAUtil:
@@ -19,7 +19,7 @@ class GDAUtil:
 
     Provides Safe Backup Protocol handlers, cryptographic hashing,
     standardized timestamps, quarantine routing, rollback management,
-    workspace hygiene, and UTF-8 JSON I/O.
+    workspace hygiene, and UTF-8 JSON I/O with unified pre-write backups.
     """
 
     BACKUP_PATTERN = re.compile(r"^(.+?)\.(.+?)\.bk$")
@@ -197,7 +197,7 @@ class GDAUtil:
         return sha256_hash.hexdigest()
 
     # -------------------------------------------------------------------------
-    # Standard UTF-8 JSON I/O
+    # Standard UTF-8 JSON I/O with Single Touch-Point Persistence
     # -------------------------------------------------------------------------
     @classmethod
     def load_json(cls, file_path: Union[Path, str]) -> Any:
@@ -207,10 +207,24 @@ class GDAUtil:
             return json.load(f)
 
     @classmethod
-    def save_json(cls, file_path: Union[Path, str], data: Any, indent: int = 2) -> Path:
-        """Writes data to a UTF-8 encoded JSON file with atomic write protection."""
+    def save_json(
+        cls,
+        file_path: Union[Path, str],
+        data: Any,
+        indent: int = 2,
+        create_backup: bool = False,
+        backup_dir: Optional[Path] = None,
+    ) -> Path:
+        """Writes data to a UTF-8 encoded JSON file with atomic write protection.
+
+        If create_backup is True and file_path already exists, triggers
+        cls.create_safe_backup before executing the atomic replace.
+        """
         path = Path(file_path).resolve()
         path.parent.mkdir(parents=True, exist_ok=True)
+
+        if create_backup and path.exists():
+            cls.create_safe_backup(path, backup_dir=backup_dir)
 
         temp_dest = path.with_suffix(f"{path.suffix}.tmp")
         with open(temp_dest, "w", encoding="utf-8") as f:
@@ -218,6 +232,7 @@ class GDAUtil:
             f.write("\n")
         temp_dest.replace(path)
         return path
+
     # -------------------------------------------------------------------------
     # Canonical Name & Identity Utilities
     # -------------------------------------------------------------------------
@@ -252,6 +267,5 @@ class GDAUtil:
             raw = canonical_name.get("raw_name")
             raw_assembled = str(raw).strip() if raw and str(raw).strip() else "UNKNOWN"
 
-        # Strictly eliminate periods and collapse internal whitespace
         clean_name = raw_assembled.replace(".", "")
         return " ".join(clean_name.split())

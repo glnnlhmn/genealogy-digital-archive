@@ -1,0 +1,55 @@
+{
+  "_name": "site_registry.schema.json",
+  "_path": "schemas/entities/site_registry.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/entities/site_registry.schema.json",
+  "title": "Site Registry Schema",
+  "version": "1.0.0",
+  "description": "Master administrative registry envelope for sites.json, including required GSI intake headers.",
+  "type": "object",
+  "required": [
+    "_name",
+    "_path",
+    "$schema",
+    "schema_version",
+    "created_at",
+    "last_modified",
+    "total_sites",
+    "sites"
+  ],
+  "properties": {
+    "_name": {
+      "type": "string",
+      "const": "sites.json"
+    },
+    "_path": {
+      "type": "string",
+      "const": "data/entities/sites.json"
+    },
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "last_modified": {
+      "type": "string"
+    },
+    "total_sites": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "sites": {
+      "type": "array",
+      "description": "Authoritative list of physical sites, cemeteries, and landmarks.",
+      "items": {
+        "$ref": "site.schema.json"
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,364 @@
+{
+  "_name": "glenn_profile.schema.json",
+  "_path": "schemas/profiles/glenn_profile.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/profiles/glenn_profile.schema.json",
+  "title": "Glenn User Profile Schema",
+  "type": "object",
+  "required": [
+    "_name",
+    "_path",
+    "Glenn-User-Profile"
+  ],
+  "properties": {
+    "_name": {
+      "type": "string",
+      "const": "glenn_profile.json"
+    },
+    "_path": {
+      "type": "string",
+      "const": "data/profiles/glenn_profile.json"
+    },
+    "Glenn-User-Profile": {
+      "type": "object",
+      "required": [
+        "SchemaVersion",
+        "LastUpdated",
+        "PersonalContext",
+        "WorkAndRoutines",
+        "FaithAndWorldview",
+        "CommunicationPreferences",
+        "DeveloperConventions",
+        "FamilyAndRelationships",
+        "InterestsAndLifestyle"
+      ],
+      "properties": {
+        "SchemaVersion": {
+          "type": "string"
+        },
+        "LastUpdated": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "PersonalContext": {
+          "type": "object",
+          "required": [
+            "LegalName",
+            "BirthDate",
+            "CalculatedAge",
+            "CurrentLocation",
+            "Roles"
+          ],
+          "properties": {
+            "LegalName": {
+              "type": "string"
+            },
+            "BirthDate": {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+            },
+            "CalculatedAge": {
+              "type": "integer"
+            },
+            "CurrentLocation": {
+              "type": "string"
+            },
+            "Roles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "WorkAndRoutines": {
+          "type": "object",
+          "required": [
+            "WeeklyHours",
+            "Vehicle",
+            "DailyRoutines"
+          ],
+          "properties": {
+            "WeeklyHours": {
+              "type": "number"
+            },
+            "Vehicle": {
+              "type": "string"
+            },
+            "DailyRoutines": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "FaithAndWorldview": {
+          "type": "object",
+          "required": [
+            "Affiliation",
+            "PrimaryTranslations",
+            "ObservanceRules"
+          ],
+          "properties": {
+            "Affiliation": {
+              "type": "string"
+            },
+            "PrimaryTranslations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "ObservanceRules": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "CommunicationPreferences": {
+          "type": "object",
+          "required": [
+            "ToneAlignment",
+            "InteractionRules"
+          ],
+          "properties": {
+            "ToneAlignment": {
+              "type": "string"
+            },
+            "InteractionRules": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "DeveloperConventions": {
+          "type": "object",
+          "required": [
+            "GitBranchNaming"
+          ],
+          "properties": {
+            "GitBranchNaming": {
+              "type": "object",
+              "required": [
+                "Convention",
+                "Pattern",
+                "Formatting",
+                "Lifecycle"
+              ],
+              "properties": {
+                "Convention": {
+                  "type": "string"
+                },
+                "Pattern": {
+                  "type": "string"
+                },
+                "Formatting": {
+                  "type": "string"
+                },
+                "Lifecycle": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "FamilyAndRelationships": {
+          "type": "object",
+          "required": [
+            "Spouse",
+            "Children",
+            "GrandchildrenTotalCount"
+          ],
+          "properties": {
+            "Spouse": {
+              "type": "object",
+              "required": [
+                "LegalName",
+                "PreferredName",
+                "Anniversary"
+              ],
+              "properties": {
+                "LegalName": {
+                  "type": "string"
+                },
+                "PreferredName": {
+                  "type": "string"
+                },
+                "Anniversary": {
+                  "type": "string",
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                }
+              },
+              "additionalProperties": false
+            },
+            "Children": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "Name"
+                ],
+                "properties": {
+                  "Name": {
+                    "type": "string"
+                  },
+                  "Relation": {
+                    "type": "string"
+                  },
+                  "Spouse": {
+                    "type": "string"
+                  },
+                  "Partner": {
+                    "type": "string"
+                  },
+                  "Children": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "GrandchildrenTotalCount": {
+              "type": "integer"
+            }
+          },
+          "additionalProperties": false
+        },
+        "InterestsAndLifestyle": {
+          "type": "object",
+          "required": [
+            "HealthGoals",
+            "Biometrics",
+            "Hobbies"
+          ],
+          "properties": {
+            "HealthGoals": {
+              "type": "string"
+            },
+            "Biometrics": {
+              "type": "object",
+              "required": [
+                "HeightCm",
+                "HeightInches",
+                "MounjaroStartDate",
+                "MounjaroStartWeightLbs",
+                "MounjaroStartWeightKg",
+                "StartBMI",
+                "CurrentWeightLbs",
+                "CurrentWeightKg",
+                "CurrentBMI",
+                "TotalNetLossLbs",
+                "TotalNetLossKg",
+                "PercentageLoss",
+                "WeeklyLossRateLbs",
+                "WeeklyLossRateKg",
+                "ReportingSchedule",
+                "ClinicalHistory"
+              ],
+              "properties": {
+                "HeightCm": {
+                  "type": "number"
+                },
+                "HeightInches": {
+                  "type": "number"
+                },
+                "MounjaroStartDate": {
+                  "type": "string",
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                },
+                "MounjaroStartWeightLbs": {
+                  "type": "number"
+                },
+                "MounjaroStartWeightKg": {
+                  "type": "number"
+                },
+                "StartBMI": {
+                  "type": "number"
+                },
+                "CurrentWeightLbs": {
+                  "type": "number"
+                },
+                "CurrentWeightKg": {
+                  "type": "number"
+                },
+                "CurrentBMI": {
+                  "type": "number"
+                },
+                "TotalNetLossLbs": {
+                  "type": "number"
+                },
+                "TotalNetLossKg": {
+                  "type": "number"
+                },
+                "PercentageLoss": {
+                  "type": "number"
+                },
+                "WeeklyLossRateLbs": {
+                  "type": "number"
+                },
+                "WeeklyLossRateKg": {
+                  "type": "number"
+                },
+                "ReportingSchedule": {
+                  "type": "string"
+                },
+                "ClinicalHistory": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "Date",
+                      "WeightKg",
+                      "WeightLbs",
+                      "BMI"
+                    ],
+                    "properties": {
+                      "Date": {
+                        "type": "string",
+                        "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                      },
+                      "WeightKg": {
+                        "type": "number"
+                      },
+                      "WeightLbs": {
+                        "type": "number"
+                      },
+                      "BMI": {
+                        "type": "number"
+                      },
+                      "Event": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "Hobbies": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

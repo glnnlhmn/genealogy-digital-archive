@@ -1,5 +1,5 @@
 # =====================================================================
-# IDE, OS & Python Virtual Environments
+# IDE, OS & System Files
 # =====================================================================
 .idea/
 .vscode/
@@ -11,16 +11,35 @@
 /dataSources.local.xml
 .DS_Store
 Thumbs.db
+desktop.ini
 
+# =====================================================================
+# Python Runtime, Virtual Environments & Quality Gates
+# =====================================================================
 venv/
 .venv/
 env/
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
 .pytest_cache/
 .coverage
+.coverage.*
 htmlcov/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+
+# =====================================================================
+# Jupyter / IPython Notebooks & Kernels
+# =====================================================================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+*-checkpoint.ipynb
+.virtual_documents/
 
 # =====================================================================
 # API Keys, Secrets & Credentials
@@ -42,15 +61,20 @@ gda_config.json.bk
 backups/
 
 # =====================================================================
-# DATA EXCLUSION (Strict Living Person Privacy)
+# DATA EXCLUSION & WHITELISTS (Privacy & Static References)
 # =====================================================================
-data/
+# Exclude raw genealogical trees and intake data
 GEDCOM/
 *.ged
 *gedcom*.json
-
-# Intake Pipeline & Staging
 import/
+
+# Protect living privacy in data/, but whitelist static reference tables and profile ledger
+data/
+!data/reference/
+!data/reference/**
+!data/profiles/
+!data/profiles/gda_profile.json
 
 # =====================================================================
 # PERSONAL USER PROFILES & PRIVATE PROMPTS
@@ -59,18 +83,16 @@ prompts/core/Glenn*
 prompts/archive/
 
 # =====================================================================
-# DEPRECATED / ARCHIVED SCHEMAS
-# =====================================================================
-schemas/archive/*_us_census.schema.json
-
-# =====================================================================
 # Ephemeral Chat Downloads, Workspace, Logs & Reports
 # =====================================================================
 gemini-code-*.*
-gtemp/
+gtemp/*
+!gtemp/.gitkeep
 logs/
 reports/
 
-# Archive & Legacy Definitions
+# =====================================================================
+# ARCHIVED & LEGACY SCHEMAS / DEFINITIONS
+# =====================================================================
 schemas/archive/
 schemas/defs/*_definitions.schema.json
