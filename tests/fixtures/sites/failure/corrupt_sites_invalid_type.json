@@ -1,0 +1,24 @@
+{
+  "_name": "corrupt_sites_invalid_type.json",
+  "_path": "tests/fixtures/sites/failure/corrupt_sites_invalid_type.json",
+  "$schema": "schemas/entities/site_registry.schema.json",
+  "schema_version": "1.0.0",
+  "total_sites": 1,
+  "sites": [
+    {
+      "site_id": "SITE-00001",
+      "site_type": "STARSHIP_HANGAR",
+      "name": "Invalid Site Entity",
+      "aliases": [],
+      "location_id": "LOC-00006",
+      "address": {
+        "address_line_1": "500 Alien Dr",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": null
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    }
+  ]
+}

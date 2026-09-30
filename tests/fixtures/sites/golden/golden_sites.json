@@ -1,0 +1,6299 @@
+{
+  "_name": "golden_sites.json",
+  "_path": "tests/fixtures/sites/golden/golden_sites.json",
+  "$schema": "schemas/entities/site_registry.schema.json",
+  "schema_version": "1.0.0",
+  "created_at": "2026-09-29T00:00:00Z",
+  "last_modified": "2026-09-29T18:56:25.338393+00:00",
+  "total_sites": 300,
+  "sites": [
+    {
+      "site_id": "SITE-00001",
+      "site_type": "FACILITY",
+      "name": "Carlisle Hospital",
+      "aliases": [
+        "Carlisle Hospital",
+        "Carlisle Hosp",
+        "Carlisle Hospital (DOA)"
+      ],
+      "location_id": "LOC-00006",
+      "address": {
+        "address_line_1": "402 W Louther St",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2035,
+          "longitude": -77.1952
+        }
+      },
+      "notes": []
+    },
+    {
+      "site_id": "SITE-00002",
+      "site_type": "FACILITY",
+      "name": "Harrisburg State Hospital",
+      "aliases": [
+        "Harrisburg State Hospital",
+        "Hbg State Hospital"
+      ],
+      "location_id": "LOC-00065",
+      "address": {
+        "address_line_1": "Cameron & Maclay Sts",
+        "address_line_2": null,
+        "postal_code": "17105",
+        "coordinates": {
+          "latitude": 40.2889,
+          "longitude": -76.8791
+        }
+      },
+      "notes": []
+    },
+    {
+      "site_id": "SITE-00003",
+      "site_type": "FACILITY",
+      "name": "Polyclinic Hospital",
+      "aliases": [
+        "Polyclinic Hospital",
+        "Polyclinic Hos"
+      ],
+      "location_id": "LOC-00020",
+      "address": {
+        "address_line_1": "2601 N 3rd St",
+        "address_line_2": null,
+        "postal_code": "17110",
+        "coordinates": {
+          "latitude": 40.2856,
+          "longitude": -76.8972
+        }
+      },
+      "notes": []
+    },
+    {
+      "site_id": "SITE-00004",
+      "site_type": "FACILITY",
+      "name": "Harrisburg Hospital",
+      "aliases": [
+        "Harrisburg Hospital",
+        "Hbg Hospital"
+      ],
+      "location_id": "LOC-00020",
+      "address": {
+        "address_line_1": "S Front St",
+        "address_line_2": null,
+        "postal_code": "17101",
+        "coordinates": {
+          "latitude": 40.2547,
+          "longitude": -76.8778
+        }
+      },
+      "notes": []
+    },
+    {
+      "site_id": "SITE-00005",
+      "site_type": "CEMETERY",
+      "name": "Rolling Green Cemetery",
+      "aliases": [
+        "Rolling Green Cemetery",
+        "Rolling Green Memorial Park"
+      ],
+      "location_id": "LOC-00005",
+      "address": {
+        "address_line_1": "1811 Carlisle Pike",
+        "address_line_2": null,
+        "postal_code": "17011",
+        "coordinates": {
+          "latitude": 40.2312,
+          "longitude": -76.9534
+        }
+      },
+      "notes": []
+    },
+    {
+      "site_id": "SITE-00006",
+      "site_type": "CHURCH",
+      "name": "Zion Lutheran Church",
+      "aliases": [
+        "Zion Lutheran Church",
+        "Zion Evangelical Lutheran Church"
+      ],
+      "location_id": "LOC-00049",
+      "address": {
+        "address_line_1": "2730 Booser Ave",
+        "address_line_2": null,
+        "postal_code": "17103",
+        "coordinates": {
+          "latitude": 40.2741,
+          "longitude": -76.8523
+        }
+      },
+      "notes": []
+    },
+    {
+      "site_id": "SITE-00007",
+      "site_type": "FACILITY",
+      "name": "Edison Junior High School",
+      "aliases": [
+        "Edison Junior High School",
+        "Edison Middle School"
+      ],
+      "location_id": "LOC-00020",
+      "address": {
+        "address_line_1": "19th & Chestnut Sts",
+        "address_line_2": null,
+        "postal_code": "17104",
+        "coordinates": {
+          "latitude": 40.2612,
+          "longitude": -76.8645
+        }
+      },
+      "notes": []
+    },
+    {
+      "site_id": "SITE-00008",
+      "site_type": "ORGANIZATION",
+      "name": "Central Dauphin School District",
+      "aliases": [
+        "Central Dauphin School District",
+        "CD School District"
+      ],
+      "location_id": "LOC-00011",
+      "address": {
+        "address_line_1": "600 Rutherford Rd",
+        "address_line_2": null,
+        "postal_code": "17109",
+        "coordinates": null
+      },
+      "notes": []
+    },
+    {
+      "site_id": "SITE-00009",
+      "site_type": "RESIDENCE",
+      "name": "5217 Creekwood Drive Residence",
+      "aliases": [
+        "5217 Creekwood Dr",
+        "5217 Creedwood Dr"
+      ],
+      "location_id": "LOC-00020",
+      "address": {
+        "address_line_1": "5217 Creekwood Dr",
+        "address_line_2": null,
+        "postal_code": "17109",
+        "coordinates": {
+          "latitude": 40.2941,
+          "longitude": -76.8123
+        }
+      },
+      "notes": []
+    },
+    {
+      "site_id": "SITE-00010",
+      "site_type": "RESIDENCE",
+      "name": "106 South 28th Street Residence",
+      "aliases": [
+        "106 S 28th St",
+        "106 South 28th Street"
+      ],
+      "location_id": "LOC-00049",
+      "address": {
+        "address_line_1": "106 S 28th St",
+        "address_line_2": null,
+        "postal_code": "17103",
+        "coordinates": {
+          "latitude": 40.2715,
+          "longitude": -76.8512
+        }
+      },
+      "notes": []
+    },
+    {
+      "site_id": "SITE-00011",
+      "site_type": "CEMETERY",
+      "name": "Carlisle Cemetery",
+      "aliases": [
+        "Carlisle Graveyard",
+        "Old Carlisle Burial Ground"
+      ],
+      "location_id": "LOC-00012",
+      "address": {
+        "address_line_1": "177 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2132,
+          "longitude": -77.0835
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00012",
+      "site_type": "CHURCH",
+      "name": "Carlisle Presbyterian Church",
+      "aliases": [
+        "First Carlisle Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00013",
+      "address": {
+        "address_line_1": "184 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2144,
+          "longitude": -77.082
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00013",
+      "site_type": "CHURCH",
+      "name": "Carlisle Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Carlisle",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00014",
+      "address": {
+        "address_line_1": "191 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2156,
+          "longitude": -77.0805
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00014",
+      "site_type": "FACILITY",
+      "name": "Carlisle Community Hospital",
+      "aliases": [
+        "Carlisle Memorial Hospital",
+        "Carlisle General"
+      ],
+      "location_id": "LOC-00015",
+      "address": {
+        "address_line_1": "198 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2168,
+          "longitude": -77.079
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00015",
+      "site_type": "FACILITY",
+      "name": "Carlisle High School",
+      "aliases": [
+        "Carlisle Public School",
+        "Old Carlisle Academy"
+      ],
+      "location_id": "LOC-00016",
+      "address": {
+        "address_line_1": "205 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.218,
+          "longitude": -77.0775
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00016",
+      "site_type": "FACILITY",
+      "name": "Carlisle Town Hall",
+      "aliases": [
+        "Carlisle Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00017",
+      "address": {
+        "address_line_1": "212 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2192,
+          "longitude": -77.076
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00017",
+      "site_type": "LANDMARK",
+      "name": "Carlisle Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Carlisle)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00018",
+      "address": {
+        "address_line_1": "219 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2204,
+          "longitude": -77.0745
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00018",
+      "site_type": "LANDMARK",
+      "name": "Carlisle Public Square",
+      "aliases": [
+        "Carlisle Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00019",
+      "address": {
+        "address_line_1": "226 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2216,
+          "longitude": -77.073
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00019",
+      "site_type": "RESIDENCE",
+      "name": "Carlisle Homestead",
+      "aliases": [
+        "Old Carlisle Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00020",
+      "address": {
+        "address_line_1": "233 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2228,
+          "longitude": -77.0715
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00020",
+      "site_type": "CEMETERY",
+      "name": "Newville Cemetery",
+      "aliases": [
+        "Newville Graveyard",
+        "Old Newville Burial Ground"
+      ],
+      "location_id": "LOC-00021",
+      "address": {
+        "address_line_1": "240 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.224,
+          "longitude": -77.07
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00021",
+      "site_type": "CHURCH",
+      "name": "Newville Presbyterian Church",
+      "aliases": [
+        "First Newville Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00022",
+      "address": {
+        "address_line_1": "247 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2252,
+          "longitude": -77.0685
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00022",
+      "site_type": "CHURCH",
+      "name": "Newville Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Newville",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00023",
+      "address": {
+        "address_line_1": "254 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2264,
+          "longitude": -77.067
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00023",
+      "site_type": "FACILITY",
+      "name": "Newville Community Hospital",
+      "aliases": [
+        "Newville Memorial Hospital",
+        "Newville General"
+      ],
+      "location_id": "LOC-00024",
+      "address": {
+        "address_line_1": "261 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2276,
+          "longitude": -77.0655
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00024",
+      "site_type": "FACILITY",
+      "name": "Newville High School",
+      "aliases": [
+        "Newville Public School",
+        "Old Newville Academy"
+      ],
+      "location_id": "LOC-00025",
+      "address": {
+        "address_line_1": "268 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2288,
+          "longitude": -77.064
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00025",
+      "site_type": "FACILITY",
+      "name": "Newville Town Hall",
+      "aliases": [
+        "Newville Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00026",
+      "address": {
+        "address_line_1": "275 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.23,
+          "longitude": -77.0625
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00026",
+      "site_type": "LANDMARK",
+      "name": "Newville Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Newville)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00027",
+      "address": {
+        "address_line_1": "282 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2312,
+          "longitude": -77.061
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00027",
+      "site_type": "LANDMARK",
+      "name": "Newville Public Square",
+      "aliases": [
+        "Newville Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00028",
+      "address": {
+        "address_line_1": "289 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2324,
+          "longitude": -77.0595
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00028",
+      "site_type": "RESIDENCE",
+      "name": "Newville Homestead",
+      "aliases": [
+        "Old Newville Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00029",
+      "address": {
+        "address_line_1": "296 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2336,
+          "longitude": -77.058
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00029",
+      "site_type": "CEMETERY",
+      "name": "Shippensburg Cemetery",
+      "aliases": [
+        "Shippensburg Graveyard",
+        "Old Shippensburg Burial Ground"
+      ],
+      "location_id": "LOC-00030",
+      "address": {
+        "address_line_1": "303 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2348,
+          "longitude": -77.0565
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00030",
+      "site_type": "CHURCH",
+      "name": "Shippensburg Presbyterian Church",
+      "aliases": [
+        "First Shippensburg Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00031",
+      "address": {
+        "address_line_1": "310 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.236,
+          "longitude": -77.055
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00031",
+      "site_type": "CHURCH",
+      "name": "Shippensburg Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Shippensburg",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00032",
+      "address": {
+        "address_line_1": "317 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2372,
+          "longitude": -77.0535
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00032",
+      "site_type": "FACILITY",
+      "name": "Shippensburg Community Hospital",
+      "aliases": [
+        "Shippensburg Memorial Hospital",
+        "Shippensburg General"
+      ],
+      "location_id": "LOC-00033",
+      "address": {
+        "address_line_1": "324 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2384,
+          "longitude": -77.052
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00033",
+      "site_type": "FACILITY",
+      "name": "Shippensburg High School",
+      "aliases": [
+        "Shippensburg Public School",
+        "Old Shippensburg Academy"
+      ],
+      "location_id": "LOC-00034",
+      "address": {
+        "address_line_1": "331 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2396,
+          "longitude": -77.0505
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00034",
+      "site_type": "FACILITY",
+      "name": "Shippensburg Town Hall",
+      "aliases": [
+        "Shippensburg Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00035",
+      "address": {
+        "address_line_1": "338 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2408,
+          "longitude": -77.049
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00035",
+      "site_type": "LANDMARK",
+      "name": "Shippensburg Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Shippensburg)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00036",
+      "address": {
+        "address_line_1": "345 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.242,
+          "longitude": -77.0475
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00036",
+      "site_type": "LANDMARK",
+      "name": "Shippensburg Public Square",
+      "aliases": [
+        "Shippensburg Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00037",
+      "address": {
+        "address_line_1": "352 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2432,
+          "longitude": -77.046
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00037",
+      "site_type": "RESIDENCE",
+      "name": "Shippensburg Homestead",
+      "aliases": [
+        "Old Shippensburg Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00038",
+      "address": {
+        "address_line_1": "359 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2444,
+          "longitude": -77.0445
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00038",
+      "site_type": "CEMETERY",
+      "name": "Mechanicsburg Cemetery",
+      "aliases": [
+        "Mechanicsburg Graveyard",
+        "Old Mechanicsburg Burial Ground"
+      ],
+      "location_id": "LOC-00039",
+      "address": {
+        "address_line_1": "366 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2456,
+          "longitude": -77.043
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00039",
+      "site_type": "CHURCH",
+      "name": "Mechanicsburg Presbyterian Church",
+      "aliases": [
+        "First Mechanicsburg Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00040",
+      "address": {
+        "address_line_1": "373 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2468,
+          "longitude": -77.0415
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00040",
+      "site_type": "CHURCH",
+      "name": "Mechanicsburg Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Mechanicsburg",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00041",
+      "address": {
+        "address_line_1": "380 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.248,
+          "longitude": -77.04
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00041",
+      "site_type": "FACILITY",
+      "name": "Mechanicsburg Community Hospital",
+      "aliases": [
+        "Mechanicsburg Memorial Hospital",
+        "Mechanicsburg General"
+      ],
+      "location_id": "LOC-00042",
+      "address": {
+        "address_line_1": "387 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2492,
+          "longitude": -77.0385
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00042",
+      "site_type": "FACILITY",
+      "name": "Mechanicsburg High School",
+      "aliases": [
+        "Mechanicsburg Public School",
+        "Old Mechanicsburg Academy"
+      ],
+      "location_id": "LOC-00043",
+      "address": {
+        "address_line_1": "394 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2504,
+          "longitude": -77.037
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00043",
+      "site_type": "FACILITY",
+      "name": "Mechanicsburg Town Hall",
+      "aliases": [
+        "Mechanicsburg Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00044",
+      "address": {
+        "address_line_1": "401 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2516,
+          "longitude": -77.0355
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00044",
+      "site_type": "LANDMARK",
+      "name": "Mechanicsburg Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Mechanicsburg)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00045",
+      "address": {
+        "address_line_1": "408 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2528,
+          "longitude": -77.034
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00045",
+      "site_type": "LANDMARK",
+      "name": "Mechanicsburg Public Square",
+      "aliases": [
+        "Mechanicsburg Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00046",
+      "address": {
+        "address_line_1": "415 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.254,
+          "longitude": -77.0325
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00046",
+      "site_type": "RESIDENCE",
+      "name": "Mechanicsburg Homestead",
+      "aliases": [
+        "Old Mechanicsburg Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00047",
+      "address": {
+        "address_line_1": "422 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2552,
+          "longitude": -77.031
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00047",
+      "site_type": "CEMETERY",
+      "name": "Camp Hill Cemetery",
+      "aliases": [
+        "Camp Hill Graveyard",
+        "Old Camp Hill Burial Ground"
+      ],
+      "location_id": "LOC-00048",
+      "address": {
+        "address_line_1": "429 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2564,
+          "longitude": -77.0295
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00048",
+      "site_type": "CHURCH",
+      "name": "Camp Hill Presbyterian Church",
+      "aliases": [
+        "First Camp Hill Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00049",
+      "address": {
+        "address_line_1": "436 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2576,
+          "longitude": -77.028
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00049",
+      "site_type": "CHURCH",
+      "name": "Camp Hill Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Camp Hill",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00050",
+      "address": {
+        "address_line_1": "443 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2588,
+          "longitude": -77.0265
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00050",
+      "site_type": "FACILITY",
+      "name": "Camp Hill Community Hospital",
+      "aliases": [
+        "Camp Hill Memorial Hospital",
+        "Camp Hill General"
+      ],
+      "location_id": "LOC-00051",
+      "address": {
+        "address_line_1": "450 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.26,
+          "longitude": -77.025
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00051",
+      "site_type": "FACILITY",
+      "name": "Camp Hill High School",
+      "aliases": [
+        "Camp Hill Public School",
+        "Old Camp Hill Academy"
+      ],
+      "location_id": "LOC-00052",
+      "address": {
+        "address_line_1": "457 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2612,
+          "longitude": -77.0235
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00052",
+      "site_type": "FACILITY",
+      "name": "Camp Hill Town Hall",
+      "aliases": [
+        "Camp Hill Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00053",
+      "address": {
+        "address_line_1": "464 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2624,
+          "longitude": -77.022
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00053",
+      "site_type": "LANDMARK",
+      "name": "Camp Hill Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Camp Hill)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00054",
+      "address": {
+        "address_line_1": "471 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2636,
+          "longitude": -77.0205
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00054",
+      "site_type": "LANDMARK",
+      "name": "Camp Hill Public Square",
+      "aliases": [
+        "Camp Hill Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00055",
+      "address": {
+        "address_line_1": "478 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2648,
+          "longitude": -77.019
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00055",
+      "site_type": "RESIDENCE",
+      "name": "Camp Hill Homestead",
+      "aliases": [
+        "Old Camp Hill Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00056",
+      "address": {
+        "address_line_1": "485 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.266,
+          "longitude": -77.0175
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00056",
+      "site_type": "CEMETERY",
+      "name": "Harrisburg Cemetery",
+      "aliases": [
+        "Harrisburg Graveyard",
+        "Old Harrisburg Burial Ground"
+      ],
+      "location_id": "LOC-00057",
+      "address": {
+        "address_line_1": "492 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2672,
+          "longitude": -77.016
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00057",
+      "site_type": "CHURCH",
+      "name": "Harrisburg Presbyterian Church",
+      "aliases": [
+        "First Harrisburg Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00058",
+      "address": {
+        "address_line_1": "499 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2684,
+          "longitude": -77.0145
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00058",
+      "site_type": "CHURCH",
+      "name": "Harrisburg Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Harrisburg",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00059",
+      "address": {
+        "address_line_1": "506 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2696,
+          "longitude": -77.013
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00059",
+      "site_type": "FACILITY",
+      "name": "Harrisburg Community Hospital",
+      "aliases": [
+        "Harrisburg Memorial Hospital",
+        "Harrisburg General"
+      ],
+      "location_id": "LOC-00060",
+      "address": {
+        "address_line_1": "513 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2708,
+          "longitude": -77.0115
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00060",
+      "site_type": "FACILITY",
+      "name": "Harrisburg High School",
+      "aliases": [
+        "Harrisburg Public School",
+        "Old Harrisburg Academy"
+      ],
+      "location_id": "LOC-00061",
+      "address": {
+        "address_line_1": "520 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.272,
+          "longitude": -77.01
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00061",
+      "site_type": "FACILITY",
+      "name": "Harrisburg Town Hall",
+      "aliases": [
+        "Harrisburg Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00062",
+      "address": {
+        "address_line_1": "527 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2732,
+          "longitude": -77.0085
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00062",
+      "site_type": "LANDMARK",
+      "name": "Harrisburg Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Harrisburg)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00063",
+      "address": {
+        "address_line_1": "534 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2744,
+          "longitude": -77.007
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00063",
+      "site_type": "LANDMARK",
+      "name": "Harrisburg Public Square",
+      "aliases": [
+        "Harrisburg Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00064",
+      "address": {
+        "address_line_1": "541 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2756,
+          "longitude": -77.0055
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00064",
+      "site_type": "RESIDENCE",
+      "name": "Harrisburg Homestead",
+      "aliases": [
+        "Old Harrisburg Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00065",
+      "address": {
+        "address_line_1": "548 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2768,
+          "longitude": -77.004
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00065",
+      "site_type": "CEMETERY",
+      "name": "Penbrook Cemetery",
+      "aliases": [
+        "Penbrook Graveyard",
+        "Old Penbrook Burial Ground"
+      ],
+      "location_id": "LOC-00066",
+      "address": {
+        "address_line_1": "555 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.278,
+          "longitude": -77.0025
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00066",
+      "site_type": "CHURCH",
+      "name": "Penbrook Presbyterian Church",
+      "aliases": [
+        "First Penbrook Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00067",
+      "address": {
+        "address_line_1": "562 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2792,
+          "longitude": -77.001
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00067",
+      "site_type": "CHURCH",
+      "name": "Penbrook Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Penbrook",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00068",
+      "address": {
+        "address_line_1": "569 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2804,
+          "longitude": -76.9995
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00068",
+      "site_type": "FACILITY",
+      "name": "Penbrook Community Hospital",
+      "aliases": [
+        "Penbrook Memorial Hospital",
+        "Penbrook General"
+      ],
+      "location_id": "LOC-00069",
+      "address": {
+        "address_line_1": "576 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2816,
+          "longitude": -76.998
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00069",
+      "site_type": "FACILITY",
+      "name": "Penbrook High School",
+      "aliases": [
+        "Penbrook Public School",
+        "Old Penbrook Academy"
+      ],
+      "location_id": "LOC-00070",
+      "address": {
+        "address_line_1": "583 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2828,
+          "longitude": -76.9965
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00070",
+      "site_type": "FACILITY",
+      "name": "Penbrook Town Hall",
+      "aliases": [
+        "Penbrook Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00071",
+      "address": {
+        "address_line_1": "590 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.284,
+          "longitude": -76.995
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00071",
+      "site_type": "LANDMARK",
+      "name": "Penbrook Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Penbrook)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00072",
+      "address": {
+        "address_line_1": "597 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2852,
+          "longitude": -76.9935
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00072",
+      "site_type": "LANDMARK",
+      "name": "Penbrook Public Square",
+      "aliases": [
+        "Penbrook Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00073",
+      "address": {
+        "address_line_1": "604 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.2864,
+          "longitude": -76.992
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00073",
+      "site_type": "RESIDENCE",
+      "name": "Penbrook Homestead",
+      "aliases": [
+        "Old Penbrook Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00074",
+      "address": {
+        "address_line_1": "611 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.2876,
+          "longitude": -71.4205
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00074",
+      "site_type": "CEMETERY",
+      "name": "Steelton Cemetery",
+      "aliases": [
+        "Steelton Graveyard",
+        "Old Steelton Burial Ground"
+      ],
+      "location_id": "LOC-00075",
+      "address": {
+        "address_line_1": "618 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.2888,
+          "longitude": -71.419
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00075",
+      "site_type": "CHURCH",
+      "name": "Steelton Presbyterian Church",
+      "aliases": [
+        "First Steelton Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00076",
+      "address": {
+        "address_line_1": "625 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.29,
+          "longitude": -71.4175
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00076",
+      "site_type": "CHURCH",
+      "name": "Steelton Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Steelton",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00077",
+      "address": {
+        "address_line_1": "632 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.2912,
+          "longitude": -71.416
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00077",
+      "site_type": "FACILITY",
+      "name": "Steelton Community Hospital",
+      "aliases": [
+        "Steelton Memorial Hospital",
+        "Steelton General"
+      ],
+      "location_id": "LOC-00078",
+      "address": {
+        "address_line_1": "639 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.2924,
+          "longitude": -71.4145
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00078",
+      "site_type": "FACILITY",
+      "name": "Steelton High School",
+      "aliases": [
+        "Steelton Public School",
+        "Old Steelton Academy"
+      ],
+      "location_id": "LOC-00079",
+      "address": {
+        "address_line_1": "646 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.2936,
+          "longitude": -71.413
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00079",
+      "site_type": "FACILITY",
+      "name": "Steelton Town Hall",
+      "aliases": [
+        "Steelton Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00080",
+      "address": {
+        "address_line_1": "653 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.2948,
+          "longitude": -71.4115
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00080",
+      "site_type": "LANDMARK",
+      "name": "Steelton Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Steelton)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00081",
+      "address": {
+        "address_line_1": "660 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.296,
+          "longitude": -71.41
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00081",
+      "site_type": "LANDMARK",
+      "name": "Steelton Public Square",
+      "aliases": [
+        "Steelton Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00082",
+      "address": {
+        "address_line_1": "667 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.2972,
+          "longitude": -71.4085
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00082",
+      "site_type": "RESIDENCE",
+      "name": "Steelton Homestead",
+      "aliases": [
+        "Old Steelton Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00083",
+      "address": {
+        "address_line_1": "674 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.2984,
+          "longitude": -71.407
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00083",
+      "site_type": "CEMETERY",
+      "name": "Middletown Cemetery",
+      "aliases": [
+        "Middletown Graveyard",
+        "Old Middletown Burial Ground"
+      ],
+      "location_id": "LOC-00084",
+      "address": {
+        "address_line_1": "681 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.2996,
+          "longitude": -71.4055
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00084",
+      "site_type": "CHURCH",
+      "name": "Middletown Presbyterian Church",
+      "aliases": [
+        "First Middletown Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00085",
+      "address": {
+        "address_line_1": "688 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3008,
+          "longitude": -71.404
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00085",
+      "site_type": "CHURCH",
+      "name": "Middletown Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Middletown",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00086",
+      "address": {
+        "address_line_1": "695 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.302,
+          "longitude": -71.4025
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00086",
+      "site_type": "FACILITY",
+      "name": "Middletown Community Hospital",
+      "aliases": [
+        "Middletown Memorial Hospital",
+        "Middletown General"
+      ],
+      "location_id": "LOC-00087",
+      "address": {
+        "address_line_1": "702 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3032,
+          "longitude": -71.401
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00087",
+      "site_type": "FACILITY",
+      "name": "Middletown High School",
+      "aliases": [
+        "Middletown Public School",
+        "Old Middletown Academy"
+      ],
+      "location_id": "LOC-00088",
+      "address": {
+        "address_line_1": "709 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3044,
+          "longitude": -71.3995
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00088",
+      "site_type": "FACILITY",
+      "name": "Middletown Town Hall",
+      "aliases": [
+        "Middletown Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00089",
+      "address": {
+        "address_line_1": "716 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3056,
+          "longitude": -71.398
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00089",
+      "site_type": "LANDMARK",
+      "name": "Middletown Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Middletown)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00090",
+      "address": {
+        "address_line_1": "723 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3068,
+          "longitude": -71.3965
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00090",
+      "site_type": "LANDMARK",
+      "name": "Middletown Public Square",
+      "aliases": [
+        "Middletown Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00091",
+      "address": {
+        "address_line_1": "730 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.308,
+          "longitude": -71.395
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00091",
+      "site_type": "RESIDENCE",
+      "name": "Middletown Homestead",
+      "aliases": [
+        "Old Middletown Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00092",
+      "address": {
+        "address_line_1": "737 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3092,
+          "longitude": -71.3935
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00092",
+      "site_type": "CEMETERY",
+      "name": "Hershey Cemetery",
+      "aliases": [
+        "Hershey Graveyard",
+        "Old Hershey Burial Ground"
+      ],
+      "location_id": "LOC-00093",
+      "address": {
+        "address_line_1": "744 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3104,
+          "longitude": -71.392
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00093",
+      "site_type": "CHURCH",
+      "name": "Hershey Presbyterian Church",
+      "aliases": [
+        "First Hershey Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00094",
+      "address": {
+        "address_line_1": "751 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3116,
+          "longitude": -71.3905
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00094",
+      "site_type": "CHURCH",
+      "name": "Hershey Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Hershey",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00095",
+      "address": {
+        "address_line_1": "758 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3128,
+          "longitude": -71.389
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00095",
+      "site_type": "FACILITY",
+      "name": "Hershey Community Hospital",
+      "aliases": [
+        "Hershey Memorial Hospital",
+        "Hershey General"
+      ],
+      "location_id": "LOC-00096",
+      "address": {
+        "address_line_1": "765 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.314,
+          "longitude": -71.3875
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00096",
+      "site_type": "FACILITY",
+      "name": "Hershey High School",
+      "aliases": [
+        "Hershey Public School",
+        "Old Hershey Academy"
+      ],
+      "location_id": "LOC-00097",
+      "address": {
+        "address_line_1": "772 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3152,
+          "longitude": -71.386
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00097",
+      "site_type": "FACILITY",
+      "name": "Hershey Town Hall",
+      "aliases": [
+        "Hershey Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00098",
+      "address": {
+        "address_line_1": "779 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3164,
+          "longitude": -71.3845
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00098",
+      "site_type": "LANDMARK",
+      "name": "Hershey Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Hershey)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00099",
+      "address": {
+        "address_line_1": "786 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3176,
+          "longitude": -71.383
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00099",
+      "site_type": "LANDMARK",
+      "name": "Hershey Public Square",
+      "aliases": [
+        "Hershey Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00100",
+      "address": {
+        "address_line_1": "793 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3188,
+          "longitude": -71.3815
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00100",
+      "site_type": "RESIDENCE",
+      "name": "Hershey Homestead",
+      "aliases": [
+        "Old Hershey Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00101",
+      "address": {
+        "address_line_1": "800 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.32,
+          "longitude": -71.38
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00101",
+      "site_type": "CEMETERY",
+      "name": "Bloserville Cemetery",
+      "aliases": [
+        "Bloserville Graveyard",
+        "Old Bloserville Burial Ground"
+      ],
+      "location_id": "LOC-00102",
+      "address": {
+        "address_line_1": "807 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3212,
+          "longitude": -71.3785
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00102",
+      "site_type": "CHURCH",
+      "name": "Bloserville Presbyterian Church",
+      "aliases": [
+        "First Bloserville Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00103",
+      "address": {
+        "address_line_1": "814 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3224,
+          "longitude": -71.377
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00103",
+      "site_type": "CHURCH",
+      "name": "Bloserville Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Bloserville",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00104",
+      "address": {
+        "address_line_1": "821 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3236,
+          "longitude": -71.3755
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00104",
+      "site_type": "FACILITY",
+      "name": "Bloserville Community Hospital",
+      "aliases": [
+        "Bloserville Memorial Hospital",
+        "Bloserville General"
+      ],
+      "location_id": "LOC-00105",
+      "address": {
+        "address_line_1": "828 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.3248,
+          "longitude": -71.374
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00105",
+      "site_type": "FACILITY",
+      "name": "Bloserville High School",
+      "aliases": [
+        "Bloserville Public School",
+        "Old Bloserville Academy"
+      ],
+      "location_id": "LOC-00001",
+      "address": {
+        "address_line_1": "835 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.326,
+          "longitude": -76.9425
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00106",
+      "site_type": "FACILITY",
+      "name": "Bloserville Town Hall",
+      "aliases": [
+        "Bloserville Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00002",
+      "address": {
+        "address_line_1": "842 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3272,
+          "longitude": -76.941
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00107",
+      "site_type": "LANDMARK",
+      "name": "Bloserville Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Bloserville)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00003",
+      "address": {
+        "address_line_1": "849 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3284,
+          "longitude": -76.9395
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00108",
+      "site_type": "LANDMARK",
+      "name": "Bloserville Public Square",
+      "aliases": [
+        "Bloserville Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00004",
+      "address": {
+        "address_line_1": "856 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3296,
+          "longitude": -76.938
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00109",
+      "site_type": "RESIDENCE",
+      "name": "Bloserville Homestead",
+      "aliases": [
+        "Old Bloserville Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00005",
+      "address": {
+        "address_line_1": "863 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3308,
+          "longitude": -76.9365
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00110",
+      "site_type": "CEMETERY",
+      "name": "Frankford Cemetery",
+      "aliases": [
+        "Frankford Graveyard",
+        "Old Frankford Burial Ground"
+      ],
+      "location_id": "LOC-00006",
+      "address": {
+        "address_line_1": "870 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.332,
+          "longitude": -76.935
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00111",
+      "site_type": "CHURCH",
+      "name": "Frankford Presbyterian Church",
+      "aliases": [
+        "First Frankford Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00007",
+      "address": {
+        "address_line_1": "877 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3332,
+          "longitude": -76.9335
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00112",
+      "site_type": "CHURCH",
+      "name": "Frankford Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Frankford",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00008",
+      "address": {
+        "address_line_1": "884 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3344,
+          "longitude": -76.932
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00113",
+      "site_type": "FACILITY",
+      "name": "Frankford Community Hospital",
+      "aliases": [
+        "Frankford Memorial Hospital",
+        "Frankford General"
+      ],
+      "location_id": "LOC-00009",
+      "address": {
+        "address_line_1": "891 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3356,
+          "longitude": -76.9305
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00114",
+      "site_type": "FACILITY",
+      "name": "Frankford High School",
+      "aliases": [
+        "Frankford Public School",
+        "Old Frankford Academy"
+      ],
+      "location_id": "LOC-00010",
+      "address": {
+        "address_line_1": "898 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3368,
+          "longitude": -76.929
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00115",
+      "site_type": "FACILITY",
+      "name": "Frankford Town Hall",
+      "aliases": [
+        "Frankford Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00011",
+      "address": {
+        "address_line_1": "905 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.338,
+          "longitude": -76.9275
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00116",
+      "site_type": "LANDMARK",
+      "name": "Frankford Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Frankford)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00012",
+      "address": {
+        "address_line_1": "912 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3392,
+          "longitude": -76.926
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00117",
+      "site_type": "LANDMARK",
+      "name": "Frankford Public Square",
+      "aliases": [
+        "Frankford Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00013",
+      "address": {
+        "address_line_1": "919 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3404,
+          "longitude": -76.9245
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00118",
+      "site_type": "RESIDENCE",
+      "name": "Frankford Homestead",
+      "aliases": [
+        "Old Frankford Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00014",
+      "address": {
+        "address_line_1": "926 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3416,
+          "longitude": -76.923
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00119",
+      "site_type": "CEMETERY",
+      "name": "West Pennsboro Cemetery",
+      "aliases": [
+        "West Pennsboro Graveyard",
+        "Old West Pennsboro Burial Ground"
+      ],
+      "location_id": "LOC-00015",
+      "address": {
+        "address_line_1": "933 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3428,
+          "longitude": -76.9215
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00120",
+      "site_type": "CHURCH",
+      "name": "West Pennsboro Presbyterian Church",
+      "aliases": [
+        "First West Pennsboro Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00016",
+      "address": {
+        "address_line_1": "940 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.344,
+          "longitude": -76.92
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00121",
+      "site_type": "CHURCH",
+      "name": "West Pennsboro Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of West Pennsboro",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00017",
+      "address": {
+        "address_line_1": "947 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3452,
+          "longitude": -76.9185
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00122",
+      "site_type": "FACILITY",
+      "name": "West Pennsboro Community Hospital",
+      "aliases": [
+        "West Pennsboro Memorial Hospital",
+        "West Pennsboro General"
+      ],
+      "location_id": "LOC-00018",
+      "address": {
+        "address_line_1": "954 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3464,
+          "longitude": -76.917
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00123",
+      "site_type": "FACILITY",
+      "name": "West Pennsboro High School",
+      "aliases": [
+        "West Pennsboro Public School",
+        "Old West Pennsboro Academy"
+      ],
+      "location_id": "LOC-00019",
+      "address": {
+        "address_line_1": "961 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3476,
+          "longitude": -76.9155
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00124",
+      "site_type": "FACILITY",
+      "name": "West Pennsboro Town Hall",
+      "aliases": [
+        "West Pennsboro Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00020",
+      "address": {
+        "address_line_1": "968 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3488,
+          "longitude": -76.914
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00125",
+      "site_type": "LANDMARK",
+      "name": "West Pennsboro Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (West Pennsboro)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00021",
+      "address": {
+        "address_line_1": "975 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.35,
+          "longitude": -76.9125
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00126",
+      "site_type": "LANDMARK",
+      "name": "West Pennsboro Public Square",
+      "aliases": [
+        "West Pennsboro Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00022",
+      "address": {
+        "address_line_1": "982 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3512,
+          "longitude": -76.911
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00127",
+      "site_type": "RESIDENCE",
+      "name": "West Pennsboro Homestead",
+      "aliases": [
+        "Old West Pennsboro Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00023",
+      "address": {
+        "address_line_1": "989 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3524,
+          "longitude": -76.9095
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00128",
+      "site_type": "CEMETERY",
+      "name": "Silver Spring Cemetery",
+      "aliases": [
+        "Silver Spring Graveyard",
+        "Old Silver Spring Burial Ground"
+      ],
+      "location_id": "LOC-00024",
+      "address": {
+        "address_line_1": "996 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3536,
+          "longitude": -76.908
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00129",
+      "site_type": "CHURCH",
+      "name": "Silver Spring Presbyterian Church",
+      "aliases": [
+        "First Silver Spring Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00025",
+      "address": {
+        "address_line_1": "104 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3548,
+          "longitude": -76.9065
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00130",
+      "site_type": "CHURCH",
+      "name": "Silver Spring Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Silver Spring",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00026",
+      "address": {
+        "address_line_1": "111 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.356,
+          "longitude": -76.905
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00131",
+      "site_type": "FACILITY",
+      "name": "Silver Spring Community Hospital",
+      "aliases": [
+        "Silver Spring Memorial Hospital",
+        "Silver Spring General"
+      ],
+      "location_id": "LOC-00027",
+      "address": {
+        "address_line_1": "118 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3572,
+          "longitude": -76.9035
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00132",
+      "site_type": "FACILITY",
+      "name": "Silver Spring High School",
+      "aliases": [
+        "Silver Spring Public School",
+        "Old Silver Spring Academy"
+      ],
+      "location_id": "LOC-00028",
+      "address": {
+        "address_line_1": "125 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3584,
+          "longitude": -76.902
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00133",
+      "site_type": "FACILITY",
+      "name": "Silver Spring Town Hall",
+      "aliases": [
+        "Silver Spring Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00029",
+      "address": {
+        "address_line_1": "132 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3596,
+          "longitude": -76.9005
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00134",
+      "site_type": "LANDMARK",
+      "name": "Silver Spring Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Silver Spring)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00030",
+      "address": {
+        "address_line_1": "139 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3608,
+          "longitude": -76.899
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00135",
+      "site_type": "LANDMARK",
+      "name": "Silver Spring Public Square",
+      "aliases": [
+        "Silver Spring Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00031",
+      "address": {
+        "address_line_1": "146 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.362,
+          "longitude": -76.8975
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00136",
+      "site_type": "RESIDENCE",
+      "name": "Silver Spring Homestead",
+      "aliases": [
+        "Old Silver Spring Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00032",
+      "address": {
+        "address_line_1": "153 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3632,
+          "longitude": -76.896
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00137",
+      "site_type": "CEMETERY",
+      "name": "Upper Allen Cemetery",
+      "aliases": [
+        "Upper Allen Graveyard",
+        "Old Upper Allen Burial Ground"
+      ],
+      "location_id": "LOC-00033",
+      "address": {
+        "address_line_1": "160 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3644,
+          "longitude": -76.8945
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00138",
+      "site_type": "CHURCH",
+      "name": "Upper Allen Presbyterian Church",
+      "aliases": [
+        "First Upper Allen Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00034",
+      "address": {
+        "address_line_1": "167 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3656,
+          "longitude": -76.893
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00139",
+      "site_type": "CHURCH",
+      "name": "Upper Allen Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Upper Allen",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00035",
+      "address": {
+        "address_line_1": "174 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3668,
+          "longitude": -76.8915
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00140",
+      "site_type": "FACILITY",
+      "name": "Upper Allen Community Hospital",
+      "aliases": [
+        "Upper Allen Memorial Hospital",
+        "Upper Allen General"
+      ],
+      "location_id": "LOC-00036",
+      "address": {
+        "address_line_1": "181 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.368,
+          "longitude": -76.89
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00141",
+      "site_type": "FACILITY",
+      "name": "Upper Allen High School",
+      "aliases": [
+        "Upper Allen Public School",
+        "Old Upper Allen Academy"
+      ],
+      "location_id": "LOC-00037",
+      "address": {
+        "address_line_1": "188 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3692,
+          "longitude": -76.8885
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00142",
+      "site_type": "FACILITY",
+      "name": "Upper Allen Town Hall",
+      "aliases": [
+        "Upper Allen Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00038",
+      "address": {
+        "address_line_1": "195 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3704,
+          "longitude": -76.887
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00143",
+      "site_type": "LANDMARK",
+      "name": "Upper Allen Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Upper Allen)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00039",
+      "address": {
+        "address_line_1": "202 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3716,
+          "longitude": -76.8855
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00144",
+      "site_type": "LANDMARK",
+      "name": "Upper Allen Public Square",
+      "aliases": [
+        "Upper Allen Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00040",
+      "address": {
+        "address_line_1": "209 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3728,
+          "longitude": -76.884
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00145",
+      "site_type": "RESIDENCE",
+      "name": "Upper Allen Homestead",
+      "aliases": [
+        "Old Upper Allen Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00041",
+      "address": {
+        "address_line_1": "216 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.374,
+          "longitude": -76.8825
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00146",
+      "site_type": "CEMETERY",
+      "name": "Lower Allen Cemetery",
+      "aliases": [
+        "Lower Allen Graveyard",
+        "Old Lower Allen Burial Ground"
+      ],
+      "location_id": "LOC-00042",
+      "address": {
+        "address_line_1": "223 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3752,
+          "longitude": -76.881
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00147",
+      "site_type": "CHURCH",
+      "name": "Lower Allen Presbyterian Church",
+      "aliases": [
+        "First Lower Allen Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00043",
+      "address": {
+        "address_line_1": "230 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3764,
+          "longitude": -76.8795
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00148",
+      "site_type": "CHURCH",
+      "name": "Lower Allen Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Lower Allen",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00044",
+      "address": {
+        "address_line_1": "237 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3776,
+          "longitude": -76.878
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00149",
+      "site_type": "FACILITY",
+      "name": "Lower Allen Community Hospital",
+      "aliases": [
+        "Lower Allen Memorial Hospital",
+        "Lower Allen General"
+      ],
+      "location_id": "LOC-00045",
+      "address": {
+        "address_line_1": "244 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3788,
+          "longitude": -76.8765
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00150",
+      "site_type": "FACILITY",
+      "name": "Lower Allen High School",
+      "aliases": [
+        "Lower Allen Public School",
+        "Old Lower Allen Academy"
+      ],
+      "location_id": "LOC-00046",
+      "address": {
+        "address_line_1": "251 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.38,
+          "longitude": -76.875
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00151",
+      "site_type": "FACILITY",
+      "name": "Lower Allen Town Hall",
+      "aliases": [
+        "Lower Allen Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00047",
+      "address": {
+        "address_line_1": "258 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3812,
+          "longitude": -76.8735
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00152",
+      "site_type": "LANDMARK",
+      "name": "Lower Allen Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Lower Allen)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00048",
+      "address": {
+        "address_line_1": "265 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3824,
+          "longitude": -76.872
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00153",
+      "site_type": "LANDMARK",
+      "name": "Lower Allen Public Square",
+      "aliases": [
+        "Lower Allen Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00049",
+      "address": {
+        "address_line_1": "272 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3836,
+          "longitude": -76.8705
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00154",
+      "site_type": "RESIDENCE",
+      "name": "Lower Allen Homestead",
+      "aliases": [
+        "Old Lower Allen Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00050",
+      "address": {
+        "address_line_1": "279 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3848,
+          "longitude": -76.869
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00155",
+      "site_type": "CEMETERY",
+      "name": "Hampden Cemetery",
+      "aliases": [
+        "Hampden Graveyard",
+        "Old Hampden Burial Ground"
+      ],
+      "location_id": "LOC-00051",
+      "address": {
+        "address_line_1": "286 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.386,
+          "longitude": -76.8675
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00156",
+      "site_type": "CHURCH",
+      "name": "Hampden Presbyterian Church",
+      "aliases": [
+        "First Hampden Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00052",
+      "address": {
+        "address_line_1": "293 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3872,
+          "longitude": -76.866
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00157",
+      "site_type": "CHURCH",
+      "name": "Hampden Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Hampden",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00053",
+      "address": {
+        "address_line_1": "300 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3884,
+          "longitude": -76.8645
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00158",
+      "site_type": "FACILITY",
+      "name": "Hampden Community Hospital",
+      "aliases": [
+        "Hampden Memorial Hospital",
+        "Hampden General"
+      ],
+      "location_id": "LOC-00054",
+      "address": {
+        "address_line_1": "307 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3896,
+          "longitude": -76.863
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00159",
+      "site_type": "FACILITY",
+      "name": "Hampden High School",
+      "aliases": [
+        "Hampden Public School",
+        "Old Hampden Academy"
+      ],
+      "location_id": "LOC-00055",
+      "address": {
+        "address_line_1": "314 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3908,
+          "longitude": -76.8615
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00160",
+      "site_type": "FACILITY",
+      "name": "Hampden Town Hall",
+      "aliases": [
+        "Hampden Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00056",
+      "address": {
+        "address_line_1": "321 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.392,
+          "longitude": -76.86
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00161",
+      "site_type": "LANDMARK",
+      "name": "Hampden Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Hampden)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00057",
+      "address": {
+        "address_line_1": "328 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3932,
+          "longitude": -76.8585
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00162",
+      "site_type": "LANDMARK",
+      "name": "Hampden Public Square",
+      "aliases": [
+        "Hampden Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00058",
+      "address": {
+        "address_line_1": "335 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3944,
+          "longitude": -76.857
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00163",
+      "site_type": "RESIDENCE",
+      "name": "Hampden Homestead",
+      "aliases": [
+        "Old Hampden Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00059",
+      "address": {
+        "address_line_1": "342 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3956,
+          "longitude": -76.8555
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00164",
+      "site_type": "CEMETERY",
+      "name": "Dickinson Cemetery",
+      "aliases": [
+        "Dickinson Graveyard",
+        "Old Dickinson Burial Ground"
+      ],
+      "location_id": "LOC-00060",
+      "address": {
+        "address_line_1": "349 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3968,
+          "longitude": -76.854
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00165",
+      "site_type": "CHURCH",
+      "name": "Dickinson Presbyterian Church",
+      "aliases": [
+        "First Dickinson Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00061",
+      "address": {
+        "address_line_1": "356 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.398,
+          "longitude": -76.8525
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00166",
+      "site_type": "CHURCH",
+      "name": "Dickinson Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Dickinson",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00062",
+      "address": {
+        "address_line_1": "363 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.3992,
+          "longitude": -76.851
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00167",
+      "site_type": "FACILITY",
+      "name": "Dickinson Community Hospital",
+      "aliases": [
+        "Dickinson Memorial Hospital",
+        "Dickinson General"
+      ],
+      "location_id": "LOC-00063",
+      "address": {
+        "address_line_1": "370 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4004,
+          "longitude": -76.8495
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00168",
+      "site_type": "FACILITY",
+      "name": "Dickinson High School",
+      "aliases": [
+        "Dickinson Public School",
+        "Old Dickinson Academy"
+      ],
+      "location_id": "LOC-00064",
+      "address": {
+        "address_line_1": "377 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4016,
+          "longitude": -76.848
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00169",
+      "site_type": "FACILITY",
+      "name": "Dickinson Town Hall",
+      "aliases": [
+        "Dickinson Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00065",
+      "address": {
+        "address_line_1": "384 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4028,
+          "longitude": -76.8465
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00170",
+      "site_type": "LANDMARK",
+      "name": "Dickinson Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Dickinson)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00066",
+      "address": {
+        "address_line_1": "391 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.404,
+          "longitude": -76.845
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00171",
+      "site_type": "LANDMARK",
+      "name": "Dickinson Public Square",
+      "aliases": [
+        "Dickinson Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00067",
+      "address": {
+        "address_line_1": "398 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4052,
+          "longitude": -76.8435
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00172",
+      "site_type": "RESIDENCE",
+      "name": "Dickinson Homestead",
+      "aliases": [
+        "Old Dickinson Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00068",
+      "address": {
+        "address_line_1": "405 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4064,
+          "longitude": -76.842
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00173",
+      "site_type": "CEMETERY",
+      "name": "South Middleton Cemetery",
+      "aliases": [
+        "South Middleton Graveyard",
+        "Old South Middleton Burial Ground"
+      ],
+      "location_id": "LOC-00069",
+      "address": {
+        "address_line_1": "412 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4076,
+          "longitude": -76.8405
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00174",
+      "site_type": "CHURCH",
+      "name": "South Middleton Presbyterian Church",
+      "aliases": [
+        "First South Middleton Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00070",
+      "address": {
+        "address_line_1": "419 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4088,
+          "longitude": -76.839
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00175",
+      "site_type": "CHURCH",
+      "name": "South Middleton Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of South Middleton",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00071",
+      "address": {
+        "address_line_1": "426 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.41,
+          "longitude": -76.8375
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00176",
+      "site_type": "FACILITY",
+      "name": "South Middleton Community Hospital",
+      "aliases": [
+        "South Middleton Memorial Hospital",
+        "South Middleton General"
+      ],
+      "location_id": "LOC-00072",
+      "address": {
+        "address_line_1": "433 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4112,
+          "longitude": -76.836
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00177",
+      "site_type": "FACILITY",
+      "name": "South Middleton High School",
+      "aliases": [
+        "South Middleton Public School",
+        "Old South Middleton Academy"
+      ],
+      "location_id": "LOC-00073",
+      "address": {
+        "address_line_1": "440 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4124,
+          "longitude": -76.8345
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00178",
+      "site_type": "FACILITY",
+      "name": "South Middleton Town Hall",
+      "aliases": [
+        "South Middleton Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00074",
+      "address": {
+        "address_line_1": "447 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4136,
+          "longitude": -71.263
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00179",
+      "site_type": "LANDMARK",
+      "name": "South Middleton Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (South Middleton)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00075",
+      "address": {
+        "address_line_1": "454 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4148,
+          "longitude": -71.2615
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00180",
+      "site_type": "LANDMARK",
+      "name": "South Middleton Public Square",
+      "aliases": [
+        "South Middleton Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00076",
+      "address": {
+        "address_line_1": "461 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.416,
+          "longitude": -71.26
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00181",
+      "site_type": "RESIDENCE",
+      "name": "South Middleton Homestead",
+      "aliases": [
+        "Old South Middleton Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00077",
+      "address": {
+        "address_line_1": "468 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4172,
+          "longitude": -71.2585
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00182",
+      "site_type": "CEMETERY",
+      "name": "Penn Cemetery",
+      "aliases": [
+        "Penn Graveyard",
+        "Old Penn Burial Ground"
+      ],
+      "location_id": "LOC-00078",
+      "address": {
+        "address_line_1": "475 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4184,
+          "longitude": -71.257
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00183",
+      "site_type": "CHURCH",
+      "name": "Penn Presbyterian Church",
+      "aliases": [
+        "First Penn Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00079",
+      "address": {
+        "address_line_1": "482 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4196,
+          "longitude": -71.2555
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00184",
+      "site_type": "CHURCH",
+      "name": "Penn Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Penn",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00080",
+      "address": {
+        "address_line_1": "489 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4208,
+          "longitude": -71.254
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00185",
+      "site_type": "FACILITY",
+      "name": "Penn Community Hospital",
+      "aliases": [
+        "Penn Memorial Hospital",
+        "Penn General"
+      ],
+      "location_id": "LOC-00081",
+      "address": {
+        "address_line_1": "496 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.422,
+          "longitude": -71.2525
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00186",
+      "site_type": "FACILITY",
+      "name": "Penn High School",
+      "aliases": [
+        "Penn Public School",
+        "Old Penn Academy"
+      ],
+      "location_id": "LOC-00082",
+      "address": {
+        "address_line_1": "503 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4232,
+          "longitude": -71.251
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00187",
+      "site_type": "FACILITY",
+      "name": "Penn Town Hall",
+      "aliases": [
+        "Penn Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00083",
+      "address": {
+        "address_line_1": "510 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4244,
+          "longitude": -71.2495
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00188",
+      "site_type": "LANDMARK",
+      "name": "Penn Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Penn)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00084",
+      "address": {
+        "address_line_1": "517 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4256,
+          "longitude": -71.248
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00189",
+      "site_type": "LANDMARK",
+      "name": "Penn Public Square",
+      "aliases": [
+        "Penn Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00085",
+      "address": {
+        "address_line_1": "524 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4268,
+          "longitude": -71.2465
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00190",
+      "site_type": "RESIDENCE",
+      "name": "Penn Homestead",
+      "aliases": [
+        "Old Penn Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00086",
+      "address": {
+        "address_line_1": "531 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.428,
+          "longitude": -71.245
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00191",
+      "site_type": "CEMETERY",
+      "name": "Concord Cemetery",
+      "aliases": [
+        "Concord Graveyard",
+        "Old Concord Burial Ground"
+      ],
+      "location_id": "LOC-00087",
+      "address": {
+        "address_line_1": "538 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4292,
+          "longitude": -71.2435
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00192",
+      "site_type": "CHURCH",
+      "name": "Concord Presbyterian Church",
+      "aliases": [
+        "First Concord Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00088",
+      "address": {
+        "address_line_1": "545 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4304,
+          "longitude": -71.242
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00193",
+      "site_type": "CHURCH",
+      "name": "Concord Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Concord",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00089",
+      "address": {
+        "address_line_1": "552 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4316,
+          "longitude": -71.2405
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00194",
+      "site_type": "FACILITY",
+      "name": "Concord Community Hospital",
+      "aliases": [
+        "Concord Memorial Hospital",
+        "Concord General"
+      ],
+      "location_id": "LOC-00090",
+      "address": {
+        "address_line_1": "559 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4328,
+          "longitude": -71.239
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00195",
+      "site_type": "FACILITY",
+      "name": "Concord High School",
+      "aliases": [
+        "Concord Public School",
+        "Old Concord Academy"
+      ],
+      "location_id": "LOC-00091",
+      "address": {
+        "address_line_1": "566 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.434,
+          "longitude": -71.2375
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00196",
+      "site_type": "FACILITY",
+      "name": "Concord Town Hall",
+      "aliases": [
+        "Concord Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00092",
+      "address": {
+        "address_line_1": "573 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4352,
+          "longitude": -71.236
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00197",
+      "site_type": "LANDMARK",
+      "name": "Concord Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Concord)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00093",
+      "address": {
+        "address_line_1": "580 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4364,
+          "longitude": -71.2345
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00198",
+      "site_type": "LANDMARK",
+      "name": "Concord Public Square",
+      "aliases": [
+        "Concord Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00094",
+      "address": {
+        "address_line_1": "587 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4376,
+          "longitude": -71.233
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00199",
+      "site_type": "RESIDENCE",
+      "name": "Concord Homestead",
+      "aliases": [
+        "Old Concord Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00095",
+      "address": {
+        "address_line_1": "594 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4388,
+          "longitude": -71.2315
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00200",
+      "site_type": "CEMETERY",
+      "name": "Bow Cemetery",
+      "aliases": [
+        "Bow Graveyard",
+        "Old Bow Burial Ground"
+      ],
+      "location_id": "LOC-00096",
+      "address": {
+        "address_line_1": "601 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.44,
+          "longitude": -71.23
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00201",
+      "site_type": "CHURCH",
+      "name": "Bow Presbyterian Church",
+      "aliases": [
+        "First Bow Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00097",
+      "address": {
+        "address_line_1": "608 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4412,
+          "longitude": -71.2285
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00202",
+      "site_type": "CHURCH",
+      "name": "Bow Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Bow",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00098",
+      "address": {
+        "address_line_1": "615 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4424,
+          "longitude": -71.227
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00203",
+      "site_type": "FACILITY",
+      "name": "Bow Community Hospital",
+      "aliases": [
+        "Bow Memorial Hospital",
+        "Bow General"
+      ],
+      "location_id": "LOC-00099",
+      "address": {
+        "address_line_1": "622 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4436,
+          "longitude": -71.2255
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00204",
+      "site_type": "FACILITY",
+      "name": "Bow High School",
+      "aliases": [
+        "Bow Public School",
+        "Old Bow Academy"
+      ],
+      "location_id": "LOC-00100",
+      "address": {
+        "address_line_1": "629 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4448,
+          "longitude": -71.224
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00205",
+      "site_type": "FACILITY",
+      "name": "Bow Town Hall",
+      "aliases": [
+        "Bow Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00101",
+      "address": {
+        "address_line_1": "636 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.446,
+          "longitude": -71.2225
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00206",
+      "site_type": "LANDMARK",
+      "name": "Bow Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Bow)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00102",
+      "address": {
+        "address_line_1": "643 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4472,
+          "longitude": -71.221
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00207",
+      "site_type": "LANDMARK",
+      "name": "Bow Public Square",
+      "aliases": [
+        "Bow Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00103",
+      "address": {
+        "address_line_1": "650 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4484,
+          "longitude": -71.2195
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00208",
+      "site_type": "RESIDENCE",
+      "name": "Bow Homestead",
+      "aliases": [
+        "Old Bow Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00104",
+      "address": {
+        "address_line_1": "657 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4496,
+          "longitude": -71.218
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00209",
+      "site_type": "CEMETERY",
+      "name": "Pembroke Cemetery",
+      "aliases": [
+        "Pembroke Graveyard",
+        "Old Pembroke Burial Ground"
+      ],
+      "location_id": "LOC-00105",
+      "address": {
+        "address_line_1": "664 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.4508,
+          "longitude": -71.2165
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00210",
+      "site_type": "CHURCH",
+      "name": "Pembroke Presbyterian Church",
+      "aliases": [
+        "First Pembroke Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00001",
+      "address": {
+        "address_line_1": "671 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.452,
+          "longitude": -76.785
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00211",
+      "site_type": "CHURCH",
+      "name": "Pembroke Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Pembroke",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00002",
+      "address": {
+        "address_line_1": "678 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4532,
+          "longitude": -76.7835
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00212",
+      "site_type": "FACILITY",
+      "name": "Pembroke Community Hospital",
+      "aliases": [
+        "Pembroke Memorial Hospital",
+        "Pembroke General"
+      ],
+      "location_id": "LOC-00003",
+      "address": {
+        "address_line_1": "685 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4544,
+          "longitude": -76.782
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00213",
+      "site_type": "FACILITY",
+      "name": "Pembroke High School",
+      "aliases": [
+        "Pembroke Public School",
+        "Old Pembroke Academy"
+      ],
+      "location_id": "LOC-00004",
+      "address": {
+        "address_line_1": "692 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4556,
+          "longitude": -76.7805
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00214",
+      "site_type": "FACILITY",
+      "name": "Pembroke Town Hall",
+      "aliases": [
+        "Pembroke Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00005",
+      "address": {
+        "address_line_1": "699 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4568,
+          "longitude": -76.779
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00215",
+      "site_type": "LANDMARK",
+      "name": "Pembroke Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Pembroke)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00006",
+      "address": {
+        "address_line_1": "706 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.458,
+          "longitude": -76.7775
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00216",
+      "site_type": "LANDMARK",
+      "name": "Pembroke Public Square",
+      "aliases": [
+        "Pembroke Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00007",
+      "address": {
+        "address_line_1": "713 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4592,
+          "longitude": -76.776
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00217",
+      "site_type": "RESIDENCE",
+      "name": "Pembroke Homestead",
+      "aliases": [
+        "Old Pembroke Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00008",
+      "address": {
+        "address_line_1": "720 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4604,
+          "longitude": -76.7745
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00218",
+      "site_type": "CEMETERY",
+      "name": "Hooksett Cemetery",
+      "aliases": [
+        "Hooksett Graveyard",
+        "Old Hooksett Burial Ground"
+      ],
+      "location_id": "LOC-00009",
+      "address": {
+        "address_line_1": "727 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4616,
+          "longitude": -76.773
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00219",
+      "site_type": "CHURCH",
+      "name": "Hooksett Presbyterian Church",
+      "aliases": [
+        "First Hooksett Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00010",
+      "address": {
+        "address_line_1": "734 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4628,
+          "longitude": -76.7715
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00220",
+      "site_type": "CHURCH",
+      "name": "Hooksett Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Hooksett",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00011",
+      "address": {
+        "address_line_1": "741 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.464,
+          "longitude": -76.77
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00221",
+      "site_type": "FACILITY",
+      "name": "Hooksett Community Hospital",
+      "aliases": [
+        "Hooksett Memorial Hospital",
+        "Hooksett General"
+      ],
+      "location_id": "LOC-00012",
+      "address": {
+        "address_line_1": "748 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4652,
+          "longitude": -76.7685
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00222",
+      "site_type": "FACILITY",
+      "name": "Hooksett High School",
+      "aliases": [
+        "Hooksett Public School",
+        "Old Hooksett Academy"
+      ],
+      "location_id": "LOC-00013",
+      "address": {
+        "address_line_1": "755 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4664,
+          "longitude": -76.767
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00223",
+      "site_type": "FACILITY",
+      "name": "Hooksett Town Hall",
+      "aliases": [
+        "Hooksett Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00014",
+      "address": {
+        "address_line_1": "762 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4676,
+          "longitude": -76.7655
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00224",
+      "site_type": "LANDMARK",
+      "name": "Hooksett Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Hooksett)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00015",
+      "address": {
+        "address_line_1": "769 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4688,
+          "longitude": -76.764
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00225",
+      "site_type": "LANDMARK",
+      "name": "Hooksett Public Square",
+      "aliases": [
+        "Hooksett Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00016",
+      "address": {
+        "address_line_1": "776 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.47,
+          "longitude": -76.7625
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00226",
+      "site_type": "RESIDENCE",
+      "name": "Hooksett Homestead",
+      "aliases": [
+        "Old Hooksett Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00017",
+      "address": {
+        "address_line_1": "783 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4712,
+          "longitude": -76.761
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00227",
+      "site_type": "CEMETERY",
+      "name": "Hopkinton Cemetery",
+      "aliases": [
+        "Hopkinton Graveyard",
+        "Old Hopkinton Burial Ground"
+      ],
+      "location_id": "LOC-00018",
+      "address": {
+        "address_line_1": "790 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4724,
+          "longitude": -76.7595
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00228",
+      "site_type": "CHURCH",
+      "name": "Hopkinton Presbyterian Church",
+      "aliases": [
+        "First Hopkinton Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00019",
+      "address": {
+        "address_line_1": "797 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4736,
+          "longitude": -76.758
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00229",
+      "site_type": "CHURCH",
+      "name": "Hopkinton Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Hopkinton",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00020",
+      "address": {
+        "address_line_1": "804 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4748,
+          "longitude": -76.7565
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00230",
+      "site_type": "FACILITY",
+      "name": "Hopkinton Community Hospital",
+      "aliases": [
+        "Hopkinton Memorial Hospital",
+        "Hopkinton General"
+      ],
+      "location_id": "LOC-00021",
+      "address": {
+        "address_line_1": "811 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.476,
+          "longitude": -76.755
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00231",
+      "site_type": "FACILITY",
+      "name": "Hopkinton High School",
+      "aliases": [
+        "Hopkinton Public School",
+        "Old Hopkinton Academy"
+      ],
+      "location_id": "LOC-00022",
+      "address": {
+        "address_line_1": "818 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4772,
+          "longitude": -76.7535
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00232",
+      "site_type": "FACILITY",
+      "name": "Hopkinton Town Hall",
+      "aliases": [
+        "Hopkinton Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00023",
+      "address": {
+        "address_line_1": "825 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4784,
+          "longitude": -76.752
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00233",
+      "site_type": "LANDMARK",
+      "name": "Hopkinton Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Hopkinton)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00024",
+      "address": {
+        "address_line_1": "832 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4796,
+          "longitude": -76.7505
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00234",
+      "site_type": "LANDMARK",
+      "name": "Hopkinton Public Square",
+      "aliases": [
+        "Hopkinton Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00025",
+      "address": {
+        "address_line_1": "839 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4808,
+          "longitude": -76.749
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00235",
+      "site_type": "RESIDENCE",
+      "name": "Hopkinton Homestead",
+      "aliases": [
+        "Old Hopkinton Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00026",
+      "address": {
+        "address_line_1": "846 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.482,
+          "longitude": -76.7475
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00236",
+      "site_type": "CEMETERY",
+      "name": "Boscawen Cemetery",
+      "aliases": [
+        "Boscawen Graveyard",
+        "Old Boscawen Burial Ground"
+      ],
+      "location_id": "LOC-00027",
+      "address": {
+        "address_line_1": "853 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4832,
+          "longitude": -76.746
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00237",
+      "site_type": "CHURCH",
+      "name": "Boscawen Presbyterian Church",
+      "aliases": [
+        "First Boscawen Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00028",
+      "address": {
+        "address_line_1": "860 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4844,
+          "longitude": -76.7445
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00238",
+      "site_type": "CHURCH",
+      "name": "Boscawen Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Boscawen",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00029",
+      "address": {
+        "address_line_1": "867 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4856,
+          "longitude": -76.743
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00239",
+      "site_type": "FACILITY",
+      "name": "Boscawen Community Hospital",
+      "aliases": [
+        "Boscawen Memorial Hospital",
+        "Boscawen General"
+      ],
+      "location_id": "LOC-00030",
+      "address": {
+        "address_line_1": "874 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4868,
+          "longitude": -76.7415
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00240",
+      "site_type": "FACILITY",
+      "name": "Boscawen High School",
+      "aliases": [
+        "Boscawen Public School",
+        "Old Boscawen Academy"
+      ],
+      "location_id": "LOC-00031",
+      "address": {
+        "address_line_1": "881 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.488,
+          "longitude": -76.74
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00241",
+      "site_type": "FACILITY",
+      "name": "Boscawen Town Hall",
+      "aliases": [
+        "Boscawen Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00032",
+      "address": {
+        "address_line_1": "888 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4892,
+          "longitude": -76.7385
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00242",
+      "site_type": "LANDMARK",
+      "name": "Boscawen Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Boscawen)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00033",
+      "address": {
+        "address_line_1": "895 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4904,
+          "longitude": -76.737
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00243",
+      "site_type": "LANDMARK",
+      "name": "Boscawen Public Square",
+      "aliases": [
+        "Boscawen Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00034",
+      "address": {
+        "address_line_1": "902 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4916,
+          "longitude": -76.7355
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00244",
+      "site_type": "RESIDENCE",
+      "name": "Boscawen Homestead",
+      "aliases": [
+        "Old Boscawen Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00035",
+      "address": {
+        "address_line_1": "909 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4928,
+          "longitude": -76.734
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00245",
+      "site_type": "CEMETERY",
+      "name": "Dunbarton Cemetery",
+      "aliases": [
+        "Dunbarton Graveyard",
+        "Old Dunbarton Burial Ground"
+      ],
+      "location_id": "LOC-00036",
+      "address": {
+        "address_line_1": "916 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.494,
+          "longitude": -76.7325
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00246",
+      "site_type": "CHURCH",
+      "name": "Dunbarton Presbyterian Church",
+      "aliases": [
+        "First Dunbarton Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00037",
+      "address": {
+        "address_line_1": "923 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4952,
+          "longitude": -76.731
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00247",
+      "site_type": "CHURCH",
+      "name": "Dunbarton Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Dunbarton",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00038",
+      "address": {
+        "address_line_1": "930 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4964,
+          "longitude": -76.7295
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00248",
+      "site_type": "FACILITY",
+      "name": "Dunbarton Community Hospital",
+      "aliases": [
+        "Dunbarton Memorial Hospital",
+        "Dunbarton General"
+      ],
+      "location_id": "LOC-00039",
+      "address": {
+        "address_line_1": "937 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4976,
+          "longitude": -76.728
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00249",
+      "site_type": "FACILITY",
+      "name": "Dunbarton High School",
+      "aliases": [
+        "Dunbarton Public School",
+        "Old Dunbarton Academy"
+      ],
+      "location_id": "LOC-00040",
+      "address": {
+        "address_line_1": "944 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.4988,
+          "longitude": -76.7265
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00250",
+      "site_type": "FACILITY",
+      "name": "Dunbarton Town Hall",
+      "aliases": [
+        "Dunbarton Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00041",
+      "address": {
+        "address_line_1": "951 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5,
+          "longitude": -76.725
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00251",
+      "site_type": "LANDMARK",
+      "name": "Dunbarton Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Dunbarton)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00042",
+      "address": {
+        "address_line_1": "958 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5012,
+          "longitude": -76.7235
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00252",
+      "site_type": "LANDMARK",
+      "name": "Dunbarton Public Square",
+      "aliases": [
+        "Dunbarton Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00043",
+      "address": {
+        "address_line_1": "965 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5024,
+          "longitude": -76.722
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00253",
+      "site_type": "RESIDENCE",
+      "name": "Dunbarton Homestead",
+      "aliases": [
+        "Old Dunbarton Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00044",
+      "address": {
+        "address_line_1": "972 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5036,
+          "longitude": -76.7205
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00254",
+      "site_type": "CEMETERY",
+      "name": "Epsom Cemetery",
+      "aliases": [
+        "Epsom Graveyard",
+        "Old Epsom Burial Ground"
+      ],
+      "location_id": "LOC-00045",
+      "address": {
+        "address_line_1": "979 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5048,
+          "longitude": -76.719
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00255",
+      "site_type": "CHURCH",
+      "name": "Epsom Presbyterian Church",
+      "aliases": [
+        "First Epsom Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00046",
+      "address": {
+        "address_line_1": "986 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.506,
+          "longitude": -76.7175
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00256",
+      "site_type": "CHURCH",
+      "name": "Epsom Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Epsom",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00047",
+      "address": {
+        "address_line_1": "993 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5072,
+          "longitude": -76.716
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00257",
+      "site_type": "FACILITY",
+      "name": "Epsom Community Hospital",
+      "aliases": [
+        "Epsom Memorial Hospital",
+        "Epsom General"
+      ],
+      "location_id": "LOC-00048",
+      "address": {
+        "address_line_1": "101 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5084,
+          "longitude": -76.7145
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00258",
+      "site_type": "FACILITY",
+      "name": "Epsom High School",
+      "aliases": [
+        "Epsom Public School",
+        "Old Epsom Academy"
+      ],
+      "location_id": "LOC-00049",
+      "address": {
+        "address_line_1": "108 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5096,
+          "longitude": -76.713
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00259",
+      "site_type": "FACILITY",
+      "name": "Epsom Town Hall",
+      "aliases": [
+        "Epsom Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00050",
+      "address": {
+        "address_line_1": "115 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5108,
+          "longitude": -76.7115
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00260",
+      "site_type": "LANDMARK",
+      "name": "Epsom Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Epsom)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00051",
+      "address": {
+        "address_line_1": "122 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.512,
+          "longitude": -76.71
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00261",
+      "site_type": "LANDMARK",
+      "name": "Epsom Public Square",
+      "aliases": [
+        "Epsom Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00052",
+      "address": {
+        "address_line_1": "129 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5132,
+          "longitude": -76.7085
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00262",
+      "site_type": "RESIDENCE",
+      "name": "Epsom Homestead",
+      "aliases": [
+        "Old Epsom Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00053",
+      "address": {
+        "address_line_1": "136 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5144,
+          "longitude": -76.707
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00263",
+      "site_type": "CEMETERY",
+      "name": "Chichester Cemetery",
+      "aliases": [
+        "Chichester Graveyard",
+        "Old Chichester Burial Ground"
+      ],
+      "location_id": "LOC-00054",
+      "address": {
+        "address_line_1": "143 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5156,
+          "longitude": -76.7055
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00264",
+      "site_type": "CHURCH",
+      "name": "Chichester Presbyterian Church",
+      "aliases": [
+        "First Chichester Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00055",
+      "address": {
+        "address_line_1": "150 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5168,
+          "longitude": -76.704
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00265",
+      "site_type": "CHURCH",
+      "name": "Chichester Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Chichester",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00056",
+      "address": {
+        "address_line_1": "157 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.518,
+          "longitude": -76.7025
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00266",
+      "site_type": "FACILITY",
+      "name": "Chichester Community Hospital",
+      "aliases": [
+        "Chichester Memorial Hospital",
+        "Chichester General"
+      ],
+      "location_id": "LOC-00057",
+      "address": {
+        "address_line_1": "164 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5192,
+          "longitude": -76.701
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00267",
+      "site_type": "FACILITY",
+      "name": "Chichester High School",
+      "aliases": [
+        "Chichester Public School",
+        "Old Chichester Academy"
+      ],
+      "location_id": "LOC-00058",
+      "address": {
+        "address_line_1": "171 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5204,
+          "longitude": -76.6995
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00268",
+      "site_type": "FACILITY",
+      "name": "Chichester Town Hall",
+      "aliases": [
+        "Chichester Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00059",
+      "address": {
+        "address_line_1": "178 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5216,
+          "longitude": -76.698
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00269",
+      "site_type": "LANDMARK",
+      "name": "Chichester Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Chichester)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00060",
+      "address": {
+        "address_line_1": "185 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5228,
+          "longitude": -76.6965
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00270",
+      "site_type": "LANDMARK",
+      "name": "Chichester Public Square",
+      "aliases": [
+        "Chichester Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00061",
+      "address": {
+        "address_line_1": "192 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.524,
+          "longitude": -76.695
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00271",
+      "site_type": "RESIDENCE",
+      "name": "Chichester Homestead",
+      "aliases": [
+        "Old Chichester Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00062",
+      "address": {
+        "address_line_1": "199 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5252,
+          "longitude": -76.6935
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00272",
+      "site_type": "CEMETERY",
+      "name": "Loudon Cemetery",
+      "aliases": [
+        "Loudon Graveyard",
+        "Old Loudon Burial Ground"
+      ],
+      "location_id": "LOC-00063",
+      "address": {
+        "address_line_1": "206 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5264,
+          "longitude": -76.692
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00273",
+      "site_type": "CHURCH",
+      "name": "Loudon Presbyterian Church",
+      "aliases": [
+        "First Loudon Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00064",
+      "address": {
+        "address_line_1": "213 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5276,
+          "longitude": -76.6905
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00274",
+      "site_type": "CHURCH",
+      "name": "Loudon Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Loudon",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00065",
+      "address": {
+        "address_line_1": "220 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5288,
+          "longitude": -76.689
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00275",
+      "site_type": "FACILITY",
+      "name": "Loudon Community Hospital",
+      "aliases": [
+        "Loudon Memorial Hospital",
+        "Loudon General"
+      ],
+      "location_id": "LOC-00066",
+      "address": {
+        "address_line_1": "227 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.53,
+          "longitude": -76.6875
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00276",
+      "site_type": "FACILITY",
+      "name": "Loudon High School",
+      "aliases": [
+        "Loudon Public School",
+        "Old Loudon Academy"
+      ],
+      "location_id": "LOC-00067",
+      "address": {
+        "address_line_1": "234 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5312,
+          "longitude": -76.686
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00277",
+      "site_type": "FACILITY",
+      "name": "Loudon Town Hall",
+      "aliases": [
+        "Loudon Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00068",
+      "address": {
+        "address_line_1": "241 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5324,
+          "longitude": -76.6845
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00278",
+      "site_type": "LANDMARK",
+      "name": "Loudon Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Loudon)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00069",
+      "address": {
+        "address_line_1": "248 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5336,
+          "longitude": -76.683
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00279",
+      "site_type": "LANDMARK",
+      "name": "Loudon Public Square",
+      "aliases": [
+        "Loudon Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00070",
+      "address": {
+        "address_line_1": "255 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5348,
+          "longitude": -76.6815
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00280",
+      "site_type": "RESIDENCE",
+      "name": "Loudon Homestead",
+      "aliases": [
+        "Old Loudon Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00071",
+      "address": {
+        "address_line_1": "262 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.536,
+          "longitude": -76.68
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00281",
+      "site_type": "CEMETERY",
+      "name": "Salisbury Cemetery",
+      "aliases": [
+        "Salisbury Graveyard",
+        "Old Salisbury Burial Ground"
+      ],
+      "location_id": "LOC-00072",
+      "address": {
+        "address_line_1": "269 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5372,
+          "longitude": -76.6785
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00282",
+      "site_type": "CHURCH",
+      "name": "Salisbury Presbyterian Church",
+      "aliases": [
+        "First Salisbury Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00073",
+      "address": {
+        "address_line_1": "276 Main Street",
+        "address_line_2": null,
+        "postal_code": "17013",
+        "coordinates": {
+          "latitude": 40.5384,
+          "longitude": -76.677
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00283",
+      "site_type": "CHURCH",
+      "name": "Salisbury Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Salisbury",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00074",
+      "address": {
+        "address_line_1": "283 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5396,
+          "longitude": -71.1055
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00284",
+      "site_type": "FACILITY",
+      "name": "Salisbury Community Hospital",
+      "aliases": [
+        "Salisbury Memorial Hospital",
+        "Salisbury General"
+      ],
+      "location_id": "LOC-00075",
+      "address": {
+        "address_line_1": "290 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5408,
+          "longitude": -71.104
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00285",
+      "site_type": "FACILITY",
+      "name": "Salisbury High School",
+      "aliases": [
+        "Salisbury Public School",
+        "Old Salisbury Academy"
+      ],
+      "location_id": "LOC-00076",
+      "address": {
+        "address_line_1": "297 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.542,
+          "longitude": -71.1025
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00286",
+      "site_type": "FACILITY",
+      "name": "Salisbury Town Hall",
+      "aliases": [
+        "Salisbury Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00077",
+      "address": {
+        "address_line_1": "304 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5432,
+          "longitude": -71.101
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00287",
+      "site_type": "LANDMARK",
+      "name": "Salisbury Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Salisbury)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00078",
+      "address": {
+        "address_line_1": "311 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5444,
+          "longitude": -71.0995
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00288",
+      "site_type": "LANDMARK",
+      "name": "Salisbury Public Square",
+      "aliases": [
+        "Salisbury Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00079",
+      "address": {
+        "address_line_1": "318 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5456,
+          "longitude": -71.098
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00289",
+      "site_type": "RESIDENCE",
+      "name": "Salisbury Homestead",
+      "aliases": [
+        "Old Salisbury Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00080",
+      "address": {
+        "address_line_1": "325 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5468,
+          "longitude": -71.0965
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00290",
+      "site_type": "CEMETERY",
+      "name": "Canterbury Cemetery",
+      "aliases": [
+        "Canterbury Graveyard",
+        "Old Canterbury Burial Ground"
+      ],
+      "location_id": "LOC-00081",
+      "address": {
+        "address_line_1": "332 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.548,
+          "longitude": -71.095
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00291",
+      "site_type": "CHURCH",
+      "name": "Canterbury Presbyterian Church",
+      "aliases": [
+        "First Canterbury Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00082",
+      "address": {
+        "address_line_1": "339 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5492,
+          "longitude": -71.0935
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00292",
+      "site_type": "CHURCH",
+      "name": "Canterbury Lutheran Church",
+      "aliases": [
+        "Zion Evangelical Lutheran of Canterbury",
+        "Zion Lutheran"
+      ],
+      "location_id": "LOC-00083",
+      "address": {
+        "address_line_1": "346 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5504,
+          "longitude": -71.092
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00293",
+      "site_type": "FACILITY",
+      "name": "Canterbury Community Hospital",
+      "aliases": [
+        "Canterbury Memorial Hospital",
+        "Canterbury General"
+      ],
+      "location_id": "LOC-00084",
+      "address": {
+        "address_line_1": "353 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5516,
+          "longitude": -71.0905
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00294",
+      "site_type": "FACILITY",
+      "name": "Canterbury High School",
+      "aliases": [
+        "Canterbury Public School",
+        "Old Canterbury Academy"
+      ],
+      "location_id": "LOC-00085",
+      "address": {
+        "address_line_1": "360 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5528,
+          "longitude": -71.089
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00295",
+      "site_type": "FACILITY",
+      "name": "Canterbury Town Hall",
+      "aliases": [
+        "Canterbury Borough Hall",
+        "Municipal Building"
+      ],
+      "location_id": "LOC-00086",
+      "address": {
+        "address_line_1": "367 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.554,
+          "longitude": -71.0875
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00296",
+      "site_type": "LANDMARK",
+      "name": "Canterbury Railroad Station",
+      "aliases": [
+        "Pennsylvania Railroad Station (Canterbury)",
+        "PRR Depot"
+      ],
+      "location_id": "LOC-00087",
+      "address": {
+        "address_line_1": "374 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5552,
+          "longitude": -71.086
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00297",
+      "site_type": "LANDMARK",
+      "name": "Canterbury Public Square",
+      "aliases": [
+        "Canterbury Historic Common",
+        "Centre Square"
+      ],
+      "location_id": "LOC-00088",
+      "address": {
+        "address_line_1": "381 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5564,
+          "longitude": -71.0845
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00298",
+      "site_type": "RESIDENCE",
+      "name": "Canterbury Homestead",
+      "aliases": [
+        "Old Canterbury Farmstead",
+        "Rural Route Homestead"
+      ],
+      "location_id": "LOC-00089",
+      "address": {
+        "address_line_1": "388 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5576,
+          "longitude": -71.083
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00299",
+      "site_type": "CEMETERY",
+      "name": "Pittsfield Cemetery",
+      "aliases": [
+        "Pittsfield Graveyard",
+        "Old Pittsfield Burial Ground"
+      ],
+      "location_id": "LOC-00090",
+      "address": {
+        "address_line_1": "395 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.5588,
+          "longitude": -71.0815
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    },
+    {
+      "site_id": "SITE-00300",
+      "site_type": "CHURCH",
+      "name": "Pittsfield Presbyterian Church",
+      "aliases": [
+        "First Pittsfield Presbyterian",
+        "Old Meeting House"
+      ],
+      "location_id": "LOC-00091",
+      "address": {
+        "address_line_1": "402 Main Street",
+        "address_line_2": null,
+        "postal_code": "03301",
+        "coordinates": {
+          "latitude": 43.56,
+          "longitude": -71.53
+        }
+      },
+      "notes": [],
+      "last_updated": "2026-09-29T00:00:00Z"
+    }
+  ]
+}

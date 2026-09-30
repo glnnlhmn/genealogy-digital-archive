@@ -1,11 +1,15 @@
 {
+  "_name": "location_registry.schema.json",
+  "_path": "schemas/entities/location_registry.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/entities/location_registry.schema.json",
-  "title": "Location_Registry",
-  "version": "1.0.0",
-  "description": "Master administrative registry container for individual location entities, utilizing centralized registry definitions.",
+  "title": "Location Registry Schema",
+  "version": "1.2.0",
+  "description": "Master administrative registry envelope for locations.json, including required GSI intake headers.",
   "type": "object",
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "schema_version",
     "created_at",
@@ -14,26 +18,34 @@
     "locations"
   ],
   "properties": {
+    "_name": {
+      "type": "string",
+      "const": "locations.json"
+    },
+    "_path": {
+      "type": "string",
+      "const": "data/entities/locations.json"
+    },
     "$schema": {
-      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/$schema"
+      "type": "string"
     },
     "schema_version": {
-      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/schema_version",
-      "const": "1.0.0"
+      "type": "string",
+      "const": "1.2.0"
     },
     "created_at": {
-      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/created_at"
+      "type": "string"
     },
     "last_modified": {
-      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/last_modified"
+      "type": "string"
     },
     "total_locations": {
-      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/total_count",
-      "description": "Total count of location entities contained in the registry."
+      "type": "integer",
+      "minimum": 0
     },
     "locations": {
       "type": "array",
-      "description": "List of master location records.",
+      "description": "Authoritative list of master civil jurisdictions.",
       "items": {
         "$ref": "location.schema.json"
       }

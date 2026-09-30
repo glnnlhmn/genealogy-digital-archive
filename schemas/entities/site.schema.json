@@ -1,0 +1,107 @@
+{
+  "_name": "site.schema.json",
+  "_path": "schemas/entities/site.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/entities/site.schema.json",
+  "title": "Master Physical Site Entity Schema",
+  "version": "1.0.0",
+  "description": "Authoritative physical facility, cemetery, church, residence, or landmark entity schema, linked to a parent civil location.",
+  "type": "object",
+  "required": [
+    "site_id",
+    "site_type",
+    "name",
+    "location_id"
+  ],
+  "properties": {
+    "site_id": {
+      "type": "string",
+      "pattern": "^SITE-[0-9]{5}$",
+      "description": "Standardized canonical site identifier format."
+    },
+    "site_type": {
+      "type": "string",
+      "enum": [
+        "FACILITY",
+        "CEMETERY",
+        "CHURCH",
+        "LANDMARK",
+        "RESIDENCE",
+        "ORGANIZATION"
+      ],
+      "description": "Classification of the physical or institutional site entity."
+    },
+    "name": {
+      "type": "string",
+      "description": "Authoritative primary designation of the physical site or landmark."
+    },
+    "aliases": {
+      "type": "array",
+      "description": "Alternative names, historical designations, or colloquial variations.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "location_id": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/location_id",
+      "description": "Foreign key link to the parent civil jurisdiction in locations.json."
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "address_line_1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "address_line_2": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "postal_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "coordinates": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "latitude": {
+              "type": "number"
+            },
+            "longitude": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "latitude",
+            "longitude"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "notes": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/note_entry"
+      }
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "ISO-8601 timestamp tracking entity modification."
+    }
+  },
+  "additionalProperties": false
+}
