@@ -1,4 +1,6 @@
 {
+  "_name": "death_certificate.schema.json",
+  "_path": "schemas/sources/death_certificate.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/sources/death_certificate.schema.json",
   "title": "DeathCertificateSourceRecord",
@@ -6,6 +8,8 @@
   "description": "Standardized schema for civil death certificates, fetal death certificates, coroner inquests, and official death register entries.",
   "type": "object",
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "description",
     "record_metadata",
@@ -13,12 +17,18 @@
     "associated_people"
   ],
   "properties": {
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
     "$schema": {
       "type": "string"
     },
     "description": {
       "type": "string",
-      "description": "[REQUIRED] Human- and AI-readable contextual summary of this death source record (e.g., '1944 Death Certificate of Annie Lehman (Newville, Cumberland Co., PA)')."
+      "description": "Contextual summary of this death source record."
     },
     "record_metadata": {
       "type": "object",
@@ -35,9 +45,10 @@
         },
         "record_category": {
           "type": "string",
-          "enum": ["VITAL"],
-          "default": "VITAL",
-          "description": "Restricted to VITAL for all civil registration source records."
+          "enum": [
+            "VITAL"
+          ],
+          "default": "VITAL"
         },
         "record_type": {
           "type": "string",
@@ -49,8 +60,7 @@
             "REGISTER_ENTRY",
             "DELAYED_DEATH"
           ],
-          "default": "DEATH_CERTIFICATE",
-          "description": "Granular legal or civil classification of the death instrument."
+          "default": "DEATH_CERTIFICATE"
         }
       },
       "additionalProperties": false
@@ -67,27 +77,40 @@
       "properties": {
         "filing_details": {
           "type": "object",
-          "required": ["certificate_number"],
+          "required": [
+            "certificate_number"
+          ],
           "properties": {
             "certificate_number": {
-              "type": "string",
-              "description": "Official state, county, or local file/certificate number. Must align with patterns under 'locator_death_patterns' in schemas/naming/_token_registry.json."
+              "type": "string"
             },
             "registration_district": {
-              "type": ["string", "null"],
-              "description": "Primary registration district or precinct number."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "date_filed": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted",
-              "description": "Date recorded or stamped by local registrar."
+              "oneOf": [
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "local_registrar": {
-              "type": ["string", "null"],
-              "description": "Name or signature of the certifying registrar."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "sub_registrar": {
-              "type": ["string", "null"],
-              "description": "Name or signature of the certifying deputy or sub-registrar."
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
@@ -100,27 +123,37 @@
           ],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id",
-              "description": "Controlled foreign key referencing the master Person Registry (/data/entities/people.json). Must be verified with 3 corroborating data points before assignment."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name",
-              "description": "Decedent's name parsed canonically or captured via raw_name."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
             },
             "is_stillborn": {
-              "type": ["boolean", "null"],
-              "default": false,
-              "description": "Flag indicating fetal death or stillborn infant."
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": false
             },
             "sex": {
               "type": "string",
-              "enum": ["Male", "Female", "Unknown"]
+              "enum": [
+                "Male",
+                "Female",
+                "Unknown"
+              ]
             },
             "color_or_race": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "marital_status": {
-              "type": ["string", "null"],
+              "type": [
+                "string",
+                "null"
+              ],
               "enum": [
                 "Single",
                 "Married",
@@ -132,46 +165,77 @@
             },
             "spouse_name": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name" },
-                { "type": "null" }
-              ],
-              "description": "Name of surviving or deceased spouse as stated on document."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "date_of_birth": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "age": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/age_record" },
-                { "type": "null" }
-              ],
-              "description": "Standardized chronological age container capturing years, months, days, or verbatim text."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/age_record"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "birthplace": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
-              ],
-              "description": "Birthplace of decedent. Must align with 'jurisdictions', 'counties', and 'states' in schemas/naming/_token_registry.json."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "citizen_country": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "social_security_no": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "armed_forces": {
-              "type": ["string", "null"],
-              "description": "Military service branch or conflict indicator."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "occupation": {
               "type": "object",
               "properties": {
-                "usual": { "type": ["string", "null"] },
-                "industry": { "type": ["string", "null"] }
+                "usual": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "industry": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
               },
               "additionalProperties": false
             },
@@ -180,26 +244,42 @@
               "properties": {
                 "father_name": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 },
                 "father_birthplace": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 },
                 "mother_maiden_name": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 },
                 "mother_birthplace": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 }
               },
@@ -216,40 +296,57 @@
           ],
           "properties": {
             "date_of_death": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
             },
             "time_of_death": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "place_of_death": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
-              "description": "Standardized location of death. Must align with 'jurisdictions', 'counties', and 'states' in schemas/naming/_token_registry.json."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
             },
             "residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "medical_certification": {
               "type": "object",
               "properties": {
                 "cause": {
-                  "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/cause_of_death"
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/cause_of_death"
                 },
                 "attending_physician": {
-                  "type": ["string", "null"]
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "physician_address": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 },
                 "date_signed": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 }
               },
@@ -259,16 +356,26 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "type": ["string", "null"]
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "address": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 },
                 "signature": {
-                  "type": ["string", "null"]
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               },
               "additionalProperties": false
@@ -277,7 +384,10 @@
               "type": "object",
               "properties": {
                 "type": {
-                  "type": ["string", "null"],
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "enum": [
                     "Burial",
                     "Cremation",
@@ -290,24 +400,38 @@
                 },
                 "dispo_date": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 },
                 "location": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                    { "type": "null" }
-                  ],
-                  "description": "Cemetery, crematory, or mausoleum facility (use location.details.location_name for name)."
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
                 },
                 "undertaker": {
-                  "type": ["string", "null"]
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 },
                 "undertaker_address": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 }
               },
@@ -317,20 +441,20 @@
           "additionalProperties": false
         },
         "certificate_note": {
-          "type": ["string", "null"],
-          "description": "Optional archival or contextual notes regarding the certificate, registrar notations, or physical document condition."
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "transcript": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
-          "description": "Structured verbatim form field readout and concise abstract."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/transcript_record"
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
-          },
-          "description": "Array of derivative media scan images comprising this source record."
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/source_media"
+          }
         }
       },
       "additionalProperties": false
@@ -338,9 +462,8 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
-      },
-      "description": "Canonical participant links (decedent, parents, spouse, informant, attendant/physician, undertaker) mapped to standardized roles and IND IDs."
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
+      }
     }
   },
   "additionalProperties": false

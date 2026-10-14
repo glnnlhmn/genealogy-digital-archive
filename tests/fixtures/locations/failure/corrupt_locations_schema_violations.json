@@ -1,0 +1,56 @@
+{
+  "_name": "corrupt_locations_schema_violations.json",
+  "_path": "tests/fixtures/locations/failure/corrupt_locations_schema_violations.json",
+  "$schema": "schemas/entities/location_registry.schema.json",
+  "schema_version": "1.2.0",
+  "created_at": "2026-09-29T00:00:00Z",
+  "last_modified": "2026-10-10T00:00:00Z",
+  "total_locations": 2,
+  "locations": [
+    {
+      "location_id": "LOC-00006",
+      "canonical_name": "   ",
+      "aliases": ["Carlisle"],
+      "jurisdiction": {
+        "local_jurisdiction": "Carlisle",
+        "county": "Cumberland",
+        "state_or_province": "Pennsylvania",
+        "country": "USA"
+      },
+      "temporal_validity": {
+        "date_established": "1751",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-10T00:00:00Z"
+    },
+    {
+      "location_id": "LOC-00042",
+      "canonical_name": "Newark, Essex County, New Jersey, USA",
+      "aliases": ["Newark"],
+      "jurisdiction": {
+        "country": ""
+      },
+      "temporal_validity": {
+        "date_established": "1900",
+        "date_dissolved": "1800",
+        "predecessor_location_id": "LOC-00042",
+        "successor_location_id": "BAD-SUCC-ID"
+      },
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-10T00:00:00Z"
+    }
+  ]
+}

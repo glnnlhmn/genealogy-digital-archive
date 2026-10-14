@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/defs/_registry_defs.schema.json",
+  "title": "Master Registry Envelope Definitions",
+  "version": "1.0.0",
+  "description": "Structural definitions for registry envelope headers and entity containers.",
+  "type": "object",
+  "$defs": {
+    "registry_header": {
+      "type": "object",
+      "required": [
+        "_name",
+        "_path",
+        "version",
+        "last_updated"
+      ],
+      "properties": {
+        "_name": {
+          "type": "string"
+        },
+        "_path": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "last_updated": {
+          "$ref": "_shared_defs.schema.json#/$defs/timestamp_iso"
+        }
+      }
+    }
+  }
+}

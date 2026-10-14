@@ -1,0 +1,111 @@
+{
+  "_name": "sources_newspaper_obituary_xref.schema.json",
+  "_path": "schemas/xrefs/sources_newspaper_obituary_xref.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/xrefs/sources_newspaper_obituary_xref.schema.json",
+  "title": "Sources_Newspaper_Obituary_XRef",
+  "version": "1.0.0",
+  "description": "Associative cross-reference bridging deceased individuals, vital dates, and source clippings.",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "required": [
+    "_name",
+    "_path",
+    "$schema",
+    "schema_version",
+    "last_modified",
+    "total_obituaries",
+    "obituaries"
+  ],
+  "properties": {
+    "_name": {
+      "type": "string",
+      "const": "sources_newspaper_obituary_xref.json"
+    },
+    "_path": {
+      "type": "string",
+      "const": "data/indexes/sources_newspaper_obituary_xref.json"
+    },
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "last_modified": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso",
+      "description": "ISO-8601 timestamp of last index compilation."
+    },
+    "total_obituaries": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total count of obituary entries cataloged in the cross-reference."
+    },
+    "obituaries": {
+      "type": "array",
+      "description": "Cataloged list of published obituaries linking individuals to source clippings.",
+      "items": {
+        "type": "object",
+        "unevaluatedProperties": false,
+        "required": [
+          "person_id",
+          "death_date",
+          "source_urn",
+          "pub_code",
+          "pub_date",
+          "headline",
+          "file_path"
+        ],
+        "properties": {
+          "person_id": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
+          },
+          "birth_date": {
+            "oneOf": [
+              {
+                "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "death_date": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+          },
+          "age_at_death": {
+            "oneOf": [
+              {
+                "$ref": "../defs/_shared_defs.schema.json#/$defs/age_record"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_urn": {
+            "type": "string",
+            "description": "Archival Uniform Resource Name for the obituary clipping."
+          },
+          "pub_code": {
+            "type": "string",
+            "maxLength": 6,
+            "description": "Standardized newspaper publication authority token."
+          },
+          "pub_date": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+          },
+          "headline": {
+            "type": "string",
+            "description": "Verbatim or standardized article headline."
+          },
+          "file_path": {
+            "type": "string",
+            "description": "Relative path to the granular archival record file on disk."
+          }
+        }
+      }
+    }
+  }
+}

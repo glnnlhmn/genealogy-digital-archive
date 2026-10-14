@@ -1,0 +1,17 @@
+{
+  "_name": "corrupt_ahnentafel_zero_number.json",
+  "_path": "tests/fixtures/xrefs/failure/corrupt_ahnentafel_zero_number.json",
+  "_defect": "ahnentafel_number violates minimum 1 constraint",
+  "_name": "people_ahnentafel_xref.json",
+  "_path": "data/indexes/people_ahnentafel_xref.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_version": "1.0.0",
+  "last_modified": "2026-10-12T12:00:00Z",
+  "total_ancestors": 1,
+  "ancestors": [
+    {
+      "ahnentafel_number": 0,
+      "person_id": "IND-00001"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "_name": "miplet_003_topic_test_harness_header.json",
+  "_path": "prompts/core/miplet_003_topic_test_harness_header.json",
+  "target_baseline": "v1.1.0",
+  "target_file": "prompts/topics/topic_test_harness.md",
+  "target_section": "Section 2.1 (File-Level Metadata Header)",
+  "operation": "modification",
+  "description": "Update the test harness metadata header template to use monotonic cumulative build counters (+build.r1) instead of calendar date resets.",
+  "payload": "```python\n# Name: test_[module].py\n# Path: [relative/path/to/test_[module].py]\n# Version: 1.0.0+build.r1\n```"
+}

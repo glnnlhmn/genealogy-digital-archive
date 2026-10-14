@@ -1,0 +1,116 @@
+{
+  "_name": "people_family_group_xref.schema.json",
+  "_path": "schemas/xrefs/people_family_group_xref.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/xrefs/people_family_group_xref.schema.json",
+  "title": "People_Family_Group_XRef",
+  "version": "1.1.0",
+  "description": "Master cross-reference index of nuclear family groups mapping parental pairings to children.",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "required": [
+    "_name",
+    "_path",
+    "$schema",
+    "schema_version",
+    "last_modified",
+    "total_families",
+    "families"
+  ],
+  "properties": {
+    "_name": {
+      "type": "string",
+      "const": "people_family_group_xref.json"
+    },
+    "_path": {
+      "type": "string",
+      "const": "data/indexes/people_family_group_xref.json"
+    },
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.1.0"
+    },
+    "last_modified": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso",
+      "description": "ISO-8601 timestamp of last index compilation."
+    },
+    "total_families": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total count of nuclear family groups cataloged."
+    },
+    "families": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^FAM-[0-9]{5}-[A-Z]$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "unevaluatedProperties": false,
+        "required": [
+          "family_id",
+          "parent_x",
+          "parent_y",
+          "total_children",
+          "children"
+        ],
+        "properties": {
+          "family_id": {
+            "type": "string",
+            "pattern": "^FAM-[0-9]{5}-[A-Z]$",
+            "description": "Sequential canonical nuclear family group identifier."
+          },
+          "parent_x": {
+            "oneOf": [
+              {
+                "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "parent_y": {
+            "oneOf": [
+              {
+                "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "total_children": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Total number of children in this nuclear family group."
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "unevaluatedProperties": false,
+              "required": [
+                "person_id"
+              ],
+              "properties": {
+                "person_id": {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
+                },
+                "relationship_note": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

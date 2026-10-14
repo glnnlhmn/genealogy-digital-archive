@@ -1,0 +1,26 @@
+<!--
+Name: runbook-gpi.md
+Path: docs/tools/runbook-gpi.md
+-->
+
+# Technical Runbook: GPI (Genealogy Person Intake)
+
+| Property | Value |
+| :--- | :--- |
+| **Tool Name** | `gpi.py` |
+| **Script Path** | `tools/ops/gpi.py` |
+| **Version** | `1.3.0+build.20261005.1` |
+| **Test Suite** | `tests/integration/test_gpi.py` |
+| **Log Output** | `logs/gpi-[YYYYMMDD_HHMMSS].log` |
+| **Target Registry** | `data/entities/people.json` |
+
+---
+
+## 1. Operator Reference & Quick-Start
+
+### Operational Intent
+GPI processes staged person entity fragments (`data/entities/pep-let-*.json`) into the master registry (`data/entities/people.json`). It enforces schema validation, verifies graph traversal to root ancestor `IND-00000`, mints sequential IDs, injects reciprocal kinship links via `KinshipEngine`, commits atomically through `GDAPeople`, and cleans staging workspaces.
+
+### CLI Syntax
+```powershell
+python tools/ops/gpi.py [-a] [-n] [-r] [-v] [--debug]

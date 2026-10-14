@@ -1,0 +1,25 @@
+{
+  "_name": "corrupt_people_missing_id.json",
+  "_path": "tests/fixtures/people/failure/corrupt_people_missing_id.json",
+  "schema_version": "1.0.0",
+  "people": [
+    {
+      "person_id": "",
+      "display_name": "Blank ID Persona",
+      "canonical_name": { "given": "Blank" },
+      "sex": "U"
+    },
+    {
+      "person_id": "IND-00001",
+      "display_name": "Jacob Lehman",
+      "canonical_name": { "given": "Jacob", "surname": "Lehman" },
+      "sex": "M"
+    },
+    {
+      "person_id": "IND-00002",
+      "display_name": "Mary Lehman",
+      "canonical_name": { "given": "Mary", "surname": "Lehman" },
+      "sex": "F"
+    }
+  ]
+}

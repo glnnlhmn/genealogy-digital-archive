@@ -1,43 +1,35 @@
 {
+  "_name": "_registry_defs.schema.json",
+  "_path": "schemas/defs/_registry_defs.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/defs/_registry_defs.schema.json",
-  "title": "Genealogy_Registry_Definitions",
+  "title": "Master Registry Envelope Definitions",
   "version": "1.0.0",
-  "description": "Administrative envelope properties and container metadata for top-level entity registries and indices.",
+  "description": "Structural definitions for registry envelope headers and entity containers.",
+  "type": "object",
   "$defs": {
     "registry_header": {
       "type": "object",
-      "unevaluatedProperties": false,
       "required": [
-        "$schema",
-        "schema_version",
-        "created_at",
-        "last_modified"
+        "_name",
+        "_path",
+        "version",
+        "last_updated"
       ],
       "properties": {
-        "$schema": {
-          "type": "string",
-          "description": "Relative URI or file path pointing to the governing registry schema."
+        "_name": {
+          "type": "string"
         },
-        "schema_version": {
-          "type": "string",
-          "description": "Semantic version of the registry schema.",
-          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        "_path": {
+          "type": "string"
         },
-        "created_at": {
-          "type": "string",
-          "description": "ISO-8601 timestamp representing when the registry container was initialized."
+        "version": {
+          "type": "string"
         },
-        "last_modified": {
-          "type": "string",
-          "description": "ISO-8601 timestamp representing the last write/mutation operation on this registry."
+        "last_updated": {
+          "$ref": "_shared_defs.schema.json#/$defs/timestamp_iso"
         }
       }
-    },
-    "total_count": {
-      "type": "integer",
-      "minimum": 0,
-      "description": "Total count of active entities contained in the registry payload array."
     }
   }
 }

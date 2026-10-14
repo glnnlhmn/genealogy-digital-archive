@@ -1,0 +1,20 @@
+{
+  "_name": "corrupt_family_invalid_fam_id.json",
+  "_path": "tests/fixtures/xrefs/failure/corrupt_family_invalid_fam_id.json",
+  "_defect": "family key violates pattern ^FAM-[0-9]{5}-[A-Z]$",
+  "_name": "people_family_group_xref.json",
+  "_path": "data/indexes/people_family_group_xref.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_version": "1.1.0",
+  "last_modified": "2026-10-12T12:00:00Z",
+  "total_families": 1,
+  "families": {
+    "INVALID-FAM-ID": {
+      "family_id": "INVALID-FAM-ID",
+      "parent_x": "IND-00001",
+      "parent_y": null,
+      "total_children": 0,
+      "children": []
+    }
+  }
+}

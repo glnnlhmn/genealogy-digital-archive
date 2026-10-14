@@ -1,0 +1,7 @@
+{
+  "_name": "corrupt_person_missing_required.json",
+  "_path": "tests/fixtures/entities/failure/corrupt_person_missing_required.json",
+  "_defect": "Missing display_name and canonical_name",
+  "person_id": "IND-00001",
+  "sex": "M"
+}

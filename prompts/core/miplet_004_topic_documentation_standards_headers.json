@@ -1,0 +1,10 @@
+{
+  "_name": "miplet_004_topic_documentation_standards_headers.json",
+  "_path": "prompts/core/miplet_004_topic_documentation_standards_headers.json",
+  "target_baseline": "v1.1.0",
+  "target_file": "prompts/topics/topic_documentation_standards.md",
+  "target_section": "Section 2.3 (Module and Class Docstrings)",
+  "operation": "modification",
+  "description": "Establish standardized PEP 440 cumulative build counters (+build.r1) in module headers across all digital archive Python scripts.",
+  "payload": "* **Header Metadata Lines (Lines 1–3):** Every Python source file must open with comments declaring `# Name: [filename]`, `# Path: [relative_path]`, and `# Version: 1.0.0+build.r[counter]`, followed by `__version__ = \"1.0.0+build.r[counter]\"`."
+}

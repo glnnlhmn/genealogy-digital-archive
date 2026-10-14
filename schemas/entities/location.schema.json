@@ -5,7 +5,7 @@
   "$id": "https://genealogy.archive/schemas/entities/location.schema.json",
   "title": "Master Civil Location Entity Schema",
   "version": "1.2.0",
-  "description": "Authoritative civil jurisdiction entity schema, independent of assertion-level location definitions.",
+  "description": "Authoritative civil jurisdiction entity schema.",
   "type": "object",
   "required": [
     "location_id",
@@ -144,6 +144,18 @@
         },
         "additionalProperties": false
       }
+    },
+    "is_deprecated": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if soft-deleted, merged, or invalidated."
+    },
+    "superseded_by": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Pointer to the replacing canonical LOC-XXXXX if superseded or merged."
     },
     "notes": {
       "type": [

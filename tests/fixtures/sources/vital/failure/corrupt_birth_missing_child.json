@@ -1,0 +1,27 @@
+{
+  "_name": "corrupt_birth_missing_child.json",
+  "_path": "data/archival_records/vital/REC-1915-BIRTH-001.json",
+  "_defect": "birth_certificate_details lacks required child object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Corrupt Birth Record missing child",
+  "record_metadata": {
+    "source_guid": "7b82450d-0e00-40e9-87d0-2f501efd1f54",
+    "record_category": "VITAL",
+    "record_type": "BIRTH_CERTIFICATE"
+  },
+  "birth_certificate_details": {
+    "filing_details": {
+      "certificate_number": "1915-00123"
+    },
+    "transcript": {
+      "verbatim_text": "Missing child payload."
+    },
+    "media_files": [
+      {
+        "file_name": "1915_birth.pdf",
+        "mime_type": "application/pdf"
+      }
+    ]
+  },
+  "associated_people": []
+}

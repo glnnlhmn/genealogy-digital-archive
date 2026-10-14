@@ -1,0 +1,60 @@
+{
+  "_name": "facts_location_idx.schema.json",
+  "_path": "schemas/indexes/facts_location_idx.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/indexes/facts_location_idx.schema.json",
+  "title": "Facts_Location_Index",
+  "version": "1.0.0",
+  "description": "Inverted foreign-key lookup index mapping canonical location_id to associated fact_ids in facts.json.",
+  "type": "object",
+  "required": [
+    "_name",
+    "_path",
+    "$schema",
+    "schema_version",
+    "last_modified",
+    "total_locations",
+    "locations"
+  ],
+  "properties": {
+    "_name": {
+      "type": "string",
+      "const": "facts_location_idx.json"
+    },
+    "_path": {
+      "type": "string",
+      "const": "data/indexes/facts_location_idx.json"
+    },
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "last_modified": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso",
+      "description": "ISO-8601 timestamp of last index update."
+    },
+    "total_locations": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total count of indexed civil locations."
+    },
+    "locations": {
+      "type": "object",
+      "description": "Dictionary keyed by canonical location_id mapping to arrays of fact_ids.",
+      "propertyNames": {
+        "pattern": "^LOC-\\d{5}$"
+      },
+      "additionalProperties": {
+        "type": "array",
+        "description": "List of fact assertions referencing this location.",
+        "items": {
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/fact_id"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

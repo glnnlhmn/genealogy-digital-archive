@@ -1,0 +1,135 @@
+{
+  "_name": "source_registry.schema.json",
+  "_path": "schemas/sources/source_registry.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/sources/source_registry.schema.json",
+  "title": "MasterSourceRegistry",
+  "version": "1.0.0",
+  "description": "Master authoritative registry tracking physical custody, provenance, and citations for all archival sources.",
+  "type": "object",
+  "required": [
+    "_name",
+    "_path",
+    "$schema",
+    "version",
+    "last_updated",
+    "sources"
+  ],
+  "properties": {
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "last_updated": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source_urn",
+          "title",
+          "record_category",
+          "repository_id"
+        ],
+        "properties": {
+          "source_urn": {
+            "type": "string",
+            "description": "Canonical uniform resource name adhering to URN:<TYPE>:<YEAR>:<JURISDICTION>:<LOCATOR>."
+          },
+          "title": {
+            "type": "string",
+            "description": "Formal or descriptive citation title."
+          },
+          "record_category": {
+            "type": "string",
+            "description": "High-level domain category (e.g. VITAL, CENSUS, LEGAL, CHURCH, NEWS, OTHER)."
+          },
+          "record_type": {
+            "type": "string",
+            "description": "Granular classification token matching _token_registry.json."
+          },
+          "repository_id": {
+            "type": "string",
+            "pattern": "^REP-\\d{5}$",
+            "description": "Foreign key reference to custodial repository in repositories.json."
+          },
+          "collection_title": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Name of archival collection, record group, or series."
+          },
+          "call_number": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Shelf mark, volume locator, microfilm roll, or digital identifier."
+          },
+          "jurisdiction": {
+            "oneOf": [
+              {
+                "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "coverage_dates": {
+            "type": "object",
+            "properties": {
+              "date_start": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "date_end": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "digital_access_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Canonical persistent external URL (e.g., FamilySearch, Ancestry, NARA)."
+          },
+          "record_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Custodial history, provenance, or condition notes."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

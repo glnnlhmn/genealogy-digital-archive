@@ -1,11 +1,15 @@
 {
+  "_name": "fact_registry.schema.json",
+  "_path": "schemas/entities/fact_registry.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/entities/fact_registry.schema.json",
   "title": "Fact_Registry",
   "version": "1.0.2",
-  "description": "Master administrative registry container for discrete fact assertions, utilizing centralized registry definitions.",
+  "description": "Master administrative registry container for discrete fact assertions.",
   "type": "object",
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "schema_version",
     "created_at",
@@ -14,21 +18,30 @@
     "facts"
   ],
   "properties": {
+    "_name": {
+      "type": "string",
+      "const": "facts.json"
+    },
+    "_path": {
+      "type": "string",
+      "const": "data/entities/facts.json"
+    },
     "$schema": {
-      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/$schema"
+      "type": "string"
     },
     "schema_version": {
-      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/schema_version",
+      "type": "string",
       "const": "1.0.2"
     },
     "created_at": {
-      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/created_at"
+      "type": "string"
     },
     "last_modified": {
-      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/last_modified"
+      "type": "string"
     },
     "total_facts": {
-      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/total_count",
+      "type": "integer",
+      "minimum": 0,
       "description": "Total count of discrete fact assertions contained in the registry."
     },
     "facts": {

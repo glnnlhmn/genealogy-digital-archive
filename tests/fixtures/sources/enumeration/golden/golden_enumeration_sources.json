@@ -1,0 +1,217 @@
+{
+  "_name": "golden_enumeration_sources.json",
+  "_path": "tests/fixtures/sources/enumeration/golden/golden_enumeration_sources.json",
+  "_description": "Canonical synthetic test payloads for enumeration and transit source records adhering strictly to Draft 2020-12 schemas.",
+  "census_schedule": {
+    "_name": "REC-1920-CENS-001.json",
+    "_path": "data/archival_records/enumeration/REC-1920-CENS-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1920 Federal Population Census Schedule (Cumberland County, PA)",
+    "record_metadata": {
+      "source_guid": "b0000001-0000-4000-8000-000000000001",
+      "record_category": "CENSUS",
+      "record_type": "CENSUS_SCHEDULE",
+      "census_year": 1920,
+      "nara_roll": "T625-1556",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "enumeration_scope": {
+      "location": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle Borough, Cumberland County, Pennsylvania"
+      },
+      "enumeration_district": "ED 14",
+      "supervisor_district": "18",
+      "sheet_number": "4",
+      "sheet_side": "A",
+      "enumerator_name": "John C. Miller",
+      "enumeration_date": {
+        "modifier": "EXACT",
+        "date_raw": "1920-01-08",
+        "date_iso": "1920-01-08",
+        "year": 1920
+      }
+    },
+    "entries": [
+      {
+        "line_number": 1,
+        "name_verbatim": "Lehman, William",
+        "age_raw": "47",
+        "naturalization_status": "Native"
+      },
+      {
+        "line_number": 2,
+        "name_verbatim": "Lehman, Annie",
+        "age_raw": "45",
+        "naturalization_status": "Native"
+      }
+    ],
+    "media_files": [
+      {
+        "file_name": "1920_census_pa_cumberland_ed14_04a.jpg",
+        "mime_type": "image/jpeg",
+        "side": "FRONT",
+        "notes": "NARA microfilm scan"
+      }
+    ],
+    "associated_people": []
+  },
+  "directory_listing": {
+    "_name": "REC-1922-DIR-001.json",
+    "_path": "data/archival_records/enumeration/REC-1922-DIR-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1922 Carlisle City Directory Listing for William Lehman",
+    "record_metadata": {
+      "source_guid": "b0000002-0000-4000-8000-000000000002",
+      "record_category": "DIRECTORIES",
+      "record_type": "CITY_DIRECTORY",
+      "directory_title": "Carlisle Directory 1922-1923",
+      "publication_year": 1922,
+      "page_number": "142",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "individual": {
+      "person_id": "IND-00002",
+      "name_raw": "Lehman, Wm (Annie)",
+      "full_name": {
+        "given": "William",
+        "surname": "Lehman"
+      },
+      "occupation": "Carpenter",
+      "business_name": "Cumberland Valley Railroad Shops"
+    },
+    "residence": {
+      "location": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle, PA"
+      },
+      "street_address": {
+        "address_line_1": "114 N Hanover St",
+        "address_line_2": null,
+        "postal_code": null,
+        "coordinates": null
+      },
+      "tenure_status": "Owner"
+    },
+    "media_files": [
+      {
+        "file_name": "1922_carlisle_dir_p142.jpg",
+        "mime_type": "image/jpeg",
+        "side": "FRONT",
+        "notes": "Directory page scan"
+      }
+    ],
+    "associated_people": []
+  },
+  "immigration_manifest": {
+    "_name": "REC-1904-MANI-001.json",
+    "_path": "data/archival_records/enumeration/REC-1904-MANI-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1904 SS Potsdam Passenger Manifest for Daniel Lehman",
+    "record_metadata": {
+      "source_guid": "b0000003-0000-4000-8000-000000000003",
+      "record_category": "IMMIGRATION",
+      "record_type": "PASSENGER_MANIFEST",
+      "nara_series": "T715",
+      "roll_number": "0482",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "voyage_particulars": {
+      "vessel_name": "SS Potsdam",
+      "shipping_line": "Holland America Line",
+      "port_of_departure": {
+        "location_id": "LOC-00003",
+        "verbatim": "Rotterdam, Netherlands"
+      },
+      "port_of_arrival": {
+        "location_id": "LOC-00004",
+        "verbatim": "Port of New York, USA"
+      },
+      "date_of_arrival": {
+        "modifier": "EXACT",
+        "date_raw": "1904-09-15",
+        "date_iso": "1904-09-15",
+        "year": 1904
+      }
+    },
+    "passenger": {
+      "person_id": "IND-00001",
+      "full_name": {
+        "given": "Daniel",
+        "surname": "Lehman"
+      },
+      "age": {
+        "years": 24
+      },
+      "sex": "Male",
+      "calling_or_occupation": "Laborer",
+      "country_of_origin": "Germany",
+      "last_permanent_residence": "Wiesbaden",
+      "destination": "Carlisle, PA"
+    },
+    "media_files": [
+      {
+        "file_name": "1904_manifest_ss_potsdam_p21.pdf",
+        "mime_type": "application/pdf",
+        "side": "FRONT",
+        "notes": "Ellis Island manifest record"
+      }
+    ],
+    "associated_people": []
+  },
+  "naturalization_record": {
+    "_name": "REC-1911-NAT-001.json",
+    "_path": "data/archival_records/enumeration/REC-1911-NAT-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1911 Petition for Naturalization of Daniel Lehman",
+    "record_metadata": {
+      "source_guid": "b0000004-0000-4000-8000-000000000004",
+      "record_category": "LEGAL",
+      "record_type": "NATURALIZATION_PETITION",
+      "certificate_number": "41209",
+      "petition_number": "1142",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "petitioner": {
+      "person_id": "IND-00001",
+      "full_name": {
+        "given": "Daniel",
+        "surname": "Lehman"
+      },
+      "birth_date": {
+        "modifier": "EXACT",
+        "date_raw": "1880-04-12",
+        "date_iso": "1880-04-12",
+        "year": 1880
+      },
+      "birth_place": {
+        "location_id": "LOC-00005",
+        "verbatim": "Wiesbaden, Germany"
+      },
+      "foreign_allegiance": "William II, German Emperor"
+    },
+    "court_particulars": {
+      "court_name": "Court of Common Pleas of Cumberland County",
+      "date": {
+        "modifier": "EXACT",
+        "date_raw": "1911-10-03",
+        "date_iso": "1911-10-03",
+        "year": 1911
+      },
+      "location": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle, Cumberland Co., PA"
+      },
+      "presiding_judge": "Hon. Wilbur F. Sadler"
+    },
+    "media_files": [
+      {
+        "file_name": "1911_naturalization_lehman.pdf",
+        "mime_type": "application/pdf",
+        "side": "FRONT",
+        "notes": "Certified petition record"
+      }
+    ],
+    "associated_people": []
+  }
+}

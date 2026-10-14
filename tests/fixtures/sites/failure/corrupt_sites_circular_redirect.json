@@ -1,0 +1,37 @@
+{
+  "_name": "corrupt_sites_circular_redirect.json",
+  "_path": "tests/fixtures/sites/failure/corrupt_sites_circular_redirect.json",
+  "$schema": "schemas/entities/site_registry.schema.json",
+  "version": "1.2.0",
+  "last_updated": "2026-10-08T19:30:00Z",
+  "sites": [
+    {
+      "site_id": "SID-00091",
+      "site_type": "LANDMARK",
+      "name": "Circular Landmark A",
+      "aliases": [],
+      "location_id": "LOC-00101",
+      "address": null,
+      "operational_status": "DEFUNCT",
+      "is_deprecated": true,
+      "superseded_by": "SID-00092",
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-08T19:30:00Z"
+    },
+    {
+      "site_id": "SID-00092",
+      "site_type": "LANDMARK",
+      "name": "Circular Landmark B",
+      "aliases": [],
+      "location_id": "LOC-00101",
+      "address": null,
+      "operational_status": "DEFUNCT",
+      "is_deprecated": true,
+      "superseded_by": "SID-00091",
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-08T19:30:00Z"
+    }
+  ]
+}

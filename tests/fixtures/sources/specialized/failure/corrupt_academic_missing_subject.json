@@ -1,0 +1,34 @@
+{
+  "_name": "corrupt_academic_missing_subject.json",
+  "_path": "data/archival_records/academic/REC-1932-DIPL-001.json",
+  "_defect": "academic_details lacks required credential_subject object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Corrupt Academic Record lacking subject",
+  "record_metadata": {
+    "source_guid": "062e354e-7ade-4ea0-86a7-fea319331b74",
+    "record_category": "EDUCATION",
+    "record_type": "DIPLOMA"
+  },
+  "institution": {
+    "location_id": "LOC-00001",
+    "verbatim": "Carlisle High School, Carlisle, PA"
+  },
+  "academic_details": {
+    "date_issued_or_published": {
+      "modifier": "EXACT",
+      "date_raw": "1932-06-10",
+      "date_iso": "1932-06-10",
+      "year": 1932
+    },
+    "transcript": {
+      "verbatim_text": "Corrupt test missing subject."
+    },
+    "media_files": [
+      {
+        "file_name": "diploma.pdf",
+        "mime_type": "application/pdf"
+      }
+    ]
+  },
+  "associated_people": []
+}

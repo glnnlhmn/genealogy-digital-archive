@@ -1,0 +1,13 @@
+{
+  "_name": "corrupt_sites_syntax.json",
+  "_path": "tests/fixtures/sites/failure/corrupt_sites_syntax.json",
+  "$schema": "schemas/entities/site_registry.schema.json",
+  "version": "1.2.0",
+  "sites": [
+    {
+      "site_id": "SID-00001",
+      "site_type": "CHURCH",
+      "name": "First Evangelical Lutheran Church"
+    }
+  INVALID_JSON_TOKEN_HERE
+}

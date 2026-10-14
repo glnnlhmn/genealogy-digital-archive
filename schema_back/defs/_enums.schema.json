@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/defs/_enums.schema.json",
+  "title": "Genealogy_Controlled_Vocabularies",
+  "version": "1.1.0",
+  "description": "Authoritative single source of truth for controlled taxonomies across the archive.",
+  "type": "object",
+  "$defs": {
+    "enum_fact_type": {
+      "type": "string",
+      "enum": [
+        "Association",
+        "Award",
+        "Baptism",
+        "Birth",
+        "Burial",
+        "Census",
+        "Civic",
+        "Death",
+        "Divorce",
+        "Education",
+        "Incident",
+        "Legal",
+        "Marriage",
+        "Military",
+        "Occupation",
+        "Parentage",
+        "Probate",
+        "Property",
+        "Residence",
+        "Other"
+      ]
+    },
+    "enum_date_modifier": {
+      "type": "string",
+      "enum": [
+        "EXACT",
+        "ABOUT",
+        "ESTIMATED",
+        "CALCULATED",
+        "BEFORE",
+        "AFTER",
+        "BETWEEN"
+      ]
+    },
+    "enum_union_status": {
+      "type": "string",
+      "enum": [
+        "MARRIED",
+        "DIVORCED",
+        "SEPARATED",
+        "COMMON_LAW",
+        "ANNULLED",
+        "UNMARRIED"
+      ]
+    },
+    "enum_kinship_role": {
+      "type": "string",
+      "enum": [
+        "FATH",
+        "MOTH",
+        "CHIL",
+        "SPOU",
+        "SIBL",
+        "HUSB",
+        "WIFE",
+        "SON",
+        "DAUG",
+        "BROT",
+        "SIST",
+        "OFFICIANT",
+        "WITN",
+        "INFORMANT",
+        "NEIGHBOR",
+        "OTHER"
+      ]
+    },
+    "enum_sex": {
+      "enum": [
+        "M",
+        "F",
+        "U",
+        null
+      ]
+    },
+    "enum_site_type": {
+      "type": "string",
+      "enum": [
+        "FACILITY",
+        "CEMETERY",
+        "CHURCH",
+        "LANDMARK",
+        "RESIDENCE",
+        "ORGANIZATION"
+      ]
+    },
+    "enum_selective_service_class": {
+      "type": "string",
+      "enum": [
+        "1-A",
+        "1-AO",
+        "1-C",
+        "1-D",
+        "1-O",
+        "2-A",
+        "2-C",
+        "2-S",
+        "3-A",
+        "4-A",
+        "4-B",
+        "4-C",
+        "4-D",
+        "4-F"
+      ]
+    },
+    "enum_document_side": {
+      "type": "string",
+      "enum": [
+        "RECTO",
+        "VERSO",
+        "FRONT",
+        "REVERSE",
+        "SINGLE_PAGE"
+      ]
+    },
+    "enum_operational_status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "DEFUNCT",
+        "HISTORICAL",
+        "DESTROYED",
+        "UNKNOWN"
+      ]
+    },
+    "enum_note_type": {
+      "type": "string",
+      "enum": [
+        "RESEARCH",
+        "GENERAL",
+        "DISCREPANCY",
+        "TODO"
+      ]
+    },
+    "enum_quality_assessment": {
+      "type": "string",
+      "enum": [
+        "DIRECT_PRIMARY",
+        "INDIRECT_PRIMARY",
+        "SECONDARY",
+        "QUESTIONABLE",
+        "UNRELIABLE"
+      ]
+    },
+    "enum_census_year": {
+      "type": "integer",
+      "enum": [
+        1790,
+        1800,
+        1810,
+        1820,
+        1830,
+        1840,
+        1850,
+        1860,
+        1870,
+        1880,
+        1900,
+        1910,
+        1920,
+        1930,
+        1940,
+        1950
+      ]
+    },
+    "enum_military_branch": {
+      "type": "string",
+      "enum": [
+        "ARMY",
+        "NAVY",
+        "MARINES",
+        "AIR_FORCE",
+        "COAST_GUARD",
+        "MILITIA",
+        "OTHER"
+      ]
+    },
+    "enum_military_war": {
+      "type": "string",
+      "enum": [
+        "REVOLUTIONARY",
+        "WAR_OF_1812",
+        "CIVIL_WAR",
+        "SPANISH_AMERICAN",
+        "WWI",
+        "WWII",
+        "KOREAN",
+        "VIETNAM",
+        "OTHER"
+      ]
+    }
+  }
+}

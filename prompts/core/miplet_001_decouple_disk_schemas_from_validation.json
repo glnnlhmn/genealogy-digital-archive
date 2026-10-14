@@ -1,0 +1,10 @@
+{
+  "_name": "miplet_001_decouple_disk_schemas_from_validation.json",
+  "_path": "prompts/core/miplet_001_decouple_disk_schemas_from_validation.json",
+  "target_baseline": "v1.1.1.r1",
+  "target_file": "prompts/topics/topic_library_architecture.md",
+  "target_section": "Section 2.2 (Schema Management) & Section 2.3 (Domain Entity Management)",
+  "operation": "addition",
+  "description": "Enforce that runtime Python validation never loads or depends on physical .schema.json files on disk; validation executes exclusively via in-memory procedural builders.",
+  "payload": "### 2.4 In-Memory Validation Invariant\n* **Zero Disk Schema Dependency for Runtime Validation:** Application code, test harnesses, and domain libraries (`gdadomain`) must never read, parse, or depend upon physical `.schema.json` files on disk under `schemas/` to execute validation.\n* **Procedural Code Authority:** All schema validation is driven strictly by in-memory data structures synthesized by procedural catalog builders in `gdaschema`.\n* **Disk Schemas as Emission Artifacts:** Physical `.schema.json` files on disk exist exclusively as serialized artifacts for external editors, IDE intellisense, and documentation extractors, emitted via `GDASchemaManager.write_all()`."
+}

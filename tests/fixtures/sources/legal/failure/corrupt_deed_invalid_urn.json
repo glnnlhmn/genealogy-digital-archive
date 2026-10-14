@@ -1,0 +1,64 @@
+{
+  "_name": "corrupt_deed_invalid_urn.json",
+  "_path": "data/archival_records/deeds/REC-1865-DEED-001.json",
+  "_defect": "source_urn does not match URN:LAND pattern",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Corrupt Deed with invalid URN",
+  "record_metadata": {
+    "source_guid": "e68da83e-9e15-4c9e-825d-709c145a5dc0",
+    "record_category": "LAND",
+    "record_type": "DEED_INDENTURE"
+  },
+  "recorder_office": {
+    "office_title": "Recorder of Deeds",
+    "location": {
+      "location_id": "LOC-00001",
+      "verbatim": "Carlisle, PA"
+    }
+  },
+  "deed_details": {
+    "recording_reference": {
+      "locator": "Book 2T, Page 45"
+    },
+    "dates": {
+      "date_written": {
+        "modifier": "EXACT",
+        "date_raw": "1865-04-01",
+        "date_iso": "1865-04-01",
+        "year": 1865
+      }
+    },
+    "grantors": [
+      {
+        "full_name": {
+          "given": "Christian",
+          "surname": "Lehman"
+        }
+      }
+    ],
+    "grantees": [
+      {
+        "full_name": {
+          "given": "Daniel",
+          "surname": "Lehman"
+        }
+      }
+    ],
+    "parcel": {
+      "location": {
+        "location_id": "LOC-00001",
+        "verbatim": "West Pennsboro Twp"
+      }
+    },
+    "transcript": {
+      "verbatim_text": "Corrupt URN deed."
+    },
+    "media_files": [
+      {
+        "file_name": "deed.pdf",
+        "mime_type": "application/pdf"
+      }
+    ]
+  },
+  "associated_people": []
+}

@@ -1,0 +1,17 @@
+{
+  "_name": "corrupt_source_registry_missing_guid.json",
+  "_path": "tests/fixtures/sources/registries/failure/corrupt_source_registry_missing_guid.json",
+  "_defect": "source entry lacks required source_guid property",
+  "_name": "sources.json",
+  "_path": "data/sources/sources.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.1.0",
+  "last_updated": "2026-10-13T16:20:00Z",
+  "sources": [
+    {
+      "title": "Missing GUID Record",
+      "record_category": "VITAL",
+      "repository_id": "REP-00001"
+    }
+  ]
+}

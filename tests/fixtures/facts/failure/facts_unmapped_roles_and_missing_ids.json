@@ -1,0 +1,29 @@
+{
+  "_name": "facts_unmapped_roles_and_missing_ids.json",
+  "_path": "tests/fixtures/facts/failure/facts_unmapped_roles_and_missing_ids.json",
+  "$schema": "schemas/entities/fact_registry.schema.json",
+  "schema_version": "1.2.0",
+  "total_facts": 1,
+  "facts": [
+    {
+      "fact_id": "a0000000-0000-4000-8000-000000000001",
+      "person_id": "IND-00001",
+      "fact_type": "Birth",
+      "associated_people": [
+        {
+          "role": "FATH"
+        },
+        {
+          "person_id": "IND-00002",
+          "role": "WITN"
+        },
+        {
+          "person_id": "IND-00003",
+          "role": "FATH"
+        }
+      ],
+      "is_deprecated": false,
+      "superseded_by": null
+    }
+  ]
+}

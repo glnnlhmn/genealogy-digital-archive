@@ -1,0 +1,9 @@
+[
+  {
+    "fact_id": "9b1deb4d-3b7d-4bad-8bdd-2b0d7b3dcb6d",
+    "person_id": "IND-00001",
+    "fact_type": "Birth",
+    "date": { "year": 1880 },
+    "is_deprecated": false
+  }
+]

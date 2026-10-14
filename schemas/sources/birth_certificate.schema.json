@@ -1,11 +1,16 @@
 {
+  "_name": "birth_certificate.schema.json",
+  "_path": "schemas/sources/birth_certificate.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/sources/birth_certificate.schema.json",
   "title": "BirthCertificateSourceRecord",
   "version": "1.0.1",
   "description": "Standardized schema for civil birth certificates, delayed birth certificates, hospital registers, and civil birth ledger entries.",
   "type": "object",
+  "unevaluatedProperties": false,
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "description",
     "record_metadata",
@@ -13,14 +18,26 @@
     "associated_people"
   ],
   "properties": {
-    "$schema": { "type": "string" },
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    },
     "description": {
       "type": "string",
-      "description": "[REQUIRED] Contextual summary (e.g., '1915 Birth Certificate of Daniel Lehman (Carlisle, Cumberland Co., PA)')."
+      "description": "Contextual summary of the birth certificate record."
     },
     "record_metadata": {
       "type": "object",
-      "required": ["source_urn", "record_category", "record_type"],
+      "required": [
+        "source_urn",
+        "record_category",
+        "record_type"
+      ],
       "properties": {
         "source_urn": {
           "type": "string",
@@ -29,7 +46,9 @@
         },
         "record_category": {
           "type": "string",
-          "enum": ["VITAL"],
+          "enum": [
+            "VITAL"
+          ],
           "default": "VITAL"
         },
         "record_type": {
@@ -57,23 +76,42 @@
       "properties": {
         "filing_details": {
           "type": "object",
-          "required": ["certificate_number"],
+          "required": [
+            "certificate_number"
+          ],
           "properties": {
             "certificate_number": {
               "type": "string",
               "description": "Official state, county, or local file number."
             },
             "registration_district": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "date_filed": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
-            "local_registrar": { "type": ["string", "null"] },
-            "sub_registrar": { "type": ["string", "null"] }
+            "local_registrar": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "sub_registrar": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
           },
           "additionalProperties": false
         },
@@ -87,48 +125,82 @@
           ],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
             },
             "sex": {
               "type": "string",
-              "enum": ["Male", "Female", "Unknown"]
+              "enum": [
+                "Male",
+                "Female",
+                "Unknown"
+              ]
             },
             "plurality": {
-              "type": ["string", "null"],
-              "enum": ["Single", "Twin", "Triplet", "Quadruplet", null],
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "Single",
+                "Twin",
+                "Triplet",
+                "Quadruplet",
+                null
+              ],
               "default": "Single"
             },
-            "birth_order": { "type": ["string", "null"] },
+            "birth_order": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
             "is_stillborn": {
-              "type": ["boolean", "null"],
+              "type": [
+                "boolean",
+                "null"
+              ],
               "default": false
             },
             "date_of_birth": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
             },
-            "time_of_birth": { "type": ["string", "null"] },
+            "time_of_birth": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
             "place_of_birth": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
             },
-            "legitimacy": { "type": ["boolean", "null"] }
+            "legitimacy": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            }
           },
           "additionalProperties": false
         },
         "certificate_note": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Archival notes regarding delayed affidavits, stamps, or seal condition."
         },
         "transcript": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record"
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/transcript_record"
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/source_media"
           }
         }
       },
@@ -137,10 +209,9 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
       },
       "description": "Linked participants (child, father, mother, attendant/physician, informant, registrar) mapped to standardized roles and IDs."
     }
-  },
-  "additionalProperties": false
+  }
 }

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/defs/_military_defs.schema.json",
+  "title": "Military & Selective Service Definitions",
+  "version": "1.0.0",
+  "description": "Definitions for military enlistments, service records, and Selective Service draft cards.",
+  "type": "object",
+  "$defs": {
+    "wwi_particulars": {
+      "type": "object",
+      "properties": {
+        "serial_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "order_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "selective_service_record": {
+      "type": "object",
+      "required": [
+        "classification"
+      ],
+      "properties": {
+        "classification": {
+          "$ref": "_enums.schema.json#/$defs/enum_selective_service_class"
+        },
+        "board_jurisdiction": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "date": {
+          "$ref": "_shared_defs.schema.json#/$defs/date_interpreted"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

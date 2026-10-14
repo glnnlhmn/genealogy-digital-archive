@@ -1,0 +1,83 @@
+{
+  "_name": "golden_indexes.json",
+  "_path": "tests/fixtures/indexes/golden/golden_indexes.json",
+  "_description": "Canonical referentially intact synthetic test payloads for single-table indexes.",
+  "people_surname_idx": {
+    "_name": "people_surname_idx.json",
+    "_path": "data/indexes/people_surname_idx.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_version": "1.0.0",
+    "last_modified": "2026-10-12T12:00:00Z",
+    "total_surnames": 1,
+    "aliases": {
+      "stirling": "sterling"
+    },
+    "surnames": {
+      "sterling": {
+        "canonical_surname": "Sterling",
+        "spelling_variants": ["Stirling"],
+        "total_persons": 1,
+        "persons": ["IND-00001"]
+      }
+    }
+  },
+  "people_surname_alias_idx": {
+    "_name": "people_surname_alias_idx.json",
+    "_path": "data/indexes/people_surname_alias_idx.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_version": "1.0.0",
+    "last_modified": "2026-10-12T12:00:00Z",
+    "total_aliases": 1,
+    "description": "Curated surname alias index.",
+    "aliases": {
+      "stirling": "sterling"
+    }
+  },
+  "locations_redirect_idx": {
+    "_name": "locations_redirect_idx.json",
+    "_path": "data/indexes/locations_redirect_idx.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_version": "1.0.0",
+    "last_modified": "2026-10-12T12:00:00Z",
+    "total_mappings": 1,
+    "redirects": {
+      "concord, nh": {
+        "location_id": "LOC-00001",
+        "standardized": "Concord, Merrimack, New Hampshire, USA"
+      }
+    }
+  },
+  "facts_location_idx": {
+    "_name": "facts_location_idx.json",
+    "_path": "data/indexes/facts_location_idx.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_version": "1.0.0",
+    "last_modified": "2026-10-12T12:00:00Z",
+    "total_locations": 1,
+    "locations": {
+      "LOC-00001": ["a0000000-0000-4000-8000-000000000001"]
+    }
+  },
+  "facts_person_idx": {
+    "_name": "facts_person_idx.json",
+    "_path": "data/indexes/facts_person_idx.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_version": "1.0.0",
+    "last_modified": "2026-10-12T12:00:00Z",
+    "total_people": 1,
+    "people": {
+      "IND-00001": ["a0000000-0000-4000-8000-000000000001"]
+    }
+  },
+  "sites_location_idx": {
+    "_name": "sites_location_idx.json",
+    "_path": "data/indexes/sites_location_idx.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_version": "1.0.0",
+    "last_modified": "2026-10-12T12:00:00Z",
+    "total_locations": 1,
+    "locations": {
+      "LOC-00001": ["SID-00001"]
+    }
+  }
+}

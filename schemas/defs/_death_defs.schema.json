@@ -1,70 +1,36 @@
 {
+  "_name": "_death_defs.schema.json",
+  "_path": "schemas/defs/_death_defs.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/defs/_death_defs.schema.json",
-  "title": "Genealogy_Death_Definitions",
-  "version": "1.0.1",
-  "description": "Standard definitions for mortality, medical certification, and etiology records.",
+  "title": "Death Assertion Definitions",
+  "version": "1.0.0",
+  "description": "Definitions for medical cause of death, contributory factors, and ICD classifications.",
+  "type": "object",
   "$defs": {
-    "enum_manner_of_death": {
-      "$ref": "_enums.schema.json#/$defs/enum_manner_of_death"
-    },
     "cause_of_death": {
       "type": "object",
-      "description": "Structured medical certification detailing manner, primary, antecedent, and contributory causes of death.",
-      "unevaluatedProperties": false,
       "properties": {
-        "manner_of_death": {
-          "$ref": "#/$defs/enum_manner_of_death"
+        "verbatim": {
+          "type": "string"
         },
-        "immediate_cause": {
+        "icd_code": {
           "type": [
             "string",
             "null"
-          ],
-          "description": "Primary disease or condition directly resulting in death."
+          ]
         },
-        "antecedent_causes": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "type": "string"
-          },
-          "description": "Sequentially underlying morbid conditions leading up to the immediate cause."
-        },
-        "contributory_causes": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "items": {
-            "type": "string"
-          },
-          "description": "Other significant conditions contributing to death but not resulting in the underlying cause."
-        },
-        "interval_onset": {
+        "duration": {
           "type": [
             "string",
             "null"
-          ],
-          "description": "Verbatim duration between onset and death."
-        },
-        "autopsy_performed": {
-          "type": [
-            "boolean",
-            "null"
-          ],
-          "description": "Indicates whether a post-mortem surgical examination was conducted."
-        },
-        "findings_considered": {
-          "type": [
-            "boolean",
-            "null"
-          ],
-          "description": "Indicates whether autopsy findings were utilized in determining the cause of death."
+          ]
         }
-      }
+      },
+      "required": [
+        "verbatim"
+      ],
+      "additionalProperties": false
     }
   }
 }

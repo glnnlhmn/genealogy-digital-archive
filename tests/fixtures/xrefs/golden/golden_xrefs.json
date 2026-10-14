@@ -1,0 +1,74 @@
+{
+  "_name": "golden_xrefs.json",
+  "_path": "tests/fixtures/xrefs/golden/golden_xrefs.json",
+  "_description": "Canonical referentially intact synthetic test payloads for cross-references.",
+  "people_family_group_xref": {
+    "_name": "people_family_group_xref.json",
+    "_path": "data/indexes/people_family_group_xref.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_version": "1.1.0",
+    "last_modified": "2026-10-12T12:00:00Z",
+    "total_families": 1,
+    "families": {
+      "FAM-00001-A": {
+        "family_id": "FAM-00001-A",
+        "parent_x": "IND-00001",
+        "parent_y": "IND-00002",
+        "total_children": 1,
+        "children": [
+          {
+            "person_id": "IND-00003",
+            "relationship_note": "Biological child"
+          }
+        ]
+      }
+    }
+  },
+  "people_ahnentafel_xref": {
+    "_name": "people_ahnentafel_xref.json",
+    "_path": "data/indexes/people_ahnentafel_xref.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_version": "1.0.0",
+    "last_modified": "2026-10-12T12:00:00Z",
+    "total_ancestors": 1,
+    "ancestors": [
+      {
+        "ahnentafel_number": 1,
+        "person_id": "IND-00001"
+      }
+    ]
+  },
+  "sources_newspaper_obituary_xref": {
+    "_name": "sources_newspaper_obituary_xref.json",
+    "_path": "data/indexes/sources_newspaper_obituary_xref.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "schema_version": "1.0.0",
+    "last_modified": "2026-10-12T12:00:00Z",
+    "total_obituaries": 1,
+    "obituaries": [
+      {
+        "person_id": "IND-00001",
+        "birth_date": null,
+        "death_date": {
+          "modifier": "EXACT",
+          "date_raw": "1910-12-05",
+          "date_iso": "1910-12-05",
+          "year": 1910
+        },
+        "age_at_death": {
+          "years": 65
+        },
+        "source_urn": "urn:gda:source:newspaper:concord_monitor:19101206:01",
+        "pub_code": "CONMON",
+        "pub_date": {
+          "modifier": "EXACT",
+          "date_raw": "1910-12-06",
+          "date_iso": "1910-12-06",
+          "year": 1910
+        },
+        "headline": "Passing of Arthur Sterling",
+        "file_path": "data/archival_records/newspapers/1910/19101206_sterling.pdf"
+      }
+    ]
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "_name": "golden_specialized_sources.json",
+  "_path": "tests/fixtures/sources/specialized/golden/golden_specialized_sources.json",
+  "_description": "Canonical synthetic test payloads for specialized and media source records adhering strictly to Draft 2020-12 schemas.",
+  "academic_credential": {
+    "_name": "REC-1933-ACAD-001.json",
+    "_path": "data/archival_records/specialized/REC-1933-ACAD-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1933 Dickinson College Bachelor of Arts Diploma for Daniel Lehman",
+    "record_metadata": {
+      "source_guid": "d0000001-0000-4000-8000-000000000001",
+      "record_category": "EDUCATION",
+      "record_type": "DIPLOMA",
+      "institution_name": "Dickinson College",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "student": {
+      "person_id": "IND-00001",
+      "full_name": {
+        "given": "Daniel",
+        "surname": "Lehman"
+      }
+    },
+    "conferral_particulars": {
+      "degree_or_certification": "Bachelor of Arts",
+      "date": {
+        "modifier": "EXACT",
+        "date_raw": "1933-06-05",
+        "date_iso": "1933-06-05",
+        "year": 1933
+      },
+      "location": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle, Cumberland Co., PA"
+      },
+      "honors": "Cum Laude"
+    },
+    "media_files": [
+      {
+        "file_name": "1933_dickinson_diploma_lehman.pdf",
+        "mime_type": "application/pdf",
+        "side": "FRONT",
+        "notes": "Original sheepskin diploma photographic scan"
+      }
+    ],
+    "associated_people": []
+  },
+  "military_draft": {
+    "_name": "REC-1918-DRAFT-001.json",
+    "_path": "data/archival_records/specialized/REC-1918-DRAFT-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1918 WWI Selective Service Draft Registration Card for Daniel Lehman",
+    "record_metadata": {
+      "source_guid": "d0000002-0000-4000-8000-000000000002",
+      "record_category": "MILITARY",
+      "record_type": "DRAFT_REGISTRATION",
+      "conflict_era": "WWI",
+      "draft_board": "Local Board for Cumberland County, Carlisle, PA",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "registrant": {
+      "person_id": "IND-00001",
+      "full_name": {
+        "given": "Daniel",
+        "surname": "Lehman"
+      },
+      "birth_date": {
+        "modifier": "EXACT",
+        "date_raw": "1899-06-12",
+        "date_iso": "1899-06-12",
+        "year": 1899
+      },
+      "birth_place": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle, PA"
+      },
+      "residence": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle, PA"
+      },
+      "employer": "Frog Switch & Manufacturing Co."
+    },
+    "draft_particulars": {
+      "registration_date": {
+        "modifier": "EXACT",
+        "date_raw": "1918-09-12",
+        "date_iso": "1918-09-12",
+        "year": 1918
+      },
+      "location": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle, Cumberland Co., PA"
+      },
+      "serial_number": "1842",
+      "order_number": "A-914"
+    },
+    "media_files": [
+      {
+        "file_name": "1918_draft_card_daniel_lehman.jpg",
+        "mime_type": "image/jpeg",
+        "side": "FRONT",
+        "notes": "Selective service card front"
+      }
+    ],
+    "associated_people": []
+  },
+  "newspaper_article": {
+    "_name": "REC-1944-NEWS-001.json",
+    "_path": "data/archival_records/specialized/REC-1944-NEWS-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1944 Obituary Clipping for Annie Lehman in The Evening Sentinel",
+    "record_metadata": {
+      "source_guid": "d0000003-0000-4000-8000-000000000003",
+      "record_category": "NEWS",
+      "record_type": "NEWSPAPER_CLIPPING",
+      "pub_code": "ES1944",
+      "article_classification": "OBIT",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "publication_particulars": {
+      "newspaper_title": "The Evening Sentinel",
+      "issue_date": {
+        "modifier": "EXACT",
+        "date_raw": "1944-11-21",
+        "date_iso": "1944-11-21",
+        "year": 1944
+      },
+      "location": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle, Cumberland Co., PA"
+      },
+      "page_number": "3",
+      "column_number": "2"
+    },
+    "article_content": {
+      "headline": "Mrs. Annie Lehman Dies At Newville Home",
+      "subheading": "Prominent Resident Succumbs After Brief Illness",
+      "transcript": "Mrs. Annie Lehman, widow of the late William Lehman, passed away at her residence yesterday morning..."
+    },
+    "media_files": [
+      {
+        "file_name": "1944_obit_annie_lehman_sentinel.png",
+        "side": "FRONT",
+        "notes": "Microfilm digital clipping"
+      }
+    ],
+    "associated_people": []
+  },
+  "personal_testimony": {
+    "_name": "REC-1972-NARR-001.json",
+    "_path": "data/archival_records/specialized/REC-1972-NARR-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1972 Oral History Interview of Mary Lehman regarding Newville Family Homestead",
+    "record_metadata": {
+      "source_guid": "d0000004-0000-4000-8000-000000000004",
+      "record_category": "NARRATIVE",
+      "record_type": "ORAL_HISTORY",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "informant": {
+      "person_id": "IND-00004",
+      "full_name": {
+        "given": "Mary",
+        "surname": "Lehman"
+      },
+      "relationship_to_subject": "Daughter"
+    },
+    "narrative_particulars": {
+      "recorded_date": {
+        "modifier": "EXACT",
+        "date_raw": "1972-08-14",
+        "date_iso": "1972-08-14",
+        "year": 1972
+      },
+      "interviewer_name": "Glenn Lehman",
+      "location": {
+        "location_id": "LOC-00002",
+        "verbatim": "Newville, PA"
+      },
+      "summary": "Audio interview describing early twentieth-century farm operations and family movements."
+    },
+    "media_files": [
+      {
+        "file_name": "1972_oral_history_mary_lehman.mp3",
+        "mime_type": "audio/mpeg",
+        "side": "FRONT",
+        "notes": "Magnetic reel transfer to MP3"
+      }
+    ],
+    "associated_people": []
+  },
+  "other_miscellaneous": {
+    "_name": "REC-1901-MISC-001.json",
+    "_path": "data/archival_records/specialized/REC-1901-MISC-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1901 Family Bible Inscription Ephemera",
+    "record_metadata": {
+      "source_guid": "d0000005-0000-4000-8000-000000000005",
+      "record_category": "OTHER",
+      "record_type": "BIBLE_FLYLEAF",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "document_summary": {
+      "title": "Lehman Family Bible Record Insert",
+      "date": {
+        "modifier": "EXACT",
+        "date_raw": "1901",
+        "year": 1901
+      },
+      "location": {
+        "location_id": "LOC-00002",
+        "verbatim": "Newville, PA"
+      },
+      "notes": "Handwritten leaf inserted inside German family Bible."
+    },
+    "media_files": [
+      {
+        "file_name": "1901_bible_flyleaf_lehman.jpg",
+        "mime_type": "image/jpeg",
+        "side": "FRONT",
+        "notes": "Flyleaf leaf scan"
+      }
+    ],
+    "associated_people": []
+  }
+}

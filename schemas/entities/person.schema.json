@@ -1,9 +1,11 @@
 {
+  "_name": "person.schema.json",
+  "_path": "schemas/entities/person.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/entities/person.schema.json",
   "title": "Person",
   "version": "1.0.4",
-  "description": "Represents an individual person entity in the master registry, utilizing centralized shared definitions.",
+  "description": "Represents an individual person entity in the master registry.",
   "type": "object",
   "unevaluatedProperties": false,
   "required": [
@@ -20,7 +22,7 @@
       "description": "Primary preferred name for listing and UI rendering."
     },
     "sex": {
-      "$ref": "../defs/_shared_defs.schema.json#/$defs/enum_sex"
+      "$ref": "../defs/_enums.schema.json#/$defs/enum_sex"
     },
     "canonical_name": {
       "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
@@ -55,23 +57,6 @@
         }
       }
     },
-    "external_identifiers": {
-      "$ref": "../defs/_shared_defs.schema.json#/$defs/external_identifiers"
-    },
-    "notes": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "description": "Structured notes and research tracking entries for the entity.",
-      "items": {
-        "$ref": "../defs/_shared_defs.schema.json#/$defs/note_entry"
-      }
-    },
-    "last_updated": {
-      "type": "string",
-      "description": "ISO-8601 timestamp representing the last modification to this entity."
-    },
     "associated_people": {
       "type": [
         "array",
@@ -84,7 +69,7 @@
     },
     "unions": {
       "type": "array",
-      "description": "List of domestic partnerships and spousal unions for identity, disambiguation, and chronological indexing.",
+      "description": "List of domestic partnerships and spousal unions.",
       "items": {
         "type": "object",
         "unevaluatedProperties": false,
@@ -107,7 +92,7 @@
           },
           "end_date": {
             "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted",
-            "description": "Working date and modifier for union dissolution, divorce, or termination."
+            "description": "Working date and modifier for union dissolution or termination."
           },
           "place": {
             "$ref": "../defs/_shared_defs.schema.json#/$defs/location",
@@ -118,10 +103,43 @@
               "string",
               "null"
             ],
-            "description": "Working contextual note regarding union circumstances or unverified source mentions."
+            "description": "Working contextual note regarding union circumstances."
           }
         }
       }
+    },
+    "notes": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "description": "Structured notes and research tracking entries for the entity.",
+      "items": {
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/note_entry"
+      }
+    },
+    "external_identifiers": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/external_identifiers"
+    },
+    "is_deprecated": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if soft-deleted, merged, or invalidated."
+    },
+    "superseded_by": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Pointer to the replacing canonical IND-XXXXX if superseded or merged."
+    },
+    "created_at": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso",
+      "description": "ISO-8601 timestamp tracking when the entity was first created."
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "ISO-8601 timestamp representing the last modification to this entity."
     }
   }
 }

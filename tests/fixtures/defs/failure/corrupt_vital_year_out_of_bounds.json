@@ -1,0 +1,7 @@
+{
+  "_name": "corrupt_vital_year_out_of_bounds.json",
+  "_path": "tests/fixtures/defs/failure/corrupt_vital_year_out_of_bounds.json",
+  "_defect": "year exceeds maximum constraint of 2100",
+  "year": 2500,
+  "modifier": "EXACT"
+}

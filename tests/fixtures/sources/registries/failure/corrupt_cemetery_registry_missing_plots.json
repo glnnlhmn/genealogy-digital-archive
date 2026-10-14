@@ -1,0 +1,16 @@
+{
+  "_name": "corrupt_cemetery_registry_missing_plots.json",
+  "_path": "tests/fixtures/sources/registries/failure/corrupt_cemetery_registry_missing_plots.json",
+  "_defect": "cemetery registry lacks required plots array",
+  "_name": "cemetery_transcripts.json",
+  "_path": "data/sources/cemetery_transcripts.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "last_updated": "2026-10-12T12:00:00Z",
+  "site_id": "SID-00001",
+  "cemetery_name": "Newville Cemetery",
+  "location": {
+    "location_id": "LOC-00001",
+    "verbatim": "Newville, PA"
+  }
+}

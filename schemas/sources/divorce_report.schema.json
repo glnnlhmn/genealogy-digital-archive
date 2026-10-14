@@ -1,4 +1,6 @@
 {
+  "_name": "divorce_report.schema.json",
+  "_path": "schemas/sources/divorce_report.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/sources/divorce_report.schema.json",
   "title": "DivorceReportRecord",
@@ -6,6 +8,8 @@
   "description": "Standardized schema for civil divorce reports, divorce decrees, court docket entries, and annulments.",
   "type": "object",
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "description",
     "record_metadata",
@@ -13,12 +17,18 @@
     "associated_people"
   ],
   "properties": {
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
     "$schema": {
       "type": "string"
     },
     "description": {
       "type": "string",
-      "description": "[REQUIRED] Human- and AI-readable contextual summary of this divorce record (e.g., '1928 Divorce of William Lehman and Annie Myers (Cumberland Co., PA)')."
+      "description": "Contextual summary of this divorce record."
     },
     "record_metadata": {
       "type": "object",
@@ -35,9 +45,10 @@
         },
         "record_category": {
           "type": "string",
-          "enum": ["LEGAL"],
-          "default": "LEGAL",
-          "description": "Restricted to LEGAL for all court and civil divorce source records."
+          "enum": [
+            "LEGAL"
+          ],
+          "default": "LEGAL"
         },
         "record_type": {
           "type": "string",
@@ -47,8 +58,7 @@
             "DOCKET_ENTRY",
             "ANNULMENT"
           ],
-          "default": "DIVORCE_REPORT",
-          "description": "Granular classification of the legal divorce instrument."
+          "default": "DIVORCE_REPORT"
         }
       },
       "additionalProperties": false
@@ -66,117 +76,163 @@
       "properties": {
         "court": {
           "type": "object",
-          "required": ["court_name"],
+          "required": [
+            "court_name"
+          ],
           "properties": {
             "court_name": {
-              "type": "string",
-              "description": "Full formal court title (e.g., 'Court of Common Pleas of Cumberland County', 'Circuit Court')."
+              "type": "string"
             },
             "docket_number": {
-              "type": ["string", "null"],
-              "description": "Docket, case, term, or file number assigned by the court. Should align with patterns under 'locator_divorce_patterns' in schemas/naming/_token_registry.json."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "state_file_number": {
-              "type": ["string", "null"],
-              "description": "State department of health or vital statistics filing number."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "jurisdiction": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
-              "description": "County seat or municipal jurisdiction where the court sat. Must align with 'jurisdictions' and 'counties' in schemas/naming/_token_registry.json."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
             },
             "presiding_judge": {
-              "type": ["string", "null"],
-              "description": "Name of the presiding judge, magistrate, or appointed divorce master."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "clerk": {
-              "type": ["string", "null"],
-              "description": "Name of the prothonotary, court clerk, or register."
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
         },
         "husband": {
           "type": "object",
-          "required": ["full_name"],
+          "required": [
+            "full_name"
+          ],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id",
-              "description": "Controlled foreign key referencing the master Person Registry (/data/entities/people.json). Must be verified with 3 corroborating data points before assignment."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name",
-              "description": "Husband's name parsed canonically or transcribed via raw_name."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
             },
             "age": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/age_record" },
-                { "type": "null" }
-              ],
-              "description": "Reported age or chronological age record at the time of divorce filing."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/age_record"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
-              ],
-              "description": "Husband's place of residence at the time of the proceeding. Must standardize jurisdiction levels."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "occupation": {
               "type": "object",
               "properties": {
-                "usual": { "type": ["string", "null"] },
-                "industry": { "type": ["string", "null"] }
+                "usual": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "industry": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
               },
               "additionalProperties": false
             },
             "attorney": {
-              "type": ["string", "null"],
-              "description": "Legal counsel representing the husband."
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
         },
         "wife": {
           "type": "object",
-          "required": ["full_name"],
+          "required": [
+            "full_name"
+          ],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id",
-              "description": "Controlled foreign key referencing the master Person Registry (/data/entities/people.json). Must be verified with 3 corroborating data points before assignment."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name",
-              "description": "Wife's married or legal name parsed canonically or transcribed via raw_name."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
             },
             "maiden_name": {
-              "type": ["string", "null"],
-              "description": "Wife's maiden surname as stated in the court pleadings or decree."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "age": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/age_record" },
-                { "type": "null" }
-              ],
-              "description": "Reported age or chronological age record at the time of divorce filing."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/age_record"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
-              ],
-              "description": "Wife's place of residence at the time of the proceeding. Must standardize jurisdiction levels."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "occupation": {
               "type": "object",
               "properties": {
-                "usual": { "type": ["string", "null"] },
-                "industry": { "type": ["string", "null"] }
+                "usual": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "industry": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
               },
               "additionalProperties": false
             },
             "attorney": {
-              "type": ["string", "null"],
-              "description": "Legal counsel representing the wife."
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
@@ -186,52 +242,76 @@
           "properties": {
             "date_of_marriage": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
-              ],
-              "description": "Date of initial marriage as certified in the divorce libel/complaint."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "place_of_marriage": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
-              ],
-              "description": "Jurisdiction where the marriage originally took place."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "date_of_separation": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
-              ],
-              "description": "Date cohabitation ceased as alleged by the complainant."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "number_of_minor_children": {
-              "type": ["integer", "null"],
-              "minimum": 0,
-              "description": "Number of dependent children resulting from the union."
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
             }
           },
           "additionalProperties": false
         },
         "decree": {
           "type": "object",
-          "required": ["date_decree_granted"],
+          "required": [
+            "date_decree_granted"
+          ],
           "properties": {
             "date_decree_granted": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted",
-              "description": "Official date the final decree was signed and entered into the court record."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
             },
             "legal_grounds": {
-              "type": ["string", "null"],
-              "description": "Statutory cause alleged or proved (e.g., 'Desertion', 'Cruel and Barbarous Treatment', 'Adultery', 'Indignities to the Person')."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "plaintiff": {
-              "type": ["string", "null"],
-              "enum": ["Husband", "Wife", "Other", null],
-              "description": "Party filing the petition or complaint for divorce."
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "Husband",
+                "Wife",
+                "Other",
+                null
+              ]
             },
             "decree_type": {
-              "type": ["string", "null"],
+              "type": [
+                "string",
+                "null"
+              ],
               "enum": [
                 "Absolute (A Vinculo Matrimonii)",
                 "Bed and Board (A Mensa Et Thoro)",
@@ -243,31 +323,35 @@
               "default": "Absolute (A Vinculo Matrimonii)"
             },
             "custody_details": {
-              "type": ["string", "null"],
-              "description": "Terms of child custody awarded in the final judgment."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "alimony_awarded": {
-              "type": ["boolean", "null"],
-              "description": "Indicates whether spousal support or alimony was ordered."
+              "type": [
+                "boolean",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
         },
         "record_note": {
-          "type": ["string", "null"],
-          "description": "Optional archival or legal notes regarding docket annotations, jurisdictional quirks, or case packet condition."
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "transcript": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
-          "description": "Structured verbatim abstract of the libel, testimony summary, or final decree, search keywords, word count, and text quality rating."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/transcript_record"
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
-          },
-          "description": "Array of original document or packet scans located in /data/media/."
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/source_media"
+          }
         }
       },
       "additionalProperties": false
@@ -275,9 +359,8 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
-      },
-      "description": "Array of canonical participants (husband, wife, presiding judge, master, attorneys, co-respondent, witnesses) linked to their standardized roles and master person IDs."
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
+      }
     }
   },
   "additionalProperties": false

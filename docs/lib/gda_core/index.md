@@ -3,80 +3,39 @@ Name: index.md
 Path: docs/lib/gda_core/index.md
 -->
 # Core Framework Library: `tools.lib.gda_core`
+<!-- Version: 1.1.0+build.20260930.1 -->
 
-The `gda_core` package provides the foundational architecture, configuration singletons, transactional entity containers, and filesystem safeguards shared across all operational tools (`tools/ops/`), maintenance pipelines, and interactive notebooks in the Genealogy Digital Archive.
+The `gda_core` package provides foundational architecture, immutable configuration singletons, structured logging, dynamic schema reflection, and filesystem safeguards shared across operational tools (`tools/ops/`), system utilities (`tools/sys/`), and verification suites (`tests/`).
 
----
+## Architectural Topology
 
-## Architecture Overview
+* `tools/lib/gda_core/__init__.py`: Package exports and version metadata (`__version__ = "1.1.0+build.20260930.1"`).
+* `tools/lib/gda_core/config.py`: Centralized `GDAConfig` singleton and filesystem directory anchors.
+* `tools/lib/gda_core/logger.py`: Dual-handler logging (`setup_logger`) and `GDALogFormatter` with action tags.
+* `tools/lib/gda_core/reference.py`: Canonical URN parsing, identifier validation, and static table cache.
+* `tools/lib/gda_core/schema_enums.py`: Dynamic JSON Schema controlled vocabulary registry (`GDASchemaEnums`).
+* `tools/lib/gda_core/util.py`: Safe Backup Protocol, atomic JSON I/O, SHA-256 digests, and workspace hygiene.
 
-All tools and interactive notebooks interact with underlying registries through `gda_core` abstractions rather than performing ad-hoc filesystem I/O. This ensures:
-* **Single Configuration Authority:** Paths anchor deterministically via `GDAConfig`.
-* **Zero Data Loss:** Write operations execute through the Safe Backup Protocol.
-* **Controlled Vocabularies & Normalization:** State validation and enum constraints resolve against centralized schema definitions and standard packages (`us`).
-* **Decoupled Registries:** Separates civil administrative jurisdictions (`GDALocations`) from physical facilities and landmarks (`GDASites`).
-* **Hermetic Test Isolation:** Core objects can be sandboxed in ephemeral `tmp_path` environments without mutating production stores.
+## Component Architecture & Contracts
 
-```text
-                    ┌─────────────────────────┐
-                    │        GDAConfig        │
-                    │ (Paths, Config, Enums)  │
-                    └────────────┬────────────┘
-                                 │
-         ┌───────────────────────┼───────────────────────┐
-         ▼                       ▼                       ▼
-┌──────────────────┐   ┌──────────────────┐   ┌──────────────────┐
-│     GDAUtil      │   │  GDASchemaEnums  │   │     GDAFacts     │
-│ (Backups, JSON,  │   │  (Vocabularies,  │   │ (Facts Registry, │
-│  Hashing, Temp)  │   │   Validation)    │   │  Index & Xref)   │
-└──────────────────┘   └──────────────────┘   └──────────────────┘
-                                 │
-         ┌───────────────────────┴───────────────────────┐
-         ▼                                               ▼
-┌──────────────────┐                           ┌──────────────────┐
-│   GDALocations   │                           │     GDASites     │
-│(Jurisdictions,   │◄──────────────────────────┤(Facilities, Geo, │
-│ Lineage, US Norm)│     Foreign Key Pointer   │ Aliases, Filter) │
-└──────────────────┘     (location_id)         └──────────────────┘
-```
+| Module | Primary Class | Role & Invariants | Specification |
+| :--- | :--- | :--- | :--- |
+| `config.py` | `GDAConfig`, `CONFIG` | Single configuration authority; anchors filesystem to repository root; provides immutable path accessors. | [config.md](config.md) |
+| `logger.py` | `setup_logger`, `GDALogFormatter` | Dual interactive/file logging with structured action tags (`[SYS]`, `[NEW]`, `[ADD]`, etc.). | [logger.md](logger.md) |
+| `reference.py` | `ReferenceManager` | Validates `IND-XXXXX` and UUIDv4 keys; parses canonical URNs; caches static reference tables. | [reference.md](reference.md) |
+| `schema_enums.py` | `GDASchemaEnums` | Dynamically resolves and caches controlled vocabularies directly from `_enums.schema.json`. | [schema_enums.md](schema_enums.md) |
+| `util.py` | `GDAUtil` | Transactional filesystem safety via the Safe Backup Protocol, atomic UTF-8 file replacement, and SHA-256 digests. | [util.md](util.md) |
 
----
+## System Invariants
 
-## Core Modules & Technical Specifications
+1. **100% Statement & Branch Coverage:** Every module in `gda_core` maintains 100% statement and branch coverage verified by atomized pytest harnesses in `tests/gda_core/`.
+2. **Transactional Pre-Write Snapshots:** All operational mutations against persistent data must invoke `GDAUtil.create_safe_backup()` prior to writing.
+3. **Single Source of Truth:** Controlled vocabularies are never hardcoded; they reflect dynamically from `schemas/defs/_enums.schema.json`.
+4. **Hermetic Test Isolation:** All paths resolve dynamically via `GDAConfig.load()`, allowing `tests/conftest.py` to seamlessly isolate test suites inside `tmp_path` sandboxes.
 
-### 1. [GDAConfig](GDAConfig.md)
-* **Role:** Centralized configuration singleton and environment resolver.
-* **Responsibilities:** Resolves root anchors (`G:/My Drive/genealogy-digital-archive`), manages runtime configuration (`gda_config.json`), provides absolute paths for all data stores, entities, schemas, and reports.
+## Installation as a Local Package
 
-### 2. [GDALocations](GDALocations.md)
-* **Role:** Master civil jurisdiction and administrative boundary manager (`data/entities/locations.json`).
-* **Responsibilities:** Normalizes hierarchical administrative layers (Country > State > County > Local), executes offline US state validation via `us`, tracks temporal boundary lineage (`date_established`, `date_dissolved`, predecessor/successor splits), manages alias variants, and executes exact, wildcard, and fuzzy queries.
-
-### 3. [GDASites](GDASites.md)
-* **Role:** Master physical site and facility registry manager (`data/entities/sites.json`).
-* **Responsibilities:** Governs physical structures, cemeteries, churches, and landmarks. Enforces foreign key referential integrity against `GDALocations`, auto-mints monotonic `SITE-XXXXX` keys, handles geocoding coordinates, manages site aliases, and provides stateful view filtering.
-
-### 4. [GDAFacts](GDAFacts.md)
-* **Role:** Transactional container and indexing engine for `data/entities/facts.json`.
-* **Responsibilities:** Manages primary UUID index (`_index`) and secondary foreign-key index (`_person_xref`), tracks dirty state, enforces `fact_id` immutability, and coordinates atomic pre-write backups.
-
-### 5. [GDAUtil](GDAUtil.md)
-* **Role:** Operational filesystem utilities and cryptographic routines.
-* **Responsibilities:** Executes Safe Backup Protocol (`create_safe_backup`, `restore_backup`, `prune_backups`), chunked SHA-256 calculation, atomic UTF-8 JSON read/write routines, and workspace hygiene (`clear_gtemp`).
-
-### 6. [GDASchemaEnums](GDASchemaEnums.md)
-* **Role:** Controlled vocabulary cache and validation engine.
-* **Responsibilities:** Parses and caches enum constraints from `schemas/defs/_enums.schema.json`, handles schema discovery fallbacks, and validates entity attributes.
-
----
-
-## Verification & Testing
-The `gda_core` suite maintains strict >95% branch coverage with isolated unit and regression test harnesses:
+Install in editable mode within the repository virtual environment:
 
 ```powershell
-# Run smoke tests across the core framework
-pytest tests/unit/test_gda_*.py -m smoke -v
-
-# Run full core framework verification with branch coverage
-pytest tests/unit/test_gda_*.py -m "unit or regression" --cov=tools.lib.gda_core --cov-report=term-missing
-```
+pip install -e .

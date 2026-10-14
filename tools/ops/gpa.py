@@ -1,5 +1,6 @@
 # Name: gpa.py
 # Path: tools/ops/gpa.py
+# Version: 1.1.0+build.20261006.7
 
 """GPA: Genealogy People Auditor Operational CLI Tool.
 
@@ -12,37 +13,32 @@ Supports full headless execution via CLI flags as well as an interactive
 console menu when invoked without operational arguments.
 """
 
+from __future__ import annotations
+
 import argparse
-from datetime import datetime
-import json
 import logging
 from pathlib import Path
 import re
 import sys
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Union
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from tools.lib.gda_core.GDAConfig import GDAConfig
-from tools.lib.gda_core.GDALogger import setup_logger
-from tools.lib.gda_core.GDAUtil import GDAUtil
+from gdacore.config import CONFIG, GDAConfig
+from gdacore.logger import get_logger, setup_logger
+from gdacore.reference_manager import GDAReferenceManager
+from gdacore.util import GDAUtil
+from gdadomain.kinship import KinshipEngine
+from gdadomain.people import GDAPeople
 
-__version__ = "1.0.2+build.20260926.2"
-
-VALID_UNION_STATUSES = {
-    "MARRIED",
-    "DIVORCED",
-    "ANNULLED",
-    "SEPARATED",
-    "WIDOWED",
-    "PARTNER",
-    "UNKNOWN",
-}
+__version__ = "1.1.0+build.20261006.7"
 
 
 class TieredFindings:
+    """Diagnostic findings container segregated into critical, warning, and info tiers."""
+
     def __init__(self) -> None:
         self.critical: List[Dict[str, Any]] = []
         self.warning: List[Dict[str, Any]] = []
@@ -68,11 +64,29 @@ class TieredFindings:
 
 
 class RegistryAuditor:
-    def __init__(self, people_data: Dict[str, Any], logger: logging.Logger) -> None:
-        self.data = people_data
-        self.persons: List[Dict[str, Any]] = self.data.get("persons", [])
-        self.logger = logger
+    """Domain auditor evaluating people registry data against genealogical invariants."""
+
+    def __init__(
+        self,
+        people_data: Union[Dict[str, Any], GDAPeople],
+        logger: Optional[logging.Logger] = None,
+    ) -> None:
+        self.logger = logger or get_logger(__name__)
         self.findings = TieredFindings()
+
+        if isinstance(people_data, GDAPeople):
+            self.people_manager: Optional[GDAPeople] = people_data
+            self.persons: List[Dict[str, Any]] = [dict(p) for p in people_data]
+            self.data: Dict[str, Any] = {
+                "total_persons": len(self.persons),
+                "persons": self.persons,
+            }
+        elif isinstance(people_data, dict):
+            self.people_manager = None
+            self.data = people_data
+            self.persons = self.data.get("persons", self.data.get("people", []))
+        else:
+            raise TypeError("people_data must be a dictionary or a GDAPeople instance.")
 
         self.person_map: Dict[str, Dict[str, Any]] = {}
         self.duplicate_ids: List[str] = []
@@ -86,13 +100,18 @@ class RegistryAuditor:
                 self.person_map[pid] = p
 
     @staticmethod
-    def _parse_year(date_str: Optional[str]) -> Optional[int]:
-        if not date_str:
+    def _parse_year(date_val: Optional[Any]) -> Optional[int]:
+        if not date_val:
             return None
-        m = re.match(r"^(\d{4})", str(date_str).strip())
+        if isinstance(date_val, dict):
+            if "year" in date_val and isinstance(date_val["year"], int):
+                return date_val["year"]
+            date_val = date_val.get("date_start") or date_val.get("date")
+        m = re.match(r"^(\d{4})", str(date_val).strip())
         return int(m.group(1)) if m else None
 
     def audit_envelope(self) -> None:
+        """Audits container envelope metadata and total count synchronization."""
         req = ["$schema", "schema_version", "created_at", "last_modified", "total_persons", "persons"]
         for f in req:
             if f not in self.data:
@@ -103,6 +122,7 @@ class RegistryAuditor:
             self.findings.add("CRITICAL", "ENV", "COUNT_MISMATCH", f"total_persons={total} does not match count={actual}")
 
     def audit_deduplication(self) -> None:
+        """Audits identifier uniqueness and name/birth year fingerprint collisions."""
         for pid in self.duplicate_ids:
             self.findings.add("CRITICAL", pid, "DUPLICATE_PERSON_ID", f"Duplicate person_id detected: {pid}")
 
@@ -135,10 +155,13 @@ class RegistryAuditor:
             cname = p.get("canonical_name") or {}
             vitals = p.get("vitals") or {}
 
-            # Birth year sync
             canon_birth_year = (cname.get("birth_year") or {}).get("year")
-            vital_birth_date = ((vitals.get("birth") or {}).get("date") or {}).get("date_start")
-            parsed_birth_year = self._parse_year(vital_birth_date)
+            vital_birth_date = ((vitals.get("birth") or {}).get("date") or {})
+            if isinstance(vital_birth_date, dict):
+                vital_birth_start = vital_birth_date.get("date_start") or vital_birth_date.get("date")
+            else:
+                vital_birth_start = str(vital_birth_date)
+            parsed_birth_year = self._parse_year(vital_birth_start)
 
             if canon_birth_year is not None and parsed_birth_year is not None:
                 if canon_birth_year != parsed_birth_year:
@@ -146,13 +169,16 @@ class RegistryAuditor:
                         "CRITICAL",
                         pid,
                         "VITAL_SYNC_BIRTH_YEAR",
-                        f"Canonical birth_year ({canon_birth_year}) does not match vitals.birth ({vital_birth_date})"
+                        f"Canonical birth_year ({canon_birth_year}) does not match vitals.birth ({vital_birth_start})"
                     )
 
-            # Death year sync
             canon_death_year = (cname.get("death_year") or {}).get("year")
-            vital_death_date = ((vitals.get("death") or {}).get("date") or {}).get("date_start")
-            parsed_death_year = self._parse_year(vital_death_date)
+            vital_death_date = ((vitals.get("death") or {}).get("date") or {})
+            if isinstance(vital_death_date, dict):
+                vital_death_start = vital_death_date.get("date_start") or vital_death_date.get("date")
+            else:
+                vital_death_start = str(vital_death_date)
+            parsed_death_year = self._parse_year(vital_death_start)
 
             if canon_death_year is not None and parsed_death_year is not None:
                 if canon_death_year != parsed_death_year:
@@ -160,7 +186,7 @@ class RegistryAuditor:
                         "CRITICAL",
                         pid,
                         "VITAL_SYNC_DEATH_YEAR",
-                        f"Canonical death_year ({canon_death_year}) does not match vitals.death ({vital_death_date})"
+                        f"Canonical death_year ({canon_death_year}) does not match vitals.death ({vital_death_start})"
                     )
 
     def audit_biological_chronology(self) -> None:
@@ -168,30 +194,27 @@ class RegistryAuditor:
         for p in self.persons:
             pid = p.get("person_id", "UNKNOWN")
             vitals = p.get("vitals") or {}
-            birth_dt = ((vitals.get("birth") or {}).get("date") or {}).get("date_start")
-            death_dt = ((vitals.get("death") or {}).get("date") or {}).get("date_start")
+            birth_dt = ((vitals.get("birth") or {}).get("date") or {})
+            death_dt = ((vitals.get("death") or {}).get("date") or {})
 
             b_year = self._parse_year(birth_dt)
             d_year = self._parse_year(death_dt)
 
-            # 1. Death before birth
             if b_year and d_year and d_year < b_year:
                 self.findings.add("CRITICAL", pid, "CHRONO_DEATH_BEFORE_BIRTH", f"Death year ({d_year}) precedes birth year ({b_year})")
 
-            # 2. Maximum plausible lifespan (> 115 years without verified note)
             if b_year and d_year and (d_year - b_year) > 115:
                 has_longevity_note = any("longevity" in (n.get("text", "").lower() + n.get("title", "").lower()) for n in p.get("notes", []))
                 if not has_longevity_note:
                     self.findings.add("WARNING", pid, "CHRONO_IMPLAUSIBLE_LIFESPAN", f"Lifespan of {d_year - b_year} years exceeds standard biological threshold")
 
-            # 3. Generational gap checks against associated parents
             for assoc in p.get("associated_people", []):
                 role = assoc.get("role")
                 parent_id = assoc.get("person_id")
                 if role in ("FATH", "MOTH", "PARENT") and parent_id and parent_id in self.person_map:
                     parent_p = self.person_map[parent_id]
-                    p_birth_dt = (((parent_p.get("vitals") or {}).get("birth") or {}).get("date") or {}).get("date_start")
-                    p_death_dt = (((parent_p.get("vitals") or {}).get("death") or {}).get("date") or {}).get("date_start")
+                    p_birth_dt = (((parent_p.get("vitals") or {}).get("birth") or {}).get("date") or {})
+                    p_death_dt = (((parent_p.get("vitals") or {}).get("death") or {}).get("date") or {})
                     p_b_year = self._parse_year(p_birth_dt)
                     p_d_year = self._parse_year(p_death_dt)
 
@@ -204,7 +227,6 @@ class RegistryAuditor:
                             if not has_late_note:
                                 self.findings.add("WARNING", pid, "CHRONO_MOTHER_TOO_OLD", f"Mother {parent_id} was {age_at_child_birth} years old at child birth")
 
-                    # Child born after parent death
                     if b_year and p_d_year:
                         if b_year > p_d_year + 1:
                             self.findings.add("CRITICAL", pid, "CHRONO_BORN_AFTER_PARENT_DEATH", f"Child born in {b_year}, after parent {parent_id} died in {p_d_year}")
@@ -230,12 +252,11 @@ class RegistryAuditor:
                     adj[pid].add(sid)
                     adj[sid].add(pid)
 
-        # BFS connected components
         visited: Set[str] = set()
         components: List[Set[str]] = []
         for pid in adj:
             if pid not in visited:
-                comp = set()
+                comp: Set[str] = set()
                 queue = [pid]
                 visited.add(pid)
                 while queue:
@@ -249,7 +270,6 @@ class RegistryAuditor:
 
         if len(components) > 1:
             components.sort(key=len, reverse=True)
-            main_tree = components[0]
             for island in components[1:]:
                 for island_pid in island:
                     self.findings.add("CRITICAL", island_pid, "TOPOLOGY_ISLAND", f"Person is in an isolated disconnected component ({len(island)} nodes)")
@@ -272,15 +292,7 @@ class RegistryAuditor:
                         self.findings.add("WARNING", pid, "LOCATION_MISSING_STANDARD", f"Place under {vital_type} missing standardized and verbatim keys")
 
     def audit_associated_people_reciprocity(self) -> None:
-        reciprocal_map = {
-            "FATH": "CHIL",
-            "MOTH": "CHIL",
-            "PARENT": "CHIL",
-            "CHIL": ["FATH", "MOTH", "PARENT"],
-            "SPOU": "SPOU",
-            "HUSB": "WIFE",
-            "WIFE": "HUSB",
-        }
+        """Audits reciprocal kinship pointers against KinshipEngine mappings."""
         for p in self.persons:
             pid = p.get("person_id", "UNKNOWN")
             for assoc in p.get("associated_people", []):
@@ -292,24 +304,23 @@ class RegistryAuditor:
                     self.findings.add("CRITICAL", pid, "DANGLING_ASSOC", f"Associated person {aid} not found in registry")
                     continue
                 target_p = self.person_map[aid]
-                expected = reciprocal_map.get(role)
-                if not expected:
+
+                expected = KinshipEngine.get_reciprocal_role(role, subject_sex=p.get("sex"))
+                if expected is None:
                     continue
-                has_recip = False
-                for t_assoc in target_p.get("associated_people", []):
-                    if t_assoc.get("person_id") == pid:
-                        t_role = t_assoc.get("role")
-                        if isinstance(expected, list):
-                            if t_role in expected:
-                                has_recip = True
-                                break
-                        elif t_role == expected:
-                            has_recip = True
-                            break
-                if not has_recip:
-                    self.findings.add("WARNING", pid, "ASYM_ASSOC", f"Missing reciprocal linkage on {aid} for {role} -> {expected}")
+
+                audit_result = KinshipEngine.audit_kinship_symmetry(p, target_p)
+                if not audit_result.is_symmetric:
+                    self.findings.add(
+                        "WARNING",
+                        pid,
+                        "ASYM_ASSOC",
+                        f"Missing or mismatched reciprocal linkage on {aid} for {role} -> {expected}",
+                    )
 
     def audit_unions(self) -> None:
+        """Audits union status validity, reciprocal presence, and marriage date synchronization."""
+        valid_union_statuses = GDAReferenceManager.get_union_statuses()
         for p in self.persons:
             pid = p.get("person_id", "UNKNOWN")
             unions = p.get("unions", [])
@@ -330,7 +341,7 @@ class RegistryAuditor:
                     self.findings.add("CRITICAL", pid, "UNION_DANGLING_SPOUSE", f"Union spouse_id {sid} does not exist in registry")
                     continue
 
-                if status not in VALID_UNION_STATUSES:
+                if status not in valid_union_statuses:
                     self.findings.add("CRITICAL", pid, "UNION_INVALID_STATUS", f"Invalid union status: {status}")
 
                 if sid not in spou_assoc_ids:
@@ -344,8 +355,8 @@ class RegistryAuditor:
                     self.findings.add("WARNING", pid, "UNION_ASYM_RECIPROCAL", f"Spouse {sid} does not have reciprocal union entry pointing to {pid}")
                     continue
 
-                m_date_a = (u.get("marriage_date") or {}).get("date_start")
-                m_date_b = (reciprocal_union.get("marriage_date") or {}).get("date_start")
+                m_date_a = (u.get("marriage_date") or {}).get("date_start") if isinstance(u.get("marriage_date"), dict) else u.get("marriage_date")
+                m_date_b = (reciprocal_union.get("marriage_date") or {}).get("date_start") if isinstance(reciprocal_union.get("marriage_date"), dict) else reciprocal_union.get("marriage_date")
                 if m_date_a != m_date_b:
                     self.findings.add("WARNING", pid, "UNION_DATE_MISMATCH", f"Marriage date mismatch with {sid}: '{m_date_a}' != '{m_date_b}'")
 
@@ -360,6 +371,7 @@ class RegistryAuditor:
                     self.findings.add("WARNING", pid, "UNION_STATUS_MISMATCH", f"Union status mismatch with {sid}: {status} vs {t_status}")
 
     def run_all(self) -> TieredFindings:
+        """Executes full diagnostic suite across all audit disciplines."""
         self.audit_envelope()
         self.audit_deduplication()
         self.audit_vital_synchronization()
@@ -372,6 +384,7 @@ class RegistryAuditor:
 
 
 def run_cli() -> int:
+    """CLI execution entrypoint for GPA."""
     parser = argparse.ArgumentParser(description="Genealogy People Auditor (GPA)")
     parser.add_argument("--file", "-f", type=Path, default=None, help="Custom people.json file path")
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose log emission")
@@ -380,9 +393,7 @@ def run_cli() -> int:
     logger = setup_logger("gpa", ephemeral=True, console_level=logging.DEBUG if args.verbose else logging.INFO)
     logger.info("GPA version %s initializing", __version__)
 
-    config = GDAConfig(ROOT_DIR)
-    default_people_path = getattr(config, "entities_dir", ROOT_DIR / "data" / "entities") / "people.json"
-    target_path = args.file or default_people_path
+    target_path = args.file or CONFIG.people
 
     if not target_path.is_file():
         logger.error("Target file does not exist: %s", target_path)

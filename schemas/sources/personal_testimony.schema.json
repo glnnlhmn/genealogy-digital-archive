@@ -1,4 +1,6 @@
 {
+  "_name": "personal_testimony.schema.json",
+  "_path": "schemas/sources/personal_testimony.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/sources/personal_testimony.schema.json",
   "title": "PersonalTestimonyRecord",
@@ -6,6 +8,8 @@
   "description": "Standardized schema for narrative and manuscript records including sworn affidavits, recorded depositions, personal memoirs, family Bible registers, and oral histories.",
   "type": "object",
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "description",
     "record_metadata",
@@ -13,14 +17,26 @@
     "associated_people"
   ],
   "properties": {
-    "$schema": { "type": "string" },
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    },
     "description": {
       "type": "string",
-      "description": "[REQUIRED] Contextual summary (e.g., '1938 Personal Memoir of Annie Myers Lehman (Newville, Cumberland Co., PA)')."
+      "description": "Contextual summary of this personal testimony record."
     },
     "record_metadata": {
       "type": "object",
-      "required": ["source_urn", "record_category", "record_type"],
+      "required": [
+        "source_urn",
+        "record_category",
+        "record_type"
+      ],
       "properties": {
         "source_urn": {
           "type": "string",
@@ -29,7 +45,11 @@
         },
         "record_category": {
           "type": "string",
-          "enum": ["MANUSCRIPT", "NARRATIVE", "LEGAL"],
+          "enum": [
+            "MANUSCRIPT",
+            "NARRATIVE",
+            "LEGAL"
+          ],
           "default": "MANUSCRIPT"
         },
         "record_type": {
@@ -59,39 +79,50 @@
       "properties": {
         "creator": {
           "type": "object",
-          "required": ["full_name"],
+          "required": [
+            "full_name"
+          ],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id",
-              "description": "Foreign key pointing to the master Person Registry."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
             },
             "relationship_to_subject": {
-              "type": ["string", "null"],
-              "description": "Kinship or contextual relationship of author/deponent to primary subjects (e.g., 'Granddaughter', 'Eyewitness', 'Self')."
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
         },
         "creation_date": {
           "oneOf": [
-            { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-            { "type": "null" }
-          ],
-          "description": "Date recorded, dictated, sworn, or entered into manuscript."
+            {
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "location": {
           "oneOf": [
-            { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-            { "type": "null" }
-          ],
-          "description": "Location where testimony, deposition, or entry was taken."
+            {
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "format": {
           "type": "object",
-          "required": ["medium"],
+          "required": [
+            "medium"
+          ],
           "properties": {
             "medium": {
               "type": "string",
@@ -105,27 +136,29 @@
               ]
             },
             "repository_or_provenance": {
-              "type": ["string", "null"],
-              "description": "Physical custodial chain, family owner, or archive holding original item."
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
         },
         "testimony_note": {
-          "type": ["string", "null"],
-          "description": "Notes regarding handwriting variations, notary seals, pagination, or ink fading."
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "transcript": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
-          "description": "Verbatim transcription, abstract summary, and keywords."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/transcript_record"
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
-          },
-          "description": "Image scans of manuscript folios, Bible leaves, or signed affidavits."
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/source_media"
+          }
         }
       },
       "additionalProperties": false
@@ -133,9 +166,8 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
-      },
-      "description": "Linked participants (author/deponent, interviewer, notary/magistrate, and mentioned relatives/subjects) mapped to roles and IDs."
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
+      }
     }
   },
   "additionalProperties": false

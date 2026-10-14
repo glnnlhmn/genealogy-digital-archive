@@ -1,4 +1,6 @@
 {
+  "_name": "naturalization_record.schema.json",
+  "_path": "schemas/sources/naturalization_record.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/sources/naturalization_record.schema.json",
   "title": "NaturalizationRecord",
@@ -6,6 +8,8 @@
   "description": "Standardized schema for historical naturalization instruments including Declarations of Intention, Petitions for Citizenship, Oaths of Allegiance, and Certificates.",
   "type": "object",
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "description",
     "record_metadata",
@@ -14,14 +18,26 @@
     "associated_people"
   ],
   "properties": {
-    "$schema": { "type": "string" },
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    },
     "description": {
       "type": "string",
-      "description": "[REQUIRED] Contextual summary (e.g., '1905 Petition for Naturalization of Johan Lehman (Carlisle, Cumberland Co., PA)')."
+      "description": "Contextual summary of the naturalization source record."
     },
     "record_metadata": {
       "type": "object",
-      "required": ["source_urn", "record_category", "record_type"],
+      "required": [
+        "source_urn",
+        "record_category",
+        "record_type"
+      ],
       "properties": {
         "source_urn": {
           "type": "string",
@@ -30,7 +46,11 @@
         },
         "record_category": {
           "type": "string",
-          "enum": ["LEGAL", "CITIZENSHIP", "IMMIGRATION"],
+          "enum": [
+            "LEGAL",
+            "CITIZENSHIP",
+            "IMMIGRATION"
+          ],
           "default": "LEGAL"
         },
         "record_type": {
@@ -49,17 +69,23 @@
     },
     "court": {
       "type": "object",
-      "required": ["court_name", "location"],
+      "required": [
+        "court_name",
+        "location"
+      ],
       "properties": {
         "court_name": {
-          "type": "string",
-          "description": "e.g., 'U.S. District Court for Middle District of Pennsylvania', 'Court of Common Pleas of Cumberland County'."
+          "type": "string"
         },
         "location": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
-          "description": "Seat of the court."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
         },
-        "presiding_judge_or_clerk": { "type": ["string", "null"] }
+        "presiding_judge_or_clerk": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       },
       "additionalProperties": false
     },
@@ -75,60 +101,101 @@
       "properties": {
         "docket_reference": {
           "type": "object",
-          "required": ["locator"],
+          "required": [
+            "locator"
+          ],
           "properties": {
             "locator": {
-              "type": "string",
-              "description": "Declaration, petition, or certificate number matching locator_naturalization_patterns."
+              "type": "string"
             },
-            "volume_page": { "type": ["string", "null"] },
-            "certificate_stub_number": { "type": ["string", "null"] }
+            "volume_page": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "certificate_stub_number": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
           },
           "additionalProperties": false
         },
         "applicant": {
           "type": "object",
-          "required": ["full_name"],
+          "required": [
+            "full_name"
+          ],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
             },
             "current_residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "date_of_birth": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "place_of_birth": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "country_of_prior_allegiance": {
-              "type": ["string", "null"],
-              "description": "e.g., 'Emperor of Germany', 'King of Great Britain and Ireland'."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "port_and_date_of_arrival": {
               "type": "object",
               "properties": {
-                "port_of_entry": { "type": ["string", "null"] },
-                "arrival_date": {
-                  "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                    { "type": "null" }
+                "port_of_entry": {
+                  "type": [
+                    "string",
+                    "null"
                   ]
                 },
-                "vessel_name": { "type": ["string", "null"] }
+                "arrival_date": {
+                  "oneOf": [
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "vessel_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
               },
               "additionalProperties": false
             }
@@ -136,37 +203,47 @@
           "additionalProperties": false
         },
         "event_date": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted",
-          "description": "Date sworn, signed, or certificate admitted."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
         },
         "witnesses": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "name": { "type": "string" },
-              "occupation": { "type": ["string", "null"] },
-              "residence": { "type": ["string", "null"] }
+              "name": {
+                "type": "string"
+              },
+              "occupation": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "residence": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
             },
             "additionalProperties": false
-          },
-          "description": "Affidavit witnesses certifying 5-year continuous residence and moral character."
+          }
         },
         "naturalization_note": {
-          "type": ["string", "null"],
-          "description": "Notes on previous declarations, certificate denials, or physical photo stubs."
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "transcript": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
-          "description": "Verbatim transcript, abstract, and search keywords."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/transcript_record"
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
-          },
-          "description": "Scans of the petition leaf, declaration stub, or certificate."
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/source_media"
+          }
         }
       },
       "additionalProperties": false
@@ -174,9 +251,8 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
-      },
-      "description": "Array of participants (applicant, character witnesses, clerk, judge) mapped to roles and IDs."
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
+      }
     }
   },
   "additionalProperties": false

@@ -1,0 +1,60 @@
+{
+  "_name": "sites_location_idx.schema.json",
+  "_path": "schemas/indexes/sites_location_idx.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/indexes/sites_location_idx.schema.json",
+  "title": "Sites_Location_Index",
+  "version": "1.0.0",
+  "description": "Inverted administrative lookup index mapping parent location_id to physical site_ids in sites.json.",
+  "type": "object",
+  "required": [
+    "_name",
+    "_path",
+    "$schema",
+    "schema_version",
+    "last_modified",
+    "total_locations",
+    "locations"
+  ],
+  "properties": {
+    "_name": {
+      "type": "string",
+      "const": "sites_location_idx.json"
+    },
+    "_path": {
+      "type": "string",
+      "const": "data/indexes/sites_location_idx.json"
+    },
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "last_modified": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso",
+      "description": "ISO-8601 timestamp of last index update."
+    },
+    "total_locations": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total count of civil locations hosting sites."
+    },
+    "locations": {
+      "type": "object",
+      "description": "Dictionary keyed by parent location_id mapping to arrays of site_ids.",
+      "propertyNames": {
+        "pattern": "^LOC-\\d{5}$"
+      },
+      "additionalProperties": {
+        "type": "array",
+        "description": "List of physical sites located within this civil jurisdiction.",
+        "items": {
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/site_id"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

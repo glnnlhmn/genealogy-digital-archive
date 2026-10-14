@@ -1,0 +1,34 @@
+{
+  "_name": "corrupt_probate_missing_decedent.json",
+  "_path": "data/archival_records/probate/REC-1874-WILL-001.json",
+  "_defect": "probate_details lacks required decedent object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Corrupt Probate Record lacking decedent",
+  "record_metadata": {
+    "source_guid": "03388071-e313-452c-8e1b-5a3af38b6a88",
+    "record_category": "PROBATE",
+    "record_type": "LAST_WILL_AND_TESTAMENT"
+  },
+  "court": {
+    "court_name": "Orphans Court of Cumberland County",
+    "location": {
+      "location_id": "LOC-00001",
+      "verbatim": "Carlisle, PA"
+    }
+  },
+  "probate_details": {
+    "filing_reference": {
+      "locator": "Will Book R, Page 125"
+    },
+    "transcript": {
+      "verbatim_text": "Missing decedent test."
+    },
+    "media_files": [
+      {
+        "file_name": "will.pdf",
+        "mime_type": "application/pdf"
+      }
+    ]
+  },
+  "associated_people": []
+}

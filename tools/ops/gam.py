@@ -1,17 +1,19 @@
 # Name: gam.py
 # Path: tools/ops/gam.py
+# Version: 1.1.0+build.20261006.2
 
 """GAM (Genealogy Archive Manager).
 
 Permanent operational tool for system configuration, asset tracking,
-schema/persona integrity auditing, hash drift detection, automated remediation,
-and report generation.
+operational script and schema integrity auditing, hash drift detection,
+automated remediation, and diagnostic report generation.
 
-Public Interface:
-    - audit_system(format_type: str, verbose: bool) -> dict: Executes system integrity checks and exports unique timestamped audit reports.
-    - generate_config() -> dict: Backs up existing config, scans the archive root, and generates a fresh gda_config.json baseline manifest.
-    - remediate_latest_report() -> None: Parses the latest audit report and automatically repairs UNKNOWN faults.
+Tracks strictly:
+- Active operational tools: tools/ops/*.py
+- Schema specifications: schemas/**/*.json (excluding schemas/archive/)
 """
+
+from __future__ import annotations
 
 import argparse
 from datetime import datetime
@@ -20,69 +22,64 @@ import logging
 from pathlib import Path
 import re
 import sys
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
-# Ensure repository root is on sys.path for standalone invocation
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
+ROOT_DIR = Path(__file__).resolve().parents[2]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
-from tools.lib.gda_core.GDAConfig import CONFIG
-from tools.lib.gda_core.GDALogger import setup_logger
-from tools.lib.gda_core.GDAUtil import GDAUtil
+from gdacore.config import CONFIG, GDAConfig
+from gdacore.logger import get_logger, setup_logger
+from gdacore.util import GDAUtil
 
-__version__ = "1.0.7+build.20260922.1"
+__version__ = "1.1.0+build.20261006.2"
 
 
 def extract_metadata(file_path: Path, logger: Optional[logging.Logger] = None) -> Tuple[str, str]:
-    """Extracts internal version string and description from file headers or JSON metadata.
+    """Extracts internal version string and description from schemas or operational tools.
 
     Args:
-        file_path (Path): Target file to inspect.
-        logger (Optional[logging.Logger]): Operational logger.
+        file_path: Target file to inspect (.json or .py).
+        logger: Operational logger.
 
     Returns:
-        Tuple[str, str]: Extracted internal version and description.
+        Tuple of (version, description).
     """
     log = logger or logging.getLogger("gam")
     version = "UNKNOWN"
     description = "N/A"
     try:
-        if file_path.suffix.lower() == ".json":
+        suffix = file_path.suffix.lower()
+        if suffix == ".json":
             data = GDAUtil.load_json(file_path)
-            for key in ["SchemaVersion", "version", "Version", "FileVersion", "ConfigVersion"]:
+            for key in ["schema_version", "SchemaVersion", "version", "Version", "FileVersion"]:
                 if isinstance(data, dict) and key in data:
                     version = str(data[key])
                     break
             if version == "UNKNOWN" and isinstance(data, dict) and len(data) == 1:
                 top_key = list(data.keys())[0]
-                if isinstance(data[top_key], dict) and "SchemaVersion" in data[top_key]:
-                    version = str(data[top_key]["SchemaVersion"])
-            description = f"JSON Metadata / Config entity ({file_path.name})"
-        elif file_path.suffix.lower() == ".md":
-            content = file_path.read_text(encoding="utf-8", errors="replace")
-            v_match = re.search(
-                r"<!--\s*(?:version|spec\s*version|v):\s*([vV]?\d+\.\d+\.\d+)\s*-->",
-                content,
-                re.IGNORECASE,
+                if isinstance(data[top_key], dict):
+                    for sub_key in ["schema_version", "SchemaVersion", "version"]:
+                        if sub_key in data[top_key]:
+                            version = str(data[top_key][sub_key])
+                            break
+            description = (
+                data.get("description") or data.get("title") or f"Schema specification ({file_path.name})"
+                if isinstance(data, dict)
+                else f"JSON Entity ({file_path.name})"
             )
+        elif suffix == ".py":
+            content = file_path.read_text(encoding="utf-8", errors="replace")
+            v_match = re.search(r'__version__\s*=\s*["\']([^"\']+)["\']', content)
             if v_match:
                 version = v_match.group(1).strip()
+            d_match = re.search(r'"""(.*?)"""', content, re.DOTALL)
+            if d_match:
+                description = d_match.group(1).strip().splitlines()[0]
             else:
-                v_match_alt = re.search(
-                    r"(?:version|v)\s*[:=]\s*([vV]?\d+\.\d+\.\d+)",
-                    content,
-                    re.IGNORECASE,
-                )
-                if v_match_alt:
-                    version = v_match_alt.group(1).strip()
-            lines = content.splitlines()
-            for line in lines:
-                if line.startswith("# "):
-                    description = line.replace("#", "").strip()
-                    break
+                description = f"Operational script ({file_path.name})"
     except Exception as e:
-        log.error(f"Error parsing metadata for {file_path}: {e}")
+        log.error("Error parsing metadata for %s: %s", file_path, e)
     return version, description
 
 
@@ -90,19 +87,19 @@ def generate_config(
     root_dir: Optional[Path] = None,
     config_file: Optional[Path] = None,
     logger: Optional[logging.Logger] = None,
-) -> dict:
-    """Backs up existing config, scans repository schemas/prompts, and generates baseline manifest.
+) -> Dict[str, Any]:
+    """Scans operational tools and schemas to generate the baseline manifest.
 
     Args:
-        root_dir (Optional[Path]): Archive root directory.
-        config_file (Optional[Path]): Path to target manifest file.
-        logger (Optional[logging.Logger]): Operational logger.
+        root_dir: Archive root directory.
+        config_file: Path to target manifest file.
+        logger: Operational logger.
 
     Returns:
-        dict: Generated configuration manifest payload.
+        Generated configuration manifest dictionary.
     """
     target_root = root_dir or CONFIG.root
-    target_config = config_file or CONFIG.config_manifest
+    target_config = config_file or (target_root / "gda_config.json")
     log = logger or logging.getLogger("gam")
 
     log.info("Generating system configuration manifest...", extra={"sys_event": True})
@@ -111,17 +108,12 @@ def generate_config(
         bk_file = target_config.with_suffix(target_config.suffix + ".bk")
         try:
             target_config.replace(bk_file)
-            rel_bk = bk_file.relative_to(target_root) if bk_file.is_relative_to(target_root) else bk_file
-            print(f"[+] Existing configuration backed up to: {rel_bk}")
-            log.info(f"Backed up existing config to {bk_file}")
+            log.info("Backed up existing config to %s", bk_file)
         except Exception as e:
-            log.error(f"Failed to backup existing config: {e}")
-            print(f"[!] Warning: Failed to backup existing config: {e}")
+            log.error("Failed to backup existing config: %s", e)
 
+    tracked_schemas: List[Dict[str, Any]] = []
     schemas_dir = target_root / "schemas"
-    prompts_dir = target_root / "prompts"
-
-    tracked_schemas = []
     if schemas_dir.exists():
         for p in sorted(schemas_dir.rglob("*.json")):
             if "archive" in p.parts or "-bk-" in p.name:
@@ -129,7 +121,7 @@ def generate_config(
             rel = p.relative_to(target_root).as_posix()
             ver, desc = extract_metadata(p, logger=log)
             if ver == "UNKNOWN":
-                print(f"[!] Skipping unversioned schema (UNKNOWN version): {rel}")
+                log.warning("Skipping unversioned schema: %s", rel)
                 continue
             tracked_schemas.append({
                 "path": rel,
@@ -138,38 +130,37 @@ def generate_config(
                 "purpose": desc,
             })
 
-    tracked_prompts = []
-    if prompts_dir.exists():
-        for p in sorted(prompts_dir.rglob("*.md")):
-            if "archive" in p.parts or "-bk-" in p.name:
+    tracked_ops: List[Dict[str, Any]] = []
+    ops_dir = target_root / "tools" / "ops"
+    if ops_dir.exists():
+        for p in sorted(ops_dir.glob("*.py")):
+            if p.name.startswith("__"):
                 continue
             rel = p.relative_to(target_root).as_posix()
             ver, desc = extract_metadata(p, logger=log)
             if ver == "UNKNOWN":
-                print(f"[!] Skipping unversioned prompt (UNKNOWN version): {rel}")
+                log.warning("Skipping unversioned operational tool: %s", rel)
                 continue
-            tracked_prompts.append({
+            tracked_ops.append({
                 "path": rel,
                 "expected_version": ver,
                 "sha256": GDAUtil.compute_sha256(p),
                 "purpose": desc,
             })
 
-    config_data = {
-        "ConfigVersion": "1.0.0",
+    config_data: Dict[str, Any] = {
+        "ConfigVersion": "1.1.0",
         "LastUpdated": datetime.now().strftime("%Y-%m-%d"),
         "ArchiveName": "Genealogy Digital Archive",
         "RootAnchor": str(target_root),
         "TrackedAssets": {
             "schemas": tracked_schemas,
-            "prompts": tracked_prompts,
+            "ops": tracked_ops,
         },
     }
 
     GDAUtil.save_json(target_config, config_data)
-    log.info(f"Configuration file written to {target_config}")
-    rel_cfg = target_config.relative_to(target_root) if target_config.is_relative_to(target_root) else target_config
-    print(f"[+] Configuration file successfully written to: {rel_cfg}")
+    log.info("Configuration file written to %s", target_config)
     return config_data
 
 
@@ -180,70 +171,62 @@ def audit_system(
     config_file: Optional[Path] = None,
     reports_dir: Optional[Path] = None,
     logger: Optional[logging.Logger] = None,
-) -> dict:
-    """Performs full system integrity audit against internal versions and hashes.
+) -> Dict[str, Any]:
+    """Audits operational tools and schemas against internal versions and hashes.
 
     Args:
-        format_type (str): Output format ("json", "md", or "all").
-        verbose (bool): Whether to log detailed diagnostic messages.
-        root_dir (Optional[Path]): Archive root directory.
-        config_file (Optional[Path]): Path to gda_config.json.
-        reports_dir (Optional[Path]): Target reports output directory.
-        logger (Optional[logging.Logger]): Operational logger.
+        format_type: Output format ("json", "md", or "all").
+        verbose: Whether to log detailed diagnostic messages.
+        root_dir: Archive root directory.
+        config_file: Path to gda_config.json.
+        reports_dir: Target reports directory.
+        logger: Operational logger.
 
     Returns:
-        dict: Full audit report payload.
+        Audit report dictionary.
     """
     target_root = root_dir or CONFIG.root
-    target_config = config_file or CONFIG.config_manifest
+    target_config = config_file or (target_root / "gda_config.json")
     target_reports = reports_dir or CONFIG.reports
     log = logger or logging.getLogger("gam")
 
     if not target_config.exists():
-        print("[!] Error: Configuration file 'gda_config.json' does not exist.")
-        print("[i] Hard stop: Run with --generate-config (-g) to initialize baseline manifest.")
         log.error("Audit aborted: gda_config.json missing.")
         sys.exit(1)
 
     config = GDAUtil.load_json(target_config)
     if config.get("ConfigVersion", "UNKNOWN") == "UNKNOWN":
-        print("[!] CRITICAL ERROR: gda_config.json contains an UNKNOWN ConfigVersion.")
         log.error("Critical error: gda_config.json ConfigVersion is UNKNOWN.")
 
-    tracked_map = {}
-    for category in ["schemas", "prompts"]:
+    tracked_map: Dict[str, Dict[str, Any]] = {}
+    for category in ["schemas", "ops"]:
         for item in config.get("TrackedAssets", {}).get(category, []):
-            if item.get("expected_version") == "UNKNOWN":
-                print(f"[!] CRITICAL CONFIG ERROR: Tracked asset '{item['path']}' has expected_version: UNKNOWN")
             tracked_map[item["path"]] = item
 
-    all_disk_files = []
+    all_disk_files: List[Path] = []
     schemas_dir = target_root / "schemas"
-    prompts_dir = target_root / "prompts"
-
     if schemas_dir.exists():
         for p in schemas_dir.rglob("*.json"):
             if "archive" in p.parts or "-bk-" in p.name:
                 continue
             all_disk_files.append(p)
-    if prompts_dir.exists():
-        for p in prompts_dir.rglob("*.md"):
-            if "archive" in p.parts or "-bk-" in p.name:
+
+    ops_dir = target_root / "tools" / "ops"
+    if ops_dir.exists():
+        for p in ops_dir.glob("*.py"):
+            if p.name.startswith("__"):
                 continue
             all_disk_files.append(p)
 
-    audit_records = []
+    audit_records: List[Dict[str, Any]] = []
     discrepancies = 0
-    print("\n" + "=" * 95)
-    print(f"{'FILE PATH':<55} | {'INTERNAL VER':<14} | {'STATUS'}")
-    print("=" * 95)
 
     for file_path in sorted(all_disk_files):
         rel_path = file_path.relative_to(target_root).as_posix()
         file_hash = GDAUtil.compute_sha256(file_path)
         internal_ver, description = extract_metadata(file_path, logger=log)
         status = "OK"
-        issues = []
+        issues: List[str] = []
 
         if internal_ver == "UNKNOWN":
             status = "ERROR"
@@ -275,13 +258,9 @@ def audit_system(
             "issues": issues,
             "description": description,
         })
-        print(f"{rel_path:<55} | {internal_ver:<14} | {status}")
-        for issue in issues:
-            print(f"    [!] {issue}")
-    print("=" * 95)
 
     run_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    report_data = {
+    report_data: Dict[str, Any] = {
         "audit_timestamp": datetime.now().isoformat(),
         "total_audited": len(audit_records),
         "discrepancies_detected": discrepancies,
@@ -292,8 +271,6 @@ def audit_system(
     if format_type in ["json", "all"]:
         json_rep = target_reports / f"gam_audit_{run_timestamp}.json"
         GDAUtil.save_json(json_rep, report_data)
-        rel_jrep = json_rep.relative_to(target_root) if json_rep.is_relative_to(target_root) else json_rep
-        print(f"[+] JSON report saved to: {rel_jrep}")
 
     if format_type in ["md", "all"]:
         md_rep = target_reports / f"gam_audit_{run_timestamp}.md"
@@ -311,8 +288,6 @@ def audit_system(
             iss_str = ", ".join(rec["issues"]) if rec["issues"] else "None"
             md_lines.append(f"| `{rec['path']}` | {rec['internal_version']} | **{rec['status']}** | {iss_str} |")
         md_rep.write_text("\n".join(md_lines) + "\n", encoding="utf-8")
-        rel_mrep = md_rep.relative_to(target_root) if md_rep.is_relative_to(target_root) else md_rep
-        print(f"[+] Markdown report saved to: {rel_mrep}")
 
     return report_data
 
@@ -321,13 +296,16 @@ def remediate_latest_report(
     root_dir: Optional[Path] = None,
     reports_dir: Optional[Path] = None,
     logger: Optional[logging.Logger] = None,
-) -> None:
+) -> int:
     """Reads the most recent audit report and forces UNKNOWN versions to 0.0.999.
 
     Args:
-        root_dir (Optional[Path]): Archive root directory.
-        reports_dir (Optional[Path]): Directory containing audit reports.
-        logger (Optional[logging.Logger]): Operational logger.
+        root_dir: Archive root directory.
+        reports_dir: Directory containing audit reports.
+        logger: Operational logger.
+
+    Returns:
+        Total number of repaired files.
     """
     target_root = root_dir or CONFIG.root
     target_reports = reports_dir or CONFIG.reports
@@ -335,15 +313,13 @@ def remediate_latest_report(
 
     reports = sorted(list(target_reports.glob("gam_audit_*.json")))
     if not reports:
-        # Check backward-compatible legacy report names
         reports = sorted(list(target_reports.glob("gna_audit_*.json")))
 
     if not reports:
-        print("[!] No prior audit reports found in reports/ to remediate.")
-        return
+        log.warning("No prior audit reports found in reports/ to remediate.")
+        return 0
 
     latest_report = reports[-1]
-    print(f"[i] Loading latest audit report: {latest_report.name}")
     data = GDAUtil.load_json(latest_report)
     fixed_count = 0
 
@@ -353,95 +329,65 @@ def remediate_latest_report(
             continue
         if rec["internal_version"] == "UNKNOWN" or rec["status"] == "ERROR":
             forced_ver = "0.0.999"
-            if file_path.suffix.lower() == ".md":
-                content = file_path.read_text(encoding="utf-8", errors="replace")
-                lines = content.splitlines()
-                new_lines = []
-                injected = False
-                for line in lines:
-                    new_lines.append(line)
-                    if line.startswith("# ") and not injected:
-                        new_lines.append(f"<!-- Version: {forced_ver} -->")
-                        injected = True
-                if not injected:
-                    new_lines.insert(0, f"<!-- Version: {forced_ver} -->")
-                file_path.write_text("\n".join(new_lines) + "\n", encoding="utf-8")
-                print(f"    [!] Forced version {forced_ver} into markdown header for {rec['path']}")
-                fixed_count += 1
-            elif file_path.suffix.lower() == ".json":
+            if file_path.suffix.lower() == ".json":
                 try:
                     jdata = GDAUtil.load_json(file_path)
-                    jdata["SchemaVersion"] = forced_ver
+                    jdata["schema_version"] = forced_ver
                     GDAUtil.save_json(file_path, jdata)
-                    print(f"    [!] Forced SchemaVersion {forced_ver} into JSON schema {rec['path']}")
                     fixed_count += 1
                 except Exception as e:
-                    log.error(f"Failed to update JSON schema {rec['path']}: {e}")
+                    log.error("Failed to update schema %s: %s", rec["path"], e)
+            elif file_path.suffix.lower() == ".py":
+                try:
+                    content = file_path.read_text(encoding="utf-8")
+                    if "__version__" in content:
+                        content = re.sub(
+                            r'__version__\s*=\s*["\'][^"\']+["\']',
+                            f'__version__ = "{forced_ver}"',
+                            content,
+                        )
+                    else:
+                        content = f'__version__ = "{forced_ver}"\n' + content
+                    file_path.write_text(content, encoding="utf-8")
+                    fixed_count += 1
+                except Exception as e:
+                    log.error("Failed to update operational tool %s: %s", rec["path"], e)
 
-    print(f"[+] Remediation complete. Successfully resolved {fixed_count} issue(s) with forced 0.0.999 overrides.")
     if fixed_count > 0:
-        print("[i] Refreshing configuration manifest...")
         generate_config(root_dir=target_root, logger=log)
 
-
-def interactive_menu() -> None:
-    """Runs the interactive TUI management console loop."""
-    while True:
-        print("\n" + "=" * 50)
-        print(f" GAM SYSTEM MANAGEMENT CONSOLE ({__version__})")
-        print("=" * 50)
-        print("[1] Run Full System Integrity Audit")
-        print("[2] Generate / Refresh System Config (gda_config.json)")
-        print("[3] Auto-Repair Discrepancies (Force UNKNOWN to 0.0.999)")
-        print("[Q] Exit")
-        print("=" * 50)
-        choice = input("Select an option [1-3, Q]: ").strip()
-        if choice == "" or choice.lower() == "q":
-            print("Exiting GAM Management Console. Goodbye!")
-            break
-        elif choice == "1":
-            audit_system(format_type="all")
-        elif choice == "2":
-            generate_config()
-        elif choice == "3":
-            remediate_latest_report()
-        else:
-            print("[!] Invalid option. Please enter 1, 2, 3, or Q.")
+    return fixed_count
 
 
-def main() -> None:
-    """Main CLI entry point for argument parsing and routing."""
+def main() -> int:
+    """Main CLI entry point for GAM pipeline."""
     parser = argparse.ArgumentParser(
-        description=f"GAM System Manager ({__version__}): Genealogy Archive Configuration & Integrity Auditor."
+        description=f"GAM System Manager ({__version__}): Operational Tool & Schema Baseline Auditor."
     )
-    parser.add_argument("-a", "--audit", action="store_true",
-                        help="Run full system integrity audit and generate reports")
-    parser.add_argument("-g", "--generate-config", action="store_true",
-                        help="Generate or refresh gda_config.json baseline manifest")
-    parser.add_argument("-r", "--report", choices=["json", "md", "all"], default="all",
-                        help="Export audit report format")
-    parser.add_argument("--repair", action="store_true",
-                        help="Attempt automated remediation using latest report")
-    parser.add_argument("-v", "--verbose", action="store_true",
-                        help="Enable verbose debugging logs")
-    parser.add_argument("--debug", action="store_true",
-                        help="Route runtime traces directly to console/stderr")
+    parser.add_argument("-a", "--audit", action="store_true", help="Run system integrity audit and generate reports")
+    parser.add_argument("-g", "--generate-config", action="store_true", help="Generate or refresh gda_config.json baseline")
+    parser.add_argument("-r", "--report", choices=["json", "md", "all"], default="all", help="Audit report format")
+    parser.add_argument("--repair", action="store_true", help="Remediate UNKNOWN versions using latest report")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Enable verbose diagnostics")
+    parser.add_argument("--debug", action="store_true", help="Output execution traces directly to stderr")
     args = parser.parse_args()
 
-    c_level = logging.DEBUG if args.debug else logging.INFO
-    logger = setup_logger("gam", console_level=c_level, file_level=logging.DEBUG)
-    logger.info(f"Initialized GAM System Manager CLI ({__version__}).", extra={"sys_event": True})
+    c_level = logging.DEBUG if args.debug else (logging.DEBUG if args.verbose else logging.INFO)
+    logger = setup_logger("gam", ephemeral=True, console_level=c_level)
+    logger.info("Initialized GAM System Manager CLI (%s).", __version__, extra={"sys_event": True})
 
-    if not args.audit and not args.generate_config and not args.repair:
-        interactive_menu()
-        return
     if args.generate_config:
         generate_config(logger=logger)
+        return 0
     if args.repair:
         remediate_latest_report(logger=logger)
+        return 0
     if args.audit:
         audit_system(format_type=args.report, verbose=args.verbose, logger=logger)
+        return 0
+
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

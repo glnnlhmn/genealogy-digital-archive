@@ -1,4 +1,6 @@
 {
+  "_name": "marriage_license.schema.json",
+  "_path": "schemas/sources/marriage_license.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/sources/marriage_license.schema.json",
   "title": "MarriageLicenseRecord",
@@ -6,6 +8,8 @@
   "description": "Standardized schema for civil marriage applications, licenses, minister returns, certificates, and ledger registers.",
   "type": "object",
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "description",
     "record_metadata",
@@ -13,12 +17,18 @@
     "associated_people"
   ],
   "properties": {
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
     "$schema": {
       "type": "string"
     },
     "description": {
       "type": "string",
-      "description": "[REQUIRED] Human- and AI-readable contextual summary of this marriage source record (e.g., '1912 Marriage License of William Lehman and Annie Myers (Carlisle, Cumberland Co., PA)')."
+      "description": "Contextual summary of this marriage source record."
     },
     "record_metadata": {
       "type": "object",
@@ -35,9 +45,10 @@
         },
         "record_category": {
           "type": "string",
-          "enum": ["VITAL"],
-          "default": "VITAL",
-          "description": "Restricted to VITAL for all civil marriage registration and certificate records."
+          "enum": [
+            "VITAL"
+          ],
+          "default": "VITAL"
         },
         "record_type": {
           "type": "string",
@@ -48,8 +59,7 @@
             "MINISTERS_RETURN",
             "MARRIAGE_BOND"
           ],
-          "default": "MARRIAGE_LICENSE",
-          "description": "Granular legal classification of the marriage instrument."
+          "default": "MARRIAGE_LICENSE"
         }
       },
       "additionalProperties": false
@@ -66,79 +76,119 @@
       "properties": {
         "license_details": {
           "type": "object",
-          "required": ["license_number"],
+          "required": [
+            "license_number"
+          ],
           "properties": {
             "license_number": {
               "type": "string",
-              "description": "Official state, county, or local license number. Must align with patterns under 'locator_marriage_patterns' in schemas/naming/_token_registry.json."
+              "description": "Official state, county, or local license number."
             },
             "date_issued": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
-              ],
-              "description": "Date the marriage license was granted by the court or clerk."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "issuing_court_or_county": {
-              "type": ["string", "null"],
-              "description": "Court, county, or office granting the license (e.g., 'Orphans Court of Cumberland County')."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "clerk": {
-              "type": ["string", "null"],
-              "description": "Name or signature of the court clerk or recorder issuing the license."
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
         },
         "groom": {
           "type": "object",
-          "required": ["full_name"],
+          "required": [
+            "full_name"
+          ],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id",
-              "description": "Controlled foreign key referencing the master Person Registry (/data/entities/people.json). Must be verified with 3 corroborating data points before assignment."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name",
-              "description": "Groom's name parsed canonically or captured via raw_name."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
             },
             "age": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/age_record" },
-                { "type": "null" }
-              ],
-              "description": "Age of groom as stated on the license application."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/age_record"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "date_of_birth": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "birthplace": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
-              ],
-              "description": "Birthplace of the groom. Must align with 'jurisdictions', 'counties', and 'states' in schemas/naming/_token_registry.json."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
-              ],
-              "description": "Groom's place of residence at the time of application."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "color_or_race": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "marital_history": {
               "type": "object",
               "properties": {
-                "previous_marriages_count": { "type": ["integer", "null"], "minimum": 0 },
+                "previous_marriages_count": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
                 "last_marriage_dissolution": {
-                  "type": ["string", "null"],
-                  "enum": ["Death", "Divorce", "Annulment", "None", null]
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "Death",
+                    "Divorce",
+                    "Annulment",
+                    "None",
+                    null
+                  ]
                 }
               },
               "additionalProperties": false
@@ -146,8 +196,18 @@
             "occupation": {
               "type": "object",
               "properties": {
-                "usual": { "type": ["string", "null"] },
-                "industry": { "type": ["string", "null"] }
+                "usual": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "industry": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
               },
               "additionalProperties": false
             },
@@ -156,14 +216,22 @@
               "properties": {
                 "father_name": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 },
                 "mother_maiden_name": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 }
               },
@@ -174,57 +242,90 @@
         },
         "bride": {
           "type": "object",
-          "required": ["full_name"],
+          "required": [
+            "full_name"
+          ],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id",
-              "description": "Controlled foreign key referencing the master Person Registry (/data/entities/people.json). Must be verified with 3 corroborating data points before assignment."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name",
-              "description": "Bride's legal name parsed canonically or captured via raw_name."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
             },
             "maiden_name": {
-              "type": ["string", "null"],
-              "description": "Bride's maiden surname if previously married."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "age": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/age_record" },
-                { "type": "null" }
-              ],
-              "description": "Age of bride as stated on the license application."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/age_record"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "date_of_birth": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "birthplace": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
-              ],
-              "description": "Birthplace of the bride. Must align with 'jurisdictions', 'counties', and 'states' in schemas/naming/_token_registry.json."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
-              ],
-              "description": "Bride's place of residence at the time of application."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "color_or_race": {
-              "type": ["string", "null"]
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "marital_history": {
               "type": "object",
               "properties": {
-                "previous_marriages_count": { "type": ["integer", "null"], "minimum": 0 },
+                "previous_marriages_count": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
                 "last_marriage_dissolution": {
-                  "type": ["string", "null"],
-                  "enum": ["Death", "Divorce", "Annulment", "None", null]
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "Death",
+                    "Divorce",
+                    "Annulment",
+                    "None",
+                    null
+                  ]
                 }
               },
               "additionalProperties": false
@@ -232,8 +333,18 @@
             "occupation": {
               "type": "object",
               "properties": {
-                "usual": { "type": ["string", "null"] },
-                "industry": { "type": ["string", "null"] }
+                "usual": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "industry": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
               },
               "additionalProperties": false
             },
@@ -242,14 +353,22 @@
               "properties": {
                 "father_name": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 },
                 "mother_maiden_name": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 }
               },
@@ -263,28 +382,53 @@
           "properties": {
             "date_of_marriage": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
-              ],
-              "description": "Actual date ceremony was solemnized."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "place_of_marriage": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
-              ],
-              "description": "Standardized location of the ceremony. Must align with 'jurisdictions', 'counties', and 'states' in schemas/naming/_token_registry.json."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "officiator": {
               "type": "object",
               "properties": {
-                "name": { "type": ["string", "null"] },
-                "title": { "type": ["string", "null"], "description": "e.g., 'Minister of the Gospel', 'Pastor', 'Justice of the Peace'." },
-                "religious_denomination": { "type": ["string", "null"] },
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "title": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "religious_denomination": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
                 "residence": {
                   "oneOf": [
-                    { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                    { "type": "null" }
+                    {
+                      "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 }
               },
@@ -292,27 +436,28 @@
             },
             "witnesses": {
               "type": "array",
-              "items": { "type": "string" },
-              "description": "Verbatim names of attending witnesses signed to certificate."
+              "items": {
+                "type": "string"
+              }
             }
           },
           "additionalProperties": false
         },
         "license_note": {
-          "type": ["string", "null"],
-          "description": "Optional archival or contextual notes regarding endorsements, clerk notations, parental consents, or physical document condition."
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "transcript": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
-          "description": "Structured verbatim form field readout, abstract summary, and keyword indexing."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/transcript_record"
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
-          },
-          "description": "Array of derivative media scan images comprising this source record."
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/source_media"
+          }
         }
       },
       "additionalProperties": false
@@ -320,9 +465,8 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
-      },
-      "description": "Canonical participants (groom, bride, parents, officiator, witnesses) mapped to standardized roles and IND IDs."
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
+      }
     }
   },
   "additionalProperties": false

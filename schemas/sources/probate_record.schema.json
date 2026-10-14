@@ -1,4 +1,6 @@
 {
+  "_name": "probate_record.schema.json",
+  "_path": "schemas/sources/probate_record.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/sources/probate_record.schema.json",
   "title": "ProbateRecord",
@@ -6,6 +8,8 @@
   "description": "Standardized schema for historical last wills and testaments, estate administrations, inventories, Orphans' Court entries, and accountings.",
   "type": "object",
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "description",
     "record_metadata",
@@ -14,14 +18,26 @@
     "associated_people"
   ],
   "properties": {
-    "$schema": { "type": "string" },
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    },
     "description": {
       "type": "string",
-      "description": "[REQUIRED] Contextual summary (e.g., '1874 Will of Christian Lehman (Carlisle, Cumberland Co., PA)')."
+      "description": "Contextual summary of this probate source record."
     },
     "record_metadata": {
       "type": "object",
-      "required": ["source_urn", "record_category", "record_type"],
+      "required": [
+        "source_urn",
+        "record_category",
+        "record_type"
+      ],
       "properties": {
         "source_urn": {
           "type": "string",
@@ -30,7 +46,10 @@
         },
         "record_category": {
           "type": "string",
-          "enum": ["PROBATE", "LEGAL"],
+          "enum": [
+            "PROBATE",
+            "LEGAL"
+          ],
           "default": "PROBATE"
         },
         "record_type": {
@@ -51,17 +70,23 @@
     },
     "court": {
       "type": "object",
-      "required": ["court_name", "location"],
+      "required": [
+        "court_name",
+        "location"
+      ],
       "properties": {
         "court_name": {
-          "type": "string",
-          "description": "Name of probate jurisdiction (e.g., 'Orphans Court of Cumberland County', 'Register of Wills')."
+          "type": "string"
         },
         "location": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
-          "description": "Jurisdiction where the court sits."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
         },
-        "register_or_clerk": { "type": ["string", "null"] }
+        "register_or_clerk": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       },
       "additionalProperties": false
     },
@@ -76,38 +101,61 @@
       "properties": {
         "filing_reference": {
           "type": "object",
-          "required": ["locator"],
+          "required": [
+            "locator"
+          ],
           "properties": {
             "locator": {
-              "type": "string",
-              "description": "Will book and page, estate file number, or docket entry matching locator_will_patterns."
+              "type": "string"
             },
-            "estate_file_number": { "type": ["string", "null"] },
-            "book_and_page": { "type": ["string", "null"] },
-            "docket_term": { "type": ["string", "null"] }
+            "estate_file_number": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "book_and_page": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "docket_term": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
           },
           "additionalProperties": false
         },
         "decedent": {
           "type": "object",
-          "required": ["full_name"],
+          "required": [
+            "full_name"
+          ],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id",
-              "description": "Foreign key pointing to the master Person Registry."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
             },
             "residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "condition_or_trade": {
-              "type": ["string", "null"],
-              "description": "e.g., 'Yeoman', 'Blacksmith', 'Intestate'."
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
@@ -117,54 +165,68 @@
           "properties": {
             "date_written": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
-              ],
-              "description": "Date signed by testator (for wills/codicils)."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "date_probated": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
-              ],
-              "description": "Date proved before the register."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "date_letters_granted": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
-              ],
-              "description": "Date Letters of Administration or Testamentary were issued."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "date_appraised_or_accounted": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
-              ],
-              "description": "Date of inventory appraisal or final court accounting confirmation."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             }
           },
           "additionalProperties": false
         },
         "provisions_summary": {
-          "type": ["string", "null"],
-          "description": "Summary of devises, bequests, debts, bond amounts, or distribution balances."
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "probate_note": {
-          "type": ["string", "null"],
-          "description": "Optional notes on caveat petitions, appraisals, or document condition."
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "transcript": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
-          "description": "Verbatim transcript, abstract summary, and keywords."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/transcript_record"
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
-          },
-          "description": "Image scans of the original record leaves."
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/source_media"
+          }
         }
       },
       "additionalProperties": false
@@ -172,9 +234,8 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
-      },
-      "description": "Array of participants (decedent/testator, executors, administrators, appraisers, witnesses, beneficiaries) linked to standardized roles and IDs."
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
+      }
     }
   },
   "additionalProperties": false

@@ -1,0 +1,45 @@
+{
+  "_name": "corrupt_immigration_invalid_urn.json",
+  "_path": "data/archival_records/immigration/REC-1745-IMM-001.json",
+  "_defect": "source_urn does not match URN:IMMIGRATION pattern",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Corrupt Manifest with invalid URN",
+  "record_metadata": {
+    "source_guid": "9b3e1b53-1072-4f22-8d30-b0fe620b51ad",
+    "record_category": "IMMIGRATION",
+    "record_type": "PASSENGER_MANIFEST"
+  },
+  "voyage": {
+    "port_of_arrival": {
+      "location_id": "LOC-00002",
+      "verbatim": "Philadelphia, PA"
+    },
+    "arrival_date": {
+      "modifier": "EXACT",
+      "date_raw": "1745-09-18",
+      "date_iso": "1745-09-18",
+      "year": 1745
+    }
+  },
+  "manifest_details": {
+    "manifest_reference": {
+      "locator": "List 102C"
+    },
+    "passenger": {
+      "full_name": {
+        "given": "Johan",
+        "surname": "Lehman"
+      }
+    },
+    "transcript": {
+      "verbatim_text": "Corrupt URN test."
+    },
+    "media_files": [
+      {
+        "file_name": "manifest.pdf",
+        "mime_type": "application/pdf"
+      }
+    ]
+  },
+  "associated_people": []
+}

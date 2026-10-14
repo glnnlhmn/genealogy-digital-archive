@@ -1,84 +1,15 @@
 {
+  "_name": "_enums.schema.json",
+  "_path": "schemas/defs/_enums.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/defs/_enums.schema.json",
   "title": "Genealogy_Controlled_Vocabularies",
-  "version": "1.0.0",
-  "description": "Centralized controlled vocabularies and categorical enumerations for the digital genealogy archive.",
+  "version": "1.2.0",
+  "description": "Authoritative single source of truth for controlled taxonomies across the archive.",
+  "type": "object",
   "$defs": {
-    "enum_quality_assessment": {
-      "type": "string",
-      "enum": [
-        "EXCELLENT",
-        "GOOD",
-        "FAIR",
-        "POOR"
-      ],
-      "default": "GOOD"
-    },
-    "enum_date_modifier": {
-      "type": "string",
-      "enum": [
-        "EXACT",
-        "ABT",
-        "BEF",
-        "AFT",
-        "BET",
-        "FROM_TO",
-        "UNKNOWN"
-      ],
-      "default": "EXACT"
-    },
-    "enum_vital_modifier": {
-      "type": "string",
-      "enum": [
-        "EXACT",
-        "ABT",
-        "BEF",
-        "AFT",
-        "BET",
-        "FROM_TO",
-        "LIVING",
-        "UNKNOWN"
-      ]
-    },
-    "enum_associated_role": {
-      "type": "string",
-      "enum": [
-        "CHIL",
-        "HUSB",
-        "WIFE",
-        "MOTH",
-        "FATH",
-        "SPOU",
-        "WITN",
-        "GODP",
-        "INFORMANT",
-        "CLERGY",
-        "OFFICIATOR",
-        "NEIGHBOR",
-        "ATND",
-        "UNDR",
-        "DEC",
-        "OTHR",
-        "UNKNOWN"
-      ]
-    },
-	"enum_note_category": {
-      "type": "string",
-      "enum": [
-        "GENERAL",
-        "RESEARCH_TODO",
-        "ANOMALY",
-        "RESEARCH",
-        "DISCREPANCY",
-        "TRANSCRIPTION",
-        "CORRECTION",
-        "PROVENANCE"
-      ]
-    },
     "enum_fact_type": {
       "type": "string",
-      "description": "Standardized category of historical fact assertions.",
       "enum": [
         "Association",
         "Award",
@@ -99,118 +30,193 @@
         "Probate",
         "Property",
         "Residence",
-        "Other"
+        "Other",
+        "Unknown"
+      ]
+    },
+    "enum_date_modifier": {
+      "type": "string",
+      "enum": [
+        "EXACT",
+        "ABT",
+        "BEF",
+        "AFT",
+        "BET",
+        "FROM_TO",
+        "UNKNOWN"
+      ]
+    },
+    "enum_vital_date_modifier": {
+      "type": "string",
+      "enum": [
+        "EXACT",
+        "ABT",
+        "BEF",
+        "AFT",
+        "BET",
+        "FROM_TO",
+        "LIVING",
+        "UNKNOWN"
+      ]
+    },
+    "enum_union_status": {
+      "type": "string",
+      "enum": [
+        "MARRIED",
+        "DIVORCED",
+        "ANNULLED",
+        "SEPARATED",
+        "COMMON_LAW",
+        "WIDOWED",
+        "PARTNER",
+        "UNKNOWN"
+      ]
+    },
+    "enum_kinship_role": {
+      "type": "string",
+      "enum": [
+        "CHIL",
+        "HUSB",
+        "WIFE",
+        "MOTH",
+        "FATH",
+        "SPOU",
+        "SIBL",
+        "WITN",
+        "GODP",
+        "INFORMANT",
+        "CLERGY",
+        "OFFICIANT",
+        "NEIGHBOR",
+        "ATND",
+        "UNDR",
+        "DEC",
+        "OTHR",
+        "UNKNOWN"
       ]
     },
     "enum_sex": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "Biological sex classification.",
       "enum": [
-        "Male",
-        "Female",
-        "Unknown",
+        "M",
+        "F",
+        "U",
         null
       ]
     },
-    "enum_marital_status": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "Marital status recorded on historical schedules.",
-      "enum": [
-        "Single",
-        "Married",
-        "Widowed",
-        "Divorced",
-        null
-      ]
-    },
-    "enum_manner_of_death": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "Categorical manner of death classification.",
-      "enum": [
-        "Natural",
-        "Accident",
-        "Suicide",
-        "Homicide",
-        "Pending",
-        "Unknown",
-        null
-      ],
-      "default": "Natural"
-    },
-    "enum_home_ownership": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "description": "Tenure status of home recorded on federal census schedules.",
-      "enum": [
-        "Owned",
-        "Rented",
-        "Free",
-        "Mortgaged",
-        null
-      ]
-    },
-    "enum_location_type": {
+    "enum_site_type": {
       "type": "string",
-      "description": "Classification distinguishing civil jurisdictions from physical venues, landmarks, and cemeteries.",
       "enum": [
-        "JURISDICTION",
         "CEMETERY",
         "CHURCH",
         "HOSPITAL",
         "FACILITY",
         "RESIDENCE",
         "LANDMARK",
+        "OTHER",
+        "UNKNOWN"
+      ]
+    },
+    "enum_selective_service_class": {
+      "type": "string",
+      "enum": [
+        "1-A",
+        "1-C",
+        "2-A",
+        "2-B",
+        "3-A",
+        "4-A",
+        "4-D",
+        "4-F",
+        "UNKNOWN"
+      ]
+    },
+    "enum_document_side": {
+      "type": "string",
+      "enum": [
+        "FRONT",
+        "BACK",
+        "INSIDE",
+        "OUTSIDE",
+        "ENCLOSURE",
+        "UNKNOWN"
+      ]
+    },
+    "enum_operational_status": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "DEFUNCT",
+        "ABANDONED",
+        "HISTORICAL",
+        "UNKNOWN"
+      ]
+    },
+    "enum_note_type": {
+      "type": "string",
+      "enum": [
+        "RESEARCH",
+        "HISTORICAL",
+        "TRANSCRIPTION",
+        "DISCREPANCY",
+        "PROVENANCE",
+        "GENERAL"
+      ]
+    },
+    "enum_quality_assessment": {
+      "type": "string",
+      "enum": [
+        "DIRECT_PRIMARY",
+        "INDIRECT_PRIMARY",
+        "SECONDARY",
+        "QUESTIONABLE",
+        "UNRELIABLE"
+      ]
+    },
+    "enum_census_year": {
+      "type": "integer",
+      "enum": [
+        1790,
+        1800,
+        1810,
+        1820,
+        1830,
+        1840,
+        1850,
+        1860,
+        1870,
+        1880,
+        1900,
+        1910,
+        1920,
+        1930,
+        1940,
+        1950
+      ]
+    },
+    "enum_military_branch": {
+      "type": "string",
+      "enum": [
+        "ARMY",
+        "NAVY",
+        "MARINES",
+        "AIR_FORCE",
+        "COAST_GUARD",
+        "MILITIA",
         "OTHER"
       ]
     },
-    "enum_citizenship_status": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        "Native Born",
-        "Naturalized",
-        "Alien",
-        "Declarant",
-        "Non-Declarant",
-        null
-      ]
-    },
-    "enum_wwi_card_type": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        "Card A (1917)",
-        "Card B (1918)",
-        "Card C (1918)",
-        null
-      ]
-    },
-    "enum_union_status": {
+    "enum_military_war": {
       "type": "string",
-      "description": "Controlled vocabulary defining legal, domestic, or biological partnership status.",
       "enum": [
-        "MARRIED",
-        "DIVORCED",
-        "ANNULLED",
-        "SEPARATED",
-        "WIDOWED",
-        "PARTNER",
-        "UNKNOWN"
+        "REVOLUTIONARY",
+        "WAR_OF_1812",
+        "CIVIL_WAR",
+        "SPANISH_AMERICAN",
+        "WWI",
+        "WWII",
+        "KOREAN",
+        "VIETNAM",
+        "OTHER"
       ]
     }
   }

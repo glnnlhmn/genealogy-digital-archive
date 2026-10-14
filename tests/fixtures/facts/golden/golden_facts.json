@@ -1,9 +1,10 @@
 {
+  "_name": "golden_facts.json",
+  "_path": "G:/My Drive/genealogy-digital-archive/tests/fixtures/facts/golden/golden_facts.json",
   "$schema": "schemas/entities/fact_registry.schema.json",
-  "schema_version": "1.0.2",
-  "created_at": "2026-09-28T00:00:00Z",
-  "last_modified": "2026-09-28T00:00:00Z",
-  "total_facts": 100,
+  "schema_version": "1.2.0",
+  "last_updated": "2026-10-12T18:01:59Z",
+  "total_facts": 123,
   "facts": [
     {
       "fact_id": "00000000-0000-4000-8000-000000000001",
@@ -32,7 +33,9 @@
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1961:0001",
         "file_name": "birth_arthur_sterling.pdf"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000002",
@@ -50,7 +53,9 @@
       "source": {
         "record_urn": "URN:EDU:PA:DAU:HBG_HIGH:1979:GRAD",
         "file_name": "hbg_high_1979.pdf"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000003",
@@ -74,7 +79,9 @@
       "source": {
         "record_urn": "URN:VITAL:MARRIAGE:PA:DAU:1983:0492",
         "file_name": "marr_1983_0492.pdf"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000004",
@@ -98,7 +105,9 @@
       "source": {
         "record_urn": "URN:COURT:PA:DAU:DIVORCE:1985:0820",
         "file_name": "divorce_1985_0820.pdf"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000005",
@@ -122,7 +131,9 @@
       "source": {
         "record_urn": "URN:VITAL:MARRIAGE:PA:CUM:1986:0184",
         "file_name": "marr_1986_0184.pdf"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000006",
@@ -139,7 +150,9 @@
       "description": "Residence at 104 High Street, Carlisle",
       "source": {
         "record_urn": "URN:DIR:PA:CUM:CARLISLE:1990:P45"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000007",
@@ -156,7 +169,9 @@
       "description": "Logistics Dispatcher for Cumberland Freight",
       "source": {
         "record_urn": "URN:TAX:PA:CUM:1995:LOCAL"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000008",
@@ -173,7 +188,9 @@
       "description": "Purchased deed for parcel on Hanover St",
       "source": {
         "record_urn": "URN:DEED:PA:CUM:2005:BK44:P12"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000009",
@@ -200,7 +217,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1963:0412"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000010",
@@ -217,7 +236,9 @@
       "description": "High School Graduation",
       "source": {
         "record_urn": "URN:EDU:PA:DAU:1981:GRAD"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000011",
@@ -240,7 +261,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:MARRIAGE:PA:DAU:1983:0492"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000012",
@@ -263,7 +286,9 @@
       ],
       "source": {
         "record_urn": "URN:COURT:PA:DAU:DIVORCE:1985:0820"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000013",
@@ -280,7 +305,9 @@
       "description": "Residence in Harrisburg City",
       "source": {
         "record_urn": "URN:DIR:PA:DAU:HBG:1995"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000014",
@@ -307,7 +334,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1984:0618"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000015",
@@ -324,7 +353,9 @@
       "description": "High School Graduation",
       "source": {
         "record_urn": "URN:EDU:PA:DAU:2002:GRAD"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000016",
@@ -341,7 +372,9 @@
       "description": "Residence in Center City Philadelphia",
       "source": {
         "record_urn": "URN:CENSUS:2010:PA:PHILA"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000017",
@@ -368,7 +401,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1964:0822"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000018",
@@ -391,7 +426,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:MARRIAGE:PA:CUM:1986:0184"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000019",
@@ -408,7 +445,9 @@
       "description": "Elementary School Teacher at Carlisle District",
       "source": {
         "record_urn": "URN:EMP:PA:CUM:CARLISLE:SCH:1992"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000020",
@@ -425,7 +464,9 @@
       "description": "Teacher of the Year Commendation",
       "source": {
         "record_urn": "URN:NEWSPAPER:PA:CUM:CARLISLE:SENTINEL:2012-05-12:P4"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000021",
@@ -452,7 +493,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1983:0210"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000022",
@@ -469,7 +512,9 @@
       "description": "Bachelor of Arts, Dickinson College",
       "source": {
         "record_urn": "URN:EDU:PA:DICKINSON:2005:GRAD"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000023",
@@ -496,7 +541,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1986:1203"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000024",
@@ -519,7 +566,9 @@
       ],
       "source": {
         "record_urn": "URN:CIVIC:PA:DAU:2001:DOM"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000025",
@@ -536,7 +585,9 @@
       "description": "Software Systems Analyst",
       "source": {
         "record_urn": "URN:EMP:PA:HBG:TECH:2010"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000026",
@@ -553,7 +604,9 @@
       "description": "Birth of Sienna Nicole Kensington",
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1986:0518"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000027",
@@ -576,7 +629,9 @@
       ],
       "source": {
         "record_urn": "URN:CIVIC:PA:DAU:2001:DOM"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000028",
@@ -603,7 +658,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:2001:1215"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000029",
@@ -620,7 +677,9 @@
       "description": "High School Graduation",
       "source": {
         "record_urn": "URN:EDU:PA:DAU:2020:GRAD"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000030",
@@ -647,7 +706,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1988:0613"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000031",
@@ -664,7 +725,9 @@
       "description": "Registered Nurse at PinnacleHealth",
       "source": {
         "record_urn": "URN:EMP:PA:HBG:HEALTH:2015"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000032",
@@ -691,7 +754,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1941:0516"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000033",
@@ -708,7 +773,9 @@
       "description": "1950 U.S. Federal Census - Son in household of Garrison Jr",
       "source": {
         "record_urn": "URN:CENSUS:1950:PA:CUM:CARLISLE:ED21-15"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000034",
@@ -731,7 +798,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:MARRIAGE:PA:DAU:1960:0812"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000035",
@@ -748,7 +817,9 @@
       "description": "Enlisted service in Pennsylvania Army National Guard",
       "source": {
         "record_urn": "URN:MIL:PA:ARNG:1962:GARRISON_STERLING"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000036",
@@ -765,7 +836,9 @@
       "description": "Transportation Safety Bureau Fleet Operations Manager",
       "source": {
         "record_urn": "URN:EMP:PA:STATE:DOT:1974:DISPATCH"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000037",
@@ -782,7 +855,9 @@
       "description": "Death of Garrison Montgomery Sterling III",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:2018:063011"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000038",
@@ -799,7 +874,9 @@
       "description": "Interment at Westminster Memorial Gardens",
       "source": {
         "record_urn": "URN:CEMETERY:PA:CUM:WESTMINSTER:2018:STERLING"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000039",
@@ -822,7 +899,9 @@
       ],
       "source": {
         "record_urn": "URN:COURT:PA:CUM:PROBATE:2018:0411"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000040",
@@ -845,7 +924,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1942:1006"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000041",
@@ -868,7 +949,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:MARRIAGE:PA:DAU:1960:0812"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000042",
@@ -885,7 +968,9 @@
       "description": "Residence in Susquehanna Township",
       "source": {
         "record_urn": "URN:DIR:PA:DAU:1980:P112"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000043",
@@ -912,7 +997,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1938:0210"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000044",
@@ -929,7 +1016,9 @@
       "description": "1940 U.S. Federal Census",
       "source": {
         "record_urn": "URN:CENSUS:1940:PA:CUM:CARLISLE:ED21-10"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000045",
@@ -946,7 +1035,9 @@
       "description": "Death of Raymond Bradley Sterling",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:2010:1104"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000046",
@@ -963,7 +1054,9 @@
       "description": "Burial at Westminster Memorial Gardens",
       "source": {
         "record_urn": "URN:CEMETERY:PA:CUM:WESTMINSTER:2010:STERLING"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000047",
@@ -986,7 +1079,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1940:0814"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000048",
@@ -1003,7 +1098,9 @@
       "description": "Death of Adelaide Rose Thornton",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:2015:00412"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000049",
@@ -1030,7 +1127,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1910:0403"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000050",
@@ -1047,7 +1146,9 @@
       "description": "1920 U.S. Federal Census - Son",
       "source": {
         "record_urn": "URN:CENSUS:1920:PA:CUM:CARLISLE:ED18"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000051",
@@ -1064,7 +1165,9 @@
       "description": "1930 U.S. Federal Census - Retail Clerk",
       "source": {
         "record_urn": "URN:CENSUS:1930:PA:CUM:CARLISLE:ED21-12"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000052",
@@ -1087,7 +1190,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:MARRIAGE:PA:CUM:1935:0620"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000053",
@@ -1104,7 +1209,9 @@
       "description": "Death of Garrison Montgomery Sterling Jr",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1985:0918"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000054",
@@ -1121,7 +1228,9 @@
       "description": "Burial at Westminster Memorial Gardens",
       "source": {
         "record_urn": "URN:CEMETERY:PA:CUM:WESTMINSTER:1985:STERLING"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000055",
@@ -1138,7 +1247,9 @@
       "description": "Birth of Dorothy Evelyn Bradford",
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1914:0725"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000056",
@@ -1161,7 +1272,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:MARRIAGE:PA:CUM:1935:0620"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000057",
@@ -1178,7 +1291,9 @@
       "description": "Death of Dorothy Evelyn Bradford",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1999:1205"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000058",
@@ -1195,7 +1310,9 @@
       "description": "Burial at Westminster Memorial Gardens",
       "source": {
         "record_urn": "URN:CEMETERY:PA:CUM:WESTMINSTER:1999:STERLING"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000059",
@@ -1222,7 +1339,9 @@
       ],
       "source": {
         "record_urn": "URN:CHURCH:PA:CUM:CARLISLE:ZION:1870:BAP"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000060",
@@ -1245,7 +1364,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:MARRIAGE:PA:CUM:1905:V24"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000061",
@@ -1262,7 +1383,9 @@
       "description": "1920 U.S. Federal Census - Bank Teller",
       "source": {
         "record_urn": "URN:CENSUS:1920:PA:CUM:CARLISLE:ED18:S6"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000062",
@@ -1279,7 +1402,9 @@
       "description": "Death of Garrison Montgomery Sterling Sr",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1945:0520"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000063",
@@ -1296,7 +1421,9 @@
       "description": "Burial in Old Graveyard, Carlisle",
       "source": {
         "record_urn": "URN:CEMETERY:PA:CUM:OLD_GRAVEYARD:1945"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000064",
@@ -1313,7 +1440,9 @@
       "description": "Birth of Helena Beatrice Fairchild",
       "source": {
         "record_urn": "URN:CHURCH:PA:CUM:CARLISLE:LUTHERAN:1878:BAP"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000065",
@@ -1336,7 +1465,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:MARRIAGE:PA:CUM:1905:V24"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000066",
@@ -1353,7 +1484,9 @@
       "description": "Death of Helena Beatrice Fairchild",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1960:0411"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000067",
@@ -1370,7 +1503,9 @@
       "description": "Burial in Old Graveyard, Carlisle",
       "source": {
         "record_urn": "URN:CEMETERY:PA:CUM:OLD_GRAVEYARD:1960"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000068",
@@ -1393,7 +1528,9 @@
       ],
       "source": {
         "record_urn": "URN:CHURCH:PA:CUM:1845:BAP"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000069",
@@ -1410,7 +1547,9 @@
       "description": "Civil War service in 130th Pennsylvania Infantry",
       "source": {
         "record_urn": "URN:MIL:CIVIL_WAR:PA:130TH:STERLING"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000070",
@@ -1433,7 +1572,9 @@
       ],
       "source": {
         "record_urn": "URN:CHURCH:PA:CUM:CARLISLE:LUTHERAN:1868:MARR"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000071",
@@ -1450,7 +1591,9 @@
       "description": "1880 U.S. Federal Census - Farmer",
       "source": {
         "record_urn": "URN:CENSUS:1880:PA:CUM:ED72"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000072",
@@ -1467,7 +1610,9 @@
       "description": "Death of William Luther Sterling",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1915:0820"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000073",
@@ -1484,7 +1629,9 @@
       "description": "Burial in Ashland Cemetery, Carlisle",
       "source": {
         "record_urn": "URN:CEMETERY:PA:CUM:ASHLAND:1915"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000074",
@@ -1501,7 +1648,9 @@
       "description": "Birth of Agnes Rachel Kensington",
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1848:0625"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000075",
@@ -1524,7 +1673,9 @@
       ],
       "source": {
         "record_urn": "URN:CHURCH:PA:CUM:CARLISLE:LUTHERAN:1868:MARR"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000076",
@@ -1541,7 +1692,9 @@
       "description": "Death of Agnes Rachel Kensington",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1920:1104"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000077",
@@ -1558,7 +1711,9 @@
       "description": "Burial in Ashland Cemetery, Carlisle",
       "source": {
         "record_urn": "URN:CEMETERY:PA:CUM:ASHLAND:1920"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000078",
@@ -1585,7 +1740,9 @@
       ],
       "source": {
         "record_urn": "URN:CHURCH:PA:CUM:1872:BAP"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000079",
@@ -1602,7 +1759,9 @@
       "description": "Death of Lawrence Sterling",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1940:0819"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000080",
@@ -1629,7 +1788,9 @@
       ],
       "source": {
         "record_urn": "URN:CHURCH:PA:CUM:1874:BAP"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000081",
@@ -1646,7 +1807,9 @@
       "description": "Death of Nathaniel Sterling",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1951:1122"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000082",
@@ -1673,7 +1836,9 @@
       ],
       "source": {
         "record_urn": "URN:CHURCH:PA:CUM:1876:BAP"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000083",
@@ -1690,7 +1855,9 @@
       "description": "Death of Cedric Sterling",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1955:0301"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000084",
@@ -1717,7 +1884,9 @@
       ],
       "source": {
         "record_urn": "URN:CHURCH:PA:CUM:1878:BAP"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000085",
@@ -1734,7 +1903,9 @@
       "description": "Death of Zachary Sterling",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1962:0615"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000086",
@@ -1746,12 +1917,14 @@
         "raw_text": "10 Feb 1740"
       },
       "location": {
-        "standardized": "Hornberg, Baden-W\u00fcrttemberg, Germany"
+        "standardized": "Hornberg, Baden-Württemberg, Germany"
       },
       "description": "Baptism of Barnaby Sterling",
       "source": {
         "record_urn": "URN:CHURCH:DEU:BW:HORNBERG:1740:BAP"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000087",
@@ -1768,7 +1941,9 @@
       "description": "Arrival on ship Phoenix from Rotterdam",
       "source": {
         "record_urn": "URN:SHIP:PHOENIX:1765:PHILADELPHIA"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000088",
@@ -1791,7 +1966,9 @@
       ],
       "source": {
         "record_urn": "URN:CHURCH:PA:CUM:1775:MARR"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000089",
@@ -1808,7 +1985,9 @@
       "description": "Death of Barnaby Sterling (age 104)",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:CUM:1844:0412"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000090",
@@ -1825,7 +2004,9 @@
       "description": "Birth of Hannah Vanderbilt",
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1755:0619"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000091",
@@ -1842,7 +2023,9 @@
       "description": "Death of Hannah Vanderbilt",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1825:0830"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000092",
@@ -1859,7 +2042,9 @@
       "description": "Birth of Gideon Thornton",
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1865:0301"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000093",
@@ -1882,7 +2067,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:MARRIAGE:PA:CUM:1889:0214"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000094",
@@ -1899,7 +2086,9 @@
       "description": "Death of Gideon Thornton",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1945:1210"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000095",
@@ -1926,7 +2115,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1868:0410"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000096",
@@ -1943,7 +2134,9 @@
       "description": "Death of Rebecca Ann Thornton in childbirth",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1890:0601"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000097",
@@ -1970,7 +2163,9 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1890:INFANT"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000098",
@@ -1987,7 +2182,9 @@
       "description": "Stillborn Infant Thornton",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1890:INFANT"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000099",
@@ -2004,7 +2201,9 @@
       "description": "Death of Percival Sinclair",
       "source": {
         "record_urn": "URN:VITAL:DEATH:PA:1880:0310"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
     },
     {
       "fact_id": "00000000-0000-4000-8000-000000000100",
@@ -2031,7 +2230,216 @@
       ],
       "source": {
         "record_urn": "URN:VITAL:BIRTH:PA:1880:0914"
-      }
+      },
+      "is_deprecated": false,
+      "superseded_by": null
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000101",
+      "person_id": "IND-00000",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "Single-hop tombstone to fact 0001",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000001"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000102",
+      "person_id": "IND-00000",
+      "fact_type": "Marriage",
+      "date": {},
+      "description": "Single-hop tombstone to fact 0003",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000003"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000103",
+      "person_id": "IND-00000",
+      "fact_type": "Marriage",
+      "date": {},
+      "description": "Single-hop tombstone to fact 0005",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000005"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000104",
+      "person_id": "IND-00029",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "Single-hop tombstone to fact 0009",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000009"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000105",
+      "person_id": "IND-00037",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "Single-hop tombstone to fact 0014",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000014"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000106",
+      "person_id": "IND-00031",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "Single-hop tombstone to fact 0017",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000017"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000107",
+      "person_id": "IND-00043",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "Single-hop tombstone to fact 0023",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000023"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000108",
+      "person_id": "IND-00019",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "Single-hop tombstone to fact 0032",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000032"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000109",
+      "person_id": "IND-00067",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "Single-hop tombstone to fact 0049",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000049"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000110",
+      "person_id": "IND-00053",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "Single-hop tombstone to fact 0059",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000059"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000201",
+      "person_id": "IND-00000",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "Two-hop tombstone step 1 to 0101",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000101"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000202",
+      "person_id": "IND-00000",
+      "fact_type": "Marriage",
+      "date": {},
+      "description": "Two-hop tombstone step 1 to 0102",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000102"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000203",
+      "person_id": "IND-00000",
+      "fact_type": "Marriage",
+      "date": {},
+      "description": "Two-hop tombstone step 1 to 0103",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000103"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000204",
+      "person_id": "IND-00029",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "Two-hop tombstone step 1 to 0104",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000104"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000205",
+      "person_id": "IND-00037",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "Two-hop tombstone step 1 to 0105",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000105"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000801",
+      "person_id": "IND-00139",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "8-hop chain step 1",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000802"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000802",
+      "person_id": "IND-00139",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "8-hop chain step 2",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000803"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000803",
+      "person_id": "IND-00139",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "8-hop chain step 3",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000804"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000804",
+      "person_id": "IND-00139",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "8-hop chain step 4",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000805"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000805",
+      "person_id": "IND-00139",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "8-hop chain step 5",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000806"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000806",
+      "person_id": "IND-00139",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "8-hop chain step 6",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000807"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000807",
+      "person_id": "IND-00139",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "8-hop chain step 7",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000808"
+    },
+    {
+      "fact_id": "00000000-0000-4000-8000-000000000808",
+      "person_id": "IND-00139",
+      "fact_type": "Birth",
+      "date": {},
+      "description": "8-hop chain step 8 -> Fact 0086",
+      "is_deprecated": true,
+      "superseded_by": "00000000-0000-4000-8000-000000000086"
     }
   ]
 }

@@ -5,7 +5,7 @@
   "$id": "https://genealogy.archive/schemas/entities/site_registry.schema.json",
   "title": "Site Registry Schema",
   "version": "1.0.0",
-  "description": "Master administrative registry envelope for sites.json, including required GSI intake headers.",
+  "description": "Master administrative registry envelope for sites.json.",
   "type": "object",
   "required": [
     "_name",

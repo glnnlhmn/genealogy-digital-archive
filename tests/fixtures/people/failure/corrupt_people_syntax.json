@@ -1,0 +1,11 @@
+{
+  "_name": "corrupt_people_syntax.json",
+  "_path": "tests/fixtures/people/failure/corrupt_people_syntax.json",
+  "schema_version": "1.0.0",
+  "people": [
+    {
+      "person_id": "IND-00001",
+      "display_name": "Jacob Lehman"
+    }
+  MALFORMED_JSON_SYNTAX_ERROR
+}

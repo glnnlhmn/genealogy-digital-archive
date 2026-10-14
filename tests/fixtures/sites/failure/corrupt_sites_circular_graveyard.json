@@ -1,0 +1,39 @@
+{
+  "_name": "corrupt_sites_circular_graveyard.json",
+  "_path": "tests/fixtures/sites/failure/corrupt_sites_circular_graveyard.json",
+  "$schema": "schemas/entities/site_registry.schema.json",
+  "version": "1.2.0",
+  "created_at": "2026-10-08T19:30:00Z",
+  "last_modified": "2026-10-10T12:00:00Z",
+  "total_sites": 2,
+  "sites": [
+    {
+      "site_id": "SID-00030",
+      "site_type": "LANDMARK",
+      "name": "Circular Loop Site Alpha",
+      "aliases": [],
+      "location_id": "LOC-00042",
+      "address": null,
+      "operational_status": "DEFUNCT",
+      "is_deprecated": true,
+      "superseded_by": "SID-00031",
+      "dissolution_date": "1900",
+      "notes": [],
+      "last_updated": "2026-10-10T12:00:00Z"
+    },
+    {
+      "site_id": "SID-00031",
+      "site_type": "LANDMARK",
+      "name": "Circular Loop Site Beta",
+      "aliases": [],
+      "location_id": "LOC-00042",
+      "address": null,
+      "operational_status": "DEFUNCT",
+      "is_deprecated": true,
+      "superseded_by": "SID-00030",
+      "dissolution_date": "1900",
+      "notes": [],
+      "last_updated": "2026-10-10T12:00:00Z"
+    }
+  ]
+}

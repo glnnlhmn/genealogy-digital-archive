@@ -1,0 +1,47 @@
+{
+  "_name": "corrupt_death_invalid_urn.json",
+  "_path": "data/archival_records/vital/REC-1944-DEATH-001.json",
+  "_defect": "source_urn does not match URN:DEATH pattern",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Corrupt Death Record with invalid URN",
+  "record_metadata": {
+    "source_guid": "503aa4a6-2abd-42ee-8a3e-ace4a22d31de",
+    "record_category": "VITAL",
+    "record_type": "DEATH_CERTIFICATE"
+  },
+  "death_certificate_details": {
+    "filing_details": {
+      "certificate_number": "DC-1944-789"
+    },
+    "decedent": {
+      "person_id": "IND-00002",
+      "full_name": {
+        "given": "Annie",
+        "surname": "Lehman"
+      },
+      "sex": "Female"
+    },
+    "event_details": {
+      "date_of_death": {
+        "modifier": "EXACT",
+        "date_raw": "1944-11-20",
+        "date_iso": "1944-11-20",
+        "year": 1944
+      },
+      "place_of_death": {
+        "location_id": "LOC-00001",
+        "verbatim": "Newville, Cumberland, Pennsylvania, USA"
+      }
+    },
+    "transcript": {
+      "verbatim_text": "Corrupt URN test."
+    },
+    "media_files": [
+      {
+        "file_name": "scan.pdf",
+        "mime_type": "application/pdf"
+      }
+    ]
+  },
+  "associated_people": []
+}

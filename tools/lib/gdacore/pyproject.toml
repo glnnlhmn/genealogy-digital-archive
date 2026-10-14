@@ -1,0 +1,65 @@
+# Name: pyproject.toml
+# Path: tools/lib/gdacore/pyproject.toml
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gdacore"
+version = "1.0.0"
+description = "Core system infrastructure, configuration, logging, and filesystem utilities for GDA."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+    { name = "Glenn D. Lehman", email = "glnn.lhmn@gmail.com" }
+]
+dependencies = [
+    "pydantic>=2.0",
+    "jsonschema>=4.20.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q --basetemp=gtemp/pytest_tmp --strict-markers"
+markers = [
+    "smoke: Fast sanity checks executed prior to commit (< 5s)",
+    "regression: Boundary and defect tests verifying specific defensive rules",
+    "burnin: Multi-item stress, deep graph traversal, and batch load tests",
+    "integration: Multi-file pipeline mutations and tool runs",
+    "unit: Isolated standalone unit tests with zero disk I/O",
+    "integrity: Whole-archive schema, topology, and drift validation",
+    "slow: Tests with execution duration exceeding 2s"
+]
+
+[tool.coverage.run]
+branch = true
+source = ["src/gdadomain"]
+omit = [
+    "tests/*",
+    "*/__init__.py"
+]
+
+[tool.coverage.report]
+fail_under = 95
+precision = 2
+show_missing = true
+skip_covered = false
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "sys.exit",
+    "if TYPE_CHECKING:"
+]

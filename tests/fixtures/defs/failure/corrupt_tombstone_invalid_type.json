@@ -1,0 +1,7 @@
+{
+  "_name": "corrupt_tombstone_invalid_type.json",
+  "_path": "tests/fixtures/defs/failure/corrupt_tombstone_invalid_type.json",
+  "_defect": "is_deprecated is not a boolean, superseded_by is integer",
+  "is_deprecated": "yes",
+  "superseded_by": 12345
+}

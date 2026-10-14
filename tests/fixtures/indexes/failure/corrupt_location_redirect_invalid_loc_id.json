@@ -1,0 +1,17 @@
+{
+  "_name": "corrupt_location_redirect_invalid_loc_id.json",
+  "_path": "tests/fixtures/indexes/failure/corrupt_location_redirect_invalid_loc_id.json",
+  "_defect": "location_id violates pattern ^LOC-\\d{5}$",
+  "_name": "locations_redirect_idx.json",
+  "_path": "data/indexes/locations_redirect_idx.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_version": "1.0.0",
+  "last_modified": "2026-10-12T12:00:00Z",
+  "total_mappings": 1,
+  "redirects": {
+    "concord, nh": {
+      "location_id": "INVALID-LOC",
+      "standardized": "Concord, Merrimack, New Hampshire, USA"
+    }
+  }
+}

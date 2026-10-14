@@ -1,0 +1,59 @@
+{
+  "_name": "corrupt_locations_circular_graveyard.json",
+  "_path": "tests/fixtures/locations/failure/corrupt_locations_circular_graveyard.json",
+  "$schema": "schemas/entities/location_registry.schema.json",
+  "schema_version": "1.2.0",
+  "created_at": "2026-09-29T00:00:00Z",
+  "last_modified": "2026-10-10T00:00:00Z",
+  "total_locations": 2,
+  "locations": [
+    {
+      "location_id": "LOC-03000",
+      "canonical_name": "Loop Settlement A, Cumberland County, Pennsylvania, USA",
+      "aliases": [],
+      "jurisdiction": {
+        "local_jurisdiction": "Loop Settlement A",
+        "county": "Cumberland",
+        "state_or_province": "Pennsylvania",
+        "country": "USA"
+      },
+      "temporal_validity": {
+        "date_established": "1750",
+        "date_dissolved": "1760",
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
+      "historical_periods": [],
+      "operational_status": "DEFUNCT",
+      "is_deprecated": true,
+      "superseded_by": "LOC-03001",
+      "dissolution_date": "1760",
+      "notes": [],
+      "last_updated": "2026-10-10T00:00:00Z"
+    },
+    {
+      "location_id": "LOC-03001",
+      "canonical_name": "Loop Settlement B, Cumberland County, Pennsylvania, USA",
+      "aliases": [],
+      "jurisdiction": {
+        "local_jurisdiction": "Loop Settlement B",
+        "county": "Cumberland",
+        "state_or_province": "Pennsylvania",
+        "country": "USA"
+      },
+      "temporal_validity": {
+        "date_established": "1760",
+        "date_dissolved": "1770",
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
+      "historical_periods": [],
+      "operational_status": "DEFUNCT",
+      "is_deprecated": true,
+      "superseded_by": "LOC-03000",
+      "dissolution_date": "1770",
+      "notes": [],
+      "last_updated": "2026-10-10T00:00:00Z"
+    }
+  ]
+}

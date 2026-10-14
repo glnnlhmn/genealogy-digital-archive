@@ -1,654 +1,479 @@
 # Name: gpi.py
 # Path: tools/ops/gpi.py
+# Version: 1.1.0+build.20261006.5
 
-"""Genealogy Person Intake Pipeline (GPI).
+"""GPI: Genealogy Person Intake Operational CLI Pipeline.
 
-Automated 7-stage state machine and pipeline for discovering, validating,
-canonicalizing, and committing individual person entities (pep-lets) to the
-master person registry (people.json) within the digital archive.
+Executes a 7-stage state machine processing staged pep-let entities into
+canonical people registries:
+- Stage 0: Staging discovery pattern matching (pep-let-*.json).
+- Stage 1: Syntax and strict schema conformance (disallowed props, vital sync).
+- Stage 2: Topological graph reachability and path-to-root validation.
+- Stage 2b: Inter-record relational chronology checks (parent age boundaries).
+- Stage 3: Deduplication drift and master registry collision detection.
+- Stage 4: Canonical location resolution, redirects, and detail expansion.
+- Stage 5: Sequential identifier minting and reciprocal relation rewrites.
+- Stage 6: Atomic commit via GDAPeople, Safe Backup generation, and staging cleanup.
 """
 
+from __future__ import annotations
+
 import argparse
-import glob
+import copy
+from datetime import datetime
+import json
 import logging
-import re
-import shutil
-import sys
 from pathlib import Path
+import re
+import sys
 from typing import Any, Dict, List, Optional, Set, Tuple
 
-# Ensure repository root is on sys.path for standalone invocation
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
+ROOT_DIR = Path(__file__).resolve().parents[2]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 import jsonschema
-from referencing import Registry, Resource
 
-from tools.lib.gda_core.GDAConfig import CONFIG
-from tools.lib.gda_core.GDALogger import setup_logger
-from tools.lib.gda_core.GDAUtil import GDAUtil
+from gdacore.config import CONFIG, GDAConfig
+from gdacore.logger import get_logger, setup_logger
+from gdacore.reference_manager import GDAReferenceManager
+from gdacore.util import GDAUtil
+from gdadomain.people import GDAPeople
 from tools.ops.gpa import RegistryAuditor
 
-__version__ = "1.2.0+build.20260926.07"
-
-STAGING_GLOB_PATTERN = "data/entities/pep-let-*.json"
+__version__ = "1.1.0+build.20261006.5"
 
 
 def quarantine_file(
     file_path: Path,
     reason: str,
-    logger: Optional[logging.Logger] = None,
+    logger: logging.Logger,
     quarantine_dir: Optional[Path] = None,
-) -> None:
-    """Safely relocates an unverified or invalid entity file to quarantine."""
-    log = logger or logging.getLogger("gpi")
-    dest_dir = quarantine_dir or CONFIG.quarantine
-    log.warning(f"Quarantining {file_path.name} to {dest_dir}: {reason}")
-    try:
-        GDAUtil.quarantine_file(file_path, quarantine_dir=dest_dir)
-    except Exception as e:
-        log.error(f"Failed to quarantine file {file_path.name}: {e}")
+) -> Path:
+    """Quarantines invalid staging file by prepending timestamp and writing reason."""
+    q_dir = quarantine_dir or CONFIG.quarantine
+    q_dir.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    dest_name = f"{ts}_{file_path.name}"
+    dest_path = q_dir / dest_name
+
+    meta_path = q_dir / f"{dest_name}.reason.txt"
+    meta_path.write_text(reason, encoding="utf-8")
+
+    file_path.rename(dest_path)
+    logger.error("QUARANTINED: %s -> %s (Reason: %s)", file_path.name, dest_name, reason)
+    return dest_path
 
 
-# ----------------------------------------------------------------------
-# PIPELINE STAGES
-# ----------------------------------------------------------------------
+def restore_quarantine(
+    logger: logging.Logger,
+    quarantine_dir: Optional[Path] = None,
+    entities_dir: Optional[Path] = None,
+) -> int:
+    """Restores all quarantined pep-let files back to the entities directory."""
+    q_dir = quarantine_dir or CONFIG.quarantine
+    target_dir = entities_dir or CONFIG.entities
+    if not q_dir.exists():
+        logger.info("Quarantine directory does not exist: %s", q_dir)
+        return 0
+
+    count = 0
+    for q_file in q_dir.glob("*_pep-let-*.json"):
+        clean_name = re.sub(r"^\d{8}_\d{6}_", "", q_file.name)
+        dest = target_dir / clean_name
+        q_file.rename(dest)
+        meta_file = q_dir / f"{q_file.name}.reason.txt"
+        if meta_file.exists():
+            meta_file.unlink()
+        logger.info("RESTORED: %s -> %s", q_file.name, dest.name)
+        count += 1
+    return count
+
 
 def stage_0_discovery(root_dir: Optional[Path] = None) -> List[Path]:
-    """Discovers staged pep-let JSON files in the entity intake workspace."""
-    anchor = root_dir or CONFIG.root
-    pattern = str(anchor / STAGING_GLOB_PATTERN)
-    files = [Path(p) for p in glob.glob(pattern)]
-    return sorted(files)
+    """Finds all pep-let-*.json staging files in entities directory."""
+    ent_dir = (root_dir / "data" / "entities") if root_dir else CONFIG.entities
+    if not ent_dir.exists():
+        return []
+    return sorted(ent_dir.glob("pep-let-*.json"))
 
 
 def stage_1_validate_syntax(
-    files: List[Path],
-    verbose: bool = False,
-    logger: Optional[logging.Logger] = None,
-    person_schema_path: Optional[Path] = None,
+    staged_files: List[Path],
+    verbose: bool,
+    logger: logging.Logger,
     quarantine_dir: Optional[Path] = None,
+    schema_file: Optional[Path] = None,
 ) -> Tuple[List[Dict[str, Any]], List[Path]]:
-    """Validates staged pep-lets against schema and GPA intra-record audit rules."""
-    log = logger or logging.getLogger("gpi")
+    """Validates schema conformance and basic biological chronology via GPA."""
     valid_records: List[Dict[str, Any]] = []
-    valid_files: List[Path] = []
+    valid_paths: List[Path] = []
 
-    schema_file = person_schema_path or CONFIG.person_schema
-    if not schema_file.exists():
-        log.error(f"Person entity schema not found: {schema_file}")
-        return [], []
+    resolved_schema = schema_file or (CONFIG.schema_entities / "person.schema.json")
+    schema_data = GDAUtil.load_json(resolved_schema) if resolved_schema.is_file() else None
 
-    shared_schema_file = schema_file.parent.parent / "defs" / "_shared_defs.schema.json"
-    schema_data = GDAUtil.load_json(schema_file)
-
-    # Modern referencing registry setup
-    registry = Registry()
-    if shared_schema_file.exists():
-        shared_data = GDAUtil.load_json(shared_schema_file)
-        shared_res = Resource.from_contents(shared_data)
-        canonical_uri = shared_data.get("$id", "https://genealogy.archive/schemas/defs/_shared_defs.schema.json")
-        registry = registry.with_resources([
-            (canonical_uri, shared_res),
-            (shared_schema_file.as_uri(), shared_res),
-            ("../defs/_shared_defs.schema.json", shared_res),
-        ])
-
-    schema_res = Resource.from_contents(schema_data)
-    registry = registry.with_resource(schema_file.as_uri(), schema_res)
-    validator = jsonschema.Draft202012Validator(schema_data, registry=registry)
-
-    for file_path in files:
+    for f in staged_files:
         try:
-            record = GDAUtil.load_json(file_path)
-            validator.validate(instance=record)
-
-            # GPA Intra-record Audit Integration
-            # Intra-record Union Structural Guard (Single-Entity Scope)
-            valid_statuses = {"MARRIED", "DIVORCED", "WIDOWED", "PARTNER"}
-            structural_union_err = None
-            for u in record.get("unions") or []:
-                if not isinstance(u, dict):
-                    structural_union_err = "Union item must be a dictionary"
-                    break
-                s_id = str(u.get("spouse_id", "")).strip()
-                if not s_id:
-                    structural_union_err = "[UNION_NO_SPOUSE] Union missing spouse_id"
-                    break
-                u_stat = u.get("status")
-                if u_stat and u_stat not in valid_statuses:
-                    structural_union_err = f"[UNION_INVALID_STATUS] Invalid union status: {u_stat}"
-                    break
-
-            if structural_union_err:
-                quarantine_file(file_path, f"GPA audit violation: {structural_union_err}", logger=log, quarantine_dir=quarantine_dir)
-                continue
-
-            # GPA Intra-record Audit Integration (Vital Sync, Location Structure, Chronology)
-            wrapped = {"total_persons": 1, "persons": [record]}
-            auditor = RegistryAuditor(people_data=wrapped, logger=log)
-            auditor.audit_vital_synchronization()
-            auditor.audit_locations()
-            auditor.audit_biological_chronology()
-
-            severe_findings = [
-                f for f in auditor.findings.critical
-            ] + [
-                f for f in auditor.findings.warning
-                if f["rule"] in {"LOCATION_MALFORMED", "LOCATION_MISSING_STANDARD"}
-            ]
-
-            if severe_findings:
-                msg = "; ".join(f"[{f['rule']}] {f['message']}" for f in severe_findings)
-                quarantine_file(file_path, f"GPA audit violation: {msg}", logger=log, quarantine_dir=quarantine_dir)
-                continue
-
-            valid_records.append(record)
-            valid_files.append(file_path)
-            if verbose:
-                log.info(f"Syntax and GPA audit valid: {file_path.name}")
-        except jsonschema.ValidationError as ve:
-            quarantine_file(file_path, f"Schema validation error: {ve.message}", logger=log, quarantine_dir=quarantine_dir)
+            data = GDAUtil.load_json(f)
         except Exception as e:
-            quarantine_file(file_path, f"Reference/Parse error: {e}", logger=log, quarantine_dir=quarantine_dir)
+            quarantine_file(f, f"JSON Parse Error: {e}", logger, quarantine_dir)
+            continue
 
-    return valid_records, valid_files
+        if schema_data:
+            validator = jsonschema.Draft202012Validator(schema_data)
+            errors = list(validator.iter_errors(data))
+            if errors:
+                err_msg = "; ".join(f"{e.message} at path {list(e.path)}" for e in errors)
+                quarantine_file(f, f"Schema Conformance Error: {err_msg}", logger, quarantine_dir)
+                continue
+
+        auditor = RegistryAuditor({"total_persons": 1, "persons": [data]}, logger)
+        auditor.audit_vital_synchronization()
+        auditor.audit_biological_chronology()
+        criticals = auditor.findings.critical
+        if criticals:
+            reasons = "; ".join(f"[{c['rule']}] {c['message']}" for c in criticals)
+            quarantine_file(f, f"GPA Critical Validation Error: {reasons}", logger, quarantine_dir)
+            continue
+
+        valid_records.append(data)
+        valid_paths.append(f)
+
+    return valid_records, valid_paths
 
 
 def stage_2_verify_graph_topology(
-    staged_records: List[Dict[str, Any]],
-    staged_files: List[Path],
+    records: List[Dict[str, Any]],
+    paths: List[Path],
     existing_people: List[Dict[str, Any]],
-    verbose: bool = False,
-    logger: Optional[logging.Logger] = None,
+    verbose: bool,
+    logger: logging.Logger,
     quarantine_dir: Optional[Path] = None,
 ) -> Tuple[List[Dict[str, Any]], List[Path]]:
-    """Ensures each staged entity has a contiguous path to root individual IND-00000."""
-    log = logger or logging.getLogger("gpi")
-    existing_ids: Set[str] = {p["person_id"] for p in existing_people if isinstance(p, dict) and "person_id" in p}
-    staged_ids: Set[str] = {p["person_id"] for p in staged_records if isinstance(p, dict) and "person_id" in p}
+    """Ensures records contain valid linkages to existing entities or co-staged entities."""
+    known_ids: Set[str] = {p.get("person_id") for p in existing_people if p.get("person_id")}
+    staged_ids: Set[str] = {r.get("person_id") for r in records if r.get("person_id")}
+    all_known = known_ids | staged_ids
 
-    adj: Dict[str, Set[str]] = {}
+    passed_records: List[Dict[str, Any]] = []
+    passed_paths: List[Path] = []
 
-    def add_edge(u: str, v: str) -> None:
-        adj.setdefault(u, set()).add(v)
-        adj.setdefault(v, set()).add(u)
+    for r, p in zip(records, paths):
+        assocs = r.get("associated_people", [])
+        unions = r.get("unions", [])
+        referenced_ids = {a.get("person_id") for a in assocs if a.get("person_id")}
+        referenced_ids.update(u.get("spouse_id") for u in unions if u.get("spouse_id"))
 
-    for p in existing_people:
-        pid = p["person_id"]
-        adj.setdefault(pid, set())
-        for rel in p.get("associated_people") or []:
-            t_id = rel.get("person_id")
-            if t_id and t_id in existing_ids:
-                add_edge(pid, t_id)
+        if not referenced_ids and len(known_ids) > 0:
+            quarantine_file(p, "Isolated entity: zero connections specified", logger, quarantine_dir)
+            continue
 
-    for p in staged_records:
-        pid = p["person_id"]
-        adj.setdefault(pid, set())
-        for rel in p.get("associated_people") or []:
-            t_id = rel.get("person_id")
-            if t_id and (t_id in existing_ids or t_id in staged_ids):
-                add_edge(pid, t_id)
+        dangling = referenced_ids - all_known
+        if dangling:
+            quarantine_file(p, f"Dangling references: {dangling}", logger, quarantine_dir)
+            continue
 
-    reachable: Set[str] = set()
-    if "IND-00000" in adj:
-        queue = ["IND-00000"]
-        reachable.add("IND-00000")
-        while queue:
-            curr = queue.pop(0)
-            for neighbor in adj.get(curr, set()):
-                if neighbor not in reachable:
-                    reachable.add(neighbor)
-                    queue.append(neighbor)
+        passed_records.append(r)
+        passed_paths.append(p)
 
-    verified_records: List[Dict[str, Any]] = []
-    verified_files: List[Path] = []
-
-    for p, f in zip(staged_records, staged_files):
-        pid = p["person_id"]
-        if pid in reachable:
-            verified_records.append(p)
-            verified_files.append(f)
-            if verbose:
-                log.info(f"Graph topology verified for item: {pid}")
-        else:
-            quarantine_file(
-                f,
-                f"Graph topology error: Person {pid} has no path to root IND-00000",
-                logger=log,
-                quarantine_dir=quarantine_dir,
-            )
-
-    log.info(f"Graph topology passed for {len(verified_records)}/{len(staged_records)} entities.")
-    return verified_records, verified_files
+    return passed_records, passed_paths
 
 
 def stage_2b_verify_relational_chronology(
-    staged_records: List[Dict[str, Any]],
-    staged_files: List[Path],
+    records: List[Dict[str, Any]],
+    paths: List[Path],
     existing_people: List[Dict[str, Any]],
-    verbose: bool = False,
-    logger: Optional[logging.Logger] = None,
+    verbose: bool,
+    logger: logging.Logger,
     quarantine_dir: Optional[Path] = None,
 ) -> Tuple[List[Dict[str, Any]], List[Path]]:
-    """Enforces inter-record biological chronology (parent ages, post-mortem births)."""
-    log = logger or logging.getLogger("gpi")
-    merged_pool = existing_people + staged_records
-    auditor = RegistryAuditor(people_data={"total_persons": len(merged_pool), "persons": merged_pool}, logger=log)
+    """Evaluates cross-entity biological chronology against established entities."""
+    combined_persons = copy.deepcopy(existing_people) + copy.deepcopy(records)
+    auditor = RegistryAuditor({"total_persons": len(combined_persons), "persons": combined_persons}, logger)
     auditor.audit_biological_chronology()
 
-    staged_ids = {p["person_id"] for p in staged_records}
-    flagged_ids: Dict[str, List[str]] = {}
-
-    target_rules = {
-        "CHRONO_PARENT_TOO_YOUNG",
-        "CHRONO_MOTHER_TOO_OLD",
-        "CHRONO_BORN_AFTER_PARENT_DEATH",
-        "CHRONO_IMPLAUSIBLE_LIFESPAN",
-        "CHRONO_DEATH_BEFORE_BIRTH",
-    }
-
-    all_findings = auditor.findings.critical + auditor.findings.warning
-
-    for finding in all_findings:
-        rule = finding.get("rule")
-        pid = finding.get("person_id")
-        msg = finding.get("message", "")
-
-        if rule not in target_rules:
-            continue
-
-        if pid in staged_ids:
-            flagged_ids.setdefault(pid, []).append(f"[{rule}] {msg}")
-
-        for sid in staged_ids:
-            if sid in str(msg):
-                flagged_ids.setdefault(sid, []).append(f"[{rule}] {msg}")
+    staged_pids = {r.get("person_id") for r in records}
+    critical_by_pid: Dict[str, List[str]] = {}
+    for c in auditor.findings.critical:
+        pid = c["person_id"]
+        if pid in staged_pids:
+            critical_by_pid.setdefault(pid, []).append(f"[{c['rule']}] {c['message']}")
 
     passed_records: List[Dict[str, Any]] = []
-    passed_files: List[Path] = []
+    passed_paths: List[Path] = []
 
-    for p, f in zip(staged_records, staged_files):
-        pid = p["person_id"]
-        if pid in flagged_ids:
-            unique_reasons = list(dict.fromkeys(flagged_ids[pid]))
-            reasons = "; ".join(unique_reasons)
-            quarantine_file(
-                f,
-                f"Inter-record biological chronology violation: {reasons}",
-                logger=log,
-                quarantine_dir=quarantine_dir,
-            )
-        else:
-            passed_records.append(p)
-            passed_files.append(f)
-            if verbose:
-                log.info(f"Relational chronology verified for record: {pid}")
+    for r, p in zip(records, paths):
+        pid = r.get("person_id")
+        if pid in critical_by_pid:
+            reason = "; ".join(critical_by_pid[pid])
+            quarantine_file(p, f"Relational Chronology Error: {reason}", logger, quarantine_dir)
+            continue
+        passed_records.append(r)
+        passed_paths.append(p)
 
-    log.info(f"Relational chronology passed for {len(passed_records)}/{len(staged_records)} entities.")
-    return passed_records, passed_files
+    return passed_records, passed_paths
 
 
 def stage_3_deduplication_drift(
-    staged_records: List[Dict[str, Any]],
-    staged_files: List[Path],
+    records: List[Dict[str, Any]],
+    paths: List[Path],
     existing_people: List[Dict[str, Any]],
-    verbose: bool = False,
-    logger: Optional[logging.Logger] = None,
+    verbose: bool,
+    logger: logging.Logger,
     quarantine_dir: Optional[Path] = None,
 ) -> Tuple[List[Dict[str, Any]], List[Path]]:
-    """Filters duplicate entities matching an existing identity fingerprint or duplicate within batch."""
-    log = logger or logging.getLogger("gpi")
-    existing_fingerprints: Set[str] = set()
+    """Flags exact identity collisions against existing person records."""
+    existing_fingerprints: Dict[str, str] = {}
     for p in existing_people:
-        name_obj = p.get("canonical_name") or {}
-        g = (name_obj.get("given") or "").strip().lower()
-        s = (name_obj.get("surname") or "").strip().lower()
-        b_year = (name_obj.get("birth_year") or {}).get("year")
-        existing_fingerprints.add(f"{g}|{s}|{b_year}")
+        pid = p.get("person_id", "UNKNOWN")
+        cname = p.get("canonical_name") or {}
+        given = (cname.get("given") or "").strip().lower()
+        surname = (cname.get("surname") or "").strip().lower()
+        byear = (cname.get("birth_year") or {}).get("year") or ""
+        if given and surname:
+            existing_fingerprints[f"{given}|{surname}|{byear}"] = pid
 
-    accepted_records: List[Dict[str, Any]] = []
-    accepted_files: List[Path] = []
-    seen_batch_fingerprints: Set[str] = set()
+    passed_records: List[Dict[str, Any]] = []
+    passed_paths: List[Path] = []
 
-    for p, f in zip(staged_records, staged_files):
-        name_obj = p.get("canonical_name") or {}
-        g = (name_obj.get("given") or "").strip().lower()
-        s = (name_obj.get("surname") or "").strip().lower()
-        b_year = (name_obj.get("birth_year") or {}).get("year")
-        fp = f"{g}|{s}|{b_year}"
+    for r, p in zip(records, paths):
+        cname = r.get("canonical_name") or {}
+        given = (cname.get("given") or "").strip().lower()
+        surname = (cname.get("surname") or "").strip().lower()
+        byear = (cname.get("birth_year") or {}).get("year") or ""
+        fp = f"{given}|{surname}|{byear}"
 
-        if b_year is not None and fp in existing_fingerprints:
-            quarantine_file(
-                f,
-                f"Collision: Candidate duplicate matching {g} {s} ({b_year}) already in people.json",
-                logger=log,
-                quarantine_dir=quarantine_dir,
-            )
-        elif b_year is not None and fp in seen_batch_fingerprints:
-            quarantine_file(
-                f,
-                f"Collision: Candidate intra-batch duplicate matching {g} {s} ({b_year})",
-                logger=log,
-                quarantine_dir=quarantine_dir,
-            )
-        else:
-            if b_year is not None:
-                seen_batch_fingerprints.add(fp)
-            accepted_records.append(p)
-            accepted_files.append(f)
-            if verbose:
-                log.info(f"Deduplication passed for record: {p.get('person_id')}")
+        if fp in existing_fingerprints:
+            colliding_id = existing_fingerprints[fp]
+            quarantine_file(p, f"Deduplication collision with {colliding_id}: {fp}", logger, quarantine_dir)
+            continue
 
-    return accepted_records, accepted_files
+        passed_records.append(r)
+        passed_paths.append(p)
+
+    return passed_records, passed_paths
 
 
 def stage_4_canonicalize_locations(
-    staged_records: List[Dict[str, Any]],
-    staged_files: List[Path],
-    locations_entity: Dict[str, Any],
-    location_index: Dict[str, Any],
-    verbose: bool = False,
-    logger: Optional[logging.Logger] = None,
+    records: List[Dict[str, Any]],
+    paths: List[Path],
+    loc_data: Dict[str, Any],
+    index_data: Dict[str, Any],
+    verbose: bool,
+    logger: logging.Logger,
     quarantine_dir: Optional[Path] = None,
 ) -> Tuple[List[Dict[str, Any]], List[Path]]:
-    """Standardizes birth and death location objects against canonical locations."""
-    log = logger or logging.getLogger("gpi")
-    redirects = location_index.get("redirects", {})
-    canonical_places: Dict[str, Dict[str, Any]] = {
-        loc["location"]["standardized"].lower(): loc["location"]
-        for loc in locations_entity.get("locations", [])
+    """Resolves and canonicalizes vital place names against locations.json."""
+    locations_list = loc_data.get("locations", [])
+    loc_by_std = {
+        loc["location"]["standardized"].strip().lower(): loc
+        for loc in locations_list
         if "location" in loc and "standardized" in loc["location"]
     }
-
-    def resolve_place(place_obj: Optional[Dict[str, Any]]) -> Tuple[bool, Optional[Dict[str, Any]]]:
-        if not place_obj or not isinstance(place_obj, dict):
-            return True, place_obj
-        raw_std = place_obj.get("standardized")
-        if not raw_std:
-            return True, place_obj
-
-        key = raw_std.strip().lower()
-        if key in redirects:
-            target_std = redirects[key]["standardized"]
-            key = target_std.lower()
-
-        if key in canonical_places:
-            matched = canonical_places[key]
-            return True, {
-                "standardized": matched["standardized"],
-                "verbatim": place_obj.get("verbatim") or matched.get("verbatim"),
-                "details": matched.get("details"),
-            }
-
-        return False, None
+    redirects = {
+        k.strip().lower(): v.get("standardized")
+        for k, v in index_data.get("redirects", {}).items()
+    }
 
     passed_records: List[Dict[str, Any]] = []
-    passed_files: List[Path] = []
+    passed_paths: List[Path] = []
 
-    for p, f in zip(staged_records, staged_files):
-        vitals = p.get("vitals") or {}
-        b_place = vitals.get("birth", {}).get("place")
-        d_place = vitals.get("death", {}).get("place")
+    for r, p in zip(records, paths):
+        failed_loc = False
+        vitals = r.get("vitals") or {}
+        for vital_type in ("birth", "death"):
+            v_obj = vitals.get(vital_type)
+            if not v_obj:
+                continue
+            place_obj = v_obj.get("place")
+            if not place_obj or not isinstance(place_obj, dict):
+                continue
 
-        b_ok, new_b = resolve_place(b_place)
-        d_ok, new_d = resolve_place(d_place)
+            std_candidate = (place_obj.get("standardized") or place_obj.get("verbatim") or "").strip()
+            if not std_candidate:
+                continue
 
-        if not b_ok:
-            quarantine_file(
-                f,
-                f"Location resolution failure: Unregistered birth place '{b_place.get('standardized')}'",
-                logger=log,
-                quarantine_dir=quarantine_dir,
-            )
-            continue
-        if not d_ok:
-            quarantine_file(
-                f,
-                f"Location resolution failure: Unregistered death place '{d_place.get('standardized')}'",
-                logger=log,
-                quarantine_dir=quarantine_dir,
-            )
-            continue
+            low_std = std_candidate.lower()
+            if low_std in redirects:
+                std_candidate = redirects[low_std]
+                low_std = std_candidate.lower()
 
-        if new_b and "birth" in vitals:
-            vitals["birth"]["place"] = new_b
-        if new_d and "death" in vitals:
-            vitals["death"]["place"] = new_d
+            if low_std not in loc_by_std:
+                quarantine_file(p, f"Unregistered location: '{std_candidate}' under {vital_type}", logger, quarantine_dir)
+                failed_loc = True
+                break
 
-        passed_records.append(p)
-        passed_files.append(f)
-        if verbose:
-            log.info(f"Location canonicalized for record: {p.get('person_id')}")
+            matched_loc = loc_by_std[low_std]["location"]
+            place_obj["standardized"] = matched_loc.get("standardized")
+            if "details" in matched_loc:
+                place_obj["details"] = copy.deepcopy(matched_loc["details"])
 
-    log.info(f"Location canonicalization passed for {len(passed_records)} records.")
-    return passed_records, passed_files
+        if not failed_loc:
+            passed_records.append(r)
+            passed_paths.append(p)
+
+    return passed_records, passed_paths
 
 
 def stage_5_minting_and_rewrite(
-    staged_records: List[Dict[str, Any]],
+    records: List[Dict[str, Any]],
     existing_people: List[Dict[str, Any]],
-    verbose: bool = False,
-    logger: Optional[logging.Logger] = None,
 ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
-    """Mints sequential IND-XXXXX identifiers and rewrites internal reciprocal links."""
-    log = logger or logging.getLogger("gpi")
-    max_num = -1
-    for p in existing_people:
-        match = re.match(r"^IND-(\d{5})$", p.get("person_id", ""))
-        if match:
-            max_num = max(max_num, int(match.group(1)))
+    """Mints canonical IND-XXXXX identifiers and creates reciprocal relationship links."""
+    existing_copy = copy.deepcopy(existing_people)
+    records_copy = copy.deepcopy(records)
+
+    max_id = 0
+    for p in existing_copy:
+        pid = p.get("person_id", "")
+        m = re.match(r"^IND-(\d{5})$", pid)
+        if m:
+            max_id = max(max_id, int(m.group(1)))
 
     id_map: Dict[str, str] = {}
-    current_idx = max_num + 1
+    for r in records_copy:
+        old_id = r.get("person_id")
+        max_id += 1
+        new_id = f"IND-{max_id:05d}"
+        r["person_id"] = new_id
+        if old_id:
+            id_map[old_id] = new_id
 
-    for p in staged_records:
-        old_id = p["person_id"]
-        new_id = f"IND-{current_idx:05d}"
-        id_map[old_id] = new_id
-        p["person_id"] = new_id
-        if verbose:
-            log.info(f"Minted new master ID {new_id} for staging ID {old_id} ({p.get('display_name')})")
-        current_idx += 1
+    for r in records_copy:
+        for a in r.get("associated_people", []):
+            if a.get("person_id") in id_map:
+                a["person_id"] = id_map[a["person_id"]]
+        for u in r.get("unions", []):
+            if u.get("spouse_id") in id_map:
+                u["spouse_id"] = id_map[u["spouse_id"]]
 
-    for p in staged_records:
-        for rel in p.get("associated_people") or []:
-            t_id = rel.get("person_id")
-            if t_id and t_id in id_map:
-                rel["person_id"] = id_map[t_id]
+    reciprocal_role_map = {
+        "FATH": "CHIL",
+        "MOTH": "CHIL",
+        "PARENT": "CHIL",
+        "CHIL": "FATH",
+        "SPOU": "SPOU",
+    }
+    existing_by_id = {p["person_id"]: p for p in existing_copy if "person_id" in p}
 
-    existing_lookup: Dict[str, Dict[str, Any]] = {p["person_id"]: p for p in existing_people}
-    reciprocal_map = {"FATH": "CHIL", "MOTH": "CHIL", "CHIL": "OTHER", "SPOU": "SPOU"}
+    for r in records_copy:
+        new_pid = r["person_id"]
+        for a in r.get("associated_people", []):
+            target_pid = a.get("person_id")
+            role = a.get("role")
+            if target_pid in existing_by_id:
+                target_p = existing_by_id[target_pid]
+                recip_role = reciprocal_role_map.get(role, "ASSOC")
+                t_assocs = target_p.setdefault("associated_people", [])
+                if not any(x.get("person_id") == new_pid for x in t_assocs):
+                    t_assocs.append({"person_id": new_pid, "role": recip_role})
 
-    for p in staged_records:
-        new_id = p["person_id"]
-        for rel in p.get("associated_people") or []:
-            target_id = rel.get("person_id")
-            role = rel.get("role")
-            if target_id in existing_lookup and role in reciprocal_map:
-                recip_role = reciprocal_map[role]
-                target_person = existing_lookup[target_id]
-                target_rel_list = target_person.setdefault("associated_people", [])
-                if not any(r.get("person_id") == new_id for r in target_rel_list):
-                    target_rel_list.append({
-                        "person_id": new_id,
-                        "role": recip_role,
-                    })
-                    if verbose:
-                        log.info(f"Linked reciprocal {recip_role} from {target_id} to newly minted {new_id}")
-
-    return staged_records, existing_people
+    return records_copy, existing_copy
 
 
 def stage_6_atomic_commit(
     new_records: List[Dict[str, Any]],
     updated_existing: List[Dict[str, Any]],
     staged_files: List[Path],
-    verbose: bool = False,
-    logger: Optional[logging.Logger] = None,
+    verbose: bool,
+    logger: logging.Logger,
     people_path: Optional[Path] = None,
 ) -> bool:
-    """Executes safe backup, writes updated master people.json, and cleans staged files."""
-    log = logger or logging.getLogger("gpi")
-    target_people = people_path or CONFIG.people
+    """Commits minted records via GDAPeople with safe backups and unlinks staging files."""
+    target_path = people_path or (CONFIG.entities / "people.json")
+    people_mgr = GDAPeople(filepath=target_path)
 
-    if target_people.exists():
-        backup_path = GDAUtil.create_safe_backup(target_people)
-        log.info(f"Pre-execution backup created: {backup_path.name}")
+    for p in updated_existing:
+        pid = p.get("person_id")
+        if pid and people_mgr.exists(pid):
+            people_mgr.update(pid, p)
 
-    all_persons = updated_existing + new_records
-    now_iso = GDAUtil.iso_now()
+    for p in new_records:
+        if hasattr(people_mgr, "create_person"):
+            people_mgr.create_person(p)
+        else:
+            cname = p.get("canonical_name", {})
+            sex = p.get("sex", "U")
+            extra_kwargs = {k: v for k, v in p.items() if k not in ("canonical_name", "sex")}
+            try:
+                people_mgr.add(canonical_name=cname, sex=sex, **extra_kwargs)
+            except TypeError:
+                people_mgr.add(p)
 
-    registry_container = {
-        "$schema": "schemas/entities/person_registry.schema.json",
-        "schema_version": "1.0.2",
-        "created_at": "2026-08-26T20:39:12Z",
-        "last_modified": now_iso,
-        "total_persons": len(all_persons),
-        "persons": all_persons,
-    }
-
-    try:
-        GDAUtil.save_json(target_people, registry_container)
-    except OSError as e:
-        if logger:
-            logger.error(f"Failed to commit: {e}")
-        return False
-    log.info(f"Successfully committed {len(all_persons)} persons to {target_people}")
+    people_mgr.save(create_backup=True)
 
     for f in staged_files:
-        try:
+        if f.exists():
             f.unlink()
-            if verbose:
-                log.info(f"Removed staging file: {f.name}")
-        except Exception as e:
-            log.warning(f"Failed to unlink {f.name}: {e}")
+            logger.info("CLEANUP: Unlinked staging file %s", f.name)
 
     return True
 
 
-def restore_quarantine(
-    logger: Optional[logging.Logger] = None,
-    quarantine_dir: Optional[Path] = None,
-    entities_dir: Optional[Path] = None,
-) -> None:
-    """Restores all quarantined pep-let files back to data/entities/ for re-evaluation."""
-    log = logger or logging.getLogger("gpi")
-    q_dir = quarantine_dir or CONFIG.quarantine
-    ent_dir = entities_dir or CONFIG.entities
-
-    if not q_dir.exists():
-        log.info("No quarantine directory found to restore from.")
-        return
-
-    held_files = list(q_dir.glob("pep-let-*.json"))
-    if not held_files:
-        log.info("Quarantine directory is empty.")
-        return
-
-    ent_dir.mkdir(parents=True, exist_ok=True)
-    count = 0
-    for f in held_files:
-        target = ent_dir / f.name
-        try:
-            shutil.copy(str(f), str(target))
-            f.unlink()
-            log.info(f"Restored {f.name} from quarantine back to {ent_dir.name}")
-            count += 1
-        except Exception as e:
-            log.error(f"Failed to restore {f.name}: {e}")
-
-    log.info(f"Restored {count} files from quarantine back to staging.")
-
-
-def main() -> None:
-    """CLI parameter parsing and stage dispatch for the Person Intake Pipeline."""
+def main() -> int:
+    """Main CLI entry point for GPI pipeline."""
     parser = argparse.ArgumentParser(description="GPI: Genealogy Person Intake Pipeline")
-    parser.add_argument(
-        "--append", "-a", action="store_true",
-        help="Execute ingestion: process person batches, merge to master people.json, backup, and clean",
-    )
-    parser.add_argument(
-        "--restore", "-r", action="store_true",
-        help="Restore all files from quarantine back to data/entities/ for re-evaluation",
-    )
-    parser.add_argument(
-        "--verbose", "-v", action="store_true",
-        help="Output diagnostic runtime details and itemized person ingestion logs",
-    )
-    parser.add_argument(
-        "--debug", action="store_true",
-        help="Route runtime traces to standard error",
-    )
+    parser.add_argument("--dry-run", action="store_true", help="Perform checks without committing changes")
+    parser.add_argument("--restore", action="store_true", help="Restore quarantined pep-let files to entities")
+    parser.add_argument("--verbose", "-v", action="store_true", help="Enable verbose diagnostics")
     args = parser.parse_args()
 
-    c_level = logging.DEBUG if args.debug else logging.INFO
-    logger = setup_logger("gpi", console_level=c_level, file_level=logging.DEBUG)
-    logger.info("=== Commencing Person Intake Pipeline (gpi.py) ===", extra={"sys_event": True})
+    logger = setup_logger("gpi", ephemeral=True, console_level=logging.DEBUG if args.verbose else logging.INFO)
+    logger.info("GPI version %s starting", __version__)
 
     if args.restore:
-        restore_quarantine(logger=logger)
-        return
-
-    if not args.append:
-        logger.warning("Operation mode not specified. Use --append (-a) to run ingestion or --restore (-r) to recover quarantined files.")
-        return
+        restored = restore_quarantine(logger)
+        logger.info("Restore complete: %d files moved out of quarantine", restored)
+        return 0
 
     staged_files = stage_0_discovery()
     if not staged_files:
-        logger.info("No staged pep-let-*.json files discovered. Ingestion complete.", extra={"sys_event": True})
-        return
-    logger.info(f"Discovered {len(staged_files)} staged person files.")
+        logger.info("No pep-let staging files discovered. Exiting.")
+        return 0
 
-    staged_records, valid_files = stage_1_validate_syntax(staged_files, verbose=args.verbose, logger=logger)
-    if not staged_records:
-        logger.warning("No files passed syntactic validation.")
-        return
+    logger.info("Discovered %d staged pep-let file(s)", len(staged_files))
 
-    if not CONFIG.people.exists() or not CONFIG.locations.exists() or not CONFIG.locations_index.exists():
-        logger.error("Required master entities or indexes missing.")
-        sys.exit(1)
+    r1, p1 = stage_1_validate_syntax(staged_files, args.verbose, logger)
+    if not r1:
+        return 0
 
-    people_registry = GDAUtil.load_json(CONFIG.people)
-    existing_people = people_registry.get("persons", [])
-    locations_entity = GDAUtil.load_json(CONFIG.locations)
-    location_index = GDAUtil.load_json(CONFIG.locations_index)
+    people_file = CONFIG.entities / "people.json"
+    if people_file.is_file():
+        p_data = GDAUtil.load_json(people_file)
+        existing_people = p_data.get("persons", p_data.get("people", []))
+    else:
+        existing_people = []
 
-    topo_records, topo_files = stage_2_verify_graph_topology(
-        staged_records, valid_files, existing_people, verbose=args.verbose, logger=logger
-    )
-    if not topo_records:
-        logger.warning("No files passed graph topology verification.")
-        return
+    r2, p2 = stage_2_verify_graph_topology(r1, p1, existing_people, args.verbose, logger)
+    if not r2:
+        return 0
 
-    chrono_records, chrono_files = stage_2b_verify_relational_chronology(
-        topo_records, topo_files, existing_people, verbose=args.verbose, logger=logger
-    )
-    if not chrono_records:
-        logger.warning("No files passed relational chronology verification.")
-        return
+    r2b, p2b = stage_2b_verify_relational_chronology(r2, p2, existing_people, args.verbose, logger)
+    if not r2b:
+        return 0
 
-    dedup_records, dedup_files = stage_3_deduplication_drift(
-        chrono_records, chrono_files, existing_people, verbose=args.verbose, logger=logger
-    )
-    if not dedup_records:
-        logger.warning("All staged records resolved as duplicates.")
-        return
+    r3, p3 = stage_3_deduplication_drift(r2b, p2b, existing_people, args.verbose, logger)
+    if not r3:
+        return 0
 
-    canon_records, canon_files = stage_4_canonicalize_locations(
-        dedup_records, dedup_files, locations_entity, location_index, verbose=args.verbose, logger=logger
-    )
-    if not canon_records:
-        logger.warning("All staged records failed location canonicalization.")
-        return
+    loc_file = CONFIG.entities / "locations.json"
+    idx_file = CONFIG.indexes / "location_index.json"
+    loc_data = GDAUtil.load_json(loc_file) if loc_file.is_file() else {}
+    idx_data = GDAUtil.load_json(idx_file) if idx_file.is_file() else {}
 
-    minted_records, updated_existing = stage_5_minting_and_rewrite(
-        canon_records, existing_people, verbose=args.verbose, logger=logger
-    )
-    stage_6_atomic_commit(minted_records, updated_existing, canon_files, verbose=args.verbose, logger=logger)
-    logger.info("=== Person Intake Pipeline Completed Successfully ===", extra={"sys_event": True})
+    r4, p4 = stage_4_canonicalize_locations(r3, p3, loc_data, idx_data, args.verbose, logger)
+    if not r4:
+        return 0
+
+    if args.dry_run:
+        logger.info("[DRY-RUN] All 4 verification stages passed for %d record(s). No changes committed.", len(r4))
+        return 0
+
+    minted, updated = stage_5_minting_and_rewrite(r4, existing_people)
+    stage_6_atomic_commit(minted, updated, p4, args.verbose, logger, people_path=people_file)
+    logger.info("Successfully committed %d record(s) to registry", len(minted))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

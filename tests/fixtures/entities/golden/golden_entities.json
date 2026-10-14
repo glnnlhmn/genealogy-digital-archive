@@ -1,0 +1,77 @@
+{
+  "_name": "golden_entities.json",
+  "_path": "tests/fixtures/entities/golden/golden_entities.json",
+  "_description": "Canonical referentially intact synthetic test payloads for core entities.",
+  "person": {
+    "person_id": "IND-00001",
+    "display_name": "Arthur Pendelton Sterling",
+    "sex": "M",
+    "canonical_name": {
+      "given": "Arthur",
+      "middle": "Pendelton",
+      "surname": "Sterling"
+    },
+    "vitals": {
+      "birth": {
+        "date": {
+          "modifier": "EXACT",
+          "date_raw": "1845-05-14",
+          "date_iso": "1845-05-14",
+          "year": 1845
+        },
+        "place": {
+          "location_id": "LOC-00001",
+          "verbatim": "Concord, Merrimack, New Hampshire, USA"
+        }
+      }
+    },
+    "is_deprecated": false,
+    "superseded_by": null,
+    "last_updated": "2026-10-12T12:00:00Z"
+  },
+  "fact": {
+    "fact_id": "a0000000-0000-4000-8000-000000000001",
+    "person_id": "IND-00001",
+    "fact_type": "Birth",
+    "quay_score": 3,
+    "date": {
+      "modifier": "EXACT",
+      "date_raw": "1845-05-14",
+      "date_iso": "1845-05-14",
+      "year": 1845
+    },
+    "description": "Birth of Arthur Pendelton Sterling",
+    "created_at": "2026-10-12T12:00:00Z",
+    "updated_at": "2026-10-12T12:00:00Z",
+    "source": {
+      "record_urn": "urn:gda:record:birth:001",
+      "citation_text": "Concord Town Clerk Birth Register, 1845, Page 12."
+    },
+    "is_deprecated": false,
+    "superseded_by": null
+  },
+  "location": {
+    "location_id": "LOC-00001",
+    "canonical_name": "Concord, Merrimack, New Hampshire, USA",
+    "aliases": ["Concord, NH"],
+    "jurisdiction": {
+      "country": "USA",
+      "state_or_province": "New Hampshire",
+      "county": "Merrimack",
+      "local_jurisdiction": "Concord"
+    },
+    "is_deprecated": false,
+    "superseded_by": null,
+    "last_updated": "2026-10-12T12:00:00Z"
+  },
+  "site": {
+    "site_id": "SID-00001",
+    "site_type": "CEMETERY",
+    "name": "Old North Cemetery",
+    "location_id": "LOC-00001",
+    "operational_status": "ACTIVE",
+    "is_deprecated": false,
+    "superseded_by": null,
+    "last_updated": "2026-10-12T12:00:00Z"
+  }
+}

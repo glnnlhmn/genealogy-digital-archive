@@ -1,0 +1,17 @@
+{
+  "_name": "corrupt_source_registry_missing_urn.json",
+  "_path": "tests/fixtures/sources/registries/failure/corrupt_source_registry_missing_urn.json",
+  "_defect": "source entry lacks required source_urn property",
+  "_name": "sources.json",
+  "_path": "data/sources/sources.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "last_updated": "2026-10-12T12:00:00Z",
+  "sources": [
+    {
+      "title": "Missing URN Record",
+      "record_category": "VITAL",
+      "repository_id": "REP-00001"
+    }
+  ]
+}

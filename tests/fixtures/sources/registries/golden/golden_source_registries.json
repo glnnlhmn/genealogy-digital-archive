@@ -1,0 +1,113 @@
+{
+  "_name": "golden_source_registries.json",
+  "_path": "tests/fixtures/sources/registries/golden/golden_source_registries.json",
+  "_description": "Canonical synthetic test payloads for source registry schemas.",
+  "source_registry": {
+    "_name": "sources.json",
+    "_path": "data/sources/sources.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "version": "1.1.0",
+    "last_updated": "2026-10-13T16:20:00Z",
+    "sources": [
+      {
+        "source_guid": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+        "title": "Birth Certificate of Daniel Lehman",
+        "record_category": "VITAL",
+        "record_type": "BIRTH_CERTIFICATE",
+        "repository_id": "REP-00001",
+        "collection_title": "Pennsylvania State Archives Vital Statistics Record Group 11",
+        "call_number": "Roll 412, Frame 102",
+        "jurisdiction": {
+          "location_id": "LOC-00001",
+          "verbatim": "Carlisle, Cumberland Co., PA"
+        },
+        "coverage_dates": {
+          "date_start": "1915-06-12",
+          "date_end": "1915-06-12"
+        },
+        "digital_access_url": "https://archive.org/details/example-record-1915",
+        "record_count": 1,
+        "notes": "State certificate microfilmed in 1968."
+      }
+    ]
+  },
+  "newspaper_registry": {
+    "_name": "newspapers.json",
+    "_path": "data/sources/newspapers.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "version": "1.1.0",
+    "last_updated": "2026-10-13T16:20:00Z",
+    "publications": [
+      {
+        "pub_code": "CARSEN",
+        "pub_name": "Carlisle Sentinel",
+        "location": {
+          "location_id": "LOC-00001",
+          "verbatim": "Carlisle, Cumberland Co., PA"
+        },
+        "frequency": "Daily",
+        "issues": [
+          {
+            "issue_date": {
+              "modifier": "EXACT",
+              "date_raw": "1952-04-12",
+              "date_iso": "1952-04-12",
+              "year": 1952
+            },
+            "edition": "Final",
+            "page_count": 16,
+            "articles": [
+              {
+                "source_guid": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
+                "headline": "William Lehman Passes Away at Age 78",
+                "category": "OBIT",
+                "page_number": "4",
+                "column": "2",
+                "primary_subject_ids": ["IND-00001"],
+                "clippings": [
+                  {
+                    "file_name": "19520412_carsen_lehman_obit.jpg",
+                    "side": "FRONT"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "cemetery_registry": {
+    "_name": "cemetery_transcripts.json",
+    "_path": "data/sources/cemetery_transcripts.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "version": "1.1.0",
+    "last_updated": "2026-10-13T16:20:00Z",
+    "site_id": "SID-00001",
+    "cemetery_name": "Newville Cemetery",
+    "location": {
+      "location_id": "LOC-00001",
+      "verbatim": "Newville, Cumberland Co., PA"
+    },
+    "sexton_or_custodian": "Newville Borough Cemetery Sexton",
+    "plots": [
+      {
+        "plot_locator": "Section 3, Lot 14, Grave 2",
+        "marker_guid": "c3d4e5f6-a7b8-4c9d-8e1f-2a3b4c5d6e7f",
+        "condition": "Sound",
+        "interments": [
+          {
+            "person_id": "IND-00002",
+            "inscribed_name": {
+              "given": "Annie",
+              "surname": "Lehman"
+            },
+            "birth_year": 1870,
+            "death_year": 1944,
+            "relationship_text": "Wife of William Lehman"
+          }
+        ]
+      }
+    ]
+  }
+}

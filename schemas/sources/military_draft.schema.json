@@ -1,4 +1,6 @@
 {
+  "_name": "military_draft.schema.json",
+  "_path": "schemas/sources/military_draft.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/sources/military_draft.schema.json",
   "title": "MilitaryDraftRecord",
@@ -6,6 +8,8 @@
   "description": "Standardized schema for historical military draft registrations, enrollments, and conscription records.",
   "type": "object",
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "description",
     "record_metadata",
@@ -14,14 +18,27 @@
     "associated_people"
   ],
   "properties": {
-    "$schema": { "type": "string" },
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    },
     "description": {
       "type": "string",
-      "description": "[REQUIRED] Contextual summary (e.g., '1942 WWII Draft Registration of William Lehman (Carlisle, Cumberland Co., PA)')."
+      "description": "Contextual summary of this military draft record."
     },
     "record_metadata": {
       "type": "object",
-      "required": ["source_urn", "record_category", "record_type", "conflict"],
+      "required": [
+        "source_urn",
+        "record_category",
+        "record_type",
+        "conflict"
+      ],
       "properties": {
         "source_urn": {
           "type": "string",
@@ -30,40 +47,64 @@
         },
         "record_category": {
           "type": "string",
-          "enum": ["MILITARY"],
+          "enum": [
+            "MILITARY"
+          ],
           "default": "MILITARY"
         },
         "record_type": {
           "type": "string",
-          "enum": ["DRAFT_REGISTRATION", "ENROLLMENT_LIST", "CONSCRIPTION_CARD"],
+          "enum": [
+            "DRAFT_REGISTRATION",
+            "ENROLLMENT_LIST",
+            "CONSCRIPTION_CARD"
+          ],
           "default": "DRAFT_REGISTRATION"
         },
         "conflict": {
           "type": "string",
-          "enum": ["CW", "SPANAM", "WWI", "WWII", "KOREA", "VIETNAM", "PEACETIME"]
+          "enum": [
+            "CW",
+            "SPANAM",
+            "WWI",
+            "WWII",
+            "KOREA",
+            "VIETNAM",
+            "PEACETIME"
+          ]
         }
       },
       "additionalProperties": false
     },
     "draft_board": {
       "type": "object",
-      "required": ["board_identifier", "location"],
+      "required": [
+        "board_identifier",
+        "location"
+      ],
       "properties": {
         "board_identifier": {
-          "type": "string",
-          "description": "Draft board designation or enrollment district."
+          "type": "string"
         },
         "location": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
-          "description": "Jurisdiction of the registration board office."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
         },
         "registration_date": {
           "oneOf": [
-            { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-            { "type": "null" }
+            {
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+            },
+            {
+              "type": "null"
+            }
           ]
         },
-        "registrar_signature": { "type": ["string", "null"] }
+        "registrar_signature": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       },
       "additionalProperties": false
     },
@@ -77,74 +118,104 @@
       "properties": {
         "registrant": {
           "type": "object",
-          "required": ["full_name"],
+          "required": [
+            "full_name"
+          ],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
             },
             "residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "date_of_birth": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "age": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/age_record" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/age_record"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "birthplace": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "occupation": {
               "type": "object",
               "properties": {
-                "usual": { "type": ["string", "null"] },
-                "industry": { "type": ["string", "null"] }
+                "usual": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "industry": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
               },
               "additionalProperties": false
-            },
-            "physical_profile": {
-              "$ref": "../defs/_draft_shared_defs.schema.json#/$defs/physical_description"
             }
           },
           "additionalProperties": false
         },
         "conflict_particulars": {
           "oneOf": [
-            { "$ref": "../defs/_draft_shared_defs.schema.json#/$defs/civil_war_particulars" },
-            { "$ref": "../defs/_draft_shared_defs.schema.json#/$defs/wwi_particulars" },
-            { "$ref": "../defs/_draft_shared_defs.schema.json#/$defs/wwii_particulars" },
-            { "$ref": "../defs/_draft_shared_defs.schema.json#/$defs/selective_service_modern_particulars" },
-            { "$ref": "../defs/_draft_shared_defs.schema.json#/$defs/generic_draft_particulars" },
-            { "type": "null" }
+            {
+              "$ref": "../defs/_military_defs.schema.json#/$defs/wwi_particulars"
+            },
+            {
+              "$ref": "../defs/_military_defs.schema.json#/$defs/selective_service_record"
+            },
+            {
+              "type": "null"
+            }
           ]
         },
         "draft_note": {
-          "type": ["string", "null"],
-          "description": "Condition or serial stamp notes."
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "transcript": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record"
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/transcript_record"
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/source_media"
           }
         }
       },
@@ -153,9 +224,8 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
-      },
-      "description": "Linked participants (registrant, registrar, nearest relative, employer) mapped to roles and IDs."
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
+      }
     }
   },
   "additionalProperties": false

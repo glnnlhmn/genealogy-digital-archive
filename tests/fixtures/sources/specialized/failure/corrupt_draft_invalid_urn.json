@@ -1,0 +1,38 @@
+{
+  "_name": "corrupt_draft_invalid_urn.json",
+  "_path": "data/archival_records/military/REC-1942-DRAFT-001.json",
+  "_defect": "source_urn does not match URN:DRAFT pattern",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Corrupt Draft Record with invalid URN",
+  "record_metadata": {
+    "source_guid": "76386e25-e2ed-428b-8a9d-d0cca5290681",
+    "record_category": "MILITARY",
+    "record_type": "DRAFT_REGISTRATION",
+    "conflict": "WWII"
+  },
+  "draft_board": {
+    "board_identifier": "Local Board No. 1",
+    "location": {
+      "location_id": "LOC-00001",
+      "verbatim": "Carlisle, PA"
+    }
+  },
+  "draft_details": {
+    "registrant": {
+      "full_name": {
+        "given": "William",
+        "surname": "Lehman"
+      }
+    },
+    "transcript": {
+      "verbatim_text": "Corrupt draft URN test."
+    },
+    "media_files": [
+      {
+        "file_name": "draft.jpg",
+        "mime_type": "image/jpeg"
+      }
+    ]
+  },
+  "associated_people": []
+}

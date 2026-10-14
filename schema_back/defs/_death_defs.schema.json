@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/defs/_death_defs.schema.json",
+  "title": "Death Assertion Definitions",
+  "version": "1.0.0",
+  "description": "Definitions for medical cause of death, contributory factors, and ICD classifications.",
+  "type": "object",
+  "$defs": {
+    "cause_of_death": {
+      "type": "object",
+      "properties": {
+        "verbatim": {
+          "type": "string"
+        },
+        "icd_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "duration": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "verbatim"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

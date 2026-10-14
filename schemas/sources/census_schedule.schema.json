@@ -1,4 +1,6 @@
 {
+  "_name": "census_schedule.schema.json",
+  "_path": "schemas/sources/census_schedule.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/sources/census_schedule.schema.json",
   "title": "CensusScheduleRecord",
@@ -6,6 +8,8 @@
   "description": "Standardized canonical schema for all U.S. Federal Population and Decennial Census schedules (1790–1950).",
   "type": "object",
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "description",
     "record_metadata",
@@ -16,14 +20,27 @@
     "associated_people"
   ],
   "properties": {
-    "$schema": { "type": "string" },
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    },
     "description": {
       "type": "string",
-      "description": "[REQUIRED] Contextual summary (e.g., '1900 U.S. Federal Census for Daniel Lehman Household (Frankford Twp, Cumberland Co., PA)')."
+      "description": "Contextual summary of this census schedule page."
     },
     "record_metadata": {
       "type": "object",
-      "required": ["source_urn", "record_category", "record_type", "census_year"],
+      "required": [
+        "source_urn",
+        "record_category",
+        "record_type",
+        "census_year"
+      ],
       "properties": {
         "source_urn": {
           "type": "string",
@@ -32,7 +49,9 @@
         },
         "record_category": {
           "type": "string",
-          "enum": ["CENSUS"],
+          "enum": [
+            "CENSUS"
+          ],
           "default": "CENSUS"
         },
         "record_type": {
@@ -56,36 +75,110 @@
       "additionalProperties": false
     },
     "page_metadata": {
-      "$ref": "../defs/_census_shared_defs.schema.json#/$defs/census_page_metadata"
+      "type": "object",
+      "required": [
+        "state",
+        "county"
+      ],
+      "properties": {
+        "state": {
+          "type": "string"
+        },
+        "county": {
+          "type": "string"
+        },
+        "township_or_ward": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "supervisor_district": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "enumeration_district": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sheet_number": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sheet_side": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "A",
+            "B",
+            null
+          ]
+        },
+        "line_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "enumeration_date": {
+          "oneOf": [
+            {
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "enumerator_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": true
     },
     "entries": {
       "type": "array",
       "minItems": 1,
       "items": {
-        "$ref": "../defs/_census_shared_defs.schema.json#/$defs/census_line_entry"
+        "$ref": "../defs/_census_defs.schema.json#/$defs/census_line_entry"
       },
       "description": "Line items enumerated on this schedule page."
     },
     "census_note": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Archival notes regarding page tears, illegible lines, or double enumerations."
     },
     "transcript": {
-      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/transcript_record",
       "description": "Verbatim transcript of enumerated household/line entries, abstract, and search keywords."
     },
     "media_files": {
       "type": "array",
       "minItems": 1,
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/source_media"
       },
       "description": "Scans of the microfilm roll or National Archives digital page."
     },
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
       },
       "description": "Array of participants (enumerated individuals, household head, enumerator) mapped to roles and IDs."
     }

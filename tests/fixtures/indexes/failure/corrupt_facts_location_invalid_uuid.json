@@ -1,0 +1,14 @@
+{
+  "_name": "corrupt_facts_location_invalid_uuid.json",
+  "_path": "tests/fixtures/indexes/failure/corrupt_facts_location_invalid_uuid.json",
+  "_defect": "fact_id array contains non-UUID string",
+  "_name": "facts_location_idx.json",
+  "_path": "data/indexes/facts_location_idx.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schema_version": "1.0.0",
+  "last_modified": "2026-10-12T12:00:00Z",
+  "total_locations": 1,
+  "locations": {
+    "LOC-00001": ["not-a-valid-uuid"]
+  }
+}

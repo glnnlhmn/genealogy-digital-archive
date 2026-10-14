@@ -1,0 +1,11 @@
+{
+  "_name": "corrupt_location_missing_country.json",
+  "_path": "tests/fixtures/entities/failure/corrupt_location_missing_country.json",
+  "_defect": "jurisdiction object lacks required country field",
+  "location_id": "LOC-00001",
+  "canonical_name": "Incomplete Jurisdiction",
+  "aliases": [],
+  "jurisdiction": {
+    "state_or_province": "New Hampshire"
+  }
+}

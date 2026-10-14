@@ -1,0 +1,10 @@
+{
+  "_name": "miplet_001_schema_generation_authority.json",
+  "_path": "prompts/core/miplet_001_schema_generation_authority.json",
+  "target_baseline": "v1.1.0",
+  "target_file": "prompts/core/mip_core.md",
+  "target_section": "Section 2 (Directory Structure & File Routing - Schema Definitions & Architecture)",
+  "operation": "modification",
+  "description": "Establish gdaschema and gdacore.GDAVocabularyManager as the programmatic generation authorities for physical schema files under schemas/.",
+  "payload": "* **Schema Definitions & Architecture (`schemas/`):** Base data types (`schemas/defs/`), structural entity definitions (`schemas/entities/`), index schemas (`schemas/indexes/`), and naming tokens (`schemas/naming/_token_registry.json`). Controlled vocabulary taxonomies are programmatically governed by `gdacore.GDAVocabularyManager`, while structural and contract schema definitions are authored and compiled by `gdaschema`. Physical files on disk under `schemas/` (including `_enums.schema.json`) represent generated serialized artifacts emitted and validated by `gdaschema`, rather than independently authored static anchors."
+}

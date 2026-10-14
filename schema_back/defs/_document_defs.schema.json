@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/defs/_document_defs.schema.json",
+  "title": "Archival Document & Media Definitions",
+  "version": "1.0.0",
+  "description": "Definitions for source document pages, scanned sheets, and digital media attachments.",
+  "type": "object",
+  "$defs": {
+    "source_media": {
+      "type": "object",
+      "required": [
+        "file_name",
+        "mime_type"
+      ],
+      "properties": {
+        "file_name": {
+          "type": "string"
+        },
+        "mime_type": {
+          "type": "string"
+        },
+        "side": {
+          "$ref": "_enums.schema.json#/$defs/enum_document_side"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "media_clipping": {
+      "type": "object",
+      "required": [
+        "file_name",
+        "side"
+      ],
+      "properties": {
+        "file_name": {
+          "type": "string"
+        },
+        "side": {
+          "$ref": "_enums.schema.json#/$defs/enum_document_side"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

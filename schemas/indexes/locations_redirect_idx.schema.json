@@ -1,0 +1,67 @@
+{
+  "_name": "locations_redirect_idx.schema.json",
+  "_path": "schemas/indexes/locations_redirect_idx.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/indexes/locations_redirect_idx.schema.json",
+  "title": "Locations_Redirect_Index",
+  "version": "1.0.0",
+  "description": "Lightweight lookup index resolving verbatim, shorthand, or historical location strings to canonical location IDs.",
+  "type": "object",
+  "required": [
+    "_name",
+    "_path",
+    "$schema",
+    "schema_version",
+    "last_modified",
+    "total_mappings",
+    "redirects"
+  ],
+  "properties": {
+    "_name": {
+      "type": "string",
+      "const": "locations_redirect_idx.json"
+    },
+    "_path": {
+      "type": "string",
+      "const": "data/indexes/locations_redirect_idx.json"
+    },
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "last_modified": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso",
+      "description": "ISO-8601 timestamp of last index update."
+    },
+    "total_mappings": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total count of redirect keys registered in the index."
+    },
+    "redirects": {
+      "type": "object",
+      "description": "Dictionary keyed by normalized lowercase alias mapping directly to canonical location references.",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "location_id",
+          "standardized"
+        ],
+        "properties": {
+          "location_id": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/location_id"
+          },
+          "standardized": {
+            "type": "string",
+            "description": "Canonical standardized jurisdiction string matching location entity."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

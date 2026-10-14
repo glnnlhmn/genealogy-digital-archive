@@ -4,8 +4,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/entities/site.schema.json",
   "title": "Master Physical Site Entity Schema",
-  "version": "1.0.0",
-  "description": "Authoritative physical facility, cemetery, church, residence, or landmark entity schema, linked to a parent civil location.",
+  "version": "1.2.0",
+  "description": "Authoritative physical facility, cemetery, church, residence, or landmark entity schema.",
   "type": "object",
   "required": [
     "site_id",
@@ -15,20 +15,11 @@
   ],
   "properties": {
     "site_id": {
-      "type": "string",
-      "pattern": "^SITE-[0-9]{5}$",
-      "description": "Standardized canonical site identifier format."
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/site_id",
+      "description": "Standardized canonical site identifier format (SID-XXXXX)."
     },
     "site_type": {
-      "type": "string",
-      "enum": [
-        "FACILITY",
-        "CEMETERY",
-        "CHURCH",
-        "LANDMARK",
-        "RESIDENCE",
-        "ORGANIZATION"
-      ],
+      "$ref": "../defs/_enums.schema.json#/$defs/enum_site_type",
       "description": "Classification of the physical or institutional site entity."
     },
     "name": {
@@ -47,47 +38,40 @@
       "description": "Foreign key link to the parent civil jurisdiction in locations.json."
     },
     "address": {
-      "type": "object",
-      "properties": {
-        "address_line_1": {
-          "type": [
-            "string",
-            "null"
-          ]
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/street_address",
+      "description": "Physical postal delivery line and geocoordinates."
+    },
+    "operational_status": {
+      "$ref": "../defs/_enums.schema.json#/$defs/enum_operational_status",
+      "default": "ACTIVE",
+      "description": "Real-world historical or operational condition of the physical facility."
+    },
+    "is_deprecated": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if soft-deleted, merged, or invalidated due to integrity issues."
+    },
+    "superseded_by": {
+      "oneOf": [
+        {
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/site_id"
         },
-        "address_line_2": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "postal_code": {
-          "type": [
-            "string",
-            "null"
-          ]
-        },
-        "coordinates": {
-          "type": [
-            "object",
-            "null"
-          ],
-          "properties": {
-            "latitude": {
-              "type": "number"
-            },
-            "longitude": {
-              "type": "number"
-            }
-          },
-          "required": [
-            "latitude",
-            "longitude"
-          ],
-          "additionalProperties": false
+        {
+          "type": "null"
         }
-      },
-      "additionalProperties": false
+      ],
+      "description": "Pointer to the replacing canonical SID-##### if superseded or merged."
+    },
+    "dissolution_date": {
+      "oneOf": [
+        {
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Date when the facility, congregation, or cemetery closed or ceased operation."
     },
     "notes": {
       "type": [
@@ -99,7 +83,7 @@
       }
     },
     "last_updated": {
-      "type": "string",
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso",
       "description": "ISO-8601 timestamp tracking entity modification."
     }
   },

@@ -1,0 +1,372 @@
+{
+  "_name": "golden_vital_sources.json",
+  "_path": "tests/fixtures/sources/vital/golden/golden_vital_sources.json",
+  "_description": "Canonical synthetic test payloads for vital and ecclesiastical source records adhering strictly to Draft 2020-12 schemas.",
+  "birth_certificate": {
+    "_name": "REC-1915-BIRTH-001.json",
+    "_path": "data/archival_records/vital/REC-1915-BIRTH-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1915 Birth Certificate of Daniel Lehman (Carlisle, Cumberland Co., PA)",
+    "record_metadata": {
+      "source_guid": "7b82450d-0e00-40e9-87d0-2f501efd1f54",
+      "record_category": "VITAL",
+      "record_type": "BIRTH_CERTIFICATE",
+      "certificate_number": "1915-00123",
+      "state_file_number": "45210",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "child": {
+      "person_id": "IND-00001",
+      "full_name": {
+        "given": "Daniel",
+        "surname": "Lehman"
+      },
+      "sex": "Male"
+    },
+    "event_particulars": {
+      "date": {
+        "modifier": "EXACT",
+        "date_raw": "1915-06-12",
+        "date_iso": "1915-06-12",
+        "year": 1915
+      },
+      "location": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle, Cumberland, Pennsylvania, USA"
+      },
+      "hospital_or_institution": "Carlisle Hospital",
+      "attendant_name": "Dr. J. M. Shearer",
+      "attendant_role": "Physician"
+    },
+    "parents": {
+      "father": {
+        "person_id": "IND-00002",
+        "full_name": {
+          "given": "William",
+          "surname": "Lehman"
+        },
+        "age": {
+          "years": 42
+        },
+        "birthplace": {
+          "location_id": "LOC-00002",
+          "verbatim": "Newville, Cumberland Co., PA"
+        },
+        "occupation": "Farmer"
+      },
+      "mother": {
+        "person_id": "IND-00003",
+        "full_name": {
+          "given": "Annie",
+          "surname": "Lehman",
+          "maiden_name": "Myers"
+        },
+        "age": {
+          "years": 40
+        },
+        "birthplace": {
+          "location_id": "LOC-00002",
+          "verbatim": "Newville, Cumberland Co., PA"
+        },
+        "occupation": "Housewife"
+      }
+    },
+    "informant": {
+      "name": "William Lehman",
+      "relation_to_child": "Father",
+      "residence": "R.D. 1, Carlisle, PA"
+    },
+    "media_files": [
+      {
+        "file_name": "1915_birth_lehman.pdf",
+        "mime_type": "application/pdf",
+        "side": "FRONT",
+        "notes": "State archival certified copy"
+      }
+    ],
+    "associated_people": []
+  },
+  "marriage_license": {
+    "_name": "REC-1912-MARR-001.json",
+    "_path": "data/archival_records/vital/REC-1912-MARR-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1912 Marriage License of William Lehman and Annie Myers",
+    "record_metadata": {
+      "source_guid": "06bfbb75-5c62-48b0-88e3-034f163ff4e8",
+      "record_category": "VITAL",
+      "record_type": "MARRIAGE_LICENSE",
+      "license_number": "ML-1912-456",
+      "docket_volume": "14",
+      "docket_page": "205",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "spouses": {
+      "spouse_1": {
+        "person_id": "IND-00002",
+        "full_name": {
+          "given": "William",
+          "surname": "Lehman"
+        },
+        "age": {
+          "years": 39
+        },
+        "residence": {
+          "location_id": "LOC-00002",
+          "verbatim": "Newville, PA"
+        },
+        "occupation": "Farmer",
+        "marital_status_prior": "Single"
+      },
+      "spouse_2": {
+        "person_id": "IND-00003",
+        "full_name": {
+          "given": "Annie",
+          "surname": "Myers"
+        },
+        "age": {
+          "years": 37
+        },
+        "residence": {
+          "location_id": "LOC-00002",
+          "verbatim": "Newville, PA"
+        },
+        "occupation": "Domestic",
+        "marital_status_prior": "Single"
+      }
+    },
+    "ceremony_particulars": {
+      "date": {
+        "modifier": "EXACT",
+        "date_raw": "1912-10-15",
+        "date_iso": "1912-10-15",
+        "year": 1912
+      },
+      "location": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle, Cumberland Co., PA"
+      },
+      "officiant_name": "Rev. E. H. Yocum",
+      "officiant_title": "Minister of the Gospel",
+      "witnesses": ["John Myers", "Emma Lehman"]
+    },
+    "media_files": [
+      {
+        "file_name": "1912_marriage_license.jpg",
+        "mime_type": "image/jpeg",
+        "side": "FRONT",
+        "notes": "County courthouse docket negative photostat"
+      }
+    ],
+    "associated_people": []
+  },
+  "death_certificate": {
+    "_name": "REC-1944-DEATH-001.json",
+    "_path": "data/archival_records/vital/REC-1944-DEATH-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1944 Death Certificate of Annie Lehman",
+    "record_metadata": {
+      "source_guid": "a152df93-0d5a-4edb-85d5-3abb26f337f2",
+      "record_category": "VITAL",
+      "record_type": "DEATH_CERTIFICATE",
+      "certificate_number": "DC-1944-789",
+      "registered_number": "104",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "decedent": {
+      "person_id": "IND-00003",
+      "full_name": {
+        "given": "Annie",
+        "surname": "Lehman",
+        "maiden_name": "Myers"
+      },
+      "sex": "Female",
+      "age_at_death": {
+        "years": 69,
+        "months": 4,
+        "days": 18
+      },
+      "marital_status": "Widowed",
+      "spouse_name": "William Lehman",
+      "occupation": "At Home",
+      "birth_date": {
+        "modifier": "EXACT",
+        "date_raw": "1875-07-02",
+        "date_iso": "1875-07-02",
+        "year": 1875
+      },
+      "birth_place": {
+        "location_id": "LOC-00002",
+        "verbatim": "Newville, Cumberland Co., PA"
+      }
+    },
+    "event_particulars": {
+      "date": {
+        "modifier": "EXACT",
+        "date_raw": "1944-11-20",
+        "date_iso": "1944-11-20",
+        "year": 1944
+      },
+      "location": {
+        "location_id": "LOC-00002",
+        "verbatim": "Newville, Cumberland Co., PA"
+      },
+      "hospital_or_facility": "Home"
+    },
+    "cause_of_death_details": {
+      "primary_cause": {
+        "verbatim": "Cerebral Hemorrhage",
+        "icd_code": "331",
+        "duration": "2 days"
+      },
+      "contributory_causes": [
+        {
+          "verbatim": "Hypertensive Heart Disease",
+          "icd_code": "444",
+          "duration": "10 years"
+        }
+      ],
+      "certifying_physician": "Dr. R. M. Alexander",
+      "coroner_inquest": false
+    },
+    "disposition": {
+      "type": "Burial",
+      "date": {
+        "modifier": "EXACT",
+        "date_raw": "1944-11-23",
+        "date_iso": "1944-11-23",
+        "year": 1944
+      },
+      "cemetery_name": "Newville Cemetery",
+      "location": {
+        "location_id": "LOC-00002",
+        "verbatim": "Newville, Cumberland Co., PA"
+      },
+      "undertaker_name": "Fickes Funeral Home"
+    },
+    "media_files": [
+      {
+        "file_name": "1944_death_lehman.pdf",
+        "mime_type": "application/pdf",
+        "side": "FRONT",
+        "notes": "State certificate image"
+      }
+    ],
+    "associated_people": []
+  },
+  "church_baptism": {
+    "_name": "REC-1888-BAPT-001.json",
+    "_path": "data/archival_records/vital/REC-1888-BAPT-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1888 Baptism of Mary Lehman",
+    "record_metadata": {
+      "source_guid": "663af24d-e6f1-4d95-8bb4-3f5282a92462",
+      "record_category": "CHURCH",
+      "record_type": "BAPTISM_PARISH_REGISTER",
+      "parish_register_volume": "Volume II",
+      "entry_number": "Entry 42",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "initiate": {
+      "person_id": "IND-00004",
+      "full_name": {
+        "given": "Mary",
+        "surname": "Lehman"
+      },
+      "sex": "Female",
+      "birth_date": {
+        "modifier": "EXACT",
+        "date_raw": "1888-02-14",
+        "date_iso": "1888-02-14",
+        "year": 1888
+      }
+    },
+    "ceremony_particulars": {
+      "date": {
+        "modifier": "EXACT",
+        "date_raw": "1888-05-10",
+        "date_iso": "1888-05-10",
+        "year": 1888
+      },
+      "church_name": "First Lutheran Church",
+      "denomination": "Lutheran",
+      "location": {
+        "location_id": "LOC-00002",
+        "verbatim": "Newville, Cumberland Co., PA"
+      },
+      "officiant_name": "Pastor C. L. Fleck",
+      "sponsors": ["Jacob Lehman", "Sarah Lehman"]
+    },
+    "parents": {
+      "father_name": "William Lehman",
+      "mother_name": "Annie Lehman"
+    },
+    "media_files": [
+      {
+        "file_name": "1888_baptism_ledger.jpg",
+        "mime_type": "image/jpeg",
+        "side": "FRONT",
+        "notes": "Parish register photostat"
+      }
+    ],
+    "associated_people": []
+  },
+  "cemetery_marker": {
+    "_name": "REC-1944-CEM-001.json",
+    "_path": "data/archival_records/vital/REC-1944-CEM-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1944 Headstone of Annie Lehman",
+    "record_metadata": {
+      "source_guid": "e398dcd9-e83e-464c-8832-0f9f10b57c65",
+      "record_category": "VITAL",
+      "record_type": "CEMETERY_MARKER",
+      "cemetery_name": "Newville Cemetery",
+      "site_id": "SID-00001",
+      "location": {
+        "location_id": "LOC-00002",
+        "verbatim": "Newville Cemetery, Cumberland Co., PA"
+      },
+      "survey_date": {
+        "modifier": "EXACT",
+        "date_raw": "2024-06-01",
+        "date_iso": "2024-06-01",
+        "year": 2024
+      }
+    },
+    "monument_particulars": {
+      "plot_section": "Section 3",
+      "plot_number": "Lot 14",
+      "material": "Granite",
+      "condition": "Sound"
+    },
+    "inscriptions": [
+      {
+        "person_id": "IND-00003",
+        "inscribed_name": {
+          "given": "Annie",
+          "surname": "Lehman"
+        },
+        "birth_date": {
+          "modifier": "EXACT",
+          "date_raw": "1875",
+          "year": 1875
+        },
+        "death_date": {
+          "modifier": "EXACT",
+          "date_raw": "1944",
+          "year": 1944
+        },
+        "age_inscribed": "69y",
+        "epitaph": "Rest in peace"
+      }
+    ],
+    "media_files": [
+      {
+        "file_name": "headstone_annie_lehman.jpg",
+        "mime_type": "image/jpeg",
+        "side": "FRONT",
+        "notes": "Field monument photograph"
+      }
+    ],
+    "associated_people": []
+  }
+}

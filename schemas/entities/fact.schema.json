@@ -1,64 +1,54 @@
 {
+  "_name": "fact.schema.json",
+  "_path": "schemas/entities/fact.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/entities/fact.schema.json",
   "title": "Fact",
   "version": "1.0.6",
-  "description": "Represents an assertion linking a person to a source document for a specific historical reason, utilizing centralized shared definitions.",
+  "description": "Represents an assertion linking a person to a source document.",
   "type": "object",
+  "required": [
+    "fact_id",
+    "person_id",
+    "fact_type",
+    "quay_score",
+    "description",
+    "created_at",
+    "updated_at",
+    "source"
+  ],
   "properties": {
     "fact_id": {
-      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/fact_id"
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/fact_id"
     },
     "person_id": {
-      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
     },
     "fact_type": {
-      "type": "string",
-      "enum": [
-        "Association",
-        "Award",
-        "Baptism",
-        "Birth",
-        "Burial",
-        "Census",
-        "Civic",
-        "Death",
-        "Divorce",
-        "Education",
-        "Incident",
-        "Legal",
-        "Marriage",
-        "Military",
-        "Occupation",
-        "Parentage",
-        "Probate",
-        "Property",
-        "Residence",
-        "Other"
-      ],
-      "description": "[REQUIRED] Standardized category of the historical fact assertion."
+      "$ref": "../defs/_enums.schema.json#/$defs/enum_fact_type",
+      "description": "Standardized category of the historical fact assertion."
     },
     "quay_score": {
-      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/quay_score"
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/quay_score"
     },
     "date": {
       "oneOf": [
         {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted"
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
         },
         {
           "type": "null"
         }
       ],
-      "description": "[OPTIONAL] Genealogical date for the fact or null."
+      "description": "Genealogical date for the fact or null."
     },
     "location": {
-      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
-      "description": "[OPTIONAL] Standardized and verbatim location."
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/location",
+      "description": "Standardized and verbatim location."
     },
     "description": {
       "type": "string",
-      "description": "[REQUIRED] Human- and AI-readable contextual display string summarizing the asserted fact (e.g., 'Death of Annie Lehman', 'Marriage of William Lehman and Annie Myers')."
+      "description": "Human- and AI-readable contextual display string summarizing the asserted fact."
     },
     "notes": {
       "type": [
@@ -68,14 +58,14 @@
       "items": {
         "$ref": "../defs/_shared_defs.schema.json#/$defs/note_entry"
       },
-      "description": "[OPTIONAL] List of structured research notes adhering to canonical note_entry, or null."
+      "description": "List of structured research notes adhering to canonical note_entry, or null."
     },
     "life_story": {
       "type": [
         "string",
         "null"
       ],
-      "description": "[OPTIONAL] Qualitative narrative describing the human context of the event."
+      "description": "Qualitative narrative describing the human context of the event."
     },
     "associated_people": {
       "type": [
@@ -83,24 +73,36 @@
         "null"
       ],
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
       },
-      "description": "[OPTIONAL] List of other individuals involved in this event and their specific roles."
+      "description": "List of other individuals involved in this event and their specific roles."
     },
     "external_identifiers": {
-      "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/fact_external_identifiers",
-      "description": "[OPTIONAL] Cross-reference mapping to external GEDCOM events and sources."
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/fact_external_identifiers",
+      "description": "Cross-reference mapping to external GEDCOM events and sources."
+    },
+    "is_deprecated": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if soft-deleted, merged, or invalidated."
+    },
+    "superseded_by": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Pointer to the absorbing canonical UUIDv4 fact_id if consolidated."
     },
     "created_at": {
       "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso",
-      "description": "[REQUIRED] ISO 8601 timestamp tracking when the fact entry was first created."
+      "description": "ISO 8601 timestamp tracking when the fact entry was first created."
     },
     "updated_at": {
       "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso",
-      "description": "[REQUIRED] ISO 8601 timestamp tracking when the fact entry was last modified."
+      "description": "ISO 8601 timestamp tracking when the fact entry was last modified."
     },
     "source": {
-      "description": "[REQUIRED] Primary source reference pairing archival URNs with physical filenames.",
+      "description": "Primary source reference pairing archival URNs with physical filenames.",
       "oneOf": [
         {
           "$ref": "../defs/_shared_defs.schema.json#/$defs/source_reference"
@@ -123,7 +125,7 @@
           "type": "null"
         }
       ],
-      "description": "[OPTIONAL] ISO 8601 timestamp tracking when this assertion was absorbed by a canonical record, or null if active."
+      "description": "ISO 8601 timestamp tracking when this assertion was absorbed by a canonical record."
     },
     "canonical_fact_id": {
       "oneOf": [
@@ -134,18 +136,8 @@
           "type": "null"
         }
       ],
-      "description": "[OPTIONAL] Pointer to the absorbing canonical fact_id if this assertion was consolidated, or null if active."
+      "description": "Pointer to the absorbing canonical fact_id if this assertion was consolidated."
     }
   },
-  "required": [
-    "fact_id",
-    "person_id",
-    "fact_type",
-    "quay_score",
-    "description",
-    "created_at",
-    "updated_at",
-    "source"
-  ],
   "additionalProperties": false
 }

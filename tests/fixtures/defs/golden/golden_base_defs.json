@@ -1,0 +1,82 @@
+{
+  "_name": "golden_base_defs.json",
+  "_path": "tests/fixtures/defs/golden/golden_base_defs.json",
+  "_description": "Canonical synthetic test payloads for base definitions primitives.",
+  "note_entry_canonical": {
+    "note_id": "NOT-00001",
+    "text": "Synthesized verification note for unit test.",
+    "type": "RESEARCH",
+    "created_at": "2026-10-12T12:00:00Z",
+    "modified_date": "2026-10-12T12:00:00Z"
+  },
+  "note_entry_legacy": {
+    "note_id": "NOT-00002",
+    "note_text": "Legacy attribute alias note verification.",
+    "note_type": "HISTORICAL",
+    "created_at": "2026-10-12T12:00:00Z"
+  },
+  "tombstone": {
+    "is_deprecated": true,
+    "superseded_by": "IND-00042",
+    "deprecated_at": "2026-10-12T12:00:00Z",
+    "reason": "Duplicate individual assertion merged."
+  },
+  "tombstone_null": {
+    "is_deprecated": false,
+    "superseded_by": null,
+    "deprecated_at": null,
+    "reason": null
+  },
+  "date_interpreted": {
+    "date_raw": "12 Jun 1915",
+    "date_iso": "1915-06-12",
+    "year": 1915,
+    "month": 6,
+    "day": 12,
+    "modifier": "EXACT",
+    "quay_start": 3,
+    "quay_end": 3,
+    "confidence": 1.0
+  },
+  "location": {
+    "location_id": "LOC-00001",
+    "verbatim": "Carlisle, Cumberland Co., PA",
+    "site_id": "SID-00001"
+  },
+  "canonical_name": {
+    "given": "Daniel",
+    "middle": "Webster",
+    "surname": "Lehman",
+    "suffix": null,
+    "maiden_name": null
+  },
+  "age_record": {
+    "years": 42,
+    "months": 6,
+    "days": 10,
+    "raw_text": "42y 6m 10d",
+    "verbatim": "42 years, 6 months"
+  },
+  "street_address": {
+    "address_line_1": "100 High Street",
+    "address_line_2": null,
+    "postal_code": "17013",
+    "coordinates": {
+      "latitude": 40.2014,
+      "longitude": -77.1889
+    }
+  },
+  "source_reference": {
+    "record_guid": "7b82450d-0e00-40e9-87d0-2f501efd1f54",
+    "citation_text": "Pennsylvania State Archives Vital Statistics Record Group 11",
+    "source_id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+    "page_or_side": "Roll 412, Frame 102",
+    "side": "FRONT"
+  },
+  "associated_person_entry": {
+    "person_id": "IND-00001",
+    "role": "CHIL",
+    "name_raw": "Daniel Lehman",
+    "notes": "Primary infant recorded on certificate."
+  }
+}

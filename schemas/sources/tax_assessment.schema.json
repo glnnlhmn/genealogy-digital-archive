@@ -1,4 +1,6 @@
 {
+  "_name": "tax_assessment.schema.json",
+  "_path": "schemas/sources/tax_assessment.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/sources/tax_assessment.schema.json",
   "title": "TaxAssessmentRecord",
@@ -6,6 +8,8 @@
   "description": "Standardized schema for historical county and township real estate, personal property, poll, and septennial tax lists.",
   "type": "object",
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "description",
     "record_metadata",
@@ -14,14 +18,26 @@
     "associated_people"
   ],
   "properties": {
-    "$schema": { "type": "string" },
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    },
     "description": {
       "type": "string",
-      "description": "[REQUIRED] Contextual summary (e.g., '1855 County Tax Assessment of Christian Lehman (West Pennsboro Twp, Cumberland Co., PA)')."
+      "description": "Contextual summary of this tax assessment record."
     },
     "record_metadata": {
       "type": "object",
-      "required": ["source_urn", "record_category", "record_type"],
+      "required": [
+        "source_urn",
+        "record_category",
+        "record_type"
+      ],
       "properties": {
         "source_urn": {
           "type": "string",
@@ -30,7 +46,11 @@
         },
         "record_category": {
           "type": "string",
-          "enum": ["TAX", "FISCAL", "CENSUS_EQUIVALENT"],
+          "enum": [
+            "TAX",
+            "FISCAL",
+            "CENSUS_EQUIVALENT"
+          ],
           "default": "TAX"
         },
         "record_type": {
@@ -51,7 +71,10 @@
     },
     "assessment_jurisdiction": {
       "type": "object",
-      "required": ["assessment_year", "taxing_district"],
+      "required": [
+        "assessment_year",
+        "taxing_district"
+      ],
       "properties": {
         "assessment_year": {
           "type": "integer",
@@ -59,10 +82,14 @@
           "maximum": 2100
         },
         "taxing_district": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
-          "description": "Township, borough, ward, or county collecting the assessment."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
         },
-        "assessor_name": { "type": ["string", "null"] }
+        "assessor_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       },
       "additionalProperties": false
     },
@@ -77,68 +104,132 @@
       "properties": {
         "roll_reference": {
           "type": "object",
-          "required": ["locator"],
+          "required": [
+            "locator"
+          ],
           "properties": {
             "locator": {
-              "type": "string",
-              "description": "Page number, line item, or assessment entry matching locator_tax_patterns."
+              "type": "string"
             },
             "schedule_name": {
-              "type": ["string", "null"],
-              "description": "e.g., 'Seated Land List', 'Unseated Land', 'Freemen List', 'Inhabitants'."
+              "type": [
+                "string",
+                "null"
+              ]
             },
-            "line_number": { "type": ["integer", "null"] }
+            "line_number": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
           },
           "additionalProperties": false
         },
         "taxpayer": {
           "type": "object",
-          "required": ["full_name"],
+          "required": [
+            "full_name"
+          ],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
             },
             "classification": {
-              "type": ["string", "null"],
-              "enum": ["Freeholder", "Tenant", "Single Freeman", "Inmate", "Widow", null],
-              "description": "Status recorded on the historical roll."
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "Freeholder",
+                "Tenant",
+                "Single Freeman",
+                "Inmate",
+                "Widow",
+                null
+              ]
             },
-            "stated_occupation": { "type": ["string", "null"] }
+            "stated_occupation": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
           },
           "additionalProperties": false
         },
         "assessed_property": {
           "type": "object",
           "properties": {
-            "acres_seated": { "type": ["number", "null"] },
-            "acres_unseated": { "type": ["number", "null"] },
-            "horses": { "type": ["integer", "null"] },
-            "cattle_or_cows": { "type": ["integer", "null"] },
-            "mills_distilleries_taverns": { "type": ["string", "null"] },
-            "total_valuation": { "type": ["string", "null"] },
-            "county_tax_amount": { "type": ["string", "null"] },
-            "state_tax_amount": { "type": ["string", "null"] }
+            "acres_seated": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "acres_unseated": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "horses": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "cattle_or_cows": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "mills_distilleries_taverns": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "total_valuation": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "county_tax_amount": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "state_tax_amount": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
           },
           "additionalProperties": false
         },
         "tax_note": {
-          "type": ["string", "null"],
-          "description": "Marginal notations, exonerations, or marks (e.g., 'transferred to John Doe')."
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "transcript": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
-          "description": "Verbatim line readout, abstract, and keywords."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/transcript_record"
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
-          },
-          "description": "Image scans of the tax ledger folio."
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/source_media"
+          }
         }
       },
       "additionalProperties": false
@@ -146,9 +237,8 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
-      },
-      "description": "Array of participants (taxpayer, landlord if tenant, assessor) mapped to roles and IDs."
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
+      }
     }
   },
   "additionalProperties": false

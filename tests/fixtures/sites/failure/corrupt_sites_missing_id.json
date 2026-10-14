@@ -1,0 +1,47 @@
+{
+  "_name": "corrupt_sites_missing_id.json",
+  "_path": "tests/fixtures/sites/failure/corrupt_sites_missing_id.json",
+  "$schema": "schemas/entities/site_registry.schema.json",
+  "version": "1.2.0",
+  "created_at": "2026-10-08T19:30:00Z",
+  "last_modified": "2026-10-10T12:00:00Z",
+  "total_sites": 18,
+  "sites": [
+    {
+      "site_id": "",
+      "site_type": "CEMETERY",
+      "name": "Corrupt Missing ID Site",
+      "aliases": [],
+      "location_id": "LOC-00042",
+      "address": null,
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-10T12:00:00Z"
+    },
+    {
+      "site_id": "SID-00001",
+      "site_type": "CHURCH",
+      "name": "First Evangelical Lutheran Church",
+      "aliases": ["First Lutheran", "Old Lutheran Church"],
+      "location_id": "LOC-00042",
+      "address": {
+        "address_line_1": "100 N Hanover St",
+        "address_line_2": null,
+        "postal_code": "19801",
+        "coordinates": {
+          "latitude": 40.2014,
+          "longitude": -77.1889
+        }
+      },
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-08T19:30:00Z"
+    }
+  ]
+}

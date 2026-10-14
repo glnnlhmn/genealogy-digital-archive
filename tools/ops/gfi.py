@@ -1,12 +1,22 @@
 # Name: gfi.py
 # Path: tools/ops/gfi.py
+# Version: 1.1.0+build.20261006.15
 
-"""GFI (Genealogy Fact Intake).
+"""GFI: Genealogy Fact Intake Operational CLI Pipeline.
 
-Permanent operational tool for staging intake, semantic quarantine filtering,
-auto-chunked batch aggregation, master facts appending, synchronized rollback backups,
-person unions synchronization, and interactive console management.
+Executes a multi-tier pipeline for staging intake, semantic triage,
+batch packaging, and master fact integration:
+- Staging Discovery: Scans for staged assertions (factoid-*.json).
+- Referential Validation: Validates lowercase UUIDv4 format, valid subject
+  IND-XXXXX pointers in people.json, and allowed fact types via GDAReferenceManager.
+- Associative Handling: Gracefully permits ungrounded entities in associated_people.
+- Union Synchronization: Automatically pairs and synchronizes Marriage and
+  Divorce assertions across GDAPeople via update().
+- Quarantine Routing: Isolates invalid records with timestamp prefixes and audit reasons.
+- Atomic Commit & Safe Backups: Persists changes via GDAFacts and GDAPeople.
 """
+
+from __future__ import annotations
 
 import argparse
 from datetime import datetime
@@ -18,308 +28,425 @@ import shutil
 import sys
 from typing import Any, Dict, List, Optional, Set, Tuple
 
-REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
+ROOT_DIR = Path(__file__).resolve().parents[2]
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))  # pragma: no cover
 
-from tools.lib.gda_core.GDAConfig import GDAConfig
-from tools.lib.gda_core.GDALogger import setup_logger
-from tools.lib.gda_core.GDAUtil import GDAUtil
+from gdacore.config import CONFIG, GDAConfig
+from gdacore.logger import get_logger, setup_logger
+from gdacore.reference_manager import GDAReferenceManager
+from gdacore.util import GDAUtil
+from gdadomain.facts import GDAFacts
+from gdadomain.people import GDAPeople
 
-__version__ = "1.0.2+build.20260925.2"
+__version__ = "1.1.0+build.20261006.15"
+
+RECOGNIZED_FACT_TYPES: Set[str] = {
+    "Birth",
+    "Death",
+    "Marriage",
+    "Divorce",
+    "Burial",
+    "Parentage",
+    "Residence",
+    "Census",
+    "Occupation",
+    "Military",
+    "Immigration",
+    "Emigration",
+    "Naturalization",
+    "Probate",
+    "Will",
+    "Education",
+    "Baptism",
+    "Christening",
+    "Adoption",
+    "Association",
+}
 
 
-def load_valid_person_ids(
-    people_path: Optional[Path] = None,
-    logger: Optional[logging.Logger] = None,
-    config: Optional[GDAConfig] = None,
-) -> Set[str]:
-    """Loads all person_ids currently in people.json."""
-    if people_path is None:
-        cfg = config or GDAConfig(REPO_ROOT)
-        entities_dir = getattr(cfg, "entities_dir", REPO_ROOT / "data" / "entities")
-        people_path = entities_dir / "people.json"
+def quarantine_factoid(
+    file_path: Path,
+    reason: str,
+    logger: logging.Logger,
+    quarantine_dir: Optional[Path] = None,
+) -> Path:
+    """Quarantines invalid staging file by prepending timestamp and writing reason."""
+    q_dir = quarantine_dir or CONFIG.quarantine
+    q_dir.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    dest_name = f"{ts}_{file_path.name}"
+    dest_path = q_dir / dest_name
 
-    if not people_path.is_file():
-        if logger:
-            logger.error("people.json not found at %s", people_path)
-        return set()
+    meta_path = q_dir / f"{dest_name}.reason.txt"
+    meta_path.write_text(reason, encoding="utf-8")
 
-    try:
-        data = GDAUtil.load_json(people_path)
-        return {p["person_id"] for p in data.get("persons", []) if "person_id" in p}
-    except Exception as exc:
-        if logger:
-            logger.error("Failed to parse people.json: %s", exc)
-        return set()
+    file_path.rename(dest_path)
+    logger.error("QUARANTINED: %s -> %s (Reason: %s)", file_path.name, dest_name, reason)
+    return dest_path
 
 
-def sync_union_for_fact(
-    people_payload: Dict[str, Any],
-    fact: Dict[str, Any],
-    logger: Optional[logging.Logger] = None,
+def restore_quarantine(
+    logger: logging.Logger,
+    quarantine_dir: Optional[Path] = None,
+    entities_dir: Optional[Path] = None,
 ) -> int:
-    """Synchronizes Marriage or Divorce fact data into person unions symmetrically.
+    """Restores all quarantined factoid files back to the entities staging directory."""
+    q_dir = quarantine_dir or CONFIG.quarantine
+    target_dir = entities_dir or CONFIG.entities
+    if not q_dir.exists():
+        logger.info("Quarantine directory does not exist: %s", q_dir)
+        return 0
 
-    Returns the number of person union endpoints updated or created.
+    count = 0
+    for q_file in q_dir.glob("*_factoid-*.json"):
+        clean_name = re.sub(r"^\d{8}_\d{6}_", "", q_file.name)
+        dest = target_dir / clean_name
+        q_file.rename(dest)
+        meta_file = q_dir / f"{q_file.name}.reason.txt"
+        if meta_file.exists():
+            meta_file.unlink()
+        logger.info("RESTORED: %s -> %s", q_file.name, dest.name)
+        count += 1
+    return count
+
+
+def discover_staged_factoids(staging_dir: Optional[Path] = None) -> List[Path]:
+    """Finds all staged factoid-*.json files in staging directory."""
+    s_dir = staging_dir or CONFIG.entities
+    if not s_dir.exists():
+        return []
+    return sorted(s_dir.glob("factoid-*.json"))
+
+
+def validate_factoid(
+    factoid: Dict[str, Any],
+    people_mgr: GDAPeople,
+) -> Tuple[bool, str]:
+    """Validates identifier formatting, subject existence, and controlled taxonomy.
+
+    Ungrounded associated people (missing or non-IND IDs) are accepted cleanly.
     """
+    if not isinstance(factoid, dict):
+        return False, "Payload is not a valid JSON dictionary"
+
+    fid = factoid.get("fact_id")
+    if not fid:
+        return False, "Missing required fact_id"
+    if not GDAReferenceManager.is_valid_fact_id(fid):
+        return False, f"Invalid fact_id format: '{fid}' must be lowercase UUIDv4"
+
+    pid = factoid.get("person_id")
+    if not pid:
+        return False, "Missing required person_id"
+    if not GDAReferenceManager.is_valid_person_id(pid):
+        return False, f"Invalid person_id format: '{pid}' must conform to IND-XXXXX"
+    if not people_mgr.exists(pid):
+        return False, f"Referenced primary subject '{pid}' not found in master people registry"
+
+    ftype = factoid.get("fact_type")
+    if not ftype:
+        return False, "Missing required fact_type"
+    if ftype not in RECOGNIZED_FACT_TYPES:
+        return False, f"Unrecognized fact_type: '{ftype}'"
+
+    for assoc in factoid.get("associated_people", []):
+        if isinstance(assoc, dict):
+            a_id = assoc.get("person_id")
+            if a_id:
+                if not GDAReferenceManager.is_valid_person_id(a_id):
+                    return False, f"Invalid associated person_id format: '{a_id}'"
+                if not people_mgr.exists(a_id):
+                    return False, f"Associated person '{a_id}' not found in master people registry"
+
+    return True, "Valid"
+
+
+def sync_unions_for_fact(
+    fact: Dict[str, Any],
+    people_mgr: GDAPeople,
+    logger: logging.Logger,
+) -> int:
+    """Synchronizes Marriage and Divorce events symmetrically into GDAPeople."""
     ftype = fact.get("fact_type")
     if ftype not in ("Marriage", "Divorce"):
         return 0
 
     pid = fact.get("person_id")
-    if not pid:
+    if not pid or not people_mgr.exists(pid):
         return 0
 
     spouse_ids = [
         a.get("person_id")
         for a in fact.get("associated_people", [])
-        if isinstance(a, dict) and a.get("person_id")
+        if isinstance(a, dict) and a.get("person_id") and people_mgr.exists(a.get("person_id"))
     ]
     if not spouse_ids:
         return 0
 
-    person_map = {p["person_id"]: p for p in people_payload.get("persons", []) if "person_id" in p}
-    if pid not in person_map:
-        return 0
-
-    updated_count = 0
-    f_date = fact.get("date")
-    f_place = fact.get("location")
-    f_notes = fact.get("notes")
+    status = "DIVORCED" if ftype == "Divorce" else "MARRIED"
+    synced = 0
+    date_val = fact.get("date")
+    place_val = fact.get("location")
 
     for sid in spouse_ids:
-        if sid not in person_map:
+        p_a = people_mgr.get_by_id(pid)
+        p_b = people_mgr.get_by_id(sid)
+
+        # Symmetrical Person A union update
+        unions_a = list(p_a.get("unions", []))
+        u_a = next((u for u in unions_a if u.get("spouse_id") == sid), None)
+        if not u_a:
+            unions_a.append({
+                "spouse_id": sid,
+                "status": status,
+                "marriage_date": date_val if ftype == "Marriage" else None,
+                "end_date": date_val if ftype == "Divorce" else None,
+                "place": place_val,
+            })
+        else:
+            u_a["status"] = status
+            if ftype == "Marriage" and date_val:
+                u_a["marriage_date"] = date_val
+            elif ftype == "Divorce" and date_val:
+                u_a["end_date"] = date_val
+        people_mgr.update(pid, {"unions": unions_a})
+
+        # Symmetrical Person B union update
+        unions_b = list(p_b.get("unions", []))
+        u_b = next((u for u in unions_b if u.get("spouse_id") == pid), None)
+        if not u_b:
+            unions_b.append({
+                "spouse_id": pid,
+                "status": status,
+                "marriage_date": date_val if ftype == "Marriage" else None,
+                "end_date": date_val if ftype == "Divorce" else None,
+                "place": place_val,
+            })
+        else:
+            u_b["status"] = status
+            if ftype == "Marriage" and date_val:
+                u_b["marriage_date"] = date_val
+            elif ftype == "Divorce" and date_val:
+                u_b["end_date"] = date_val
+        people_mgr.update(sid, {"unions": unions_b})
+
+        synced += 1
+        logger.info("Synchronized %s union symmetrically between %s and %s", ftype, pid, sid)
+
+    return synced
+
+
+def process_intake_batch(
+    staged_files: List[Path],
+    facts_mgr: GDAFacts,
+    people_mgr: GDAPeople,
+    logger: logging.Logger,
+    batch_size: int = 75,
+    quarantine_dir: Optional[Path] = None,
+    fact_new_dir: Optional[Path] = None,
+    dry_run: bool = False,
+) -> Dict[str, Any]:
+    """Triages, validates, batches, and stages factoids."""
+    target_q = quarantine_dir or CONFIG.quarantine
+    target_new = fact_new_dir or (CONFIG.entities / "fact-new")
+
+    accepted_facts: List[Dict[str, Any]] = []
+    quarantined_count = 0
+    accepted_files: List[Path] = []
+
+    for fpath in staged_files:
+        try:
+            payload = GDAUtil.load_json(fpath)
+        except Exception as exc:
+            if not dry_run:
+                quarantine_factoid(fpath, f"JSON Parse Error: {exc}", logger, target_q)
+            quarantined_count += 1
             continue
 
-        p_a = person_map[pid]
-        p_b = person_map[sid]
+        valid, reason = validate_factoid(payload, people_mgr)
+        if not valid:
+            if not dry_run:
+                quarantine_factoid(fpath, reason, logger, target_q)
+            quarantined_count += 1
+            continue
 
-        if "unions" not in p_a:
-            p_a["unions"] = []
-        if "unions" not in p_b:
-            p_b["unions"] = []
+        fid = payload.get("fact_id")
+        if fid in facts_mgr.existing_ids:
+            if not dry_run:
+                quarantine_factoid(fpath, f"Duplicate fact_id collision: '{fid}' already exists", logger, target_q)
+            quarantined_count += 1
+            continue
 
-        u_a = next((u for u in p_a["unions"] if u.get("spouse_id") == sid), None)
-        u_b = next((u for u in p_b["unions"] if u.get("spouse_id") == pid), None)
+        accepted_facts.append(payload)
+        accepted_files.append(fpath)
 
-        if not u_a:
-            u_a = {
-                "spouse_id": sid,
-                "status": "DIVORCED" if ftype == "Divorce" else "MARRIED",
-                "marriage_date": f_date if ftype == "Marriage" else None,
-                "end_date": f_date if ftype == "Divorce" else None,
-                "place": f_place,
-                "notes": f_notes,
-            }
-            p_a["unions"].append(u_a)
-            updated_count += 1
-        else:
-            if ftype == "Marriage":
-                u_a["status"] = "MARRIED" if u_a.get("status") != "DIVORCED" else u_a.get("status")
-                u_a["marriage_date"] = f_date or u_a.get("marriage_date")
-                if f_place:
-                    u_a["place"] = f_place
-            elif ftype == "Divorce":
-                u_a["status"] = "DIVORCED"
-                u_a["end_date"] = f_date or u_a.get("end_date")
-            updated_count += 1
-
-        if not u_b:
-            u_b = {
-                "spouse_id": pid,
-                "status": "DIVORCED" if ftype == "Divorce" else "MARRIED",
-                "marriage_date": f_date if ftype == "Marriage" else None,
-                "end_date": f_date if ftype == "Divorce" else None,
-                "place": f_place,
-                "notes": f_notes,
-            }
-            p_b["unions"].append(u_b)
-            updated_count += 1
-        else:
-            if ftype == "Marriage":
-                u_b["status"] = "MARRIED" if u_b.get("status") != "DIVORCED" else u_b.get("status")
-                u_b["marriage_date"] = f_date or u_b.get("marriage_date")
-                if f_place:
-                    u_b["place"] = f_place
-            elif ftype == "Divorce":
-                u_b["status"] = "DIVORCED"
-                u_b["end_date"] = f_date or u_b.get("end_date")
-            updated_count += 1
-
-        if logger:
-            logger.info("Synchronized %s union symmetrically between %s and %s", ftype, pid, sid)
-
-    return updated_count
-
-
-class FactIntakeEngine:
-    """Manages intake, quarantine triage, batch appending, and union sync."""
-
-    def __init__(
-        self,
-        config: GDAConfig,
-        logger: logging.Logger,
-    ) -> None:
-        self.config = config
-        self.logger = logger
-        self.entities_dir = getattr(config, "entities_dir", config.root / "data" / "entities")
-        self.quarantine_dir = getattr(config, "quarantine_dir", self.entities_dir / "quarantine")
-        self.facts_path = self.entities_dir / "facts.json"
-        self.people_path = self.entities_dir / "people.json"
-        self.backups_dir = getattr(config, "backups_dir", config.root / "backups")
-
-    def _relocate_to_quarantine(self, source_file: Path) -> Path:
-        """Safely moves a failed or invalid factoid file into the quarantine directory."""
-        self.quarantine_dir.mkdir(parents=True, exist_ok=True)
-        dest_file = self.quarantine_dir / source_file.name
-        shutil.copy2(source_file, dest_file)
-        source_file.unlink(missing_ok=True)
-        return dest_file
-
-    def validate_factoid(
-        self,
-        factoid: Dict[str, Any],
-        valid_pids: Set[str],
-    ) -> Tuple[bool, str]:
-        """Validates schema conformance and person reference validity."""
-        if not isinstance(factoid, dict):
-            return False, "Payload is not a valid JSON dictionary"
-
-        fid = factoid.get("fact_id")
-        if not fid:
-            return False, "Missing required fact_id"
-
-        pid = factoid.get("person_id")
-        if not pid:
-            return False, "Missing required person_id"
-
-        if pid not in valid_pids:
-            return False, f"Referenced person_id '{pid}' not found in registry"
-
-        ftype = factoid.get("fact_type")
-        if not ftype:
-            return False, "Missing required fact_type"
-
-        return True, "Valid"
-
-    def process_staged_factoids(self, staging_files: List[Path]) -> Dict[str, Any]:
-        """Triage staged factoids: appends valid facts and routes invalid to quarantine."""
-        valid_pids = load_valid_person_ids(self.people_path, self.logger, self.config)
-
-        facts_payload = (
-            GDAUtil.load_json(self.facts_path)
-            if self.facts_path.is_file()
-            else {
-                "$schema": "schemas/entities/fact_registry.schema.json",
-                "schema_version": "1.0.1",
-                "facts": [],
-            }
-        )
-        people_payload = (
-            GDAUtil.load_json(self.people_path)
-            if self.people_path.is_file()
-            else {"persons": []}
-        )
-
-        existing_fids = {f["fact_id"] for f in facts_payload.get("facts", []) if "fact_id" in f}
-
-        accepted_facts: List[Dict[str, Any]] = []
-        quarantined_files: List[Path] = []
-        union_sync_count = 0
-
-        self.quarantine_dir.mkdir(parents=True, exist_ok=True)
-        self.backups_dir.mkdir(parents=True, exist_ok=True)
-
-        for sfile in staging_files:
-            try:
-                content = GDAUtil.load_json(sfile)
-            except Exception as exc:
-                self.logger.warning("Unreadable factoid file %s: %s", sfile.name, exc)
-                q_dest = self._relocate_to_quarantine(sfile)
-                quarantined_files.append(q_dest)
-                continue
-
-            valid, reason = self.validate_factoid(content, valid_pids)
-            if not valid:
-                self.logger.warning("Quarantining %s: %s", sfile.name, reason)
-                q_dest = self._relocate_to_quarantine(sfile)
-                quarantined_files.append(q_dest)
-                continue
-
-            fid = content["fact_id"]
-            if fid in existing_fids:
-                self.logger.warning("Quarantining %s: Duplicate fact_id '%s'", sfile.name, fid)
-                q_dest = self._relocate_to_quarantine(sfile)
-                quarantined_files.append(q_dest)
-                continue
-
-            accepted_facts.append(content)
-            existing_fids.add(fid)
-            sfile.unlink(missing_ok=True)
-
-        if accepted_facts:
-            # Safe Backup Protocol
-            ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-            if self.facts_path.is_file():
-                shutil.copy2(self.facts_path, self.backups_dir / f"facts.json.{ts}.bk")
-            if self.people_path.is_file():
-                shutil.copy2(self.people_path, self.backups_dir / f"people.json.{ts}.bk")
-
-            for fact in accepted_facts:
-                facts_payload.setdefault("facts", []).append(fact)
-                u_synced = sync_union_for_fact(people_payload, fact, self.logger)
-                union_sync_count += u_synced
-
-            facts_payload["last_modified"] = datetime.now().isoformat()
-            people_payload["last_modified"] = datetime.now().isoformat()
-
-            GDAUtil.save_json(self.facts_path, facts_payload)
-            GDAUtil.save_json(self.people_path, people_payload)
-
+    if not accepted_facts:
         return {
-            "processed": len(staging_files),
-            "accepted": len(accepted_facts),
-            "quarantined": len(quarantined_files),
-            "unions_synced": union_sync_count,
+            "total_processed": len(staged_files),
+            "accepted": 0,
+            "quarantined": quarantined_count,
+            "batches_created": 0,
+            "accepted_files": [],
+            "accepted_facts": [],
         }
 
+    batches_created = 0
+    if not dry_run:
+        target_new.mkdir(parents=True, exist_ok=True)
+        for i in range(0, len(accepted_facts), batch_size):
+            batch_slice = accepted_facts[i : i + batch_size]
+            batch_num = (i // batch_size) + 1
+            b_dir = target_new / f"batch-{batch_num:04d}"
+            b_dir.mkdir(parents=True, exist_ok=True)
 
-def run_cli() -> int:
-    parser = argparse.ArgumentParser(description="Genealogy Fact Intake (GFI)")
-    parser.add_argument("--dir", "-d", type=Path, default=None, help="Directory containing staged factoids")
-    parser.add_argument("--verbose", "-v", action="store_true", help="Emit verbose logging traces")
+            batch_envelope = {
+                "batch_number": batch_num,
+                "created_at": GDAUtil.iso_now(),
+                "count": len(batch_slice),
+                "facts": batch_slice,
+            }
+            GDAUtil.save_json(b_dir / f"factoids-{batch_num:04d}.json", batch_envelope)
+            batches_created += 1
+    else:
+        batches_created = (len(accepted_facts) + batch_size - 1) // batch_size
+
+    return {
+        "total_processed": len(staged_files),
+        "accepted": len(accepted_facts),
+        "quarantined": quarantined_count,
+        "batches_created": batches_created,
+        "accepted_files": accepted_files,
+        "accepted_facts": accepted_facts,
+    }
+
+
+def commit_fact_batches(
+    facts_mgr: GDAFacts,
+    people_mgr: GDAPeople,
+    logger: logging.Logger,
+    accepted_facts: Optional[List[Dict[str, Any]]] = None,
+    accepted_files: Optional[List[Path]] = None,
+    fact_new_dir: Optional[Path] = None,
+) -> Dict[str, Any]:
+    """Appends accepted facts to master store, syncs unions, creates Safe Backups, and cleans up."""
+    target_new = fact_new_dir or (CONFIG.entities / "fact-new")
+    facts_to_commit: List[Dict[str, Any]] = []
+
+    if accepted_facts is not None:
+        facts_to_commit = accepted_facts
+    elif target_new.exists():
+        for b_file in target_new.glob("batch-*/factoids-*.json"):
+            b_data = GDAUtil.load_json(b_file)
+            facts_to_commit.extend(b_data.get("facts", []))
+
+    if not facts_to_commit:
+        logger.info("No batched facts found to commit.")
+        return {"committed": 0, "unions_synced": 0}
+
+    union_sync_count = 0
+    for fact in facts_to_commit:
+        facts_mgr.add_fact(fact)
+        union_sync_count += sync_unions_for_fact(fact, people_mgr, logger)
+
+    facts_mgr.save(create_backup=True)
+    people_mgr.save(create_backup=True)
+
+    if accepted_files:
+        for f in accepted_files:
+            if f.exists():
+                f.unlink()
+
+    if target_new.exists():
+        shutil.rmtree(target_new)
+
+    logger.info("Successfully committed %d fact(s) to master registry.", len(facts_to_commit))
+    return {"committed": len(facts_to_commit), "unions_synced": union_sync_count}
+
+
+def main() -> int:
+    """Main CLI entry point for GFI pipeline."""
+    parser = argparse.ArgumentParser(description="GFI: Genealogy Fact Intake Pipeline")
+    parser.add_argument("-i", "--intake", action="store_true", help="Execute intake validation and batch container staging")
+    parser.add_argument("-a", "--append", action="store_true", help="Perform end-to-end ingestion: validate, batch, commit, and purge")
+    parser.add_argument("-r", "--restore", action="store_true", help="Restore quarantined factoids back to entities")
+    parser.add_argument("-b", "--batch-size", type=int, choices=[75, 150, 300], default=75, help="Batch container size (Default: 75)")
+    parser.add_argument("--dir", "-d", type=Path, default=None, help="Explicit directory containing staged factoids")
+    parser.add_argument("--dry-run", action="store_true", help="Run validation without committing mutations")
+    parser.add_argument("-v", "--verbose", action="store_true", help="Emit verbose logging traces")
+    parser.add_argument("--debug", action="store_true", help="Route runtime traces directly to console/stderr")
     args = parser.parse_args()
 
-    logger = setup_logger("gfi", ephemeral=True, console_level=logging.DEBUG if args.verbose else logging.INFO)
+    c_level = logging.DEBUG if args.debug else (logging.DEBUG if args.verbose else logging.INFO)
+    logger = setup_logger("gfi", ephemeral=True, console_level=c_level)
     logger.info("GFI version %s initializing", __version__)
 
-    config = GDAConfig(REPO_ROOT)
-    staging_dir = args.dir or (getattr(config, "entities_dir", REPO_ROOT / "data" / "entities") / "quarantine")
-
-    if not staging_dir.is_dir():
-        logger.error("Staging directory not found: %s", staging_dir)
-        return 1
-
-    staging_files = sorted(list(staging_dir.glob("factoid-*.json")))
-    if not staging_files:
-        logger.info("No staged factoids found to process in %s", staging_dir)
+    if args.restore:
+        restored = restore_quarantine(logger)
+        logger.info("Restore complete: %d factoids recovered from quarantine", restored)
         return 0
 
-    engine = FactIntakeEngine(config, logger)
-    results = engine.process_staged_factoids(staging_files)
+    staged_files = discover_staged_factoids(args.dir)
+    if not staged_files and not (args.append and (CONFIG.entities / "fact-new").exists()):
+        logger.info("No staged factoids found to process. Exiting.")
+        return 0
 
-    logger.info("==========================================")
-    logger.info("GFI INTAKE EXECUTION SUMMARY")
-    logger.info("==========================================")
-    logger.info("Total Factoids Examined:  %d", results["processed"])
-    logger.info("Accepted & Appended:      %d", results["accepted"])
-    logger.info("Quarantined:              %d", results["quarantined"])
-    logger.info("Union Endpoints Synced:   %d", results["unions_synced"])
-    logger.info("==========================================")
+    facts_mgr = GDAFacts(CONFIG.entities / "facts.json")
+    people_mgr = GDAPeople(filepath=CONFIG.entities / "people.json")
+
+    if args.intake:
+        results = process_intake_batch(
+            staged_files=staged_files,
+            facts_mgr=facts_mgr,
+            people_mgr=people_mgr,
+            logger=logger,
+            batch_size=args.batch_size,
+            dry_run=args.dry_run,
+        )
+        logger.info(
+            "INTAKE SUMMARY: %d processed, %d accepted, %d quarantined, %d batch(es) staged",
+            results["total_processed"],
+            results["accepted"],
+            results["quarantined"],
+            results["batches_created"],
+        )
+        return 0
+
+    if args.append or (not args.intake and not args.restore):
+        if staged_files:
+            b_res = process_intake_batch(
+                staged_files=staged_files,
+                facts_mgr=facts_mgr,
+                people_mgr=people_mgr,
+                logger=logger,
+                batch_size=args.batch_size,
+                dry_run=args.dry_run,
+            )
+            if args.dry_run:
+                logger.info("[DRY-RUN] Validation complete. 0 facts committed.")
+                return 0
+            c_res = commit_fact_batches(
+                facts_mgr=facts_mgr,
+                people_mgr=people_mgr,
+                logger=logger,
+                accepted_facts=b_res.get("accepted_facts"),
+                accepted_files=b_res.get("accepted_files"),
+            )
+        else:
+            if args.dry_run:
+                logger.info("[DRY-RUN] Validation complete. 0 facts committed.")
+                return 0
+            c_res = commit_fact_batches(
+                facts_mgr=facts_mgr,
+                people_mgr=people_mgr,
+                logger=logger,
+            )
+
+        logger.info("APPEND COMPLETE: %d facts committed, %d unions synced.", c_res["committed"], c_res["unions_synced"])
+        return 0
 
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(run_cli())
+    sys.exit(main())  # pragma: no cover

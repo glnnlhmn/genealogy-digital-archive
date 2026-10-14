@@ -4,623 +4,32 @@
   "$schema": "schemas/entities/location_registry.schema.json",
   "schema_version": "1.2.0",
   "created_at": "2026-09-29T00:00:00Z",
-  "last_modified": "2026-09-29T00:00:00Z",
-  "total_locations": 105,
+  "last_modified": "2026-10-09T22:30:00Z",
+  "total_locations": 45,
   "locations": [
-    {
-      "location_id": "LOC-00001",
-      "canonical_name": "Baden Wuerttemberg, Germany",
-      "aliases": ["Baden Wuerttemberg", "Baden-Wuerttemberg", "Baden Wuerttemberg Ger"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": null,
-        "state_or_province": "Baden Wuerttemberg",
-        "country": "Germany"
-      },
-      "temporal_validity": {"date_established": "1952-04-25", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00002",
-      "canonical_name": "Bangor, Northampton County, Pennsylvania, USA",
-      "aliases": ["Bangor", "Bangor Pa", "Bangor Northampton Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Bangor",
-        "county": "Northampton",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1875-05-22", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00003",
-      "canonical_name": "Berks County, Pennsylvania, USA",
-      "aliases": ["Berks Co", "Berks County", "Berks Penna"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": "Berks",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1752-03-11", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00004",
-      "canonical_name": "Blain, Perry County, Pennsylvania, USA",
-      "aliases": ["Blain", "Blain Pa", "Blain Perry Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Blain",
-        "county": "Perry",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1877-11-03", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00005",
-      "canonical_name": "Camp Hill, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Camp Hill", "Camp Hill Pa", "Camp Hill Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Camp Hill",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1885-11-10", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
     {
       "location_id": "LOC-00006",
       "canonical_name": "Carlisle, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Carlisle", "Carlisle Pa", "Carlisle Cumberland"],
+      "aliases": ["Carlisle", "Carlisle Pa", "Carlisle Borough"],
       "jurisdiction": {
         "local_jurisdiction": "Carlisle",
         "county": "Cumberland",
         "state_or_province": "Pennsylvania",
         "country": "USA"
       },
-      "temporal_validity": {"date_established": "1751", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00007",
-      "canonical_name": "Colonial Park, Dauphin County, Pennsylvania, USA",
-      "aliases": ["Colonial Park", "Colonial Park Pa", "Colonial Park Dauphin Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Colonial Park",
-        "county": "Dauphin",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
+      "temporal_validity": {
+        "date_established": "1751",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
       },
-      "temporal_validity": {"date_established": "1927", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
       "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
       "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00008",
-      "canonical_name": "Concord, Merrimack County, New Hampshire, USA",
-      "aliases": ["Concord", "Concord NH", "Concord Merrimack Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Concord",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1733", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00009",
-      "canonical_name": "Connecticut, USA",
-      "aliases": ["Conn", "CT", "State of Connecticut"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": null,
-        "state_or_province": "Connecticut",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1788-01-09", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00010",
-      "canonical_name": "Cumberland County, Pennsylvania, USA",
-      "aliases": ["Cumberland Co", "Cumb Co", "Cumberland County Pa"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1750-01-27", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00011",
-      "canonical_name": "Dauphin County, Pennsylvania, USA",
-      "aliases": ["Dauphin Co", "Dauphin County", "Dauphin Penna"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": "Dauphin",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1785-03-04", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00012",
-      "canonical_name": "Decatur, Macon County, Illinois, USA",
-      "aliases": ["Decatur", "Decatur Ill", "Decatur Macon Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Decatur",
-        "county": "Macon",
-        "state_or_province": "Illinois",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1829", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00013",
-      "canonical_name": "Dunoon and Kilmun, Argyll and Bute, Scotland",
-      "aliases": ["Dunoon and Kilmun", "Dunoon Kilmun Argyll"],
-      "jurisdiction": {
-        "local_jurisdiction": "Dunoon and Kilmun",
-        "county": null,
-        "state_or_province": "Argyll and Bute",
-        "country": "Scotland"
-      },
-      "temporal_validity": {"date_established": "1692", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00014",
-      "canonical_name": "Enola, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Enola", "Enola Pa", "Enola Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Enola",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1861", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00015",
-      "canonical_name": "Frankford Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Frankford", "Frankford Twp", "Frankford Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Frankford Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1795", "date_dissolved": null, "predecessor_location_id": "LOC-00069", "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00016",
-      "canonical_name": "Franklin, Merrimack County, New Hampshire, USA",
-      "aliases": ["Franklin", "Franklin NH", "Franklin Merrimack Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Franklin",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1828", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00017",
-      "canonical_name": "Gardners, Adams County, Pennsylvania, USA",
-      "aliases": ["Gardners", "Gardners Pa", "Gardners Adams Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Gardners",
-        "county": "Adams",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1884", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00018",
-      "canonical_name": "Greason, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Greason", "Greason Pa", "Greason Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Greason",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1870", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00019",
-      "canonical_name": "Groton, New London County, Connecticut, USA",
-      "aliases": ["Groton", "Groton CT", "Groton New London Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Groton",
-        "county": "New London",
-        "state_or_province": "Connecticut",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1705", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00020",
-      "canonical_name": "Harrisburg, Dauphin County, Pennsylvania, USA",
-      "aliases": ["Harrisburg", "Harrisburg Pa", "Hbg", "Hbg Pa"],
-      "jurisdiction": {
-        "local_jurisdiction": "Harrisburg",
-        "county": "Dauphin",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1785", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00021",
-      "canonical_name": "Hershey, Dauphin County, Pennsylvania, USA",
-      "aliases": ["Hershey", "Hershey Pa", "Hershey Dauphin Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Hershey",
-        "county": "Dauphin",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1903", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00022",
-      "canonical_name": "Hornberg, Ortenaukreis, Baden Wuerttemberg, Germany",
-      "aliases": ["Hornberg", "Hornberg Baden", "Hornberg Baden Wuerttemberg"],
-      "jurisdiction": {
-        "local_jurisdiction": "Hornberg",
-        "county": "Ortenaukreis",
-        "state_or_province": "Baden Wuerttemberg",
-        "country": "Germany"
-      },
-      "temporal_validity": {"date_established": "1288", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00023",
-      "canonical_name": "Huntingdon County, Pennsylvania, USA",
-      "aliases": ["Huntingdon Co", "Huntingdon County", "Huntingdon Penna"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": "Huntingdon",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1787-09-20", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00024",
-      "canonical_name": "Illinois, USA",
-      "aliases": ["Ill", "IL", "State of Illinois"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": null,
-        "state_or_province": "Illinois",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1818-12-03", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00025",
-      "canonical_name": "Johnston, Jones County, Iowa, USA",
-      "aliases": ["Johnston", "Johnston IA", "Johnston Jones Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Johnston",
-        "county": "Jones",
-        "state_or_province": "Iowa",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1850", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00026",
-      "canonical_name": "Johnstown, Cambria County, Pennsylvania, USA",
-      "aliases": ["Johnstown", "Johnstown Pa", "Johnstown Cambria Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Johnstown",
-        "county": "Cambria",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1800", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00027",
-      "canonical_name": "Lancaster County, Pennsylvania, USA",
-      "aliases": ["Lancaster Co", "Lancaster County", "Lancaster Penna"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": "Lancaster",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1729-05-10", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00028",
-      "canonical_name": "Lawrence County, South Dakota, USA",
-      "aliases": ["Lawrence Co", "Lawrence County SD", "Lawrence South Dakota"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": "Lawrence",
-        "state_or_province": "South Dakota",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1877", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00029",
-      "canonical_name": "Lebanon County, Pennsylvania, USA",
-      "aliases": ["Lebanon Co", "Lebanon County", "Lebanon Penna"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": "Lebanon",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1813-02-16", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00030",
-      "canonical_name": "Lebanon, Lebanon County, Pennsylvania, USA",
-      "aliases": ["Lebanon", "Lebanon Pa", "Lebanon Lebanon Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Lebanon",
-        "county": "Lebanon",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1753", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00031",
-      "canonical_name": "Lower Frankford Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Lower Frankford", "Lower Frankford Twp", "Lower Frankford Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Lower Frankford Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1882", "date_dissolved": null, "predecessor_location_id": "LOC-00015", "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00032",
-      "canonical_name": "Lower Mifflin Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Lower Mifflin", "Lower Mifflin Twp", "Lower Mifflin Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Lower Mifflin Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1892", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00033",
-      "canonical_name": "Lower Paxton Township, Dauphin County, Pennsylvania, USA",
-      "aliases": ["Lower Paxton", "Lower Paxton Twp", "Lower Paxton Dauphin Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Lower Paxton Township",
-        "county": "Dauphin",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1767", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00034",
-      "canonical_name": "Lower Swatara Township, Dauphin County, Pennsylvania, USA",
-      "aliases": ["Lower Swatara", "Lower Swatara Twp", "Lower Swatara Dauphin Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Lower Swatara Township",
-        "county": "Dauphin",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1840", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00035",
-      "canonical_name": "Lower West Pennsboro Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Lower West Pennsboro", "Lower West Pennsboro Twp", "Lower W Pennsboro"],
-      "jurisdiction": {
-        "local_jurisdiction": "Lower West Pennsboro Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1880", "date_dissolved": null, "predecessor_location_id": "LOC-00069", "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00036",
-      "canonical_name": "Mechanicsburg, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Mechanicsburg", "Mechanicsburg Pa", "Mechanicsburg Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Mechanicsburg",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1806", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00037",
-      "canonical_name": "Michigan, USA",
-      "aliases": ["Mich", "MI", "State of Michigan"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": null,
-        "state_or_province": "Michigan",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1837-01-26", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00038",
-      "canonical_name": "Middletown, Dauphin County, Pennsylvania, USA",
-      "aliases": ["Middletown", "Middletown Pa", "Middletown Dauphin Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Middletown",
-        "county": "Dauphin",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1755", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00039",
-      "canonical_name": "Mount Holly Springs, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Mount Holly Springs", "Mt Holly Springs", "Mt Holly Springs Pa"],
-      "jurisdiction": {
-        "local_jurisdiction": "Mount Holly Springs",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1873", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00040",
-      "canonical_name": "Neffsville, Lancaster County, Pennsylvania, USA",
-      "aliases": ["Neffsville", "Neffsville Pa", "Neffsville Lancaster Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Neffsville",
-        "county": "Lancaster",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1800", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00041",
-      "canonical_name": "New York, USA",
-      "aliases": ["NY", "State of New York"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": null,
-        "state_or_province": "New York",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1788-07-26", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
       "location_id": "LOC-00042",
@@ -632,120 +41,502 @@
         "state_or_province": "New Jersey",
         "country": "USA"
       },
-      "temporal_validity": {"date_established": "1666", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "temporal_validity": {
+        "date_established": "1666",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
       "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
       "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
-      "location_id": "LOC-00043",
-      "canonical_name": "Newton Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Newton", "Newton Twp", "Newton Cumberland Co"],
+      "location_id": "LOC-00101",
+      "canonical_name": "Gettysburg, Adams County, Pennsylvania, USA",
+      "aliases": ["Gettysburg", "Gettysburg Pa", "Gettysburg Adams Co"],
       "jurisdiction": {
-        "local_jurisdiction": "Newton Township",
-        "county": "Cumberland",
+        "local_jurisdiction": "Gettysburg",
+        "county": "Adams",
         "state_or_province": "Pennsylvania",
         "country": "USA"
       },
-      "temporal_validity": {"date_established": "1767", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "temporal_validity": {
+        "date_established": "1786",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
       "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
       "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
-      "location_id": "LOC-00044",
-      "canonical_name": "Newville, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Newville", "Newville Pa", "Newville Cumberland Co"],
+      "location_id": "LOC-00205",
+      "canonical_name": "Richmond, Henrico County, Virginia, USA",
+      "aliases": ["Richmond", "Richmond VA", "Capital of the Confederacy"],
       "jurisdiction": {
-        "local_jurisdiction": "Newville",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
+        "local_jurisdiction": "Richmond",
+        "county": "Henrico",
+        "state_or_province": "Virginia",
         "country": "USA"
       },
-      "temporal_validity": {"date_established": "1790", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "temporal_validity": {
+        "date_established": "1737",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
       "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
       "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
-      "location_id": "LOC-00045",
-      "canonical_name": "North Liberty, Johnson County, Iowa, USA",
-      "aliases": ["North Liberty", "North Liberty IA", "North Liberty Johnson Co"],
+      "location_id": "LOC-00312",
+      "canonical_name": "Sharpsburg, Washington County, Maryland, USA",
+      "aliases": ["Sharpsburg", "Sharpsburg MD", "Antietam"],
       "jurisdiction": {
-        "local_jurisdiction": "North Liberty",
-        "county": "Johnson",
-        "state_or_province": "Iowa",
+        "local_jurisdiction": "Sharpsburg",
+        "county": "Washington",
+        "state_or_province": "Maryland",
         "country": "USA"
       },
-      "temporal_validity": {"date_established": "1857", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "temporal_validity": {
+        "date_established": "1763",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
       "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
       "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
-      "location_id": "LOC-00046",
-      "canonical_name": "North Middleton Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["North Middleton", "North Middleton Twp", "North Middleton Cumberland Co"],
+      "location_id": "LOC-00450",
+      "canonical_name": "Andersonville, Sumter County, Georgia, USA",
+      "aliases": ["Andersonville", "Andersonville GA", "Camp Sumter"],
       "jurisdiction": {
-        "local_jurisdiction": "North Middleton Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
+        "local_jurisdiction": "Andersonville",
+        "county": "Sumter",
+        "state_or_province": "Georgia",
         "country": "USA"
       },
-      "temporal_validity": {"date_established": "1810", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "temporal_validity": {
+        "date_established": "1853",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
       "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
       "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
-      "location_id": "LOC-00047",
-      "canonical_name": "Orange County, California, USA",
-      "aliases": ["Orange Co", "Orange County CA", "Orange California"],
+      "location_id": "LOC-00501",
+      "canonical_name": "Arlington, Arlington County, Virginia, USA",
+      "aliases": ["Arlington", "Arlington VA", "Custis-Lee Estate"],
+      "jurisdiction": {
+        "local_jurisdiction": "Arlington",
+        "county": "Arlington",
+        "state_or_province": "Virginia",
+        "country": "USA"
+      },
+      "temporal_validity": {
+        "date_established": "1801",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00615",
+      "canonical_name": "Appomattox, Appomattox County, Virginia, USA",
+      "aliases": ["Appomattox", "Appomattox Court House", "Appomattox VA"],
+      "jurisdiction": {
+        "local_jurisdiction": "Appomattox",
+        "county": "Appomattox",
+        "state_or_province": "Virginia",
+        "country": "USA"
+      },
+      "temporal_validity": {
+        "date_established": "1845",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00720",
+      "canonical_name": "Murfreesboro, Rutherford County, Tennessee, USA",
+      "aliases": ["Murfreesboro", "Murfreesboro TN", "Stones River"],
+      "jurisdiction": {
+        "local_jurisdiction": "Murfreesboro",
+        "county": "Rutherford",
+        "state_or_province": "Tennessee",
+        "country": "USA"
+      },
+      "temporal_validity": {
+        "date_established": "1811",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00810",
+      "canonical_name": "Fort Oglethorpe, Catoosa County, Georgia, USA",
+      "aliases": ["Chickamauga", "Fort Oglethorpe GA", "Chickamauga Battlefield"],
+      "jurisdiction": {
+        "local_jurisdiction": "Fort Oglethorpe",
+        "county": "Catoosa",
+        "state_or_province": "Georgia",
+        "country": "USA"
+      },
+      "temporal_validity": {
+        "date_established": "1900",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00925",
+      "canonical_name": "Vicksburg, Warren County, Mississippi, USA",
+      "aliases": ["Vicksburg", "Vicksburg MS", "Gibraltar of the Confederacy"],
+      "jurisdiction": {
+        "local_jurisdiction": "Vicksburg",
+        "county": "Warren",
+        "state_or_province": "Mississippi",
+        "country": "USA"
+      },
+      "temporal_validity": {
+        "date_established": "1811",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-01033",
+      "canonical_name": "Chicago, Cook County, Illinois, USA",
+      "aliases": ["Chicago", "Chicago IL", "Camp Douglas Area"],
+      "jurisdiction": {
+        "local_jurisdiction": "Chicago",
+        "county": "Cook",
+        "state_or_province": "Illinois",
+        "country": "USA"
+      },
+      "temporal_validity": {
+        "date_established": "1833",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-01140",
+      "canonical_name": "Manassas, Prince William County, Virginia, USA",
+      "aliases": ["Manassas", "Manassas VA", "Bull Run Junction"],
+      "jurisdiction": {
+        "local_jurisdiction": "Manassas",
+        "county": "Prince William",
+        "state_or_province": "Virginia",
+        "country": "USA"
+      },
+      "temporal_validity": {
+        "date_established": "1853",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-01255",
+      "canonical_name": "Louisville, Jefferson County, Kentucky, USA",
+      "aliases": ["Louisville", "Louisville KY", "Falls of the Ohio"],
+      "jurisdiction": {
+        "local_jurisdiction": "Louisville",
+        "county": "Jefferson",
+        "state_or_province": "Kentucky",
+        "country": "USA"
+      },
+      "temporal_validity": {
+        "date_established": "1778",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00201",
+      "canonical_name": "Cumberland County, Pennsylvania, USA",
+      "aliases": ["Cumberland Co", "Cumberland County PA"],
       "jurisdiction": {
         "local_jurisdiction": null,
-        "county": "Orange",
-        "state_or_province": "California",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1889-03-11", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00048",
-      "canonical_name": "Penacook, Merrimack County, New Hampshire, USA",
-      "aliases": ["Penacook", "Penacook NH", "Penacook Merrimack Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Penacook",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1733", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00049",
-      "canonical_name": "Penbrook, Dauphin County, Pennsylvania, USA",
-      "aliases": ["Penbrook", "Penbrook Pa", "Penbrook Dauphin Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Penbrook",
-        "county": "Dauphin",
+        "county": "Cumberland",
         "state_or_province": "Pennsylvania",
         "country": "USA"
       },
-      "temporal_validity": {"date_established": "1894-07-09", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "temporal_validity": {"date_established": "1750-01-27", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
       "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
       "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
-      "location_id": "LOC-00050",
+      "location_id": "LOC-00202",
+      "canonical_name": "Adams County, Pennsylvania, USA",
+      "aliases": ["Adams Co", "Adams County PA"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": "Adams",
+        "state_or_province": "Pennsylvania",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1800-01-22", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00203",
+      "canonical_name": "Spotsylvania County, Virginia, USA",
+      "aliases": ["Spotsylvania Co", "Spotsylvania Virginia"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": "Spotsylvania",
+        "state_or_province": "Virginia",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1721", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00204",
+      "canonical_name": "Culpeper County, Virginia, USA",
+      "aliases": ["Culpeper Co", "Culpeper Virginia"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": "Culpeper",
+        "state_or_province": "Virginia",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1749", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00206",
+      "canonical_name": "Dinwiddie County, Virginia, USA",
+      "aliases": ["Dinwiddie Co", "Dinwiddie Virginia"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": "Dinwiddie",
+        "state_or_province": "Virginia",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1752", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00207",
+      "canonical_name": "Hardin County, Tennessee, USA",
+      "aliases": ["Hardin Co", "Shiloh District"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": "Hardin",
+        "state_or_province": "Tennessee",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1819", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00208",
+      "canonical_name": "Frederick County, Maryland, USA",
+      "aliases": ["Frederick Co", "Frederick County MD"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": "Frederick",
+        "state_or_province": "Maryland",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1748", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00209",
+      "canonical_name": "Franklin County, Pennsylvania, USA",
+      "aliases": ["Franklin Co", "Franklin County PA"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": "Franklin",
+        "state_or_province": "Pennsylvania",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1784", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00210",
+      "canonical_name": "Centre County, Pennsylvania, USA",
+      "aliases": ["Centre Co", "Centre County PA"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": "Centre",
+        "state_or_province": "Pennsylvania",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1800", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00211",
+      "canonical_name": "Albemarle County, Virginia, USA",
+      "aliases": ["Albemarle Co", "Albemarle Virginia"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": "Albemarle",
+        "state_or_province": "Virginia",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1744", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00301",
       "canonical_name": "Pennsylvania, USA",
-      "aliases": ["Pa", "PA", "Penna", "Commonwealth of Pennsylvania"],
+      "aliases": ["PA", "Keystone State", "Commonwealth of Pennsylvania"],
       "jurisdiction": {
         "local_jurisdiction": null,
         "county": null,
@@ -754,833 +545,420 @@
       },
       "temporal_validity": {"date_established": "1787-12-12", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
       "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
       "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
-      "location_id": "LOC-00051",
-      "canonical_name": "Philadelphia, Philadelphia County, Pennsylvania, USA",
-      "aliases": ["Philadelphia", "Phila", "Philadelphia PA"],
-      "jurisdiction": {
-        "local_jurisdiction": "Philadelphia",
-        "county": "Philadelphia",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1682", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00052",
-      "canonical_name": "Phoenixville, Chester County, Pennsylvania, USA",
-      "aliases": ["Phoenixville", "Phoenixville Pa", "Phoenixville Chester Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Phoenixville",
-        "county": "Chester",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1849-03-06", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00053",
-      "canonical_name": "Pine Grove, Schuylkill County, Pennsylvania, USA",
-      "aliases": ["Pine Grove", "Pine Grove Pa", "Pine Grove Schuylkill Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Pine Grove",
-        "county": "Schuylkill",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1832-05-07", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00054",
-      "canonical_name": "Pittsburgh, Allegheny County, Pennsylvania, USA",
-      "aliases": ["Pittsburgh", "Pittsburg", "Pittsburgh PA"],
-      "jurisdiction": {
-        "local_jurisdiction": "Pittsburgh",
-        "county": "Allegheny",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1758", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00055",
-      "canonical_name": "Progress, Dauphin County, Pennsylvania, USA",
-      "aliases": ["Progress", "Progress Pa", "Progress Dauphin Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Progress",
-        "county": "Dauphin",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1890", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00056",
-      "canonical_name": "Randolph County, Illinois, USA",
-      "aliases": ["Randolph Co", "Randolph County IL", "Randolph Ill"],
+      "location_id": "LOC-00302",
+      "canonical_name": "Virginia, USA",
+      "aliases": ["VA", "Old Dominion", "Commonwealth of Virginia"],
       "jurisdiction": {
         "local_jurisdiction": null,
-        "county": "Randolph",
-        "state_or_province": "Illinois",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1795-10-05", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00057",
-      "canonical_name": "Saltillo, Huntingdon County, Pennsylvania, USA",
-      "aliases": ["Saltillo", "Saltillo Pa", "Saltillo Huntingdon Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Saltillo",
-        "county": "Huntingdon",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1875-11-10", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00058",
-      "canonical_name": "Santa Barbara, Santa Barbara County, California, USA",
-      "aliases": ["Santa Barbara", "Santa Barbara CA", "Santa Barbara Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Santa Barbara",
-        "county": "Santa Barbara",
-        "state_or_province": "California",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1850-04-09", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00059",
-      "canonical_name": "Shellsville, Dauphin County, Pennsylvania, USA",
-      "aliases": ["Shellsville", "Shellsville Pa", "Shellsville Dauphin Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Shellsville",
-        "county": "Dauphin",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1820", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00060",
-      "canonical_name": "Shermans Dale, Perry County, Pennsylvania, USA",
-      "aliases": ["Shermans Dale", "Shermans Dale Pa", "Shermans Dale Perry Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Shermans Dale",
-        "county": "Perry",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1850", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00061",
-      "canonical_name": "Shippensburg, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Shippensburg", "Shippensburg Pa", "Shippensburg Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Shippensburg",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1730", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00062",
-      "canonical_name": "Silver Spring Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Silver Spring", "Silver Spring Twp", "Silver Spring Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Silver Spring Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1757", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00063",
-      "canonical_name": "Stanislaus County, California, USA",
-      "aliases": ["Stanislaus", "Stanislaus Co", "Stanislaus California"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": "Stanislaus",
-        "state_or_province": "California",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1854-04-01", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00064",
-      "canonical_name": "Steelton, Dauphin County, Pennsylvania, USA",
-      "aliases": ["Steelton", "Steelton Pa", "Steelton Dauphin Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Steelton",
-        "county": "Dauphin",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1880-01-19", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00065",
-      "canonical_name": "Susquehanna Township, Dauphin County, Pennsylvania, USA",
-      "aliases": ["Susquehanna", "Susquehanna Twp", "Susquehanna Dauphin Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Susquehanna Township",
-        "county": "Dauphin",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1815-05-01", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00066",
-      "canonical_name": "Thurso, Caithness, Scotland",
-      "aliases": ["Thurso", "Thurso Caithness", "Thurso Scotland"],
-      "jurisdiction": {
-        "local_jurisdiction": "Thurso",
         "county": null,
-        "state_or_province": "Caithness",
-        "country": "Scotland"
-      },
-      "temporal_validity": {"date_established": "1633", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00067",
-      "canonical_name": "Upper Frankford Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Upper Frankford", "Upper Frankford Twp", "Bloserville"],
-      "jurisdiction": {
-        "local_jurisdiction": "Upper Frankford Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
+        "state_or_province": "Virginia",
         "country": "USA"
       },
-      "temporal_validity": {"date_established": "1882", "date_dissolved": null, "predecessor_location_id": "LOC-00015", "successor_location_id": null},
+      "temporal_validity": {"date_established": "1788-06-25", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
       "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
       "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
-      "location_id": "LOC-00068",
-      "canonical_name": "Washington, District of Columbia, USA",
-      "aliases": ["Washington", "Washington DC", "District of Columbia"],
+      "location_id": "LOC-00303",
+      "canonical_name": "Maryland, USA",
+      "aliases": ["MD", "Old Line State", "State of Maryland"],
       "jurisdiction": {
-        "local_jurisdiction": "Washington",
+        "local_jurisdiction": null,
+        "county": null,
+        "state_or_province": "Maryland",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1788-04-28", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00304",
+      "canonical_name": "Georgia, USA",
+      "aliases": ["GA", "Peach State", "State of Georgia"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": null,
+        "state_or_province": "Georgia",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1788-01-02", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00305",
+      "canonical_name": "Tennessee, USA",
+      "aliases": ["TN", "Volunteer State", "State of Tennessee"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": null,
+        "state_or_province": "Tennessee",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1796-06-01", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00306",
+      "canonical_name": "Mississippi, USA",
+      "aliases": ["MS", "Magnolia State", "State of Mississippi"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": null,
+        "state_or_province": "Mississippi",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1817-12-10", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00307",
+      "canonical_name": "Kentucky, USA",
+      "aliases": ["KY", "Bluegrass State", "Commonwealth of Kentucky"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": null,
+        "state_or_province": "Kentucky",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1792-06-01", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00308",
+      "canonical_name": "District of Columbia, USA",
+      "aliases": ["DC", "Washington DC", "Federal District"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
         "county": null,
         "state_or_province": "District of Columbia",
         "country": "USA"
       },
       "temporal_validity": {"date_established": "1790-07-16", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
       "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
       "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
-      "location_id": "LOC-00069",
-      "canonical_name": "West Pennsboro Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["West Pennsboro", "West Pennsborough", "W Pennsboro", "Westpensboro"],
+      "location_id": "LOC-00309",
+      "canonical_name": "North Carolina, USA",
+      "aliases": ["NC", "Tar Heel State", "State of North Carolina"],
       "jurisdiction": {
-        "local_jurisdiction": "West Pennsboro Township",
+        "local_jurisdiction": null,
+        "county": null,
+        "state_or_province": "North Carolina",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1789-11-21", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00310",
+      "canonical_name": "Indiana, USA",
+      "aliases": ["IN", "Hoosier State", "State of Indiana"],
+      "jurisdiction": {
+        "local_jurisdiction": null,
+        "county": null,
+        "state_or_province": "Indiana",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1816-12-11", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00401",
+      "canonical_name": "State College, Centre County, Pennsylvania, USA",
+      "aliases": ["State College", "Happy Valley", "Penn State Town"],
+      "jurisdiction": {
+        "local_jurisdiction": "State College",
+        "county": "Centre",
+        "state_or_province": "Pennsylvania",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1896", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00402",
+      "canonical_name": "Charlottesville, Albemarle County, Virginia, USA",
+      "aliases": ["Charlottesville", "C-ville", "UVA Grounds"],
+      "jurisdiction": {
+        "local_jurisdiction": "Charlottesville",
+        "county": "Albemarle",
+        "state_or_province": "Virginia",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1762", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00403",
+      "canonical_name": "Chapel Hill, Orange County, North Carolina, USA",
+      "aliases": ["Chapel Hill", "UNC Town", "The Hill"],
+      "jurisdiction": {
+        "local_jurisdiction": "Chapel Hill",
+        "county": "Orange",
+        "state_or_province": "North Carolina",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1793", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00404",
+      "canonical_name": "Bloomington, Monroe County, Indiana, USA",
+      "aliases": ["Bloomington", "IU Bloomington"],
+      "jurisdiction": {
+        "local_jurisdiction": "Bloomington",
+        "county": "Monroe",
+        "state_or_province": "Indiana",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1818", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00405",
+      "canonical_name": "Ann Arbor, Washtenaw County, Michigan, USA",
+      "aliases": ["Ann Arbor", "A2", "U-M Town"],
+      "jurisdiction": {
+        "local_jurisdiction": "Ann Arbor",
+        "county": "Washtenaw",
+        "state_or_province": "Michigan",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1824", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-00406",
+      "canonical_name": "Lexington, Rockbridge County, Virginia, USA",
+      "aliases": ["Lexington", "Lexington VA", "VMI Town"],
+      "jurisdiction": {
+        "local_jurisdiction": "Lexington",
+        "county": "Rockbridge",
+        "state_or_province": "Virginia",
+        "country": "USA"
+      },
+      "temporal_validity": {"date_established": "1777", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    },
+    {
+      "location_id": "LOC-01300",
+      "canonical_name": "Old Carlisle District, Cumberland County, Pennsylvania, USA",
+      "aliases": ["Old Carlisle District", "Historic Carlisle Settlement"],
+      "jurisdiction": {
+        "local_jurisdiction": "Old Carlisle",
         "county": "Cumberland",
         "state_or_province": "Pennsylvania",
         "country": "USA"
       },
-      "temporal_validity": {"date_established": "1745", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "temporal_validity": {"date_established": "1750", "date_dissolved": "1751", "predecessor_location_id": null, "successor_location_id": "LOC-00006"},
       "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "operational_status": "DEFUNCT",
+      "is_deprecated": true,
+      "superseded_by": "LOC-00006",
+      "dissolution_date": "1751",
+      "notes": [
+        {
+          "note_id": "NOT-00001",
+          "text": "Absorbed into incorporated Carlisle borough.",
+          "type": "AUDIT",
+          "created_at": "2026-10-09T22:30:00Z"
+        }
+      ],
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
-      "location_id": "LOC-00070",
-      "canonical_name": "West Virginia, USA",
-      "aliases": ["WV", "W Va", "State of West Virginia"],
+      "location_id": "LOC-01302",
+      "canonical_name": "Antietam Iron Works District, Washington County, Maryland, USA",
+      "aliases": ["Antietam Works", "Old Furnace District"],
       "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": null,
-        "state_or_province": "West Virginia",
+        "local_jurisdiction": "Antietam Iron Works",
+        "county": "Washington",
+        "state_or_province": "Maryland",
         "country": "USA"
       },
-      "temporal_validity": {"date_established": "1863-06-20", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "temporal_validity": {"date_established": "1765", "date_dissolved": "1862", "predecessor_location_id": null, "successor_location_id": "LOC-00312"},
       "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "operational_status": "DEFUNCT",
+      "is_deprecated": true,
+      "superseded_by": "LOC-00312",
+      "dissolution_date": "1862",
+      "notes": [
+        {
+          "note_id": "NOT-00001",
+          "text": "Industrial tract consolidated under Sharpsburg civil administration.",
+          "type": "AUDIT",
+          "created_at": "2026-10-09T22:30:00Z"
+        }
+      ],
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
-      "location_id": "LOC-00071",
-      "canonical_name": "Wormleysburg, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Wormleysburg", "Wormleysburg Pa", "Wormleysburg Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Wormleysburg",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1815", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00072",
-      "canonical_name": "York County, Pennsylvania, USA",
-      "aliases": ["York Co", "York County", "York Penna"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": "York",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1749-08-19", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00073",
-      "canonical_name": "Germany",
-      "aliases": ["Ger", "DEU", "Deutschland"],
-      "jurisdiction": {
-        "local_jurisdiction": null,
-        "county": null,
-        "state_or_province": null,
-        "country": "Germany"
-      },
-      "temporal_validity": {"date_established": "1871-01-18", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00074",
-      "canonical_name": "Bow, Merrimack County, New Hampshire, USA",
-      "aliases": ["Bow", "Bow NH", "Bow Merrimack Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Bow",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1727-05-20", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00075",
-      "canonical_name": "Manchester, Hillsborough County, New Hampshire, USA",
-      "aliases": ["Manchester", "Manchester NH", "Derryfield"],
+      "location_id": "LOC-01303",
+      "canonical_name": "Manchester City Annex, Chesterfield County, Virginia, USA",
+      "aliases": ["Manchester Town", "South Richmond Settlement"],
       "jurisdiction": {
         "local_jurisdiction": "Manchester",
-        "county": "Hillsborough",
-        "state_or_province": "New Hampshire",
+        "county": "Chesterfield",
+        "state_or_province": "Virginia",
         "country": "USA"
       },
-      "temporal_validity": {"date_established": "1751-09-03", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "temporal_validity": {"date_established": "1769", "date_dissolved": "1910", "predecessor_location_id": "LOC-01304", "successor_location_id": "LOC-00205"},
       "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "operational_status": "DEFUNCT",
+      "is_deprecated": true,
+      "superseded_by": "LOC-00205",
+      "dissolution_date": "1910",
+      "notes": [
+        {
+          "note_id": "NOT-00001",
+          "text": "Merged into canonical City of Richmond.",
+          "type": "AUDIT",
+          "created_at": "2026-10-09T22:30:00Z"
+        }
+      ],
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
-      "location_id": "LOC-00076",
-      "canonical_name": "Pembroke, Merrimack County, New Hampshire, USA",
-      "aliases": ["Pembroke", "Pembroke NH", "Suncook"],
+      "location_id": "LOC-01304",
+      "canonical_name": "Old Henrico Parish Settlement, Virginia, USA",
+      "aliases": ["Henrico Parish", "Colonial James River Tract"],
       "jurisdiction": {
-        "local_jurisdiction": "Pembroke",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
+        "local_jurisdiction": "Henrico Parish",
+        "county": null,
+        "state_or_province": "Virginia",
         "country": "USA"
       },
-      "temporal_validity": {"date_established": "1759-11-01", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "temporal_validity": {"date_established": "1611", "date_dissolved": "1769", "predecessor_location_id": null, "successor_location_id": "LOC-01303"},
       "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "operational_status": "DEFUNCT",
+      "is_deprecated": true,
+      "superseded_by": "LOC-01303",
+      "dissolution_date": "1769",
+      "notes": [
+        {
+          "note_id": "NOT-00001",
+          "text": "Early colonial division subdivided into Manchester town charter.",
+          "type": "AUDIT",
+          "created_at": "2026-10-09T22:30:00Z"
+        }
+      ],
+      "last_updated": "2026-10-09T22:30:00Z"
     },
     {
-      "location_id": "LOC-00077",
-      "canonical_name": "Hooksett, Merrimack County, New Hampshire, USA",
-      "aliases": ["Hooksett", "Hooksett NH"],
+      "location_id": "LOC-01301",
+      "canonical_name": "Defunct Frontier Settlement, Cumberland County, Pennsylvania, USA",
+      "aliases": ["Unknown Frontier Settlement"],
       "jurisdiction": {
-        "local_jurisdiction": "Hooksett",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1822-07-02", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00078",
-      "canonical_name": "Hopkinton, Merrimack County, New Hampshire, USA",
-      "aliases": ["Hopkinton", "Hopkinton NH", "Contoocook"],
-      "jurisdiction": {
-        "local_jurisdiction": "Hopkinton",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1765-01-10", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00079",
-      "canonical_name": "Boscawen, Merrimack County, New Hampshire, USA",
-      "aliases": ["Boscawen", "Boscawen NH"],
-      "jurisdiction": {
-        "local_jurisdiction": "Boscawen",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1760-04-22", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00080",
-      "canonical_name": "Dunbarton, Merrimack County, New Hampshire, USA",
-      "aliases": ["Dunbarton", "Dunbarton NH"],
-      "jurisdiction": {
-        "local_jurisdiction": "Dunbarton",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1765-08-10", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00081",
-      "canonical_name": "Epsom, Merrimack County, New Hampshire, USA",
-      "aliases": ["Epsom", "Epsom NH"],
-      "jurisdiction": {
-        "local_jurisdiction": "Epsom",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1727-05-18", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00082",
-      "canonical_name": "Chichester, Merrimack County, New Hampshire, USA",
-      "aliases": ["Chichester", "Chichester NH"],
-      "jurisdiction": {
-        "local_jurisdiction": "Chichester",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1727-05-20", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00083",
-      "canonical_name": "Loudon, Merrimack County, New Hampshire, USA",
-      "aliases": ["Loudon", "Loudon NH"],
-      "jurisdiction": {
-        "local_jurisdiction": "Loudon",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1773-01-23", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00084",
-      "canonical_name": "Salisbury, Merrimack County, New Hampshire, USA",
-      "aliases": ["Salisbury", "Salisbury NH"],
-      "jurisdiction": {
-        "local_jurisdiction": "Salisbury",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1768-03-01", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00085",
-      "canonical_name": "Canterbury, Merrimack County, New Hampshire, USA",
-      "aliases": ["Canterbury", "Canterbury NH", "Canterbury Shaker Village"],
-      "jurisdiction": {
-        "local_jurisdiction": "Canterbury",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1727-05-20", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00086",
-      "canonical_name": "Pittsfield, Merrimack County, New Hampshire, USA",
-      "aliases": ["Pittsfield", "Pittsfield NH"],
-      "jurisdiction": {
-        "local_jurisdiction": "Pittsfield",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1782-03-27", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00087",
-      "canonical_name": "Warner, Merrimack County, New Hampshire, USA",
-      "aliases": ["Warner", "Warner NH"],
-      "jurisdiction": {
-        "local_jurisdiction": "Warner",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1774-09-03", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00088",
-      "canonical_name": "Henniker, Merrimack County, New Hampshire, USA",
-      "aliases": ["Henniker", "Henniker NH"],
-      "jurisdiction": {
-        "local_jurisdiction": "Henniker",
-        "county": "Merrimack",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1768-11-10", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00089",
-      "canonical_name": "Nashua, Hillsborough County, New Hampshire, USA",
-      "aliases": ["Nashua", "Nashua NH", "Dunstable"],
-      "jurisdiction": {
-        "local_jurisdiction": "Nashua",
-        "county": "Hillsborough",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1746-04-04", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00090",
-      "canonical_name": "Portsmouth, Rockingham County, New Hampshire, USA",
-      "aliases": ["Portsmouth", "Portsmouth NH", "Strawbery Banke"],
-      "jurisdiction": {
-        "local_jurisdiction": "Portsmouth",
-        "county": "Rockingham",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1653-05-28", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00091",
-      "canonical_name": "Dover, Strafford County, New Hampshire, USA",
-      "aliases": ["Dover", "Dover NH", "Cochecho"],
-      "jurisdiction": {
-        "local_jurisdiction": "Dover",
-        "county": "Strafford",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1623", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00092",
-      "canonical_name": "Laconia, Belknap County, New Hampshire, USA",
-      "aliases": ["Laconia", "Laconia NH"],
-      "jurisdiction": {
-        "local_jurisdiction": "Laconia",
-        "county": "Belknap",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1855-07-14", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00093",
-      "canonical_name": "Keene, Cheshire County, New Hampshire, USA",
-      "aliases": ["Keene", "Keene NH", "Upper Ashuelot"],
-      "jurisdiction": {
-        "local_jurisdiction": "Keene",
-        "county": "Cheshire",
-        "state_or_province": "New Hampshire",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1753-04-11", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00094",
-      "canonical_name": "Hampden Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Hampden", "Hampden Twp", "Hampden Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Hampden Township",
+        "local_jurisdiction": "Frontier Settlement",
         "county": "Cumberland",
         "state_or_province": "Pennsylvania",
         "country": "USA"
       },
-      "temporal_validity": {"date_established": "1845-01-23", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
+      "temporal_validity": {"date_established": "1740", "date_dissolved": "1750", "predecessor_location_id": null, "successor_location_id": null},
       "historical_periods": [],
+      "operational_status": "DEFUNCT",
+      "is_deprecated": true,
+      "superseded_by": null,
+      "dissolution_date": "1750",
       "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00095",
-      "canonical_name": "East Pennsboro Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["East Pennsboro", "East Pennsboro Twp", "E Pennsboro"],
-      "jurisdiction": {
-        "local_jurisdiction": "East Pennsboro Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1745", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00096",
-      "canonical_name": "Lower Allen Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Lower Allen", "Lower Allen Twp", "Lower Allen Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Lower Allen Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1849", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00097",
-      "canonical_name": "Upper Allen Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Upper Allen", "Upper Allen Twp", "Upper Allen Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Upper Allen Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1849", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00098",
-      "canonical_name": "Monroe Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Monroe", "Monroe Twp", "Monroe Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Monroe Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1825", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00099",
-      "canonical_name": "South Middleton Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["South Middleton", "South Middleton Twp", "S Middleton"],
-      "jurisdiction": {
-        "local_jurisdiction": "South Middleton Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1810", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00100",
-      "canonical_name": "Penn Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Penn", "Penn Twp", "Penn Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Penn Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1860", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00101",
-      "canonical_name": "Dickinson Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Dickinson", "Dickinson Twp", "Dickinson Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Dickinson Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1785-04-27", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00102",
-      "canonical_name": "Southampton Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Southampton", "Southampton Twp", "Southampton Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Southampton Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1783", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00103",
-      "canonical_name": "Hopewell Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Hopewell", "Hopewell Twp", "Hopewell Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Hopewell Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1735", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00104",
-      "canonical_name": "Upper Mifflin Township, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Upper Mifflin", "Upper Mifflin Twp", "Upper Mifflin Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Upper Mifflin Township",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1892", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
-    },
-    {
-      "location_id": "LOC-00105",
-      "canonical_name": "Lemoyne, Cumberland County, Pennsylvania, USA",
-      "aliases": ["Lemoyne", "Lemoyne Pa", "Lemoyne Cumberland Co"],
-      "jurisdiction": {
-        "local_jurisdiction": "Lemoyne",
-        "county": "Cumberland",
-        "state_or_province": "Pennsylvania",
-        "country": "USA"
-      },
-      "temporal_validity": {"date_established": "1905-05-23", "date_dissolved": null, "predecessor_location_id": null, "successor_location_id": null},
-      "historical_periods": [],
-      "notes": [],
-      "last_updated": "2026-09-29T00:00:00Z"
+      "last_updated": "2026-10-09T22:30:00Z"
     }
   ]
 }

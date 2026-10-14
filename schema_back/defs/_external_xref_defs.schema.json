@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/defs/_external_xref_defs.schema.json",
+  "title": "External Cross-Reference Definitions",
+  "version": "1.0.0",
+  "description": "Definitions for uniform resource name syntax linking external repositories.",
+  "type": "object",
+  "$defs": {
+    "fact_external_identifiers": {
+      "type": "object",
+      "properties": {
+        "gedcom_event_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ancestry_fact_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "familysearch_event_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "census_source_urn": {
+      "type": "string",
+      "pattern": "^urn:gda:census:[0-9]{4}:[a-z]{2}:[a-z0-9_-]+$"
+    },
+    "military_source_urn": {
+      "type": "string",
+      "pattern": "^urn:gda:military:[a-z0-9_-]+:[a-z0-9_-]+$"
+    }
+  }
+}

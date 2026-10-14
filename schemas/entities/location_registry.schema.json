@@ -5,7 +5,7 @@
   "$id": "https://genealogy.archive/schemas/entities/location_registry.schema.json",
   "title": "Location Registry Schema",
   "version": "1.2.0",
-  "description": "Master administrative registry envelope for locations.json, including required GSI intake headers.",
+  "description": "Master administrative registry envelope for locations.json.",
   "type": "object",
   "required": [
     "_name",

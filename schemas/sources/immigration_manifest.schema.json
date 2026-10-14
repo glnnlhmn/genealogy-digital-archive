@@ -1,4 +1,6 @@
 {
+  "_name": "immigration_manifest.schema.json",
+  "_path": "schemas/sources/immigration_manifest.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/sources/immigration_manifest.schema.json",
   "title": "ImmigrationManifestRecord",
@@ -6,6 +8,8 @@
   "description": "Standardized schema for historical ship passenger arrival manifests, border inspection cards, customs lists, and oaths of allegiance.",
   "type": "object",
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "description",
     "record_metadata",
@@ -14,14 +18,26 @@
     "associated_people"
   ],
   "properties": {
-    "$schema": { "type": "string" },
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    },
     "description": {
       "type": "string",
-      "description": "[REQUIRED] Contextual summary (e.g., '1745 Passenger Arrival Manifest of Johan Adam Lehman (Ship Robert and Alice, Port of Philadelphia, PA)')."
+      "description": "Contextual summary of the immigration manifest record."
     },
     "record_metadata": {
       "type": "object",
-      "required": ["source_urn", "record_category", "record_type"],
+      "required": [
+        "source_urn",
+        "record_category",
+        "record_type"
+      ],
       "properties": {
         "source_urn": {
           "type": "string",
@@ -30,7 +46,11 @@
         },
         "record_category": {
           "type": "string",
-          "enum": ["IMMIGRATION", "TRAVEL", "CUSTOMS"],
+          "enum": [
+            "IMMIGRATION",
+            "TRAVEL",
+            "CUSTOMS"
+          ],
           "default": "IMMIGRATION"
         },
         "record_type": {
@@ -49,28 +69,44 @@
     },
     "voyage": {
       "type": "object",
-      "required": ["port_of_arrival", "arrival_date"],
+      "required": [
+        "port_of_arrival",
+        "arrival_date"
+      ],
       "properties": {
         "ship_name": {
-          "type": ["string", "null"],
-          "description": "Name of the steamship, sailing vessel, or airline (e.g., 'SS Rotterdam', 'Robert and Alice')."
+          "type": [
+            "string",
+            "null"
+          ]
         },
-        "master_or_captain": { "type": ["string", "null"] },
-        "shipping_line": { "type": ["string", "null"] },
+        "master_or_captain": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "shipping_line": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "port_of_departure": {
           "oneOf": [
-            { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-            { "type": "null" }
-          ],
-          "description": "Port where voyage commenced (e.g., Rotterdam, Liverpool, Bremen, Le Havre)."
+            {
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "port_of_arrival": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
-          "description": "Port of entry (e.g., Philadelphia, Ellis Island/New York, Castle Garden, Boston)."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
         },
         "arrival_date": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted",
-          "description": "Date manifest was filed or vessel reached port."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
         }
       },
       "additionalProperties": false
@@ -86,82 +122,143 @@
       "properties": {
         "manifest_reference": {
           "type": "object",
-          "required": ["locator"],
+          "required": [
+            "locator"
+          ],
           "properties": {
             "locator": {
-              "type": "string",
-              "description": "List number and line number matching locator_immigration_patterns."
+              "type": "string"
             },
-            "list_number": { "type": ["string", "null"] },
-            "line_number": { "type": ["integer", "null"] }
+            "list_number": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "line_number": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            }
           },
           "additionalProperties": false
         },
         "passenger": {
           "type": "object",
-          "required": ["full_name"],
+          "required": [
+            "full_name"
+          ],
           "properties": {
             "person_id": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
             },
             "full_name": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
             },
             "age": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/age_record" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/age_record"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "sex": {
-              "type": ["string", "null"],
-              "enum": ["Male", "Female", "Unknown", null]
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "Male",
+                "Female",
+                "Unknown",
+                null
+              ]
             },
             "marital_status": {
-              "type": ["string", "null"],
-              "enum": ["Single", "Married", "Widowed", "Divorced", null]
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "Single",
+                "Married",
+                "Widowed",
+                "Divorced",
+                null
+              ]
             },
-            "occupation": { "type": ["string", "null"] },
+            "occupation": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
             "last_permanent_residence": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "final_destination": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                { "type": "null" }
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                },
+                {
+                  "type": "null"
+                }
               ]
             },
             "relative_joined": {
               "type": "object",
               "properties": {
-                "name": { "type": ["string", "null"] },
-                "relationship": { "type": ["string", "null"] },
-                "address": { "type": ["string", "null"] }
+                "name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "relationship": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "address": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
               },
-              "additionalProperties": false,
-              "description": "Named kin or sponsor the passenger is joining in America."
+              "additionalProperties": false
             }
           },
           "additionalProperties": false
         },
         "manifest_note": {
-          "type": ["string", "null"],
-          "description": "Annotations on head tax, ticket details, or hospital detentions."
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "transcript": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
-          "description": "Verbatim line transcription, abstract, and search keywords."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/transcript_record"
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
-          },
-          "description": "Scans of the ship manifest roll pages."
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/source_media"
+          }
         }
       },
       "additionalProperties": false
@@ -169,9 +266,8 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
-      },
-      "description": "Array of participants (passenger, accompanying family members, master, relative joined) mapped to roles and IDs."
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
+      }
     }
   },
   "additionalProperties": false

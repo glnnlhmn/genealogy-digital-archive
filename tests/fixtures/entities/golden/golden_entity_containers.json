@@ -1,0 +1,119 @@
+{
+  "_name": "golden_entity_containers.json",
+  "_path": "tests/fixtures/entities/golden/golden_entity_containers.json",
+  "_description": "Canonical synthetic test payloads for top-level entity store containers.",
+  "people_container": {
+    "_name": "people.json",
+    "_path": "data/entities/people.json",
+    "version": "1.1.0",
+    "last_updated": "2026-10-12T12:00:00Z",
+    "description": "Master individual person registry store.",
+    "people": [
+      {
+        "person_id": "IND-00001",
+        "canonical_name": {
+          "given": "Daniel",
+          "surname": "Lehman",
+          "middle": "Webster",
+          "suffix": null,
+          "maiden_name": null
+        },
+        "sex": "Male",
+        "notes": [],
+        "created_at": "2026-10-12T12:00:00Z",
+        "updated_at": null,
+        "tombstone": null,
+        "external_identifiers": null
+      }
+    ]
+  },
+  "facts_container": {
+    "_name": "facts.json",
+    "_path": "data/entities/facts.json",
+    "version": "1.1.0",
+    "last_updated": "2026-10-12T12:00:00Z",
+    "description": "Master fact assertion registry store.",
+    "facts": [
+      {
+        "fact_id": "7b82450d-0e00-40e9-87d0-2f501efd1f54",
+        "fact_type": "Birth",
+        "primary_person_id": "IND-00001",
+        "date": {
+          "date_raw": "1915-06-12",
+          "date_iso": "1915-06-12",
+          "year": 1915,
+          "month": 6,
+          "day": 12,
+          "modifier": "EXACT",
+          "quay_start": 3,
+          "quay_end": 3,
+          "confidence": 1.0
+        },
+        "location": {
+          "location_id": "LOC-00001",
+          "verbatim": "Carlisle, Cumberland Co., PA",
+          "site_id": null
+        },
+        "sources": [
+          {
+            "record_guid": "7b82450d-0e00-40e9-87d0-2f501efd1f54",
+            "citation_text": "PA Department of Health Birth Certificate 1915-00123"
+          }
+        ],
+        "notes": [],
+        "created_at": "2026-10-12T12:00:00Z",
+        "updated_at": null,
+        "tombstone": null
+      }
+    ]
+  },
+  "locations_container": {
+    "_name": "locations.json",
+    "_path": "data/entities/locations.json",
+    "version": "1.1.0",
+    "last_updated": "2026-10-12T12:00:00Z",
+    "description": "Master civil location registry store.",
+    "locations": [
+      {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle, Cumberland, Pennsylvania, USA",
+        "location_type": "CIVIL_JURISDICTION",
+        "city": "Carlisle",
+        "county": "Cumberland",
+        "state": "Pennsylvania",
+        "country": "USA",
+        "created_at": "2026-10-12T12:00:00Z",
+        "updated_at": null,
+        "tombstone": null
+      }
+    ]
+  },
+  "sites_container": {
+    "_name": "sites.json",
+    "_path": "data/entities/sites.json",
+    "version": "1.1.0",
+    "last_updated": "2026-10-12T12:00:00Z",
+    "description": "Master physical facility registry store.",
+    "sites": [
+      {
+        "site_id": "SID-00001",
+        "site_name": "Newville Cemetery",
+        "site_type": "CEMETERY",
+        "location_id": "LOC-00001",
+        "street_address": {
+          "address_line_1": "Cemetery Road",
+          "address_line_2": null,
+          "postal_code": "17241",
+          "coordinates": {
+            "latitude": 40.1754,
+            "longitude": -77.4012
+          }
+        },
+        "operational_status": "ACTIVE",
+        "created_at": "2026-10-12T12:00:00Z",
+        "updated_at": null,
+        "tombstone": null
+      }
+    ]
+  }
+}

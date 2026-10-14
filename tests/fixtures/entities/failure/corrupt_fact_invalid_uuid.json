@@ -1,0 +1,16 @@
+{
+  "_name": "corrupt_fact_invalid_uuid.json",
+  "_path": "tests/fixtures/entities/failure/corrupt_fact_invalid_uuid.json",
+  "_defect": "fact_id is not valid RFC 4122 UUIDv4",
+  "fact_id": "not-a-uuid",
+  "person_id": "IND-00001",
+  "fact_type": "Birth",
+  "quay_score": 3,
+  "description": "Invalid UUID test assertion",
+  "created_at": "2026-10-12T12:00:00Z",
+  "updated_at": "2026-10-12T12:00:00Z",
+  "source": {
+    "record_urn": "urn:gda:record:birth:001",
+    "citation_text": "Sample citation."
+  }
+}

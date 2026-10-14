@@ -1,0 +1,158 @@
+{
+  "_name": "newspaper_registry.schema.json",
+  "_path": "schemas/sources/newspaper_registry.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/sources/newspaper_registry.schema.json",
+  "title": "NewspaperRegistryRecord",
+  "version": "1.0.0",
+  "description": "Consolidated registry indexing historical newspaper publications, issues, clippings, and articles.",
+  "type": "object",
+  "required": [
+    "_name",
+    "_path",
+    "$schema",
+    "version",
+    "last_updated",
+    "publications"
+  ],
+  "properties": {
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "last_updated": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso"
+    },
+    "publications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "pub_code",
+          "pub_name",
+          "location",
+          "issues"
+        ],
+        "properties": {
+          "pub_code": {
+            "type": "string",
+            "maxLength": 6,
+            "description": "Standard publication identifier token matching pub_codes in _token_registry.json."
+          },
+          "pub_name": {
+            "type": "string",
+            "description": "Formal newspaper title (e.g., 'The Carlisle Sentinel')."
+          },
+          "location": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/location",
+            "description": "Town or city where the newspaper was published."
+          },
+          "frequency": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "Daily",
+              "Weekly",
+              "Semi-Weekly",
+              "Monthly",
+              null
+            ]
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "issue_date",
+                "articles"
+              ],
+              "properties": {
+                "issue_date": {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                "edition": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "page_count": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 1
+                },
+                "articles": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "source_urn",
+                      "category"
+                    ],
+                    "properties": {
+                      "source_urn": {
+                        "type": "string",
+                        "pattern": "^URN:NEWSPAPER:[0-9]{8}:[A-Z0-9_]+:[A-Za-z0-9_-]+$"
+                      },
+                      "headline": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "category": {
+                        "type": "string",
+                        "maxLength": 6,
+                        "description": "Classification code matching news_classifications."
+                      },
+                      "page_number": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "column": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "primary_subject_ids": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
+                        }
+                      },
+                      "clippings": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "../defs/_shared_defs.schema.json#/$defs/media_clipping"
+                        }
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

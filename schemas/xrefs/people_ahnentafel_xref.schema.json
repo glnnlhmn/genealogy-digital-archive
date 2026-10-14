@@ -1,0 +1,68 @@
+{
+  "_name": "people_ahnentafel_xref.schema.json",
+  "_path": "schemas/xrefs/people_ahnentafel_xref.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/xrefs/people_ahnentafel_xref.schema.json",
+  "title": "People_Ahnentafel_XRef",
+  "version": "1.0.0",
+  "description": "Structured Ahnentafel lineage cross-reference mapping mathematical pedigree positions to individuals.",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "required": [
+    "_name",
+    "_path",
+    "$schema",
+    "schema_version",
+    "last_modified",
+    "total_ancestors",
+    "ancestors"
+  ],
+  "properties": {
+    "_name": {
+      "type": "string",
+      "const": "people_ahnentafel_xref.json"
+    },
+    "_path": {
+      "type": "string",
+      "const": "data/indexes/people_ahnentafel_xref.json"
+    },
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "last_modified": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso",
+      "description": "ISO-8601 timestamp of last index compilation."
+    },
+    "total_ancestors": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total count of indexed pedigree ancestor positions."
+    },
+    "ancestors": {
+      "type": "array",
+      "description": "Sequential list of ancestor records mapped by Ahnentafel numbers.",
+      "items": {
+        "type": "object",
+        "unevaluatedProperties": false,
+        "required": [
+          "ahnentafel_number",
+          "person_id"
+        ],
+        "properties": {
+          "ahnentafel_number": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Mathematical position of the ancestor in the pedigree tree."
+          },
+          "person_id": {
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
+          }
+        }
+      }
+    }
+  }
+}

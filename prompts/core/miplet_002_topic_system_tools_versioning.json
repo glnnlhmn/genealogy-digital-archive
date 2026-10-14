@@ -1,0 +1,10 @@
+{
+  "_name": "miplet_002_topic_system_tools_versioning.json",
+  "_path": "prompts/core/miplet_002_topic_system_tools_versioning.json",
+  "target_baseline": "v1.1.0",
+  "target_file": "prompts/topics/topic_system_tools.md",
+  "target_section": "Section 3 (Mandatory System Utility Invariants)",
+  "operation": "modification",
+  "description": "Standardize system utility PEP 440 versioning to use monotonic cumulative build counters (+build.r#) instead of calendar date resets.",
+  "payload": "* **PEP 440 Module Versioning:** Every utility must declare a module-level `__version__` string conforming to PEP 440 local build identifiers using cumulative build counters (`__version__ = \"<major>.<minor>.<rev>+build.r<counter>\"`). Pre-release development candidates use candidate tags preceding the build segment (`rc<candidate>+build.r<counter>`)."
+}

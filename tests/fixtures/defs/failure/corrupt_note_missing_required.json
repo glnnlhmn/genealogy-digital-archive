@@ -1,0 +1,7 @@
+{
+  "_name": "corrupt_note_missing_required.json",
+  "_path": "tests/fixtures/defs/failure/corrupt_note_missing_required.json",
+  "_defect": "Missing note_id and missing both note_text and text",
+  "note_type": "RESEARCH",
+  "modified_date": "2026-10-12T12:00:00Z"
+}

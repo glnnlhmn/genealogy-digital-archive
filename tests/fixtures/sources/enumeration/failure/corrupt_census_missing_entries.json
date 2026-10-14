@@ -1,0 +1,27 @@
+{
+  "_name": "corrupt_census_missing_entries.json",
+  "_path": "data/archival_records/census/REC-1900-CENSUS-001.json",
+  "_defect": "census_schedule lacks required entries array",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Corrupt Census Record lacking entries",
+  "record_metadata": {
+    "source_guid": "61e0b5db-0fe9-4db3-8a2d-b256554580d4",
+    "record_category": "CENSUS",
+    "record_type": "POPULATION_SCHEDULE",
+    "census_year": 1900
+  },
+  "page_metadata": {
+    "state": "Pennsylvania",
+    "county": "Cumberland"
+  },
+  "transcript": {
+    "verbatim_text": "Corrupt census test."
+  },
+  "media_files": [
+    {
+      "file_name": "scan.jpg",
+      "mime_type": "image/jpeg"
+    }
+  ],
+  "associated_people": []
+}

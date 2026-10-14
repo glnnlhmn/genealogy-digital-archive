@@ -1,0 +1,31 @@
+{
+  "_name": "corrupt_people_nonconforming_ids.json",
+  "_path": "tests/fixtures/people/failure/corrupt_people_nonconforming_ids.json",
+  "schema_version": "1.0.0",
+  "people": [
+    {
+      "person_id": "IND-00002",
+      "display_name": "Standard Two",
+      "canonical_name": { "given": "Two" },
+      "sex": "M"
+    },
+    {
+      "person_id": "IND-00001",
+      "display_name": "Standard One",
+      "canonical_name": { "given": "One" },
+      "sex": "M"
+    },
+    {
+      "person_id": "CUSTOM-ZED",
+      "display_name": "Custom Zed",
+      "canonical_name": { "given": "Zed" },
+      "sex": "U"
+    },
+    {
+      "person_id": "CUSTOM-ALPHA",
+      "display_name": "Custom Alpha",
+      "canonical_name": { "given": "Alpha" },
+      "sex": "U"
+    }
+  ]
+}

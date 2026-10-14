@@ -1,0 +1,384 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "name": "naming_standards.json",
+  "version": "1.0.15",
+  "description": "Deterministic file naming specifications and pattern templates for the digital archive.",
+  "token_registry_ref": "schemas/naming/_token_registry.json",
+  "standards": {
+    "census": {
+      "record_type": "CENSUS",
+      "pattern": "[YEAR]_CENSUS_[REGION_1]_[REGION_2]_[JURISDICTION]_[LOCATOR_CENSUS].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^(1790|18[0-9]{2}|19[0-5]{1}[0-9]{1})$" },
+        "RECORD_TYPE": { "type": "literal", "value": "CENSUS" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "LOCATOR_CENSUS": { "type": "registry_ref", "path": "locator_census_patterns" }
+      },
+      "examples": [
+        "1840_CENSUS_PA_Cumberland_WestPennsboro_P070.json",
+        "1850_CENSUS_PA_Cumberland_WestPennsboro_P140S070B.json",
+        "1900_CENSUS_PA_Cumberland_Frankford_ED10S08A.json",
+        "1940_CENSUS_PA_Cumberland_LowerFrankford_ED21-27S05A.json"
+      ]
+    },
+    "cemetery_marker": {
+      "record_type": "CEMETERY",
+      "pattern": "[YEAR]_CEMETERY_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[MARKER].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "CEMETERY" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "MARKER": { "type": "registry_ref", "path": "marker_patterns" }
+      },
+      "examples": [
+        "1944_CEMETERY_PA_Cumberland_Newville_Lehman_Annie_FG-104729778.json",
+        "1952_CEMETERY_PA_Cumberland_Newville_Lehman_William_FG-104729773.json",
+        "1944_CEMETERY_PA_Cumberland_Newville_Lehman_Annie_Headstone.jpg"
+      ]
+    },
+    "cemetery_register": {
+      "record_type": "CEMETERY",
+      "pattern": "[YEAR]_CEMETERY_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[REGISTER_CEMETERY].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "CEMETERY" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "REGISTER_CEMETERY": { "type": "registry_ref", "path": "register_cemetery_patterns" }
+      },
+      "examples": [
+        "1935_CEMETERY_PA_Cumberland_Newville_Failor_WilliamA_Entry-357.jpg"
+      ]
+    },
+    "church_baptism": {
+      "record_type": "BAPTISM",
+      "pattern": "[YEAR]_BAPTISM_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[REGISTER_CHURCH].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "BAPTISM" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "string", "case": "CamelCase" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "REGISTER_CHURCH": { "type": "registry_ref", "path": "register_church_patterns" }
+      },
+      "examples": [
+        "1745_BAPTISM_BW_Hornberg_Hornberg_Lehman_JohanAdam_P12.json",
+        "1888_BAPTISM_PA_Cumberland_Newville_Lehman_Mary_Vol1P45.json"
+      ]
+    },
+    "death_certificate": {
+      "record_type": "DEATH",
+      "pattern": "[YEAR]_DEATH_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[LOCATOR_DEATH].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "DEATH" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "LOCATOR_DEATH": { "type": "registry_ref", "path": "locator_death_patterns" }
+      },
+      "examples": [
+        "1944_DEATH_PA_Cumberland_Newville_Lehman_Annie_08112.json",
+        "1952_DEATH_PA_Cumberland_Newville_Lehman_William_23147.json",
+        "1892_DEATH_PA_Cumberland_Carlisle_Lehman_John_REC-1042.json"
+      ]
+    },
+    "marriage_certificate": {
+      "record_type": "MARRIAGE",
+      "pattern": "[YEAR]_MARRIAGE_[REGION_1]_[REGION_2]_[JURISDICTION]_[SPOUSE1_SURNAME]_[SPOUSE1_GIVEN]_[SPOUSE2_SURNAME]_[SPOUSE2_GIVEN]_[LOCATOR_MARRIAGE].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "MARRIAGE" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SPOUSE1_SURNAME": { "type": "string", "case": "CamelCase" },
+        "SPOUSE1_GIVEN": { "type": "string", "case": "CamelCase" },
+        "SPOUSE2_SURNAME": { "type": "string", "case": "CamelCase" },
+        "SPOUSE2_GIVEN": { "type": "string", "case": "CamelCase" },
+        "LOCATOR_MARRIAGE": { "type": "registry_ref", "path": "locator_marriage_patterns" }
+      },
+      "examples": [
+        "1912_MARRIAGE_PA_Cumberland_Carlisle_Lehman_William_Myers_Annie_LIC-14022.json",
+        "1885_MARRIAGE_PA_Cumberland_Carlisle_Smith_John_Jones_Mary_Vol2P45.json"
+      ]
+    },
+    "birth_certificate": {
+      "record_type": "BIRTH",
+      "pattern": "[YEAR]_BIRTH_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[LOCATOR_BIRTH].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "BIRTH" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "LOCATOR_BIRTH": { "type": "registry_ref", "path": "locator_birth_patterns" }
+      },
+      "examples": [
+        "1915_BIRTH_PA_Cumberland_Carlisle_Lehman_Daniel_04122.json",
+        "1898_BIRTH_PA_Cumberland_Newville_Lehman_Annie_DEL-194201.json",
+        "1890_BIRTH_PA_Cumberland_Frankford_Lehman_Jacob_REC-3041.json"
+      ]
+    },
+    "newspaper_clipping": {
+      "record_type": "NEWS",
+      "pattern": "[PUBDATE]_NEWS_[CLASSIFICATION]_[REGION_1]_[REGION_2]_[PUBCODE]_[SUBJECT]_[LOCATOR_NEWS].[ext]",
+      "components": {
+        "PUBDATE": { "type": "regex", "pattern": "^[0-9]{8}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "NEWS" },
+        "CLASSIFICATION": { "type": "registry_ref", "path": "news_classifications" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "PUBCODE": { "type": "registry_ref", "path": "pub_codes" },
+        "SUBJECT": { "type": "regex", "pattern": "^[A-Za-z0-9_]+$" },
+        "LOCATOR_NEWS": { "type": "registry_ref", "path": "locator_news_patterns" }
+      },
+      "examples": [
+        "19520415_NEWS_OBIT_PA_Cumberland_CARSENT_Lehman_William_P02C03.json",
+        "19350812_NEWS_SOC_PA_Cumberland_VALSTAR_Lehman_Family_Reunion_P01C02.json",
+        "19120620_NEWS_MARR_PA_Dauphin_PATNEWS_Myers_Annie_CLIP-4021.json"
+      ]
+    },
+    "will_or_probate": {
+      "record_type": "WILL",
+      "pattern": "[YEAR]_WILL_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[LOCATOR_WILL].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "WILL" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "LOCATOR_WILL": { "type": "registry_ref", "path": "locator_will_patterns" }
+      },
+      "examples": [
+        "1874_WILL_PA_Cumberland_Carlisle_Lehman_Christian_WB-OP312.json",
+        "1902_WILL_PA_Cumberland_Carlisle_Lehman_Daniel_FILE-8412.json"
+      ]
+    },
+    "military_draft_registration": {
+      "record_type": "DRAFT",
+      "pattern": "[YEAR]_DRAFT_[CONFLICT]_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[LOCATOR_DRAFT].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "DRAFT" },
+        "CONFLICT": { "type": "registry_ref", "path": "conflicts" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "LOCATOR_DRAFT": { "type": "registry_ref", "path": "locator_draft_patterns" }
+      },
+      "examples": [
+        "1917_DRAFT_WWI_PA_Cumberland_Carlisle_Lehman_William_BOARD-1.json",
+        "1942_DRAFT_WWII_PA_Cumberland_Carlisle_Lehman_William_SN-U1042.json",
+        "1863_DRAFT_CW_PA_Cumberland_Carlisle_Lehman_Christian_CLASS-1.json"
+      ]
+    },
+    "divorce_record": {
+      "record_type": "DIVORCE",
+      "pattern": "[YEAR]_DIVORCE_[REGION_1]_[REGION_2]_[JURISDICTION]_[SPOUSE1_SURNAME]_[SPOUSE1_GIVEN]_[SPOUSE2_SURNAME]_[SPOUSE2_GIVEN]_[LOCATOR_DIVORCE].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "DIVORCE" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SPOUSE1_SURNAME": { "type": "string", "case": "CamelCase" },
+        "SPOUSE1_GIVEN": { "type": "string", "case": "CamelCase" },
+        "SPOUSE2_SURNAME": { "type": "string", "case": "CamelCase" },
+        "SPOUSE2_GIVEN": { "type": "string", "case": "CamelCase" },
+        "LOCATOR_DIVORCE": { "type": "registry_ref", "path": "locator_divorce_patterns" }
+      },
+      "examples": [
+        "1928_DIVORCE_PA_Cumberland_Carlisle_Lehman_William_Myers_Annie_DOCKET-1928-04.json",
+        "1954_DIVORCE_PA_Dauphin_Harrisburg_Smith_John_Jones_Mary_CASE-5821.json"
+      ]
+    },
+    "personal_testimony": {
+      "record_type": "TESTIMONY",
+      "pattern": "[YEAR]_TESTIMONY_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[LOCATOR_TESTIMONY].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "TESTIMONY" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "LOCATOR_TESTIMONY": { "type": "registry_ref", "path": "locator_testimony_patterns" }
+      },
+      "examples": [
+        "1975_TESTIMONY_PA_Cumberland_Carlisle_Lehman_Daniel_SESS-01.json",
+        "1938_TESTIMONY_PA_Cumberland_Newville_Myers_Annie_Memoir.json",
+        "1912_TESTIMONY_PA_Cumberland_Carlisle_Lehman_William_AFF-104.json"
+      ]
+    },
+    "award_commendation": {
+      "record_type": "AWARD",
+      "pattern": "[YEAR]_AWARD_[CATEGORY]_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[LOCATOR_AWARD].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "AWARD" },
+        "CATEGORY": { "type": "registry_ref", "path": "award_categories" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "LOCATOR_AWARD": { "type": "registry_ref", "path": "locator_award_patterns" }
+      },
+      "examples": [
+        "1945_AWARD_MIL_PA_Cumberland_Carlisle_Lehman_William_GO-44.json",
+        "1962_AWARD_CIVIC_PA_Cumberland_Carlisle_Lehman_Daniel_Plaque.json"
+      ]
+    },
+    "diploma_certificate": {
+      "record_type": "DIPLOMA",
+      "pattern": "[YEAR]_DIPLOMA_[LEVEL]_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[INSTITUTION].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "DIPLOMA" },
+        "LEVEL": { "type": "registry_ref", "path": "diploma_levels" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "INSTITUTION": { "type": "string", "case": "CamelCase" }
+      },
+      "examples": [
+        "1932_DIPLOMA_HS_PA_Cumberland_Carlisle_Lehman_Daniel_CarlisleHS.json",
+        "1955_DIPLOMA_COLL_PA_Cumberland_Carlisle_Lehman_Robert_DickinsonColl.json"
+      ]
+    },
+    "land_deed": {
+      "record_type": "LAND",
+      "pattern": "[YEAR]_LAND_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[LOCATOR_LAND].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "LAND" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "LOCATOR_LAND": { "type": "registry_ref", "path": "locator_land_patterns" }
+      },
+      "examples": [
+        "1865_LAND_PA_Cumberland_WestPennsboro_Lehman_Christian_DB-2KP114.json",
+        "1794_LAND_PA_Cumberland_Frankford_Lehman_Tobias_WAR-104.json"
+      ]
+    },
+    "tax_assessment": {
+      "record_type": "TAX",
+      "pattern": "[YEAR]_TAX_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[LOCATOR_TAX].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "TAX" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "LOCATOR_TAX": { "type": "registry_ref", "path": "locator_tax_patterns" }
+      },
+      "examples": [
+        "1855_TAX_PA_Cumberland_WestPennsboro_Lehman_Christian_P12.json",
+        "1880_TAX_PA_Cumberland_UpperFrankford_Lehman_William_LINE-22.json"
+      ]
+    },
+    "naturalization_record": {
+      "record_type": "NATURALIZATION",
+      "pattern": "[YEAR]_NATURALIZATION_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[LOCATOR_NATURALIZATION].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "NATURALIZATION" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "LOCATOR_NATURALIZATION": { "type": "registry_ref", "path": "locator_naturalization_patterns" }
+      },
+      "examples": [
+        "1905_NATURALIZATION_PA_Cumberland_Carlisle_Lehman_Johan_PET-1402.json",
+        "1912_NATURALIZATION_PA_Dauphin_Harrisburg_Schmidt_Karl_CERT-44102.json"
+      ]
+    },
+    "immigration_manifest": {
+      "record_type": "IMMIGRATION",
+      "pattern": "[YEAR]_IMMIGRATION_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[LOCATOR_IMMIGRATION].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "IMMIGRATION" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "LOCATOR_IMMIGRATION": { "type": "registry_ref", "path": "locator_immigration_patterns" }
+      },
+      "examples": [
+        "1745_IMMIGRATION_PA_Philadelphia_Philadelphia_Lehman_JohanAdam_LIST-102L14.json",
+        "1882_IMMIGRATION_NY_NewYork_CastleGarden_Schmidt_Heinrich_PASS-8812.json"
+      ]
+    },
+    "directory_listing": {
+      "record_type": "DIRECTORY",
+      "pattern": "[YEAR]_DIRECTORY_[REGION_1]_[REGION_2]_[JURISDICTION]_[SURNAME]_[GIVEN]_[LOCATOR_DIRECTORY].[ext]",
+      "components": {
+        "YEAR": { "type": "regex", "pattern": "^[0-9]{4}$" },
+        "RECORD_TYPE": { "type": "literal", "value": "DIRECTORY" },
+        "REGION_1": { "type": "registry_ref", "path": "states" },
+        "REGION_2": { "type": "registry_ref", "path": "counties" },
+        "JURISDICTION": { "type": "registry_ref", "path": "jurisdictions" },
+        "SURNAME": { "type": "string", "case": "CamelCase" },
+        "GIVEN": { "type": "string", "case": "CamelCase" },
+        "LOCATOR_DIRECTORY": { "type": "registry_ref", "path": "locator_directory_patterns" }
+      },
+      "examples": [
+        "1924_DIRECTORY_PA_Cumberland_Carlisle_Lehman_William_P142C01.json",
+        "1935_DIRECTORY_PA_Dauphin_Harrisburg_Myers_Annie_P88.json"
+      ]
+    },
+    "other_miscellaneous": {
+      "record_type": "OTHER",
+      "pattern": "[YEAR]_OTHER_[CATEGORY]_[SUBJECT]_[LOCATOR_OTHER].[ext]",
+      "components": {
+        "YEAR": { 
+          "type": "regex", 
+          "pattern": "^[0-9]{4}$",
+          "default": "9999"
+        },
+        "RECORD_TYPE": { "type": "literal", "value": "OTHER" },
+        "CATEGORY": { "type": "registry_ref", "path": "other_categories" },
+        "SUBJECT": { "type": "regex", "pattern": "^[A-Za-z0-9_]+$" },
+        "LOCATOR_OTHER": { "type": "registry_ref", "path": "locator_other_patterns" }
+      },
+      "examples": [
+        "1880_OTHER_BIBLE_Lehman_Family_FamilyRecord.json",
+        "1910_OTHER_CORRESP_Lehman_William_LetterToAnnie.json",
+        "9999_OTHER_PHOTO_Lehman_William_Portrait.jpg",
+        "9999_OTHER_MISC_Myers_Daniel_UnidentifiedDocument.json"
+      ]
+    }
+  }
+}

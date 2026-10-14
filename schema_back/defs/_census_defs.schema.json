@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/defs/_census_defs.schema.json",
+  "title": "Census Schedule Field Definitions",
+  "version": "1.0.0",
+  "description": "Definitions for census line entries and enumerated population questions.",
+  "type": "object",
+  "$defs": {
+    "census_line_entry": {
+      "type": "object",
+      "required": [
+        "line_number",
+        "name_verbatim"
+      ],
+      "properties": {
+        "line_number": {
+          "type": "integer"
+        },
+        "name_verbatim": {
+          "type": "string"
+        },
+        "age_raw": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "naturalization_status": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Historical census notation; normalized via GDAReferenceManager."
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

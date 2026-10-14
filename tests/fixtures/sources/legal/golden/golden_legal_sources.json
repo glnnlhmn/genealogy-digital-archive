@@ -1,0 +1,217 @@
+{
+  "_name": "golden_legal_sources.json",
+  "_path": "tests/fixtures/sources/legal/golden/golden_legal_sources.json",
+  "_description": "Canonical synthetic test payloads for legal and fiscal source records adhering strictly to Draft 2020-12 schemas.",
+  "divorce_report": {
+    "_name": "REC-1932-DIV-001.json",
+    "_path": "data/archival_records/legal/REC-1932-DIV-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1932 Divorce Decree of Lehman v. Lehman",
+    "record_metadata": {
+      "source_guid": "c0000001-0000-4000-8000-000000000001",
+      "record_category": "LEGAL",
+      "record_type": "DIVORCE_DECREE",
+      "case_number": "1932-CV-412",
+      "docket_volume": "Docket 28",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "parties": {
+      "plaintiff": {
+        "person_id": "IND-00001",
+        "full_name": {
+          "given": "Daniel",
+          "surname": "Lehman"
+        }
+      },
+      "defendant": {
+        "person_id": "IND-00005",
+        "full_name": {
+          "given": "Clara",
+          "surname": "Lehman"
+        }
+      }
+    },
+    "decree_particulars": {
+      "date": {
+        "modifier": "EXACT",
+        "date_raw": "1932-05-18",
+        "date_iso": "1932-05-18",
+        "year": 1932
+      },
+      "court_name": "Court of Common Pleas of Cumberland County",
+      "location": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle, Cumberland Co., PA"
+      },
+      "grounds_stated": "Desertion",
+      "custody_orders": null
+    },
+    "media_files": [
+      {
+        "file_name": "1932_divorce_decree_lehman.pdf",
+        "mime_type": "application/pdf",
+        "side": "FRONT",
+        "notes": "Judicial final decree record"
+      }
+    ],
+    "associated_people": []
+  },
+  "probate_record": {
+    "_name": "REC-1945-PROB-001.json",
+    "_path": "data/archival_records/legal/REC-1945-PROB-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1945 Will and Estate Packet of Annie Lehman",
+    "record_metadata": {
+      "source_guid": "c0000002-0000-4000-8000-000000000002",
+      "record_category": "LEGAL",
+      "record_type": "PROBATE_WILL",
+      "estate_file_number": "File 18921",
+      "will_book": "Will Book 34",
+      "will_page": "412",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "decedent": {
+      "person_id": "IND-00003",
+      "full_name": {
+        "given": "Annie",
+        "surname": "Lehman"
+      },
+      "death_date": {
+        "modifier": "EXACT",
+        "date_raw": "1944-11-20",
+        "date_iso": "1944-11-20",
+        "year": 1944
+      },
+      "residence": {
+        "location_id": "LOC-00002",
+        "verbatim": "Newville, Cumberland Co., PA"
+      }
+    },
+    "court_proceedings": {
+      "probate_date": {
+        "modifier": "EXACT",
+        "date_raw": "1945-01-10",
+        "date_iso": "1945-01-10",
+        "year": 1945
+      },
+      "court_name": "Orphans' Court of Cumberland County",
+      "location": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle, Cumberland Co., PA"
+      },
+      "executors": ["Daniel Lehman"],
+      "beneficiaries": ["Daniel Lehman", "Mary Lehman"]
+    },
+    "media_files": [
+      {
+        "file_name": "1945_probate_will_annie_lehman.pdf",
+        "mime_type": "application/pdf",
+        "side": "FRONT",
+        "notes": "Will transcription and probate register entry"
+      }
+    ],
+    "associated_people": []
+  },
+  "land_deed": {
+    "_name": "REC-1918-DEED-001.json",
+    "_path": "data/archival_records/legal/REC-1918-DEED-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1918 Land Indenture between William Lehman and Daniel Lehman",
+    "record_metadata": {
+      "source_guid": "c0000003-0000-4000-8000-000000000003",
+      "record_category": "LAND",
+      "record_type": "DEED",
+      "deed_book": "Book 8-T",
+      "deed_page": "184",
+      "instrument_number": "1918-0419",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "conveyance_particulars": {
+      "date": {
+        "modifier": "EXACT",
+        "date_raw": "1918-04-01",
+        "date_iso": "1918-04-01",
+        "year": 1918
+      },
+      "location": {
+        "location_id": "LOC-00002",
+        "verbatim": "Newville Borough, Cumberland Co., PA"
+      },
+      "consideration_amount": "$1,200.00",
+      "acreage": 2.5,
+      "legal_description": "Beginning at a post on High Street thence south 40 degrees east 15 perches to a stone..."
+    },
+    "grantor": {
+      "person_id": "IND-00002",
+      "full_name": {
+        "given": "William",
+        "surname": "Lehman"
+      },
+      "residence": {
+        "location_id": "LOC-00002",
+        "verbatim": "Newville, PA"
+      }
+    },
+    "grantee": {
+      "person_id": "IND-00001",
+      "full_name": {
+        "given": "Daniel",
+        "surname": "Lehman"
+      },
+      "residence": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle, PA"
+      }
+    },
+    "media_files": [
+      {
+        "file_name": "1918_deed_book_8t_p184.jpg",
+        "mime_type": "image/jpeg",
+        "side": "FRONT",
+        "notes": "County recorder of deeds ledger scan"
+      }
+    ],
+    "associated_people": []
+  },
+  "tax_assessment": {
+    "_name": "REC-1925-TAX-001.json",
+    "_path": "data/archival_records/legal/REC-1925-TAX-001.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "description": "1925 Carlisle Borough Tax Duplicate Assessment for Daniel Lehman",
+    "record_metadata": {
+      "source_guid": "c0000004-0000-4000-8000-000000000004",
+      "record_category": "TAX",
+      "record_type": "TAX_ASSESSMENT_ROLL",
+      "tax_year": 1925,
+      "assessment_roll": "Carlisle Third Ward Triennial Assessment",
+      "repository_id": "00000000-0000-4000-8000-000000000001"
+    },
+    "taxpayer": {
+      "person_id": "IND-00001",
+      "name_raw": "Lehman, Daniel",
+      "full_name": {
+        "given": "Daniel",
+        "surname": "Lehman"
+      },
+      "occupation": "Machinist"
+    },
+    "assessment_particulars": {
+      "location": {
+        "location_id": "LOC-00001",
+        "verbatim": "Carlisle Borough, Ward 3, PA"
+      },
+      "real_estate_value": 2400.0,
+      "personal_property_value": 150.0,
+      "total_tax_assessed": 38.25
+    },
+    "media_files": [
+      {
+        "file_name": "1925_tax_duplicate_carlisle_w3.jpg",
+        "mime_type": "image/jpeg",
+        "side": "FRONT",
+        "notes": "County commissioners duplicate ledger"
+      }
+    ],
+    "associated_people": []
+  }
+}

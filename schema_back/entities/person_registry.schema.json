@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/entities/person_registry.schema.json",
+  "title": "Person_Registry",
+  "version": "1.0.2",
+  "description": "Master administrative registry container for individual person entities, utilizing centralized registry definitions.",
+  "type": "object",
+  "required": [
+    "$schema",
+    "schema_version",
+    "created_at",
+    "last_modified",
+    "total_persons",
+    "persons"
+  ],
+  "properties": {
+    "$schema": {
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/$schema"
+    },
+    "schema_version": {
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/schema_version",
+      "const": "1.0.2"
+    },
+    "created_at": {
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/created_at"
+    },
+    "last_modified": {
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/registry_header/properties/last_modified"
+    },
+    "total_persons": {
+      "$ref": "../defs/_registry_shared_defs.schema.json#/$defs/total_count",
+      "description": "Total count of person entities contained in the registry."
+    },
+    "persons": {
+      "type": "array",
+      "description": "List of master person records.",
+      "items": {
+        "$ref": "person.schema.json"
+      }
+    }
+  },
+  "additionalProperties": false
+}

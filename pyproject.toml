@@ -1,11 +1,15 @@
+# Name: pyproject.toml
+# Path: pyproject.toml
+
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "genealogy-digital-archive"
-version = "1.0.1"
+version = "1.1.0"
 description = "Production archival system, indexing engine, and validation pipeline."
+readme = "docs/index.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [
@@ -32,10 +36,11 @@ dependencies = [
     "jsonschema>=4.26.0",
     "pandas>=3.0.6",
     "pillow>=12.3.0",
+    "pydantic>=2.0",
     "rich>=15.0.0",
     "rapidfuzz>=3.0.0",
-	"referencing>=0.30.0",
-	"us>=3.1.1",
+    "referencing>=0.30.0",
+    "us>=3.1.1",
 ]
 
 [project.urls]
@@ -46,8 +51,10 @@ Documentation = "https://github.com/glnnlhmn/genealogy-digital-archive/tree/main
 
 [project.optional-dependencies]
 dev = [
-	"pytest>=8.0.0",
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
     "pytest-mock>=3.12.0",
+    "pytest-xdist>=3.5.0",
     "jupyterlab>=4.0.0",
     "ipykernel>=6.0.0",
     "tabulate>=0.9.0",
@@ -57,11 +64,39 @@ docs = [
     "mkdocs-material>=9.7.7"
 ]
 
+[tool.setuptools.package-dir]
+tools = "tools"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["tools*"]
+exclude = [
+    "data*",
+    "logs*",
+    "backups*",
+    "gtemp*",
+    "import*",
+    "notebooks*",
+    "schemas*",
+    "reports*",
+    "prompts*",
+    "tests*",
+    "tools/lib/gdacore*",
+    "tools/lib/gdadomain*"
+]
+
 [tool.pytest.ini_options]
 minversion = "8.0"
-pythonpath = ["."]
-testpaths = ["tests"]
-addopts = "-ra -q --basetemp=gtemp/pytest_tmp --strict-markers"
+pythonpath = [
+    ".",
+    "tools/lib/gdacore/src",
+    "tools/lib/gdadomain/src"
+]
+testpaths = [
+    "tests/ops",
+    "tests/sys",
+    "tools/lib/gdacore/tests"
+]
 norecursedirs = [
     ".git",
     ".venv",
@@ -70,7 +105,10 @@ norecursedirs = [
     "import",
     "logs",
     "data",
-    "schemas/archive"
+    "notebooks",
+    "prompts",
+    "schemas/archive",
+    "tests/fixtures"
 ]
 markers = [
     "smoke: Fast sanity checks executed prior to commit (< 5s)",
@@ -84,25 +122,37 @@ markers = [
 
 [tool.coverage.run]
 branch = true
-source = ["tools/ops"]
+source = [
+    "tools/ops",
+    "tools/lib/gdacore/src/gdacore",
+    "tools/lib/gdadomain/src/gdadomain",
+    "tools/sys"
+]
 omit = [
     "tests/*",
-    "gtemp/*"
+    "gtemp/*",
+    "*/__init__.py"
 ]
 
 [tool.coverage.report]
-fail_under = 80
+fail_under = 85
 precision = 2
 show_missing = true
 skip_covered = false
 exclude_lines = [
+    # Standard pragma markers
     "pragma: no cover",
+    
+    # Defensive method stubs
     "def __repr__",
     "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+    
+    # Module execution entry points (exact literal patterns)
+    'if __name__ == "__main__":',
     "if __name__ == .__main__.:",
-    "sys.exit"
+    
+    # Path bootstrapping
+    "sys.path.insert",
+    "if str(ROOT_DIR) not in sys.path:"
 ]
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["tools*"]
-exclude = ["data*", "logs*", "backups*", "gtemp*", "import*", "schemas*", "reports*", "prompts*", "tests*"]

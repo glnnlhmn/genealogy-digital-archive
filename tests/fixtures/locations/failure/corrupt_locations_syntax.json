@@ -1,0 +1,15 @@
+{
+  "_name": "corrupt_locations_syntax.json",
+  "_path": "tests/fixtures/locations/failure/corrupt_locations_syntax.json",
+  "$schema": "schemas/entities/location_registry.schema.json",
+  "schema_version": "1.2.0",
+  "locations": [
+    {
+      "location_id": "LOC-00006",
+      "canonical_name": "Carlisle, Cumberland County, Pennsylvania, USA",
+      "jurisdiction": {
+        "country": "USA"
+      }
+    }
+  INVALID_JSON_TOKEN_HERE
+}

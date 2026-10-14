@@ -1,4 +1,6 @@
 {
+  "_name": "land_deed.schema.json",
+  "_path": "schemas/sources/land_deed.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://genealogy.archive/schemas/sources/land_deed.schema.json",
   "title": "LandDeedRecord",
@@ -6,6 +8,8 @@
   "description": "Standardized schema for historical land deeds, indentures, conveyances, warrants, patents, surveys, and mortgages.",
   "type": "object",
   "required": [
+    "_name",
+    "_path",
     "$schema",
     "description",
     "record_metadata",
@@ -14,14 +18,26 @@
     "associated_people"
   ],
   "properties": {
-    "$schema": { "type": "string" },
+    "_name": {
+      "type": "string"
+    },
+    "_path": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
+    },
     "description": {
       "type": "string",
-      "description": "[REQUIRED] Contextual summary (e.g., '1865 Land Conveyance from Christian Lehman to Daniel Lehman (West Pennsboro Twp, Cumberland Co., PA)')."
+      "description": "Contextual summary of this land deed record."
     },
     "record_metadata": {
       "type": "object",
-      "required": ["source_urn", "record_category", "record_type"],
+      "required": [
+        "source_urn",
+        "record_category",
+        "record_type"
+      ],
       "properties": {
         "source_urn": {
           "type": "string",
@@ -30,7 +46,11 @@
         },
         "record_category": {
           "type": "string",
-          "enum": ["LAND", "LEGAL", "PROPERTY"],
+          "enum": [
+            "LAND",
+            "LEGAL",
+            "PROPERTY"
+          ],
           "default": "LAND"
         },
         "record_type": {
@@ -52,17 +72,23 @@
     },
     "recorder_office": {
       "type": "object",
-      "required": ["office_title", "location"],
+      "required": [
+        "office_title",
+        "location"
+      ],
       "properties": {
         "office_title": {
-          "type": "string",
-          "description": "e.g., 'Recorder of Deeds of Cumberland County', 'Pennsylvania Land Office'."
+          "type": "string"
         },
         "location": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
-          "description": "Jurisdiction where deed was officially enrolled/recorded."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
         },
-        "recorder_or_deputy": { "type": ["string", "null"] }
+        "recorder_or_deputy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       },
       "additionalProperties": false
     },
@@ -80,39 +106,62 @@
       "properties": {
         "recording_reference": {
           "type": "object",
-          "required": ["locator"],
+          "required": [
+            "locator"
+          ],
           "properties": {
             "locator": {
-              "type": "string",
-              "description": "Deed book and page, warrant number, or patent number matching locator_land_patterns."
+              "type": "string"
             },
-            "deed_book": { "type": ["string", "null"] },
-            "page_number": { "type": ["string", "null"] },
-            "instrument_number": { "type": ["string", "null"] }
+            "deed_book": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "page_number": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "instrument_number": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
           },
           "additionalProperties": false
         },
         "dates": {
           "type": "object",
-          "required": ["date_written"],
+          "required": [
+            "date_written"
+          ],
           "properties": {
             "date_written": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted",
-              "description": "Date indenture/conveyance was signed and sealed by grantors."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
             },
             "date_acknowledged": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
-              ],
-              "description": "Date grantors appeared before a Justice of the Peace."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             },
             "date_recorded": {
               "oneOf": [
-                { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/date_interpreted" },
-                { "type": "null" }
-              ],
-              "description": "Date formally entered into county deed books."
+                {
+                  "$ref": "../defs/_shared_defs.schema.json#/$defs/date_interpreted"
+                },
+                {
+                  "type": "null"
+                }
+              ]
             }
           },
           "additionalProperties": false
@@ -122,111 +171,140 @@
           "minItems": 1,
           "items": {
             "type": "object",
-            "required": ["full_name"],
+            "required": [
+              "full_name"
+            ],
             "properties": {
               "person_id": {
-                "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
+                "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
               },
               "full_name": {
-                "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
+                "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
               },
               "residence": {
                 "oneOf": [
-                  { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                  { "type": "null" }
+                  {
+                    "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                  },
+                  {
+                    "type": "null"
+                  }
                 ]
               },
-              "relationship_to_grantee": { "type": ["string", "null"] }
+              "relationship_to_grantee": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
             },
             "additionalProperties": false
-          },
-          "description": "Selling/transferring party (grantors, releasors, mortgagors)."
+          }
         },
         "grantees": {
           "type": "array",
           "minItems": 1,
           "items": {
             "type": "object",
-            "required": ["full_name"],
+            "required": [
+              "full_name"
+            ],
             "properties": {
               "person_id": {
-                "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/person_id"
+                "$ref": "../defs/_shared_defs.schema.json#/$defs/person_id"
               },
               "full_name": {
-                "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/canonical_name"
+                "$ref": "../defs/_shared_defs.schema.json#/$defs/canonical_name"
               },
               "residence": {
                 "oneOf": [
-                  { "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location" },
-                  { "type": "null" }
+                  {
+                    "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
+                  },
+                  {
+                    "type": "null"
+                  }
                 ]
               }
             },
             "additionalProperties": false
-          },
-          "description": "Purchasing/receiving party (grantees, releasees, mortgagees)."
+          }
         },
         "financials": {
           "type": "object",
           "properties": {
             "consideration_amount": {
-              "type": ["string", "null"],
-              "description": "Verbatim purchase price (e.g., '$1,200.00', '50 pounds lawful money of Pennsylvania', 'one dollar and natural love and affection')."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "dower_relinquished": {
-              "type": ["boolean", "null"],
-              "description": "True if wife examined separately by magistrate acknowledging release of dower."
+              "type": [
+                "boolean",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
         },
         "parcel": {
           "type": "object",
-          "required": ["location"],
+          "required": [
+            "location"
+          ],
           "properties": {
             "location": {
-              "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/location",
-              "description": "Township/borough and physical tract location."
+              "$ref": "../defs/_shared_defs.schema.json#/$defs/location"
             },
             "tract_name": {
-              "type": ["string", "null"],
-              "description": "Colonial patent or tract title (e.g., 'Wheatland', 'Mount Pleasant')."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "acreage": {
-              "type": ["string", "null"],
-              "description": "Verbatim acreage (e.g., '142 acres and 32 perches')."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "metes_and_bounds_summary": {
-              "type": ["string", "null"],
-              "description": "Summary of corner markers (e.g., 'beginning at a white oak...')."
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "neighboring_landowners": {
               "type": "array",
-              "items": { "type": "string" },
-              "description": "Adjoining owners cited in bounds (vital for neighborhood network analysis)."
+              "items": {
+                "type": "string"
+              }
             },
             "prior_deed_recital": {
-              "type": ["string", "null"],
-              "description": "Chain of title recital reciting how grantor obtained title."
+              "type": [
+                "string",
+                "null"
+              ]
             }
           },
           "additionalProperties": false
         },
         "deed_note": {
-          "type": ["string", "null"],
-          "description": "Condition, marginal releases, or watermarks."
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "transcript": {
-          "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/transcript_record",
-          "description": "Verbatim deed text, abstract, and keywords."
+          "$ref": "../defs/_shared_defs.schema.json#/$defs/transcript_record"
         },
         "media_files": {
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/source_media"
-          },
-          "description": "Scans of the deed pages or deed book register leaves."
+            "$ref": "../defs/_shared_defs.schema.json#/$defs/source_media"
+          }
         }
       },
       "additionalProperties": false
@@ -234,9 +312,8 @@
     "associated_people": {
       "type": "array",
       "items": {
-        "$ref": "../defs/_shared_shared_defs.schema.json#/$defs/associated_person_entry"
-      },
-      "description": "Array of participants (grantors, grantees, wives releasing dower, neighboring owners, witnesses, recorder) mapped to roles and IDs."
+        "$ref": "../defs/_shared_defs.schema.json#/$defs/associated_person_entry"
+      }
     }
   },
   "additionalProperties": false

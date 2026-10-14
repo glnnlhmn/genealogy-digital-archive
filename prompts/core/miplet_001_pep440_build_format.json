@@ -1,0 +1,10 @@
+{
+  "_name": "miplet_001_pep440_build_format.json",
+  "_path": "prompts/core/miplet_001_pep440_build_format.json",
+  "target_baseline": "v1.1.0",
+  "target_file": "prompts/core/mip_core.md",
+  "target_section": "Section 0 (Versioning Protocol & System Identity)",
+  "operation": "modification",
+  "description": "Transition PEP 440 build numbers from daily date resets to monotonic cumulative counters (+build.r# and rc#).",
+  "payload": "* **Operational Tool & Library Versioning (PEP 440):** All production tools under `tools/ops/`, `tools/sys/`, and shared framework libraries under `tools/lib/` must declare module-level `__version__` strings adhering to PEP 440 local build identifiers using monotonic cumulative counters (`<major>.<minor>.<rev>+build.r<counter>`). Pre-release development candidates use PEP 440 candidate tags preceding the build segment (`<major>.<minor>.<rev>rc<candidate>+build.r<counter>`). Daily calendar resets of build counters are prohibited."
+}

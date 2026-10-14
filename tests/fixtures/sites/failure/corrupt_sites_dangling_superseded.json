@@ -1,0 +1,23 @@
+{
+  "_name": "corrupt_sites_dangling_superseded.json",
+  "_path": "tests/fixtures/sites/failure/corrupt_sites_dangling_superseded.json",
+  "$schema": "schemas/entities/site_registry.schema.json",
+  "version": "1.2.0",
+  "last_updated": "2026-10-08T19:30:00Z",
+  "sites": [
+    {
+      "site_id": "SID-00093",
+      "site_type": "LANDMARK",
+      "name": "Orphaned Redirect Landmark",
+      "aliases": [],
+      "location_id": "LOC-00101",
+      "address": null,
+      "operational_status": "DEFUNCT",
+      "is_deprecated": true,
+      "superseded_by": "SID-99999",
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-08T19:30:00Z"
+    }
+  ]
+}

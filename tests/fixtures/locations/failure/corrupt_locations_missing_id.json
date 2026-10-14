@@ -1,0 +1,59 @@
+{
+  "_name": "corrupt_locations_missing_id.json",
+  "_path": "tests/fixtures/locations/failure/corrupt_locations_missing_id.json",
+  "$schema": "schemas/entities/location_registry.schema.json",
+  "schema_version": "1.2.0",
+  "created_at": "2026-09-29T00:00:00Z",
+  "last_modified": "2026-10-10T00:00:00Z",
+  "total_locations": 46,
+  "locations": [
+    {
+      "location_id": "",
+      "canonical_name": "Missing Identifier District, Pennsylvania, USA",
+      "aliases": [],
+      "jurisdiction": {
+        "local_jurisdiction": "Missing Identifier District",
+        "county": "Cumberland",
+        "state_or_province": "Pennsylvania",
+        "country": "USA"
+      },
+      "temporal_validity": {
+        "date_established": "1800",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-10T00:00:00Z"
+    },
+    {
+      "location_id": "LOC-00006",
+      "canonical_name": "Carlisle, Cumberland County, Pennsylvania, USA",
+      "aliases": ["Carlisle", "Carlisle Pa", "Carlisle Borough"],
+      "jurisdiction": {
+        "local_jurisdiction": "Carlisle",
+        "county": "Cumberland",
+        "state_or_province": "Pennsylvania",
+        "country": "USA"
+      },
+      "temporal_validity": {
+        "date_established": "1751",
+        "date_dissolved": null,
+        "predecessor_location_id": null,
+        "successor_location_id": null
+      },
+      "historical_periods": [],
+      "operational_status": "ACTIVE",
+      "is_deprecated": false,
+      "superseded_by": null,
+      "dissolution_date": null,
+      "notes": [],
+      "last_updated": "2026-10-09T22:30:00Z"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "_name": "people_surname_alias_idx.schema.json",
+  "_path": "schemas/indexes/people_surname_alias_idx.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genealogy.archive/schemas/indexes/people_surname_alias_idx.schema.json",
+  "title": "People_Surname_Alias_Index",
+  "version": "1.0.0",
+  "description": "Validation contract governing directional variant-to-canonical surname alias lookups.",
+  "type": "object",
+  "unevaluatedProperties": false,
+  "required": [
+    "_name",
+    "_path",
+    "$schema",
+    "schema_version",
+    "last_modified",
+    "total_aliases",
+    "description",
+    "aliases"
+  ],
+  "properties": {
+    "_name": {
+      "type": "string",
+      "const": "people_surname_alias_idx.json"
+    },
+    "_path": {
+      "type": "string",
+      "const": "data/indexes/people_surname_alias_idx.json"
+    },
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "last_modified": {
+      "$ref": "../defs/_shared_defs.schema.json#/$defs/timestamp_iso",
+      "description": "ISO-8601 timestamp of last index compilation."
+    },
+    "total_aliases": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total count of directional alias mappings."
+    },
+    "description": {
+      "type": "string",
+      "description": "Functional description of the alias authority registry."
+    },
+    "aliases": {
+      "type": "object",
+      "description": "Directional mapping of normalized variant keys to canonical surname keys.",
+      "propertyNames": {
+        "pattern": "^[a-z0-9\\-]+$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-z0-9\\-]+$"
+      }
+    }
+  }
+}
